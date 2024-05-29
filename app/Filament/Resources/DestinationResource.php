@@ -1,0 +1,197 @@
+<?php
+
+namespace App\Filament\Resources;
+
+use Filament\Forms;
+use Filament\Tables;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
+use App\Models\Destination;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Section;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ViewAction;
+use Filament\Forms\Components\TextInput;
+use Filament\Tables\Actions\CreateAction;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Filters\SelectFilter;
+use App\Filament\Filters\DateRangeFilter;
+use App\Filament\Resources\DestinationResource\Pages;
+
+class DestinationResource extends Resource
+{
+    protected static ?string $model = Destination::class;
+
+    protected static ?string $navigationIcon = 'heroicon-o-map-pin';
+
+    protected static ?string $recordTitleAttribute = 'destination';
+
+    public static function form(Form $form): Form
+    {
+        return $form->schema([
+            Section::make()->schema([
+                Grid::make(['default' => 0])->schema([
+                    Select::make('city_id')
+                        ->rules(['exists:cities,id'])
+                        ->required()
+                        ->relationship('city', 'name')
+                        ->searchable()
+                        ->placeholder('City')
+                        ->columnSpan([
+                            'default' => 12,
+                            'md' => 12,
+                            'lg' => 6,
+                        ]),
+
+                    FileUpload::make('image')
+                        ->rules(['image', 'max:1024'])
+                        ->nullable()
+                        ->image()
+                        ->placeholder('Image')
+                        ->columnSpan([
+                            'default' => 12,
+                            'md' => 12,
+                            'lg' => 6,
+                        ]),
+
+                    TextInput::make('destination')
+                        ->rules(['string'])
+                        ->required()
+                        ->placeholder('Destination')
+                        ->columnSpan([
+                            'default' => 12,
+                            'md' => 12,
+                            'lg' => 6,
+                        ]),
+
+                    TextInput::make('location')
+                        ->rules(['string'])
+                        ->nullable()
+                        ->placeholder('Location')
+                        ->columnSpan([
+                            'default' => 12,
+                            'md' => 12,
+                            'lg' => 6,
+                        ]),
+
+                    TextInput::make('south_asian_price')
+                        ->rules(['numeric'])
+                        ->required()
+                        ->numeric()
+                        ->placeholder('South Asian Price')
+                        ->default('0')
+                        ->columnSpan([
+                            'default' => 12,
+                            'md' => 12,
+                            'lg' => 4,
+                        ]),
+
+                    TextInput::make('non_south_asian_price')
+                        ->rules(['numeric'])
+                        ->required()
+                        ->numeric()
+                        ->placeholder('Non South Asian Price')
+                        ->default('0')
+                        ->columnSpan([
+                            'default' => 12,
+                            'md' => 12,
+                            'lg' => 4,
+                        ]),
+
+                    TextInput::make('discount_price')
+                        ->rules(['numeric'])
+                        ->nullable()
+                        ->numeric()
+                        ->placeholder('Discount Price')
+                        ->default('0')
+                        ->columnSpan([
+                            'default' => 12,
+                            'md' => 12,
+                            'lg' => 4,
+                        ]),
+
+                    Select::make('status')
+                        ->rules(['string'])
+                        ->required()
+                        ->searchable()
+                        ->options([
+                            'draft' => 'Draft',
+                            'publish' => 'Publish',
+                        ])
+                        ->placeholder('Status')
+                        ->default('draft')
+                        ->columnSpan([
+                            'default' => 12,
+                            'md' => 12,
+                            'lg' => 3,
+                        ]),
+                ]),
+            ]),
+        ]);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return $table 
+            ->columns([
+                Tables\Columns\TextColumn::make('city.name')
+                    ->toggleable()
+                    ->limit(50),
+                Tables\Columns\ImageColumn::make('image')
+                    ->toggleable()
+                    ->circular(),
+                Tables\Columns\TextColumn::make('destination')
+                    ->toggleable()
+                    ->limit(50),
+                Tables\Columns\TextColumn::make('location')
+                    ->toggleable()
+                    ->limit(50),
+                Tables\Columns\TextColumn::make('south_asian_price')
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('non_south_asian_price')
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('discount_price')
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('status')
+                ->badge()
+                ->color(fn (string $state): string => match ($state) {
+                    'draft' => 'gray',
+                    'publish' => 'success',
+                })    
+               
+            ])
+            ->filters([
+                DateRangeFilter::make('created_at'),
+
+                SelectFilter::make('city_id')
+                    ->relationship('city', 'name')
+                    ->indicator('City')
+                    ->multiple()
+                    ->label('City'),
+            ])
+            ->actions([
+                ViewAction::make(),
+                EditAction::make(),
+                DeleteAction::make(),
+            ])
+            ->headerActions([CreateAction::make()]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => Pages\ListDestinations::route('/'),
+            'create' => Pages\CreateDestination::route('/create'),
+            'view' => Pages\ViewDestination::route('/{record}'),
+            'edit' => Pages\EditDestination::route('/{record}/edit'),
+        ];
+    }
+}
