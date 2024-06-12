@@ -29,7 +29,7 @@ class BookingResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $recordTitleAttribute = 'date';
+    protected static ?string $navigationGroup = 'Bookings';
 
     public static function form(Form $form): Form
     {
@@ -145,7 +145,6 @@ class BookingResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->poll('60s')
             ->columns([
                 Tables\Columns\TextColumn::make('package.main_title')
                     ->toggleable()
@@ -167,7 +166,7 @@ class BookingResource extends Resource
                 Tables\Columns\TextColumn::make('date')
                     ->toggleable()
                     ->date(),
-                
+
             ])
             ->filters([
                 DateRangeFilter::make('created_at'),

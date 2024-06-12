@@ -49,7 +49,7 @@
                         @enderror
 
                         <button type="submit"
-                            class="flex items-center justify-center flex-none px-3 py-2 font-medium text-white bg-black border-2 border-black rounded-lg md:px-4 md:py-3">login
+                            class="flex items-center justify-center flex-none px-3 py-2 font-medium text-white bg-black border-2 border-black rounded-lg md:px-4 md:py-3">log-in
                         </button>
                     </div>
                 </form>

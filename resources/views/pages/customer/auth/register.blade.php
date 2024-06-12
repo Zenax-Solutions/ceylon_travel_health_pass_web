@@ -11,7 +11,7 @@
                     experiences</h1>
                 <p class="text-lg">Already have an account</p>
                 <a class="flex-none inline-block px-4 py-3 font-medium text-white bg-black border-2 border-black rounded-lg"
-                    href="{{ route('customer.login') }}">Login
+                    href="{{ route('customer.login') }}">Log-in
                     here</a>
 
             </div>
@@ -24,7 +24,7 @@
                 <div class="flex items-center space-x-2">
                     <span>Already have an account </span>
                     <a href="{{ route('customer.login') }}" class="underline font-medium text-[#070eff]">
-                        Login here
+                        Log-in here
                     </a>
                 </div>
             </div>
@@ -89,7 +89,7 @@
                         @enderror
 
                         <button type="submit"
-                            class="flex items-center justify-center flex-none px-3 py-2 font-medium text-white bg-black border-2 border-black rounded-lg md:px-4 md:py-3">login
+                            class="flex items-center justify-center flex-none px-3 py-2 font-medium text-white bg-black border-2 border-black rounded-lg md:px-4 md:py-3">Sign-in
                         </button>
                     </div>
                 </form>

@@ -27,7 +27,7 @@ class TicketResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-ticket';
 
-    protected static ?string $recordTitleAttribute = 'ticket_id';
+    protected static ?string $navigationGroup = 'Bookings';
 
     public static function form(Form $form): Form
     {
@@ -91,11 +91,13 @@ class TicketResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('booking.date')
+                Tables\Columns\TextColumn::make('booking.id')
                     ->toggleable()
+                    ->label('Bookig No')
                     ->limit(50),
                 Tables\Columns\TextColumn::make('ticket_id')
                     ->toggleable()
+                    ->label('Ticket No')
                     ->searchable(true, null, true)
                     ->limit(50),
                 Tables\Columns\TextColumn::make('expiry_date')

@@ -359,38 +359,42 @@
                                                 @endif
                                                 <div
                                                     class="group flex items-center gap-x-5 rounded-md px-2.5 py-2 transition-all duration-75 hover:bg-green-100">
-                                                    <div class="inline-flex items-center">
-                                                        <label
-                                                            class="relative flex items-center p-3 rounded-full cursor-pointer"
-                                                            for="checkbox-{{ $destination->id }}"
-                                                            data-ripple-dark="true">
-                                                            <input type="checkbox"
-                                                                class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-pink-500 checked:bg-pink-500 checked:before:bg-pink-500 hover:before:opacity-10"
-                                                                id="checkbox-{{ $destination->id }}"
-                                                                onchange="calculateTotal()"
-                                                                @if ($auth_customer != null) @if ($auth_customer->region_type == 'south_asian')
+
+                                                    @if ($destination->current_stock_count > 0)
+                                                        <div class="inline-flex items-center">
+                                                            <label
+                                                                class="relative flex items-center p-3 rounded-full cursor-pointer"
+                                                                for="checkbox-{{ $destination->id }}"
+                                                                data-ripple-dark="true">
+                                                                <input type="checkbox"
+                                                                    class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-pink-500 checked:bg-pink-500 checked:before:bg-pink-500 hover:before:opacity-10"
+                                                                    id="checkbox-{{ $destination->id }}"
+                                                                    onchange="calculateTotal()"
+                                                                    @if ($auth_customer != null) @if ($auth_customer->region_type == 'south_asian')
                                                                     data-price="{{ $destination->south_asian_price }}"
                                                                     data-child-price="{{ $destination->child_south_asian_price }}"
                                                                 @elseif ($auth_customer->region_type == 'non_south_asian')
                                                                     data-price="{{ $destination->non_south_asian_price }}"
                                                                     data-child-price="{{ $destination->child_non_south_asian_price }}" @endif
-                                                                @endif
-                                                            />
+                                                                    @endif
+                                                                />
 
 
-                                                            <div
-                                                                class="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
-                                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                                    class="h-3.5 w-3.5" viewBox="0 0 20 20"
-                                                                    fill="currentColor" stroke="currentColor"
-                                                                    stroke-width="1">
-                                                                    <path fill-rule="evenodd"
-                                                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                                                        clip-rule="evenodd"></path>
-                                                                </svg>
-                                                            </div>
-                                                        </label>
-                                                    </div>
+                                                                <div
+                                                                    class="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                        class="h-3.5 w-3.5" viewBox="0 0 20 20"
+                                                                        fill="currentColor" stroke="currentColor"
+                                                                        stroke-width="1">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                                            clip-rule="evenodd"></path>
+                                                                    </svg>
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                    @endif
+
                                                     <div
                                                         class="flex items-center text-black bg-gray-200 rounded-lg group-hover:bg-green-200">
                                                         <img style="width: 120px; object-fit: cover; height:80px; border-radius: 8px;"
@@ -426,6 +430,12 @@
                                                                 @endif
                                                             @endif
                                                         </p>
+                                                        @if ($destination->current_stock_count == 0)
+                                                            <div
+                                                                class="center relative inline-block select-none whitespace-nowrap rounded-lg bg-red-500 py-2 px-3.5 align-baseline font-sans text-xs font-bold  leading-none text-white">
+                                                                <div class="mt-px">not available</div>
+                                                            </div>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             @empty

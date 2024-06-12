@@ -135,7 +135,7 @@ class Package extends Component
             $this->redirect('/');
         } else {
             $this->package->first();
-            $this->destinations = Destination::all();
+            $this->destinations = Destination::where('current_stock_count', '>', 0)->get();
             $this->citys = City::all();
             $this->esimServiceProviderList = EsimService::where('status', 'publish')->get();
         }

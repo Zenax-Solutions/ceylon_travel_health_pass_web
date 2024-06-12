@@ -27,21 +27,23 @@ class CityResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    protected static ?string $navigationGroup = 'Destinations';
+
     public static function form(Form $form): Form
     {
         return $form->schema([
             Section::make()->schema([
                 Grid::make(['default' => 0])->schema([
-                    FileUpload::make('image')
-                        ->rules(['image', 'max:1024'])
-                        ->nullable()
-                        ->image()
-                        ->placeholder('Image')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 6,
-                        ]),
+                    // FileUpload::make('image')
+                    //     ->rules(['image', 'max:1024'])
+                    //     ->nullable()
+                    //     ->image()
+                    //     ->placeholder('Image')
+                    //     ->columnSpan([
+                    //         'default' => 12,
+                    //         'md' => 12,
+                    //         'lg' => 6,
+                    //     ]),
 
                     TextInput::make('name')
                         ->rules(['string'])
@@ -61,12 +63,13 @@ class CityResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('image')
-                    ->toggleable()
-                    ->circular(),
+
                 Tables\Columns\TextColumn::make('name')
                     ->toggleable()
-                    ->searchable(true, null, true)
+                    ->searchable()
+                    ->limit(50),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->toggleable()
                     ->limit(50),
             ])
             ->filters([DateRangeFilter::make('created_at')])

@@ -27,7 +27,14 @@ class EsimServiceResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
 
+    protected static ?string $navigationGroup = 'Services';
+
     protected static ?string $recordTitleAttribute = 'service_name';
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 
     public static function form(Form $form): Form
     {
@@ -110,11 +117,12 @@ class EsimServiceResource extends Resource
                     ->limit(50),
                 Tables\Columns\TextColumn::make('service_name')
                     ->toggleable()
-                    ->searchable(true, null, true)
+                    ->searchable()
                     ->limit(50),
                 Tables\Columns\TextColumn::make('per_sim_price')
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('created_at')
                     ->toggleable()
-                    ->searchable(true, null, true),
                 // Tables\Columns\TextColumn::make('status')
                 //     ->toggleable()
                 //     ->searchable()

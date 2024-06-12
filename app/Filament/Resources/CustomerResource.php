@@ -28,7 +28,12 @@ class CustomerResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
-    protected static ?string $recordTitleAttribute = 'first_name';
+    protected static ?string $navigationGroup = 'Actors';
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 
     public static function form(Form $form): Form
     {
@@ -69,6 +74,7 @@ class CustomerResource extends Resource
                     TextInput::make('email')
                         ->rules(['email'])
                         ->required()
+                        ->unique(ignoreRecord: true)
                         ->email()
                         ->placeholder('Email')
                         ->columnSpan([
@@ -80,9 +86,9 @@ class CustomerResource extends Resource
                     TextInput::make('password')
                         ->required()
                         ->password()
-                        ->dehydrateStateUsing(fn($state) => \Hash::make($state))
+                        ->dehydrateStateUsing(fn ($state) => \Hash::make($state))
                         ->required(
-                            fn(Component $livewire) => $livewire instanceof
+                            fn (Component $livewire) => $livewire instanceof
                                 Pages\CreateCustomer
                         )
                         ->placeholder('Password')
@@ -111,6 +117,7 @@ class CustomerResource extends Resource
                         ->rules(['string'])
                         ->nullable()
                         ->placeholder('Contact No')
+                        ->unique(ignoreRecord: true)
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
@@ -165,15 +172,15 @@ class CustomerResource extends Resource
                     ->circular(),
                 Tables\Columns\TextColumn::make('first_name')
                     ->toggleable()
-                    ->searchable(true, null, true)
+                    ->searchable()
                     ->limit(50),
                 Tables\Columns\TextColumn::make('last_name')
                     ->toggleable()
-                    ->searchable(true, null, true)
+                    ->searchable()
                     ->limit(50),
                 Tables\Columns\TextColumn::make('email')
                     ->toggleable()
-                    ->searchable(true, null, true)
+                    ->searchable()
                     ->limit(50),
                 // Tables\Columns\TextColumn::make('region_type')
                 //     ->toggleable()
@@ -184,15 +191,17 @@ class CustomerResource extends Resource
                 //     ]),
                 Tables\Columns\TextColumn::make('contact_no')
                     ->toggleable()
-                    ->searchable(true, null, true)
+                    ->searchable()
                     ->limit(50),
                 Tables\Columns\TextColumn::make('whatsapp_no')
                     ->toggleable()
-                    ->searchable(true, null, true)
+                    ->searchable()
                     ->limit(50),
                 Tables\Columns\TextColumn::make('address')
                     ->toggleable()
-                    ->searchable()
+                    ->limit(50),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->toggleable()
                     ->limit(50),
                 // Tables\Columns\TextColumn::make('status')
                 //     ->toggleable()
@@ -214,7 +223,7 @@ class CustomerResource extends Resource
     public static function getRelations(): array
     {
         return [
-            CustomerResource\RelationManagers\BookingsRelationManager::class,
+            // CustomerResource\RelationManagers\BookingsRelationManager::class,
         ];
     }
 

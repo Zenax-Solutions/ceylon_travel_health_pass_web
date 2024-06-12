@@ -27,7 +27,14 @@ class DiscountShopResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
 
+    protected static ?string $navigationGroup = 'Services';
+
     protected static ?string $recordTitleAttribute = 'shope_name';
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 
     public static function form(Form $form): Form
     {
@@ -69,7 +76,8 @@ class DiscountShopResource extends Resource
 
                     TextInput::make('location')
                         ->rules(['string'])
-                        ->nullable()
+                        ->label('Location ( Map Link )')
+                        ->required()
                         ->placeholder('Location')
                         ->columnSpan([
                             'default' => 12,
@@ -127,22 +135,22 @@ class DiscountShopResource extends Resource
                     ->circular(),
                 Tables\Columns\TextColumn::make('agent.name')
                     ->toggleable()
+                    ->searchable()
                     ->limit(50),
                 Tables\Columns\TextColumn::make('shope_name')
                     ->toggleable()
-                    ->searchable(true, null, true)
-                    ->limit(50),
-                Tables\Columns\TextColumn::make('location')
-                    ->toggleable()
-                    ->searchable(true, null, true)
+                    ->searchable()
                     ->limit(50),
                 Tables\Columns\TextColumn::make('area')
                     ->toggleable()
-                    ->searchable(true, null, true)
+                    ->searchable()
                     ->limit(50),
                 Tables\Columns\TextColumn::make('discount_amount')
+                    ->suffix('%')
                     ->toggleable()
-                    ->searchable(true, null, true)
+                    ->limit(50),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->toggleable()
                     ->limit(50),
                 // Tables\Columns\TextColumn::make('status')
                 //     ->toggleable()

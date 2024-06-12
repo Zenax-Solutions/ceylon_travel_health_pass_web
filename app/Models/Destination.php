@@ -14,6 +14,7 @@ class Destination extends Model
     protected $fillable = [
         'city_id',
         'destination',
+        'branch_number',
         'image',
         'location',
         'south_asian_price',
@@ -21,6 +22,8 @@ class Destination extends Model
         'child_south_asian_price',
         'child_non_south_asian_price',
         'discount_price',
+        'stock_count',
+        'current_stock_count',
         'status',
     ];
 

@@ -30,6 +30,13 @@ class AgentResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    protected static ?string $navigationGroup = 'Actors';
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([
@@ -76,6 +83,7 @@ class AgentResource extends Resource
                     TextInput::make('email')
                         ->rules(['email'])
                         ->required()
+                        ->unique(ignoreRecord: true)
                         ->email()
                         ->placeholder('Email')
                         ->columnSpan([
@@ -87,6 +95,7 @@ class AgentResource extends Resource
                     RichEditor::make('contact_no')
                         ->rules(['string'])
                         ->required()
+                        ->unique(ignoreRecord: true)
                         ->placeholder('Contact No')
                         ->columnSpan([
                             'default' => 12,
@@ -234,9 +243,6 @@ class AgentResource extends Resource
                 Tables\Columns\TextColumn::make('license_no')
                     ->toggleable()
                     ->limit(50),
-                Tables\Columns\TextColumn::make('bank_details')
-                    ->toggleable()
-                    ->limit(50),
                 Tables\Columns\TextColumn::make('points')
                     ->toggleable()
                     ->limit(50),
@@ -261,6 +267,9 @@ class AgentResource extends Resource
                     ->toggleable()
                     ->limit(50),
                 Tables\Columns\TextColumn::make('status')
+                    ->toggleable()
+                    ->limit(50),
+                Tables\Columns\TextColumn::make('created_at')
                     ->toggleable()
                     ->limit(50),
             ])

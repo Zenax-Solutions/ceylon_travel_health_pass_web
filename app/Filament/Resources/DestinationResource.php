@@ -20,6 +20,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Filters\SelectFilter;
 use App\Filament\Filters\DateRangeFilter;
 use App\Filament\Resources\DestinationResource\Pages;
+use Filament\Support\RawJs;
 
 class DestinationResource extends Resource
 {
@@ -28,6 +29,8 @@ class DestinationResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-map-pin';
 
     protected static ?string $recordTitleAttribute = 'destination';
+
+    protected static ?string $navigationGroup = 'Destinations';
 
     public static function form(Form $form): Form
     {
@@ -56,6 +59,14 @@ class DestinationResource extends Resource
                             'md' => 12,
                             'lg' => 6,
                         ]),
+                    TextInput::make('branch_number')
+                        ->required()
+                        ->unique(ignoreRecord: true)
+                        ->columnSpan([
+                            'default' => 12,
+                            'md' => 12,
+                            'lg' => 6,
+                        ]),
 
                     TextInput::make('destination')
                         ->rules(['string'])
@@ -67,20 +78,23 @@ class DestinationResource extends Resource
                             'lg' => 6,
                         ]),
 
-                    TextInput::make('location')
-                        ->rules(['string'])
-                        ->nullable()
-                        ->placeholder('Location')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 6,
-                        ]),
+                    // TextInput::make('location')
+                    //     ->rules(['string'])
+                    //     ->nullable()
+                    //     ->placeholder('Location')
+                    //     ->columnSpan([
+                    //         'default' => 12,
+                    //         'md' => 12,
+                    //         'lg' => 6,
+                    //     ]),
 
                     TextInput::make('south_asian_price')
                         ->rules(['numeric'])
                         ->required()
                         ->numeric()
+                        ->mask(RawJs::make('$money($input)'))
+                        ->stripCharacters(',')
+                        ->prefix('$')
                         ->placeholder('South Asian Price')
                         ->default('0')
                         ->columnSpan([
@@ -93,6 +107,9 @@ class DestinationResource extends Resource
                         ->rules(['numeric'])
                         ->required()
                         ->numeric()
+                        ->mask(RawJs::make('$money($input)'))
+                        ->stripCharacters(',')
+                        ->prefix('$')
                         ->placeholder('Non South Asian Price')
                         ->default('0')
                         ->columnSpan([
@@ -101,11 +118,34 @@ class DestinationResource extends Resource
                             'lg' => 4,
                         ]),
 
-                    TextInput::make('discount_price')
+                    // TextInput::make('discount_price')
+                    //     ->rules(['numeric'])
+                    //     ->nullable()
+                    //     ->numeric()
+                    //     ->placeholder('Discount Price')
+                    //     ->default('0')
+                    //     ->columnSpan([
+                    //         'default' => 12,
+                    //         'md' => 12,
+                    //         'lg' => 4,
+                    //     ]),
+
+                    TextInput::make('stock_count')
                         ->rules(['numeric'])
-                        ->nullable()
-                        ->numeric()
-                        ->placeholder('Discount Price')
+                        ->required()
+                        ->default('0')
+                        ->debounce('2s')
+                        ->afterStateUpdated(fn ($state, callable $set) => $set('current_stock_count', $state))
+                        ->columnSpan([
+                            'default' => 12,
+                            'md' => 12,
+                            'lg' => 4,
+                        ]),
+
+                    TextInput::make('current_stock_count')
+                        ->rules(['numeric'])
+                        ->required()
+                        ->readOnly()
                         ->default('0')
                         ->columnSpan([
                             'default' => 12,
@@ -135,33 +175,48 @@ class DestinationResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return $table 
+        return $table
             ->columns([
-                Tables\Columns\TextColumn::make('city.name')
-                    ->toggleable()
-                    ->limit(50),
                 Tables\Columns\ImageColumn::make('image')
                     ->toggleable()
                     ->circular(),
+                Tables\Columns\TextColumn::make('branch_number')
+                    ->toggleable()
+                    ->searchable()
+                    ->limit(50),
                 Tables\Columns\TextColumn::make('destination')
                     ->toggleable()
+                    ->searchable()
                     ->limit(50),
-                Tables\Columns\TextColumn::make('location')
+                Tables\Columns\TextColumn::make('city.name')
                     ->toggleable()
+                    ->searchable()
                     ->limit(50),
                 Tables\Columns\TextColumn::make('south_asian_price')
+                    ->money('USD')
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('non_south_asian_price')
+                    ->money('USD')
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('discount_price')
+                Tables\Columns\TextColumn::make('stock_count')
+                    ->label('Ticket stock count')
+                    ->description(fn (Destination $record): string => 'remaining : ' . $record->current_stock_count)
+                    ->badge()
+                    ->color('warning')
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('current_stock_count')
+                    ->label('Sold ticket count')
+                    ->formatStateUsing(fn (Destination $record): string => $record->stock_count - $record->current_stock_count)
+                    ->badge()
+                    ->color('danger')
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('status')
-                ->badge()
-                ->color(fn (string $state): string => match ($state) {
-                    'draft' => 'gray',
-                    'publish' => 'success',
-                })    
-               
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'draft' => 'gray',
+                        'publish' => 'success',
+                    })
+
             ])
             ->filters([
                 DateRangeFilter::make('created_at'),

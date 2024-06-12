@@ -23,6 +23,7 @@ use App\Models\DiscountService;
 use Filament\Forms\Components\Select;
 use App\Models\DiscountShop;
 use Filament\Forms\Components\FileUpload;
+use Filament\Support\RawJs;
 
 class PackageResource extends Resource
 {
@@ -30,7 +31,8 @@ class PackageResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-cube';
 
-    protected static ?string $recordTitleAttribute = 'main_title';
+    protected static ?string $navigationGroup = 'Packages';
+
 
     public static function form(Form $form): Form
     {
@@ -64,17 +66,9 @@ class PackageResource extends Resource
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
-                            'lg' => 6,
-                        ]),
-                    RichEditor::make('description')
-                        ->rules(['string'])
-                        ->nullable()
-                        ->placeholder('Description')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
                             'lg' => 12,
                         ]),
+
 
                     RichEditor::make('travel_info')
                         ->rules(['string'])
@@ -96,16 +90,6 @@ class PackageResource extends Resource
                             'lg' => 12,
                         ]),
 
-                    TextInput::make('days')
-                        ->rules([])
-                        ->nullable()
-                        ->numeric()
-                        ->placeholder('Days')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 3,
-                        ]),
 
                     TextInput::make('expire_days_count')
                         ->rules([])
@@ -123,48 +107,15 @@ class PackageResource extends Resource
                         ->rules(['numeric'])
                         ->required()
                         ->numeric()
+                        ->mask(RawJs::make('$money($input)'))
+                        ->stripCharacters(',')
+                        ->prefix('$')
                         ->placeholder('Price')
                         ->default('0')
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
                             'lg' => 5,
-                        ]),
-
-                    TextInput::make('child_price')
-                        ->rules(['numeric'])
-                        ->nullable()
-                        ->numeric()
-                        ->placeholder('Child Price')
-                        ->default('0')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 6,
-                        ]),
-
-                    TextInput::make('additional_per_adult_price')
-                        ->rules(['numeric'])
-                        ->nullable()
-                        ->numeric()
-                        ->placeholder('Additional Per Adult Price')
-                        ->default('0')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 6,
-                        ]),
-
-                    TextInput::make('additional_per_day_price')
-                        ->rules(['numeric'])
-                        ->nullable()
-                        ->numeric()
-                        ->placeholder('Additional Per Day Price')
-                        ->default('0')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 6,
                         ]),
 
                     Select::make('discount_shop_list')
@@ -200,42 +151,18 @@ class PackageResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('main_title')
                     ->toggleable()
-                    ->searchable(true, null, true)
-                    ->limit(50),
-                Tables\Columns\TextColumn::make('second_title')
-                    ->toggleable()
-                    ->searchable(true, null, true)
-                    ->limit(50),
-                Tables\Columns\TextColumn::make('description')
-                    ->toggleable()
                     ->searchable()
                     ->limit(50),
-                Tables\Columns\TextColumn::make('travel_info')
-                    ->toggleable()
-                    ->searchable()
-                    ->limit(50),
-                Tables\Columns\TextColumn::make('health_info')
-                    ->toggleable()
-                    ->searchable()
-                    ->limit(50),
-                Tables\Columns\TextColumn::make('days')
-                    ->toggleable()
-                    ->searchable(true, null, true),
+
                 Tables\Columns\TextColumn::make('expire_days_count')
-                    ->toggleable()
-                    ->searchable(true, null, true),
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('price')
+                    ->money('USD')
+                    ->toggleable(),
+
+                Tables\Columns\TextColumn::make('created_at')
                     ->toggleable()
-                    ->searchable(true, null, true),
-                Tables\Columns\TextColumn::make('child_price')
-                    ->toggleable()
-                    ->searchable(true, null, true),
-                Tables\Columns\TextColumn::make('additional_per_adult_price')
-                    ->toggleable()
-                    ->searchable(true, null, true),
-                Tables\Columns\TextColumn::make('additional_per_day_price')
-                    ->toggleable()
-                    ->searchable(true, null, true),
+
             ])
             ->filters([DateRangeFilter::make('created_at')])
             ->actions([
@@ -249,7 +176,7 @@ class PackageResource extends Resource
     public static function getRelations(): array
     {
         return [
-            PackageResource\RelationManagers\BookingsRelationManager::class,
+            // PackageResource\RelationManagers\BookingsRelationManager::class,
         ];
     }
 

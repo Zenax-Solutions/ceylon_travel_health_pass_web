@@ -14,9 +14,11 @@
                             <img src="{{ Storage::url($service->image) }}" alt="burger illustration">
 
                             <div class="space-y-2">
-                                <h5 class="text-xl font-medium text-gray-800 transition group-hover:text-yellow-600">
-                                    {{ $service->service_name }}
-                                </h5>
+                                <a href="{{ $service->location }}" target="_blank" rel="noopener noreferrer">
+                                    <h5 class="text-xl font-medium text-gray-800 transition group-hover:text-yellow-600">
+                                        {{ $service->service_name }}
+                                    </h5>
+                                </a>
                                 <p class="text-sm font-bold text-green-400">Discount: %{{ $service->discount_amount }}</p>
                                 <p class="text-sm font-bold text-gray-600">Area: {{ $service->area }}</p>
                             </div>
