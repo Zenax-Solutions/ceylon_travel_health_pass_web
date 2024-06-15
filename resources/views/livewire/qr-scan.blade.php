@@ -4,9 +4,9 @@
         <div
             class="w-full max-w-md p-8 transition-all duration-500 ease-in-out transform bg-white rounded-lg shadow-lg hover:scale-105 hover:shadow-2xl">
             <h2 class="mb-4 text-3xl font-bold text-center text-gray-800">QR Code Scanner</h2>
-            <div id="qr-reader" class="overflow-hidden border-4 border-gray-300 border-dashed rounded-lg animate-pulse"
+            <div id="qr-reader" class="overflow-hidden border-4 border-gray-300 border-dashed rounded-lg "
                 style="width: 100%; height: auto;"></div>
-            <div id="result" class="mt-4 text-center text-gray-600 transition duration-500 ease-in-out">
+            <div id="result" class="mt-4 font-bold text-center text-gray-600 transition duration-500 ease-in-out">
             </div>
             <audio id="beepSound" src="{{ asset('sounds/beep.mp3') }}" preload="auto"></audio>
         </div>
@@ -14,16 +14,17 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            function onScanSuccess(decodedText, decodedResult) {
+            async function onScanSuccess(decodedText, decodedResult) {
                 if (decodedText) {
                     // Play sound
                     document.getElementById('beepSound').play();
 
-                    // Send QR code to Livewire component
-                    Livewire.dispatch('scanQrCode', {
+                    // Asynchronously send QR code to Livewire component
+                    await Livewire.dispatch('scanQrCode', {
                         decodedText: decodedText
                     });
 
+                    // Update result text
                     document.getElementById('result').textContent = `Scanned QR Code: ${decodedText}`;
                 }
             }
@@ -40,6 +41,8 @@
 
             window.addEventListener('qrCodeValidated', event => {
                 let resultElement = document.getElementById('result');
+
+
                 if (event.detail.status === 'valid') {
                     resultElement.textContent = 'QR Code is valid!';
                     resultElement.classList.remove('text-red-500');
@@ -54,5 +57,6 @@
             });
         });
     </script>
+
 
 </div>
