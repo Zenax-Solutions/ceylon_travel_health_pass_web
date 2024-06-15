@@ -1,4 +1,4 @@
-<div>
+<div wire:ignore>
 
     <div class="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-400 to-purple-500">
         <div
@@ -6,7 +6,8 @@
             <h2 class="mb-4 text-3xl font-bold text-center text-gray-800">QR Code Scanner</h2>
             <div id="qr-reader" class="overflow-hidden border-4 border-gray-300 border-dashed rounded-lg animate-pulse"
                 style="width: 100%; height: auto;"></div>
-            <div id="result" class="mt-4 text-center text-gray-600 transition duration-500 ease-in-out"></div>
+            <div id="result" class="mt-4 text-center text-gray-600 transition duration-500 ease-in-out">
+            </div>
             <audio id="beepSound" src="{{ asset('sounds/beep.mp3') }}" preload="auto"></audio>
         </div>
     </div>
@@ -19,7 +20,9 @@
                     document.getElementById('beepSound').play();
 
                     // Send QR code to Livewire component
-                    Livewire.dispatch('scanQrCode', decodedText);
+                    Livewire.dispatch('scanQrCode', {
+                        decodedText: decodedText
+                    });
 
                     document.getElementById('result').textContent = `Scanned QR Code: ${decodedText}`;
                 }

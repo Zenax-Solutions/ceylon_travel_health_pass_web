@@ -4,27 +4,33 @@ namespace App\Livewire;
 
 use App\Models\Ticket;
 use Livewire\Component;
+use Livewire\Attributes\On;
 
 class QrScan extends Component
 {
 
     public $qrCode;
 
-    protected $listeners = ['scanQrCode'];
 
-    public function scanQrCode($qrCode)
+    #[On('scanQrCode')]
+    public function scanQrCode($decodedText)
     {
-        $this->qrCode = $qrCode;
+
+        $this->qrCode = $decodedText;
 
         // Validate QR code with database
-        $record = Ticket::where('ticket_id', $this->qrCode)->firstOrNull();
+        $record = Ticket::where('ticket_id', $this->qrCode)->first();
 
-        if ($record != null) {
-            // Handle successful validation
-            $this->dispatchBrowserEvent('qrCodeValidated', ['status' => 'valid', 'data' => $record]);
+        if ($record == null) {
+            $this->dispatch('qrCodeValidated', ['status' => 'invalid']);
         } else {
-            // Handle failed validation
-            $this->dispatchBrowserEvent('qrCodeValidated', ['status' => 'invalid']);
+            if ($record != null) {
+                // Handle successful validation
+                $this->dispatch('qrCodeValidated', ['status' => 'valid', 'data' => $record]);
+            } else {
+                // Handle failed validation
+                $this->dispatch('qrCodeValidated', ['status' => 'invalid']);
+            }
         }
     }
 
