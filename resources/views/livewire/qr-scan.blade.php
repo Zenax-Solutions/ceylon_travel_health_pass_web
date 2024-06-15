@@ -5,7 +5,7 @@
             class="w-full max-w-md p-8 transition-all duration-500 ease-in-out transform bg-white rounded-lg shadow-lg hover:scale-105 hover:shadow-2xl">
             <h2 class="mb-4 text-3xl font-bold text-center text-gray-800">QR Code Scanner</h2>
             <div id="qr-reader" class="overflow-hidden border-4 border-gray-300 border-dashed rounded-lg animate-pulse"
-                style="width: 100%; height: 300px;"></div>
+                style="width: 100%; height: auto;"></div>
             <div id="result" class="mt-4 text-center text-gray-600 transition duration-500 ease-in-out"></div>
             <audio id="beepSound" src="{{ asset('sounds/beep.mp3') }}" preload="auto"></audio>
         </div>
