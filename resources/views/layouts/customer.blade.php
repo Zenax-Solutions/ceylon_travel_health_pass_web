@@ -58,6 +58,10 @@
                 <li><a href="/" class="px-2 py-2 text-gray-800 rounded-md xl:px-4 hover:bg-gray-200">Home</a>
                 </li>
 
+                <li><a href="{{ route('customer.dashboard') }}"
+                        class="px-2 py-2 text-gray-800 rounded-md xl:px-4 hover:bg-gray-200">Dashboard</a>
+                </li>
+
                 <li><a href="{{ route('customer.profile') }}"
                         class="px-2 py-2 text-gray-800 rounded-md xl:px-4 hover:bg-gray-200">My
                         Profile</a>

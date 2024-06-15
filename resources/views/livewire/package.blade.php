@@ -245,8 +245,7 @@
                                                     </p>
                                                     <span class="text-xs font-light text-black">Area :
                                                         {{ $shop->area }}</span>
-                                                    <span class="text-xs font-light text-black">Location :
-                                                        {{ $shop->location }}</span>
+
                                                     <span class="text-xs font-bold text-black">Discount :
                                                         %{{ $shop->discount_amount }}</span>
                                                 </div>
@@ -275,8 +274,7 @@
                                                         {{ $service->service_name }}</p>
                                                     <span class="text-xs font-light text-black">Area :
                                                         {{ $service->area }}</span>
-                                                    <span class="text-xs font-light text-black">Location :
-                                                        {{ $service->location }}</span>
+
                                                     <span class="text-xs font-bold text-black">Discount :
                                                         %{{ $service->discount_amount }}</span>
                                                 </div>

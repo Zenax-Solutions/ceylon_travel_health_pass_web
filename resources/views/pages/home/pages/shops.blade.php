@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('content')
+    <!-- Live chat -->
+    @include('pages.home.components.chatwidget')
+
     <div class="py-16 overflow-hidden bg-gray-50">
         <div class="container px-6 m-auto space-y-8 text-gray-500 md:px-12">
             <div>

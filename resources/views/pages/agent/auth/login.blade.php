@@ -19,10 +19,7 @@
                         Welcome to Ceylon Travel Agent Program
                     </h2>
 
-                    {{-- <p class="mt-4 leading-relaxed text-white/90">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam dolorum aliquam,
-                        quibusdam aperiam voluptatum.
-                    </p> --}}
+
                 </div>
             </section>
 
@@ -40,10 +37,7 @@
                             Welcome to Ceylon Travel Agent Program
                         </h1>
 
-                        {{-- <p class="mt-4 leading-relaxed text-gray-500">
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam dolorum aliquam,
-                            quibusdam aperiam voluptatum.
-                        </p> --}}
+
                     </div>
 
                     <div class="flex flex-col space-y-2 text-center">
@@ -79,7 +73,7 @@
                         <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
                             <button type="submit"
                                 class="inline-block px-12 py-3 text-sm font-medium text-white transition bg-green-600 border border-green-600 rounded-md shrink-0 hover:bg-transparent hover:text-green-600 focus:outline-none focus:ring active:text-green-500">
-                                Login
+                                Log-in
                             </button>
 
                             <p class="mt-4 text-sm text-gray-500 sm:mt-0">

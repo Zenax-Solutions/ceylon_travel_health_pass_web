@@ -47,6 +47,7 @@
 
 <body>
 
+
     <div class="container flex flex-col mx-auto bg-white" style="padding: 10px">
         <div style="background-color: #e3efc9; padding:10px"
             class="relative flex flex-wrap items-center justify-between w-full group py-7 shrink-0">
@@ -178,6 +179,22 @@
                         <a href="#"
                             class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">Refund
                             Policy</a>
+                    </div>
+                </div>
+
+                <div>
+                    <p class="font-semibold text-gray-800 dark:text-white">Agent Program</p>
+
+                    <div class="flex flex-col items-start mt-5 space-y-2">
+                        <a href="{{ route('agent.login') }}"
+                            class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">Agent
+                            Portal</a>
+
+                        <a href="#"
+                            class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">Destination
+                            Portal</a>
+
+
                     </div>
                 </div>
             </div>

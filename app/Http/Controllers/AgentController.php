@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agent;
+use App\Models\Booking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
@@ -14,7 +15,12 @@ class AgentController extends Controller
     public function dashboard()
     {
         if (Session::has('auth_agent')) {
-            return view('pages.agent.dashboard.main');
+
+            $agent = Agent::where('email', Session::get('auth_agent'))->first();
+
+            $bookings = Booking::where('agent_id', $agent?->id)->paginate(10);
+
+            return view('pages.agent.dashboard.main', compact('agent', 'bookings'));
         }
 
         return redirect()->route('agent.login');
@@ -99,12 +105,18 @@ class AgentController extends Controller
     }
 
 
+    public function qrscan()
+    {
+        return view('pages.agent.dashboard.pages.qrscan');
+    }
+
+
     public function logout()
     {
         $remove = Session::remove('auth_agent');
 
         if ($remove) {
-            return redirect('/');
+            return redirect()->route('agent.login');
         }
 
         return redirect()->back();

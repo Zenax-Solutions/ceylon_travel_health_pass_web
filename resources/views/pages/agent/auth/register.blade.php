@@ -19,10 +19,7 @@
                         Welcome to Ceylon Travel Agent Program
                     </h2>
 
-                    {{-- <p class="mt-4 leading-relaxed text-white/90">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam dolorum aliquam,
-                        quibusdam aperiam voluptatum.
-                    </p> --}}
+
                 </div>
             </section>
 
@@ -40,10 +37,7 @@
                             Welcome to Ceylon Travel Agent Program
                         </h1>
 
-                        {{-- <p class="mt-4 leading-relaxed text-gray-500">
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam dolorum aliquam,
-                            quibusdam aperiam voluptatum.
-                        </p> --}}
+
                     </div>
 
                     <div class="flex flex-col space-y-2 text-center">
@@ -146,7 +140,7 @@
                             </button>
                             <p class="mt-4 text-sm text-gray-500 sm:mt-0">
                                 Already have an account?
-                                <a href="{{ route('agent.login') }}" class="text-gray-700 underline">Log here</a>.
+                                <a href="{{ route('agent.login') }}" class="text-gray-700 underline">Log-in here</a>.
                             </p>
                         </div>
                     </form>

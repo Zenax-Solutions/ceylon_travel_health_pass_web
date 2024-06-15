@@ -173,16 +173,13 @@
                                             </tr>
                                         @empty
                                         @endforelse
-
-
-
-
-
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
+                    <br>
+                    {{ $bookings->links() }}
                 </div>
             </div>
         </div>

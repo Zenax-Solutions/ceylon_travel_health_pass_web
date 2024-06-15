@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('content')
 
+    <!-- Live Chat -->
+    @include('pages.home.components.chatwidget')
+
     <div class="container flex flex-col mx-auto bg-white" style="padding: 10px">
         <div class="grid w-full grid-cols-1 my-auto mt-12 mb-8 md:grid-cols-3 ">
             <div class="flex flex-col justify-center text-center lg:text-start">
