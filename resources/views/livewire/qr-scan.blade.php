@@ -14,10 +14,15 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             function onScanSuccess(decodedText, decodedResult) {
-                // Send QR code to Livewire component
-                //Livewire.dispatch('scanQrCode', decodedText);
-                document.getElementById('beepSound').play();
-                document.getElementById('result').textContent = `Scanned QR Code: ${decodedText}`;
+                if (decodedText) {
+                    // Play sound
+                    document.getElementById('beepSound').play();
+
+                    // Send QR code to Livewire component
+                    Livewire.dispatch('scanQrCode', decodedText);
+
+                    document.getElementById('result').textContent = `Scanned QR Code: ${decodedText}`;
+                }
             }
 
             let html5QrCodeScanner = new Html5QrcodeScanner(
