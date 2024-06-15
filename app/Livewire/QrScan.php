@@ -26,7 +26,7 @@ class QrScan extends Component
         if ($record == null) {
             $this->dispatch('qrCodeValidated', ['status' => 'invalid']);
         } else {
-            if ($record != null) {
+            if ($record) {
                 // Handle successful validation
                 $this->dispatch('qrCodeValidated', ['status' => 'valid', 'data' => $record]);
             } else {
