@@ -25,7 +25,7 @@
                     });
 
                     // Update result text
-                    document.getElementById('result').textContent = `Scanned QR Code: ${decodedText}`;
+                    //document.getElementById('result').textContent = `Scanned QR Code: ${decodedText}`;
                 }
             }
 
