@@ -1,6 +1,6 @@
 <div wire:ignore>
 
-    <div class="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-400 to-purple-500">
+    <div class="flex items-center justify-center min-h-screen bg-gradient-to-r from-green-400 to-green-500">
         <div
             class="w-full max-w-md p-8 transition-all duration-500 ease-in-out transform bg-white rounded-lg shadow-lg hover:scale-105 hover:shadow-2xl">
             <div>
