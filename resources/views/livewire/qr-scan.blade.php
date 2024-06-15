@@ -3,7 +3,12 @@
     <div class="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-400 to-purple-500">
         <div
             class="w-full max-w-md p-8 transition-all duration-500 ease-in-out transform bg-white rounded-lg shadow-lg hover:scale-105 hover:shadow-2xl">
-            <h2 class="mb-4 text-3xl font-bold text-center text-gray-800">QR Code Scanner</h2>
+            <div>
+
+                <img style="width: 200px" src="{{ asset('images/logo.png') }}">
+
+            </div>
+            <h2 class="mb-4 text-3xl font-bold text-center text-gray-800">QR Ticket Scanner</h2>
             <div id="qr-reader" class="overflow-hidden border-4 border-gray-300 border-dashed rounded-lg "
                 style="width: 100%; height: auto;"></div>
             <div id="result" class="mt-4 font-bold text-center text-gray-600 transition duration-500 ease-in-out">
