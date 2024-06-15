@@ -21,6 +21,8 @@ class QrScan extends Component
         // Validate QR code with database
         $record = Ticket::where('ticket_id', $this->qrCode)->first();
 
+        dd($record);
+
         if ($record == null) {
             $this->dispatch('qrCodeValidated', ['status' => 'invalid']);
         } else {
