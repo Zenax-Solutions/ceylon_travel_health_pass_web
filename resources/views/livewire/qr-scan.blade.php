@@ -98,41 +98,37 @@
 
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            async function onScanSuccess(decodedText, decodedResult) {
-                if (decodedText) {
-                    // Play sound
-                    document.getElementById('beepSound').play();
+        let html5QrCodeScanner = new Html5QrcodeScanner(
+            "qr-reader", {
+                fps: 120,
+                qrbox: {
+                    width: 250,
+                    height: 250
+                },
+                rememberLastUsedCamera: true,
+                supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
+                formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE],
+                showTorchButtonIfSupported: true,
+            });
 
-                    // Asynchronously send QR code to Livewire component
-                    await Livewire.dispatch('scanQrCode', {
-                        decodedText: decodedText
-                    });
-                }
-            }
+        html5QrCodeScanner.render(onScanSuccess);
 
-            let html5QrCodeScanner = new Html5QrcodeScanner(
-                "qr-reader", {
-                    fps: 120,
-                    qrbox: {
-                        width: 250,
-                        height: 250
-                    },
-                    rememberLastUsedCamera: true,
-                    supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
-                    formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE],
-                    showTorchButtonIfSupported: true,
+        async function onScanSuccess(decodedText, decodedResult) {
+            if (decodedText) {
+                // Play sound
+                document.getElementById('beepSound').play();
+
+                // Asynchronously send QR code to Livewire component
+                await Livewire.dispatch('scanQrCode', {
+                    decodedText: decodedText
                 });
-            html5QrCodeScanner.render(onScanSuccess);
-
-        });
-
+            }
+        }
 
 
         window.addEventListener('qrCodeValidated', event => {
             let resultElement = document.getElementById('result');
             const modal = document.getElementById('QrModal');
-            const cameraContainer = document.getElementById('qr-reader');
 
 
             if (event.detail.status === 'valid') {
