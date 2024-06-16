@@ -16,6 +16,7 @@ class DiscountShopQrReader
         // Check if the selection (shop_id) is in the discount_shop_list of the package
         if (in_array($selection, $discountShopList)) {
             // Check if there's a DiscountShopQrRecord with the given shop_id and ticket_id
+            sleep(1);
             $existingRecord = ShopeQrScanRecord::where('shop_id', $selection)
                 ->where('ticket_id', $record->ticket_id)
                 ->first();
@@ -25,13 +26,14 @@ class DiscountShopQrReader
                 return 'used';
             } else {
                 // Create a new DiscountShopQrRecord since it doesn't exist
+                sleep(1);
                 ShopeQrScanRecord::create([
                     'shop_id' => $selection,
                     'ticket_id' => $record->ticket_id,
                     'date' => now()
                 ]);
 
-                sleep(2);
+
                 return 'valid'; // Return 'valid' if the operation succeeded
             }
         } else {
