@@ -101,7 +101,7 @@
             async function onScanSuccess(decodedText, decodedResult) {
                 if (decodedText) {
                     // Play sound
-                    // document.getElementById('beepSound').play();
+                    document.getElementById('beepSound').play();
 
                     // Asynchronously send QR code to Livewire component
                     await Livewire.dispatch('scanQrCode', {
@@ -112,7 +112,7 @@
 
             let html5QrCodeScanner = new Html5QrcodeScanner(
                 "qr-reader", {
-                    fps: 60,
+                    fps: 20,
                     qrbox: {
                         width: 250,
                         height: 250
@@ -136,19 +136,17 @@
                     resultElement.classList.remove('text-yellow-500');
                     resultElement.classList.add('text-green-500');
                     resultElement.classList.add('animate-bounce');
+
+                    cameraContainer.classList.add('hidden');
+                    modal.classList.remove('hidden');
+
+
                 } else if (event.detail.status === 'used') {
                     resultElement.textContent = 'This ticket has already been used.';
                     resultElement.classList.remove('text-green-500');
                     resultElement.classList.add('text-yellow-500');
                     resultElement.classList.add('animate-shake');
 
-
-                    cameraContainer.classList.add('hidden');
-                    modal.classList.remove('hidden');
-
-                    setTimeout(() => {
-                        modal.classList.remove('opacity-0');
-                    }, 50);
                 } else {
                     resultElement.textContent = 'QR Code is invalid';
                     resultElement.classList.remove('text-green-500');
@@ -166,12 +164,8 @@
             const modal = document.getElementById('QrModal');
             const cameraContainer = document.getElementById('qr-reader');
 
-            // Hide modal with animation
-            modal.classList.add('opacity-0');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 550); // Adjust timing based on your transition duration
-
+            // Adjust timing based on your transition duration
+            modal.classList.add('hidden');
             cameraContainer.classList.remove('hidden')
 
         }
