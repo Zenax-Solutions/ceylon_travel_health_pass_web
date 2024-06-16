@@ -24,7 +24,7 @@
                 </select>
             </div>
 
-            <div id="qr-reader-modal">
+            <div wire:ignore id="qr-reader-modal">
                 <div id="qr-reader" class="overflow-hidden border-4 border-gray-300 border-dashed rounded-lg "
                     style="width: 100%; height: auto;"></div>
                 <div id="result"
