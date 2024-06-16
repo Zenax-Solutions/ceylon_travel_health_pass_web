@@ -94,13 +94,13 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            function onScanSuccess(decodedText, decodedResult) {
+            async function onScanSuccess(decodedText, decodedResult) {
                 if (decodedText) {
                     // Play sound
-                    document.getElementById('beepSound').play();
+                    // document.getElementById('beepSound').play();
 
                     // Asynchronously send QR code to Livewire component
-                    Livewire.dispatch('scanQrCode', {
+                    await Livewire.dispatch('scanQrCode', {
                         decodedText: decodedText
                     });
                 }
@@ -139,6 +139,7 @@
                     resultElement.classList.add('animate-shake');
 
 
+                    cameraContainer.classList.add('hidden');
                     modal.classList.remove('hidden');
 
                     setTimeout(() => {
@@ -167,6 +168,7 @@
                 modal.classList.add('hidden');
             }, 550); // Adjust timing based on your transition duration
 
+            cameraContainer.classList.remove('hidden')
 
         }
     </script>
