@@ -62,6 +62,7 @@
                     height: 250
                 },
                 rememberLastUsedCamera: true,
+                aspectRatio: '4:3',
                 // Only support camera scan type.
                 supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
                 showTorchButtonIfSupported: true,
@@ -69,7 +70,7 @@
 
             // If you want to prefer front camera
             html5QrCode.start({
-                facingMode: "user"
+                facingMode: "environment"
             }, config, onScanSuccess);
 
             window.addEventListener('qrCodeValidated', event => {
