@@ -96,8 +96,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             async function onScanSuccess(decodedText, decodedResult) {
                 if (decodedText) {
-                    // Play sound
-                    document.getElementById('beepSound').play();
 
                     // Asynchronously send QR code to Livewire component
                     await Livewire.dispatch('scanQrCode', {
@@ -137,6 +135,9 @@
                     resultElement.classList.remove('text-green-500');
                     resultElement.classList.add('text-yellow-500');
                     resultElement.classList.add('animate-shake');
+
+                    // Play sound
+                    document.getElementById('beepSound').play();
 
 
                     // Hide camera feed
