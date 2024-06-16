@@ -95,12 +95,20 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             async function onScanSuccess(decodedText, decodedResult) {
-                if (decodedText) {
+                if (decodedText && !isSoundPlaying) {
+                    isSoundPlaying = true;
+                    // Play sound
+                    document.getElementById('beepSound').play();
 
                     // Asynchronously send QR code to Livewire component
                     await Livewire.dispatch('scanQrCode', {
                         decodedText: decodedText
                     });
+
+                    // Reset flag after some delay to prevent repeated playing in quick succession
+                    setTimeout(() => {
+                        isSoundPlaying = false;
+                    }, 1000); // Adjust delay as needed
                 }
             }
 
@@ -124,6 +132,11 @@
                 const cameraContainer = document.getElementById('qr-reader');
 
 
+                if (!document.getElementById('QrModal').classList.contains('hidden')) {
+                    return; // Exit early if modal is already visible
+                }
+
+
                 if (event.detail.status === 'valid') {
                     resultElement.textContent = 'QR Code is valid!';
                     resultElement.classList.remove('text-red-500');
@@ -135,9 +148,6 @@
                     resultElement.classList.remove('text-green-500');
                     resultElement.classList.add('text-yellow-500');
                     resultElement.classList.add('animate-shake');
-
-                    // Play sound
-                    document.getElementById('beepSound').play();
 
 
                     // Hide camera feed
