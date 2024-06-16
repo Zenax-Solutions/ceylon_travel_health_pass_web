@@ -94,6 +94,9 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+
+            let isSoundPlaying = false;
+
             async function onScanSuccess(decodedText, decodedResult) {
                 if (decodedText && !isSoundPlaying) {
                     isSoundPlaying = true;
