@@ -16,7 +16,6 @@ class DiscountShopQrReader
         // Check if the selection (shop_id) is in the discount_shop_list of the package
         if (in_array($selection, $discountShopList)) {
             // Check if there's a DiscountShopQrRecord with the given shop_id and ticket_id
-            sleep(1);
             $existingRecord = ShopeQrScanRecord::where('shop_id', $selection)
                 ->where('ticket_id', $record->ticket_id)
                 ->first();
