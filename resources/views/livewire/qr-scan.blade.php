@@ -101,7 +101,11 @@
                 if (decodedText && !isSoundPlaying) {
                     isSoundPlaying = true;
                     // Play sound
-                    document.getElementById('beepSound').play();
+                    const beepSound = document.getElementById('beepSound');
+                    if (beepSound) {
+                        beepSound.play();
+                    }
+
 
                     // Asynchronously send QR code to Livewire component
                     await Livewire.dispatch('scanQrCode', {
@@ -134,8 +138,8 @@
                 const modal = document.getElementById('QrModal');
                 const cameraContainer = document.getElementById('qr-reader');
 
-
-                if (!document.getElementById('QrModal').classList.contains('hidden')) {
+                const modal = document.getElementById('QrModal');
+                if (modal && !modal.classList.contains('hidden')) {
                     return; // Exit early if modal is already visible
                 }
 
