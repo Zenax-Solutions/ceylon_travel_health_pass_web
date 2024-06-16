@@ -89,10 +89,10 @@ class QrScan extends Component
     }
 
 
-    public function updatedSelection($value)
+    public function updatedSelection()
     {
         // Store the selection in the session whenever it is updated
-        Session::put('selection', $value);
+        Session::put('selection', $this->selection);
     }
 
     public function initializeSelection()
