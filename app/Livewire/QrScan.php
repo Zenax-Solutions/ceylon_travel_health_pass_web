@@ -29,7 +29,6 @@ class QrScan extends Component
         if (Session::has('auth_agent')) {
             $this->agent = Agent::where('email', Session::get('auth_agent'))->first();
 
-
             if (Session::has('selection')) {
                 $this->selection = Session::get('selection');
             } else {
@@ -65,7 +64,7 @@ class QrScan extends Component
                         break;
 
                     case 'service_agent':
-                        //$status = $this->discount_service_agent->read($this->selection, $record);
+                        $status = $discount_service_agent->read($this->selection, $record);
                         break;
 
                     case 'esim_agent':

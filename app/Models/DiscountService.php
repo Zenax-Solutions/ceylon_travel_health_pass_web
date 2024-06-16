@@ -29,4 +29,9 @@ class DiscountService extends Model
     {
         return $this->belongsTo(Agent::class);
     }
+
+    public function serviceQrScanRecord()
+    {
+        return $this->hasMany(ServiceQrScanRecord::class);
+    }
 }

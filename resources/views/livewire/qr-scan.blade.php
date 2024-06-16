@@ -4,12 +4,21 @@
         <div class="flex items-center justify-center min-h-screen bg-gradient-to-r from-green-400 to-green-500">
             <div
                 class="w-full max-w-md p-8 transition-all duration-500 ease-in-out transform bg-white rounded-lg shadow-lg hover:scale-105 hover:shadow-2xl">
-                <div>
+                <div class="mb-2" style="display: flex; justify-content: center;">
 
                     <img style="width: 200px" src="{{ asset('images/logo.png') }}">
 
                 </div>
                 <h2 class="mb-4 text-3xl font-bold text-center text-gray-800">QR Ticket Scanner</h2>
+                <div style="display: flex; justify-content: center;">
+                    <img style="width: 50%" src="{{ Storage::url($agent?->profile_image) }}" alt=""
+                        srcset="">
+
+                </div>
+                <p class="mt-4 text-sm text-gray-500 sm:mt-0" style="text-align: center">
+                    <a href="{{ route('agent.dashboard') }}" class="font-bold text-red-700 underline">Back To
+                        Dashboard</a>.
+                </p>
 
                 <div class="p-4">
 
@@ -17,7 +26,7 @@
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Selections</label>
                     <select wire:model = "selection"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-
+                        <option selected>select here</option>
                         @foreach ($selectionList as $list)
                             <option value="{{ $list->id }}"> {{ $list->shope_name ?? $list->service_name }}</option>
                         @endforeach
@@ -53,33 +62,37 @@
                 <div class="inline-block overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
                     role="dialog" aria-labelledby="modal-headline">
                     <div class="px-4 pt-5 pb-4 bg-white sm:p-6 sm:pb-4">
-                        <div class="sm:flex sm:items-start">
-                            <div
-                                class="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto bg-green-100 rounded-full sm:mx-0 sm:h-10 sm:w-10">
-                                <!-- Icon or indicator (e.g., checkmark) -->
-                                <!-- Adjust based on your design -->
-                                <!-- For example, using Heroicons -->
-                                <svg class="w-6 h-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M5 13l4 4L19 7"></path>
-                                </svg>
-                            </div>
-                            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                        <div>
+
+                            <div class="mt-3 text-center">
                                 <!-- Modal title -->
-                                <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-headline">
-                                    Valid User Information
-                                </h3>
+
                                 <!-- Display user information -->
                                 <!-- Example of displaying user name and email -->
                                 <div class="mt-2">
-                                    <p class="text-sm text-gray-500">
-                                        Name: <span id="userName"></span>
-                                    </p>
-                                    <p class="text-sm text-gray-500">
-                                        Email: <span id="userEmail"></span>
-                                    </p>
-                                    <!-- Add more user details as needed -->
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        class="w-16 h-16 mx-auto mt-8 text-green-400" viewBox="0 0 20 20"
+                                        fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                            d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    <h1 class="mt-2 text-2xl font-bold text-center text-gray-500">Valid QR Code</h1>
+                                    <div class="mt-3">
+                                        <div class="pt-2">
+                                            <p class="text-sm font-medium leading-none text-gray-800">
+                                                Booking No
+                                            </p>
+                                            <p class="text-xs font-bold text-green-500" id="bookingId"></p>
+                                        </div>
+                                        <div class="pt-2">
+                                            <p class="text-sm font-medium leading-none text-gray-800">
+                                                Ticket No
+                                            </p>
+                                            <p class="text-xs font-bold text-green-500" id="ticketNo"></p>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -149,12 +162,21 @@
             let resultElement = document.getElementById('result');
             const modal = document.getElementById('QrModal');
 
+            let bookigId = document.getElementById('bookingId');
+
+            let ticketNo = document.getElementById('ticketNo');
+
             if (resultElement && modal) {
                 if (event.detail.status === 'valid') {
                     resultElement.textContent = 'QR Code is valid!';
                     resultElement.classList.remove('text-red-500', 'text-yellow-500');
                     resultElement.classList.add('text-green-500', 'animate-bounce');
                     modal.classList.remove('hidden');
+
+                    bookigId.textContent = event.detail.data.booking_id;
+                    ticketNo.textContent = event.detail.data.ticket_id;
+
+
 
                 } else if (event.detail.status === 'used') {
                     resultElement.textContent = 'This ticket has already been used.';
@@ -174,9 +196,13 @@
         function closeModal() {
             const modal = document.getElementById('QrModal');
             let resultElement = document.getElementById('result');
+            let bookigId = document.getElementById('bookingId');
+            let ticketNo = document.getElementById('ticketNo');
 
             if (resultElement && modal) {
                 resultElement.textContent = '';
+                bookigId.textContent = '';
+                ticketNo.textContent = '';
                 modal.classList.add('hidden');
             } else {
                 console.error('Result element or modal not found');

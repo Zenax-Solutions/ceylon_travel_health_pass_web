@@ -11,16 +11,7 @@
             </div>
             <div class="flex items-center justify-between gap-2 md:gap-4">
                 <div class="flex flex-col space-y-4">
-                    <h2 class="font-bold leading-tight tracking-widest text-gray-800">Derol's Savings
-                        Account</h2>
-                    <div class="flex items-center gap-4">
-                        <p class="text-lg tracking-wider text-gray-600">**** **** *321</p>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                    </div>
+
                 </div>
                 <h2 class="text-lg font-black tracking-wider text-gray-700 md:text-xl xl:text-3xl">
                     <span class="md:text-xl">$</span>
@@ -39,13 +30,13 @@
             </div>
         </div>
     </div>
-    <div class="flex flex-col justify-between col-span-2 p-6 rounded-2xl bg-gradient-to-r from-blue-500 to-blue-800">
+    <div class="flex flex-col justify-between col-span-2 p-6 rounded-2xl bg-gradient-to-r from-green-500 to-green-800">
         <div class="flex flex-col">
             <p class="font-bold text-white">Ticket Scan</p>
         </div>
         <div class="flex items-end justify-between">
             <a href="{{ route('agent.qrscan') }}"
-                class="px-4 py-3 text-xs font-semibold tracking-wider text-white bg-blue-800 rounded-lg hover:bg-blue-600 hover:text-white">
+                class="px-4 py-3 text-xs font-semibold tracking-wider text-white bg-gray-800 rounded-lg hover:bg-green-600 hover:text-white">
                 open the scanner
             </a>
             <img src="{{ asset('images/qr-image.png') }}" alt="calendar" class="object-cover" style="width: 50%">

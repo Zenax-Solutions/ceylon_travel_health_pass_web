@@ -115,6 +115,8 @@ class AgentController extends Controller
     {
         $remove = Session::remove('auth_agent');
 
+        Session::remove('selection');
+
         if ($remove) {
             return redirect()->route('agent.login');
         }

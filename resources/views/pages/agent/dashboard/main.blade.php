@@ -7,7 +7,7 @@
 
 
 
-            <div class="p-6 bg-white border md:col-span-2 xl:col-span-3 rounded-2xl border-gray-50">
+            <div class="p-6 bg-white border md:col-span-2 xl:col-span-2 rounded-2xl border-gray-50">
                 <div class="flex flex-col space-y-6 md:h-full md:justify-between">
                     <div class="flex justify-between">
                         <span class="text-xs font-semibold tracking-wider text-gray-500 uppercase">
@@ -16,7 +16,9 @@
 
                     </div>
                     <div class="flex items-center justify-between gap-2 md:gap-4">
+                        <img style="width: 50%" src="{{ Storage::url($agent?->profile_image) }}" alt="" srcset="">
                         <div class="flex flex-col space-y-4">
+
                             <h1 class="font-bold leading-tight tracking-widest text-gray-800">
                                 Hello, {{ $agent?->name }}</h1>
                         </div>
@@ -24,17 +26,6 @@
                     </div>
 
                 </div>
-            </div>
-            <div
-                class="flex flex-col justify-between col-span-2 p-6 rounded-2xl bg-gradient-to-r from-green-400 to-green-600">
-                <div class="flex flex-col">
-                    <p class="font-bold text-white">Welcome To Ceylon Travel & Health Pass</p>
-
-                    <br>
-                    <h1 class="font-bold leading-tight tracking-widest text-gray-800">{{ now()->format('Y/m/d') }}</h1>
-
-                </div>
-
             </div>
 
         </div>
