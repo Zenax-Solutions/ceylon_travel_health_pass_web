@@ -28,6 +28,13 @@ class QrScan extends Component
         //checking the auth agent and redirect
         if (Session::has('auth_agent')) {
             $this->agent = Agent::where('email', Session::get('auth_agent'))->first();
+
+
+            if (Session::has('selection')) {
+                $this->selection = Session::get('selection');
+            } else {
+                $this->initializeSelection();
+            }
         } else {
             $this->redirectRoute('agent.login');
         }
@@ -82,7 +89,13 @@ class QrScan extends Component
     }
 
 
-    public function render()
+    public function updatedSelection($value)
+    {
+        // Store the selection in the session whenever it is updated
+        Session::put('selection', $value);
+    }
+
+    public function initializeSelection()
     {
         if ($this->agent->type == 'discount_agent') {
             $this->selectionList = $this->agent->discountShops;
@@ -92,13 +105,15 @@ class QrScan extends Component
             $this->selectionList = $this->agent->esimServices;
         }
 
-
         if (!empty($this->selectionList) && count($this->selectionList) > 0) {
             $defaultItem = $this->selectionList[0];
-
             $this->selection = $defaultItem->id;
         }
+    }
 
+
+    public function render()
+    {
         return view('livewire.qr-scan');
     }
 }
