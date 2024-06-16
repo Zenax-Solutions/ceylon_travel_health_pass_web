@@ -138,7 +138,6 @@
                 const modal = document.getElementById('QrModal');
                 const cameraContainer = document.getElementById('qr-reader');
 
-                const modal = document.getElementById('QrModal');
                 if (modal && !modal.classList.contains('hidden')) {
                     return; // Exit early if modal is already visible
                 }
