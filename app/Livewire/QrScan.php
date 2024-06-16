@@ -73,7 +73,7 @@ class QrScan extends Component
                 $status = 'invalid';
             }
 
-            $this->dispatch('qrCodeValidated', status: $status);
+            $this->dispatch('qrCodeValidated', status: $status, data: $record);
         } else {
 
             // Handle failed validation

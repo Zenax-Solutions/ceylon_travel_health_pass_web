@@ -48,7 +48,7 @@
                 class="px-4 py-3 text-xs font-semibold tracking-wider text-white bg-blue-800 rounded-lg hover:bg-blue-600 hover:text-white">
                 open the scanner
             </a>
-            <img src="{{ asset('images/qr-image.png') }}" alt="calendar" class="object-cover w-auto h-56">
+            <img src="{{ asset('images/qr-image.png') }}" alt="calendar" class="object-cover" style="width: 50%">
         </div>
     </div>
 
