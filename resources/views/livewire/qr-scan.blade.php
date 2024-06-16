@@ -24,11 +24,14 @@
                 </select>
             </div>
 
-            <div id="qr-reader" class="overflow-hidden border-4 border-gray-300 border-dashed rounded-lg "
-                style="width: 100%; height: auto;"></div>
-            <div id="result" class="mt-4 font-bold text-center text-gray-600 transition duration-500 ease-in-out">
+            <div id="qr-reader-modal">
+                <div id="qr-reader" class="overflow-hidden border-4 border-gray-300 border-dashed rounded-lg "
+                    style="width: 100%; height: auto;"></div>
+                <div id="result"
+                    class="mt-4 font-bold text-center text-gray-600 transition duration-500 ease-in-out">
+                </div>
+                <audio id="beepSound" src="{{ asset('sounds/beep.mp3') }}" preload="auto"></audio>
             </div>
-            <audio id="beepSound" src="{{ asset('sounds/beep.mp3') }}" preload="auto"></audio>
         </div>
     </div>
 
@@ -141,7 +144,7 @@
 
 
                     // Hide camera feed
-                    //scameraContainer.classList.add('hidden');
+                    cameraContainer.classList.add('hidden');
 
                     modal.classList.remove('hidden');
 
@@ -163,7 +166,7 @@
 
         function closeModal() {
             const modal = document.getElementById('QrModal');
-            const cameraContainer = document.getElementById('qr-reader');
+            const cameraContainer = document.getElementById('qr-reader-modal');
 
             // Hide modal with animation
             modal.classList.add('opacity-0');
@@ -172,7 +175,7 @@
             }, 550); // Adjust timing based on your transition duration
 
             // Show camera feed
-            // cameraContainer.classList.remove('hidden');
+            cameraContainer.classList.remove('hidden');
 
         }
     </script>
