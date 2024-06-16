@@ -162,8 +162,9 @@
 
         function closeModal() {
             const modal = document.getElementById('QrModal');
-            const cameraContainer = document.getElementById('qr-reader');
+            let resultElement = document.getElementById('result');
 
+            resultElement.textContent = '';
             // Adjust timing based on your transition duration
             modal.classList.add('hidden');
 
