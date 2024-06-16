@@ -125,38 +125,39 @@
                 });
             html5QrCodeScanner.render(onScanSuccess);
 
-            window.addEventListener('qrCodeValidated', event => {
-                let resultElement = document.getElementById('result');
-                const modal = document.getElementById('QrModal');
-                const cameraContainer = document.getElementById('qr-reader');
-
-
-                if (event.detail.status === 'valid') {
-                    resultElement.textContent = 'QR Code is valid!';
-                    resultElement.classList.remove('text-red-500');
-                    resultElement.classList.remove('text-yellow-500');
-                    resultElement.classList.add('text-green-500');
-                    resultElement.classList.add('animate-bounce');
-                    modal.classList.remove('hidden');
-
-
-                } else if (event.detail.status === 'used') {
-                    resultElement.textContent = 'This ticket has already been used.';
-                    resultElement.classList.remove('text-green-500');
-                    resultElement.classList.add('text-yellow-500');
-                    resultElement.classList.add('animate-shake');
-
-                } else {
-                    resultElement.textContent = 'QR Code is invalid';
-                    resultElement.classList.remove('text-green-500');
-                    resultElement.classList.remove('text-yellow-500');
-                    resultElement.classList.add('text-red-500');
-                    resultElement.classList.add('animate-shake');
-                }
-            });
+        });
 
 
 
+        window.addEventListener('qrCodeValidated', event => {
+            let resultElement = document.getElementById('result');
+            const modal = document.getElementById('QrModal');
+            const cameraContainer = document.getElementById('qr-reader');
+
+
+            if (event.detail.status === 'valid') {
+                resultElement.textContent = 'QR Code is valid!';
+                resultElement.classList.remove('text-red-500');
+                resultElement.classList.remove('text-yellow-500');
+                resultElement.classList.add('text-green-500');
+                resultElement.classList.add('animate-bounce');
+                modal.classList.remove('hidden');
+
+
+            } else if (event.detail.status === 'used') {
+                resultElement.textContent = 'This ticket has already been used.';
+                resultElement.classList.remove('text-green-500');
+                resultElement.classList.remove('text-red-500');
+                resultElement.classList.add('text-yellow-500');
+                resultElement.classList.add('animate-shake');
+
+            } else {
+                resultElement.textContent = 'QR Code is invalid';
+                resultElement.classList.remove('text-green-500');
+                resultElement.classList.remove('text-yellow-500');
+                resultElement.classList.add('text-red-500');
+                resultElement.classList.add('animate-shake');
+            }
         });
 
         function closeModal() {
