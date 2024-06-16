@@ -100,7 +100,7 @@
     <script>
         let html5QrCodeScanner = new Html5QrcodeScanner(
             "qr-reader", {
-                fps: 120,
+                fps: 10, // Lower the fps to reduce the frequency of scans
                 qrbox: {
                     width: 250,
                     height: 250
@@ -113,27 +113,36 @@
 
         html5QrCodeScanner.render(onScanSuccess);
 
-        async function onScanSuccess(decodedText, decodedResult) {
-            try {
-                if (decodedText) {
-                    // Play sound
-                    let beepSound = document.getElementById('beepSound');
-                    if (beepSound) {
-                        beepSound.play();
-                    }
+        let debounceTimeout;
+        const debounceDelay = 1000; // 1 second delay to prevent multiple submissions
 
-                    // Asynchronously send QR code to Livewire component
-                    if (typeof Livewire !== 'undefined') {
-                        await Livewire.dispatch('scanQrCode', {
-                            decodedText: decodedText
-                        });
-                    } else {
-                        console.error('Livewire is not available');
-                    }
-                }
-            } catch (error) {
-                console.error('Error in onScanSuccess:', error);
+        async function onScanSuccess(decodedText, decodedResult) {
+            if (debounceTimeout) {
+                clearTimeout(debounceTimeout);
             }
+
+            debounceTimeout = setTimeout(async () => {
+                try {
+                    if (decodedText) {
+                        // Play sound
+                        let beepSound = document.getElementById('beepSound');
+                        if (beepSound) {
+                            beepSound.play();
+                        }
+
+                        // Asynchronously send QR code to Livewire component
+                        if (typeof Livewire !== 'undefined') {
+                            await Livewire.dispatch('scanQrCode', {
+                                decodedText: decodedText
+                            });
+                        } else {
+                            console.error('Livewire is not available');
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error in onScanSuccess:', error);
+                }
+            }, debounceDelay);
         }
 
         window.addEventListener('qrCodeValidated', event => {
