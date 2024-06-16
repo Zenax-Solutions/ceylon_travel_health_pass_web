@@ -113,7 +113,7 @@
 
             let html5QrCodeScanner = new Html5QrcodeScanner(
                 "qr-reader", {
-                    fps: 20,
+                    fps: 120,
                     qrbox: {
                         width: 250,
                         height: 250
@@ -137,8 +137,6 @@
                     resultElement.classList.remove('text-yellow-500');
                     resultElement.classList.add('text-green-500');
                     resultElement.classList.add('animate-bounce');
-
-                    cameraContainer.classList.add('hidden');
                     modal.classList.remove('hidden');
 
 
@@ -167,7 +165,7 @@
 
             // Adjust timing based on your transition duration
             modal.classList.add('hidden');
-            cameraContainer.classList.remove('hidden')
+
 
         }
     </script>
