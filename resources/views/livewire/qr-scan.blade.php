@@ -30,6 +30,7 @@
                 <div id="result"
                     class="mt-4 font-bold text-center text-gray-600 transition duration-500 ease-in-out">
                 </div>
+                <audio id="beepSound" src="{{ asset('sounds/beep.mp3') }}" preload="auto"></audio>
 
             </div>
         </div>
