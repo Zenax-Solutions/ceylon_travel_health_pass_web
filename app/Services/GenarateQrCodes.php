@@ -43,6 +43,7 @@ class GenarateQrCodes
                     'expiry_date' => $formattedExpirationDate,
                     'status' => 'active'
                 ]);
+
                 $tickets[] = $ticket;
 
                 $qrCode = QrCode::format('png')->size(200)->generate($ticketNumber);

@@ -29,4 +29,9 @@ class DiscountShop extends Model
     {
         return $this->belongsTo(Agent::class);
     }
+
+    public function shopQrScanRecord()
+    {
+        return $this->hasMany(ShopeQrScanRecord::class);
+    }
 }

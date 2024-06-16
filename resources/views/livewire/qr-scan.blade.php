@@ -9,6 +9,21 @@
 
             </div>
             <h2 class="mb-4 text-3xl font-bold text-center text-gray-800">QR Ticket Scanner</h2>
+
+            <div class="p-4">
+
+                <label for="countries"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Selections</label>
+                <select wire:model.live = "selection"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                    @foreach ($selectionList as $list)
+                        <option value="{{ $list->id }}"> {{ $list->shope_name ?? $list->service_name }}</option>
+                    @endforeach
+
+                </select>
+            </div>
+
             <div id="qr-reader" class="overflow-hidden border-4 border-gray-300 border-dashed rounded-lg "
                 style="width: 100%; height: auto;"></div>
             <div id="result" class="mt-4 font-bold text-center text-gray-600 transition duration-500 ease-in-out">
@@ -34,15 +49,28 @@
                 }
             }
 
-            let html5QrCodeScanner = new Html5QrcodeScanner(
+
+            const html5QrCode = new Html5Qrcode(
                 "qr-reader", {
-                    fps: 60,
-                    qrbox: {
-                        width: 250,
-                        height: 250
-                    }
+                    formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE]
                 });
-            html5QrCodeScanner.render(onScanSuccess);
+
+            const config = {
+                fps: 60,
+                qrbox: {
+                    width: 250,
+                    height: 250
+                },
+                rememberLastUsedCamera: true,
+                // Only support camera scan type.
+                supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
+                showTorchButtonIfSupported: true,
+            };
+
+            // If you want to prefer front camera
+            html5QrCode.start({
+                facingMode: "user"
+            }, config, onScanSuccess);
 
             window.addEventListener('qrCodeValidated', event => {
                 let resultElement = document.getElementById('result');
@@ -51,11 +79,18 @@
                 if (event.detail.status === 'valid') {
                     resultElement.textContent = 'QR Code is valid!';
                     resultElement.classList.remove('text-red-500');
+                    resultElement.classList.remove('text-yellow-500');
                     resultElement.classList.add('text-green-500');
                     resultElement.classList.add('animate-bounce');
+                } else if (event.detail.status === 'used') {
+                    resultElement.textContent = 'This ticket has already been used.';
+                    resultElement.classList.remove('text-green-500');
+                    resultElement.classList.add('text-yellow-500');
+                    resultElement.classList.add('animate-shake');
                 } else {
                     resultElement.textContent = 'QR Code is invalid';
                     resultElement.classList.remove('text-green-500');
+                    resultElement.classList.remove('text-yellow-500');
                     resultElement.classList.add('text-red-500');
                     resultElement.classList.add('animate-shake');
                 }
