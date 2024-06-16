@@ -114,45 +114,51 @@
         html5QrCodeScanner.render(onScanSuccess);
 
         async function onScanSuccess(decodedText, decodedResult) {
-            if (decodedText) {
-                // Play sound
-                document.getElementById('beepSound').play();
+            try {
+                if (decodedText) {
+                    // Play sound
+                    let beepSound = document.getElementById('beepSound');
+                    if (beepSound) {
+                        beepSound.play();
+                    }
 
-                // Asynchronously send QR code to Livewire component
-                await Livewire.dispatch('scanQrCode', {
-                    decodedText: decodedText
-                });
+                    // Asynchronously send QR code to Livewire component
+                    if (typeof Livewire !== 'undefined') {
+                        await Livewire.dispatch('scanQrCode', {
+                            decodedText: decodedText
+                        });
+                    } else {
+                        console.error('Livewire is not available');
+                    }
+                }
+            } catch (error) {
+                console.error('Error in onScanSuccess:', error);
             }
         }
-
 
         window.addEventListener('qrCodeValidated', event => {
             let resultElement = document.getElementById('result');
             const modal = document.getElementById('QrModal');
 
+            if (resultElement && modal) {
+                if (event.detail.status === 'valid') {
+                    resultElement.textContent = 'QR Code is valid!';
+                    resultElement.classList.remove('text-red-500', 'text-yellow-500');
+                    resultElement.classList.add('text-green-500', 'animate-bounce');
+                    modal.classList.remove('hidden');
 
-            if (event.detail.status === 'valid') {
-                resultElement.textContent = 'QR Code is valid!';
-                resultElement.classList.remove('text-red-500');
-                resultElement.classList.remove('text-yellow-500');
-                resultElement.classList.add('text-green-500');
-                resultElement.classList.add('animate-bounce');
-                modal.classList.remove('hidden');
+                } else if (event.detail.status === 'used') {
+                    resultElement.textContent = 'This ticket has already been used.';
+                    resultElement.classList.remove('text-green-500', 'text-red-500');
+                    resultElement.classList.add('text-yellow-500', 'animate-shake');
 
-
-            } else if (event.detail.status === 'used') {
-                resultElement.textContent = 'This ticket has already been used.';
-                resultElement.classList.remove('text-green-500');
-                resultElement.classList.remove('text-red-500');
-                resultElement.classList.add('text-yellow-500');
-                resultElement.classList.add('animate-shake');
-
+                } else {
+                    resultElement.textContent = 'QR Code is invalid';
+                    resultElement.classList.remove('text-green-500', 'text-yellow-500');
+                    resultElement.classList.add('text-red-500', 'animate-shake');
+                }
             } else {
-                resultElement.textContent = 'QR Code is invalid';
-                resultElement.classList.remove('text-green-500');
-                resultElement.classList.remove('text-yellow-500');
-                resultElement.classList.add('text-red-500');
-                resultElement.classList.add('animate-shake');
+                console.error('Result element or modal not found');
             }
         });
 
@@ -160,13 +166,15 @@
             const modal = document.getElementById('QrModal');
             let resultElement = document.getElementById('result');
 
-            resultElement.textContent = '';
-            // Adjust timing based on your transition duration
-            modal.classList.add('hidden');
-
-
+            if (resultElement && modal) {
+                resultElement.textContent = '';
+                modal.classList.add('hidden');
+            } else {
+                console.error('Result element or modal not found');
+            }
         }
     </script>
+
 
 
 
