@@ -30,6 +30,8 @@ class DiscountShopQrReader
                     'ticket_id' => $record->ticket_id,
                     'date' => now()
                 ]);
+
+                sleep(2);
                 return 'valid'; // Return 'valid' if the operation succeeded
             }
         } else {
