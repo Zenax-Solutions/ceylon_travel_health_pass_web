@@ -49,29 +49,19 @@
                 }
             }
 
-
-            const html5QrCode = new Html5Qrcode(
+            let html5QrCodeScanner = new Html5QrcodeScanner(
                 "qr-reader", {
-                    formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE]
+                    fps: 10,
+                    qrbox: {
+                        width: 250,
+                        height: 250
+                    },
+                    rememberLastUsedCamera: true,
+                    supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
+                    formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE],
+                    showTorchButtonIfSupported: true,
                 });
-
-            const config = {
-                fps: 60,
-                qrbox: {
-                    width: 250,
-                    height: 250
-                },
-                rememberLastUsedCamera: true,
-                aspectRatio: '4:3',
-                // Only support camera scan type.
-                supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
-                showTorchButtonIfSupported: true,
-            };
-
-            // If you want to prefer front camera
-            html5QrCode.start({
-                facingMode: "environment"
-            }, config, onScanSuccess);
+            html5QrCodeScanner.render(onScanSuccess);
 
             window.addEventListener('qrCodeValidated', event => {
                 let resultElement = document.getElementById('result');
