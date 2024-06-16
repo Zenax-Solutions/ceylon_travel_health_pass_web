@@ -14,7 +14,7 @@
 
                 <label for="countries"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Selections</label>
-                <select wire:model = "selection"
+                <select wire:model.live = "selection"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
                     @foreach ($selectionList as $list)
@@ -93,82 +93,67 @@
     </div>
 
     <script>
-        let html5QrCodeScanner = new Html5QrcodeScanner(
-            "qr-reader", {
-                fps: 60,
-                qrbox: {
-                    width: 250,
-                    height: 250
-                },
-                rememberLastUsedCamera: true,
-                supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
-                formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE],
-                showTorchButtonIfSupported: true,
+        document.addEventListener('DOMContentLoaded', function() {
+            async function onScanSuccess(decodedText, decodedResult) {
+                if (decodedText) {
+                    // Play sound
+                    document.getElementById('beepSound').play();
+
+                    // Asynchronously send QR code to Livewire component
+                    await Livewire.dispatch('scanQrCode', {
+                        decodedText: decodedText
+                    });
+                }
+            }
+
+            let html5QrCodeScanner = new Html5QrcodeScanner(
+                "qr-reader", {
+                    fps: 60,
+                    qrbox: {
+                        width: 250,
+                        height: 250
+                    },
+                    rememberLastUsedCamera: true,
+                    supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
+                    formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE],
+                    showTorchButtonIfSupported: true,
+                });
+            html5QrCodeScanner.render(onScanSuccess);
+
+            window.addEventListener('qrCodeValidated', event => {
+                let resultElement = document.getElementById('result');
+                const modal = document.getElementById('QrModal');
+                const cameraContainer = document.getElementById('qr-reader');
+
+
+                if (event.detail.status === 'valid') {
+                    resultElement.textContent = 'QR Code is valid!';
+                    resultElement.classList.remove('text-red-500');
+                    resultElement.classList.remove('text-yellow-500');
+                    resultElement.classList.add('text-green-500');
+                    resultElement.classList.add('animate-bounce');
+                } else if (event.detail.status === 'used') {
+                    resultElement.textContent = 'This ticket has already been used.';
+                    resultElement.classList.remove('text-green-500');
+                    resultElement.classList.add('text-yellow-500');
+                    resultElement.classList.add('animate-shake');
+
+
+                    modal.classList.remove('hidden');
+
+                    setTimeout(() => {
+                        modal.classList.remove('opacity-0');
+                    }, 50);
+                } else {
+                    resultElement.textContent = 'QR Code is invalid';
+                    resultElement.classList.remove('text-green-500');
+                    resultElement.classList.remove('text-yellow-500');
+                    resultElement.classList.add('text-red-500');
+                    resultElement.classList.add('animate-shake');
+                }
             });
 
 
-        async function onScanSuccess(decodedText, decodedResult) {
-            if (decodedText) {
-                // Play sound
-                document.getElementById('beepSound').play();
-
-                // Asynchronously send QR code to Livewire component
-                await Livewire.dispatch('scanQrCode', {
-                    decodedText: decodedText
-                });
-            }
-        }
-
-
-        document.addEventListener('DOMContentLoaded', function() {
-
-
-            try {
-                html5QrCodeScanner.render(onScanSuccess);
-
-                window.addEventListener('qrCodeValidated', event => {
-                    let resultElement = document.getElementById('result');
-                    const modal = document.getElementById('QrModal');
-                    const cameraContainer = document.getElementById('qr-reader');
-
-
-                    if (event.detail.status === 'valid') {
-                        resultElement.textContent = 'QR Code is valid!';
-                        resultElement.classList.remove('text-red-500');
-                        resultElement.classList.remove('text-yellow-500');
-                        resultElement.classList.add('text-green-500');
-                        resultElement.classList.add('animate-bounce');
-                    } else if (event.detail.status === 'used') {
-                        resultElement.textContent = 'This ticket has already been used.';
-                        resultElement.classList.remove('text-green-500');
-                        resultElement.classList.add('text-yellow-500');
-                        resultElement.classList.add('animate-shake');
-
-
-
-                        // Hide camera feed
-                        //cameraContainer.classList.add('hidden');
-
-                        html5QrCodeScanner.pause();
-
-                        modal.classList.remove('hidden');
-
-                        setTimeout(() => {
-                            modal.classList.remove('opacity-0');
-                        }, 50);
-                    } else {
-                        resultElement.textContent = 'QR Code is invalid';
-                        resultElement.classList.remove('text-green-500');
-                        resultElement.classList.remove('text-yellow-500');
-                        resultElement.classList.add('text-red-500');
-                        resultElement.classList.add('animate-shake');
-                    }
-
-                });
-
-            } catch (err) {
-                //console.error('Failed to initialize QR code scanner:', err);
-            }
 
         });
 
@@ -182,10 +167,6 @@
                 modal.classList.add('hidden');
             }, 550); // Adjust timing based on your transition duration
 
-
-            html5QrCodeScanner.render(onScanSuccess);
-            // Show camera feed
-            //cameraContainer.classList.remove('hidden');
 
         }
     </script>
