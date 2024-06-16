@@ -94,28 +94,15 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-
-            let isSoundPlaying = false;
-
             async function onScanSuccess(decodedText, decodedResult) {
-                if (decodedText && !isSoundPlaying) {
-                    isSoundPlaying = true;
+                if (decodedText) {
                     // Play sound
-                    const beepSound = document.getElementById('beepSound');
-                    if (beepSound) {
-                        beepSound.play();
-                    }
-
+                    document.getElementById('beepSound').play();
 
                     // Asynchronously send QR code to Livewire component
                     await Livewire.dispatch('scanQrCode', {
                         decodedText: decodedText
                     });
-
-                    // Reset flag after some delay to prevent repeated playing in quick succession
-                    setTimeout(() => {
-                        isSoundPlaying = false;
-                    }, 1000); // Adjust delay as needed
                 }
             }
 
@@ -138,10 +125,6 @@
                 const modal = document.getElementById('QrModal');
                 const cameraContainer = document.getElementById('qr-reader');
 
-                if (modal && !modal.classList.contains('hidden')) {
-                    return; // Exit early if modal is already visible
-                }
-
 
                 if (event.detail.status === 'valid') {
                     resultElement.textContent = 'QR Code is valid!';
@@ -156,8 +139,9 @@
                     resultElement.classList.add('animate-shake');
 
 
+
                     // Hide camera feed
-                    cameraContainer.classList.add('hidden');
+                    //scameraContainer.classList.add('hidden');
 
                     modal.classList.remove('hidden');
 
@@ -188,7 +172,7 @@
             }, 550); // Adjust timing based on your transition duration
 
             // Show camera feed
-            cameraContainer.classList.remove('hidden');
+            // cameraContainer.classList.remove('hidden');
 
         }
     </script>
