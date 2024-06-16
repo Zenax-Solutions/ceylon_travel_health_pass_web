@@ -108,7 +108,7 @@
 
             let html5QrCodeScanner = new Html5QrcodeScanner(
                 "qr-reader", {
-                    fps: 10,
+                    fps: 60,
                     qrbox: {
                         width: 250,
                         height: 250
@@ -138,7 +138,6 @@
                     resultElement.classList.add('text-yellow-500');
                     resultElement.classList.add('animate-shake');
 
-                    console.log(event.detail.data);
 
                     // Hide camera feed
                     cameraContainer.classList.add('hidden');
