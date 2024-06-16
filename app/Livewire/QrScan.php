@@ -97,14 +97,6 @@ class QrScan extends Component
 
     public function initializeSelection()
     {
-        if ($this->agent->type == 'discount_agent') {
-            $this->selectionList = $this->agent->discountShops;
-        } elseif ($this->agent->type == 'service_agent') {
-            $this->selectionList = $this->agent->discountServices;
-        } elseif ($this->agent->type == 'esim_agent') {
-            $this->selectionList = $this->agent->esimServices;
-        }
-
         if (!empty($this->selectionList) && count($this->selectionList) > 0) {
             $defaultItem = $this->selectionList[0];
             $this->selection = $defaultItem->id;
@@ -114,6 +106,14 @@ class QrScan extends Component
 
     public function render()
     {
+        if ($this->agent->type == 'discount_agent') {
+            $this->selectionList = $this->agent->discountShops;
+        } elseif ($this->agent->type == 'service_agent') {
+            $this->selectionList = $this->agent->discountServices;
+        } elseif ($this->agent->type == 'esim_agent') {
+            $this->selectionList = $this->agent->esimServices;
+        }
+
         return view('livewire.qr-scan');
     }
 }
