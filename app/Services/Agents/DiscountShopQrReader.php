@@ -25,13 +25,11 @@ class DiscountShopQrReader
                 return 'used';
             } else {
                 // Create a new DiscountShopQrRecord since it doesn't exist
-                sleep(1);
                 ShopeQrScanRecord::create([
                     'shop_id' => $selection,
                     'ticket_id' => $record->ticket_id,
                     'date' => now()
                 ]);
-
 
                 return 'valid'; // Return 'valid' if the operation succeeded
             }
