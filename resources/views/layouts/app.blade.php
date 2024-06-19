@@ -48,9 +48,9 @@
 <body>
 
 
-    <div class="container flex flex-col mx-auto bg-white" style="padding: 10px">
+    <div class="container flex flex-col mx-auto bg-white rounded-md" style="padding: 10px">
         <div style="background-color: #e3efc9; padding:10px"
-            class="relative flex flex-wrap items-center justify-between w-full group py-7 shrink-0">
+            class="relative flex flex-wrap items-center justify-between w-full rounded-md group py-7 shrink-0">
             <div>
                 <a href="/">
                     <img style="width: 200px" src="{{ asset('images/logo.png') }}">
@@ -124,7 +124,7 @@
     </main>
 
     <!-- component -->
-    <footer class="font-sans bg-blue-100/80 dark:bg-gray-900">
+    <footer class="font-sans bg-gray-900 dark:bg-gray-900">
         <div class="container px-6 py-12 mx-auto">
             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4">
 

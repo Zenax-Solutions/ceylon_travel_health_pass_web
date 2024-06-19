@@ -24,6 +24,7 @@ use Filament\Forms\Components\Select;
 use App\Models\DiscountShop;
 use Filament\Forms\Components\FileUpload;
 use Filament\Support\RawJs;
+use Filament\Forms\Components\Toggle;
 
 class PackageResource extends Resource
 {
@@ -140,6 +141,11 @@ class PackageResource extends Resource
                             'md' => 12,
                             'lg' => 12,
                         ]),
+
+                    Toggle::make('child_price')
+                        ->label("Accept Children's")
+                        ->onColor('success')
+                        ->offColor('danger'),
                 ]),
             ]),
         ]);
@@ -159,7 +165,7 @@ class PackageResource extends Resource
                 Tables\Columns\TextColumn::make('price')
                     ->money('USD')
                     ->toggleable(),
-
+                Tables\Columns\ToggleColumn::make('child_price')->label("Accept Children's"),
                 Tables\Columns\TextColumn::make('created_at')
                     ->toggleable()
 

@@ -110,6 +110,11 @@ class AgentController extends Controller
         return view('pages.agent.dashboard.pages.qrscan');
     }
 
+    public function records()
+    {
+        return view('pages.agent.dashboard.pages.records');
+    }
+
 
     public function logout()
     {

@@ -14,6 +14,6 @@ class ShopeQrScanRecord extends Model
 
     public function discountShop()
     {
-        return $this->belongsTo(DiscountShop::class);
+        return $this->belongsTo(DiscountShop::class, 'shop_id', 'id');
     }
 }

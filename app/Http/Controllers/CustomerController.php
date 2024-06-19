@@ -18,7 +18,7 @@ class CustomerController extends Controller
 
             $customer = Customer::where('email', Session::get('auth_customer'))->first();
 
-            $bookings = Booking::where('customer_id', $customer?->id)->paginate(10);
+            $bookings = Booking::where('customer_id', $customer?->id)->orderBy('created_at', 'desc')->paginate(10);
 
             return view('pages.customer.dashboard.main', compact('customer', 'bookings'));
         }

@@ -32,6 +32,6 @@ class DiscountShop extends Model
 
     public function shopQrScanRecord()
     {
-        return $this->hasMany(ShopeQrScanRecord::class);
+        return $this->hasMany(ShopeQrScanRecord::class, 'shop_id', 'id');
     }
 }

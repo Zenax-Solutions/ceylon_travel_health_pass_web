@@ -13,6 +13,6 @@ class ServiceQrScanRecord extends Model
 
     public function discountService()
     {
-        return $this->belongsTo(DiscountService::class);
+        return $this->belongsTo(DiscountService::class, 'service_id', 'id');
     }
 }

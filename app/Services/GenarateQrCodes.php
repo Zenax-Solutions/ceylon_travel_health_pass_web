@@ -27,7 +27,7 @@ class GenarateQrCodes
             // Get the current date
             $currentDate = Carbon::now();
 
-            // Add 69 days to the current date to get the expiration date
+            // Add 60 days to the current date to get the expiration date
             $expirationDate = $currentDate->addDays($bookig->package->expire_days_count);
 
             // Format the expiration date if needed
@@ -40,7 +40,7 @@ class GenarateQrCodes
                     'booking_id' => $bookig->id,
                     'ticket_id' => $ticketNumber,
                     'is_adult' => true,
-                    'expiry_date' => $formattedExpirationDate,
+                    //'expiry_date' => $formattedExpirationDate,
                     'status' => 'active'
                 ]);
 
@@ -59,7 +59,7 @@ class GenarateQrCodes
                     'booking_id' => $bookig->id,
                     'ticket_id' => $ticketNumber,
                     'is_adult' => false,
-                    'expiry_date' => $formattedExpirationDate,
+                    //'expiry_date' => $formattedExpirationDate,
                     'status' => 'active'
                 ]);
                 $tickets[] = $ticket;

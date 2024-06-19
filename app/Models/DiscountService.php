@@ -32,6 +32,6 @@ class DiscountService extends Model
 
     public function serviceQrScanRecord()
     {
-        return $this->hasMany(ServiceQrScanRecord::class);
+        return $this->hasMany(ServiceQrScanRecord::class, 'service_id', 'id');
     }
 }

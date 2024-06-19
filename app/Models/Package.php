@@ -34,6 +34,7 @@ class Package extends Model
         'gallery' => 'array',
         'discount_shop_list' => 'array',
         'discount_service_list' => 'array',
+        'child_price' => 'boolean',
     ];
 
     public function bookings()

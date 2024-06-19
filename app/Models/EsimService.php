@@ -27,4 +27,9 @@ class EsimService extends Model
     {
         return $this->belongsTo(Agent::class);
     }
+
+    public function esimQrScanRecord()
+    {
+        return $this->hasMany(EsimQrScanRecord::class);
+    }
 }

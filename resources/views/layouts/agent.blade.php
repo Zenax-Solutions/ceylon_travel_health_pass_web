@@ -49,19 +49,24 @@
 </head>
 
 
-<body class="relative antialiased bg-gray-100">
+<body class="container flex flex-col mx-auto bg-white bg-gray-100 rounded-md" style="padding: 10px">
 
-    <nav class="p-4 md:py-8 xl:px-0 md:container md:mx-w-6xl md:mx-auto">
+    <nav style="background-color: #e3efc9; padding:10px"
+        class="relative flex flex-wrap items-center justify-between w-full rounded-md group py-7 shrink-0">
         <div class="hidden lg:flex lg:justify-between lg:items-center">
             <a href="/" class="flex items-start gap-2 group">
                 <img style="width: 200px" src="{{ asset('images/logo.png') }}">
             </a>
-            <ul class="flex items-center space-x-4 text-sm font-semibold">
-                <li><a href="/" class="px-2 py-2 text-gray-800 rounded-md xl:px-4 hover:bg-gray-200">Home</a>
-                </li>
+            <ul class="flex items-center ml-4 space-x-4 text-sm font-semibold">
+                {{-- <li><a href="/" class="px-2 py-2 text-gray-800 rounded-md xl:px-4 hover:bg-gray-200">Home</a>
+                </li> --}}
 
                 <li><a href="{{ route('agent.dashboard') }}"
                         class="px-2 py-2 text-gray-800 rounded-md xl:px-4 hover:bg-gray-200">Dashboard</a>
+                </li>
+
+                <li><a href="{{ route('agent.records') }}"
+                        class="px-2 py-2 text-gray-800 rounded-md xl:px-4 hover:bg-gray-200">Records</a>
                 </li>
 
             </ul>
@@ -98,13 +103,23 @@
             <div x-show="open" x-transition class="absolute left-0 right-0 w-full bg-white border rounded-md top-14">
                 <ul class="p-4">
                     <li class="px-4 py-2 font-bold rounded hover:bg-gray-200">
-                        <a href="/" class="flex items-center gap-4">
+                        <a href="{{ route('agent.dashboard') }}" class="flex items-center gap-4">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 5l7 7-7 7" />
                             </svg>
-                            Home
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="px-4 py-2 font-bold rounded hover:bg-gray-200">
+                        <a href="{{ route('agent.records') }}" class="flex items-center gap-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5l7 7-7 7" />
+                            </svg>
+                            Records
                         </a>
                     </li>
 

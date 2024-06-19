@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -20,7 +21,7 @@ return new class extends Migration {
             $table->bigInteger('days')->nullable();
             $table->decimal('price')->default(0);
             $table
-                ->decimal('child_price')
+                ->boolean('child_price')
                 ->default(0)
                 ->nullable();
             $table

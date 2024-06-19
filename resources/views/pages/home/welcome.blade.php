@@ -81,7 +81,7 @@
                 <!--start here-->
 
                 @forelse ($packages as $key => $package)
-                    <div class="p-4 md:w-1/2 lg:w-1/4">
+                    <div class="p-4 md:w-1/2 lg:w-1/2">
 
                         <div class="relative flex flex-col text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
 
@@ -162,47 +162,53 @@
                                     <h3 class="text-xl font-black text-green-400 md:text-3xl">
                                         {{ $package->main_title }}</h3>
 
-                                    <p
-                                        class="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900">
-                                        ${{ number_format($package->price) }}
+                                    <p <span class="text-5xl font-bold leading-none align-baseline">
+                                        {{ env('CURRENCY', '$') . number_format($package->price) }}</span>
                                     </p>
                                 </div>
-                                <p class="text-base text-gray-500 md:text-lg">
-                                <h1 class="text-lg font-black text-gray-800 md:text-2xl">Travel</h1>
-                                {!! $package->travel_info !!}
-                                </p>
-                                <p class="text-base text-gray-500 md:text-lg">
-                                <h1 class="text-lg font-black text-gray-800 md:text-2xl">Health</h1>
-                                {!! $package->health_info !!}
-                                </p>
-                            </div>
+                                <div class="flex flex-wrap items-center justify-between mb-2">
+                                    <div>
+                                        <p class="text-base text-gray-500 md:text-lg">
+                                        <h1 class="text-lg font-black text-gray-800 md:text-2xl">Travel</h1>
+                                        {!! $package->travel_info !!}
+                                        </p>
+                                        <p class="text-base text-gray-500 md:text-lg">
+                                        <h1 class="text-lg font-black text-gray-800 md:text-2xl">Health</h1>
+                                        {!! $package->health_info !!}
+                                        </p>
+                                    </div>
 
-                            <div class="pl-6">
-                                <h1 class="text-lg font-black text-gray-800 md:text-2xl">Destinations</h1>
-                                <div class="flex items-center pt-4 pb-4">
+                                    <div>
+                                        <div class="">
+                                            <h1 class="text-lg font-black text-gray-800 md:text-2xl">Destinations</h1>
+                                            <div class="items-center pt-4 pb-4" style="gap: 10px; display: grid;">
 
-                                    @forelse ($destinations as $destination)
-                                        <img style="object-fit: cover"
-                                            class="transform border border-gray-200 rounded-full w-14 h-14 hover:scale-125"
-                                            src="{{ Storage::url($destination->image) }}" />
-                                    @empty
-                                    @endforelse
+                                                @forelse ($destinations as $destination)
+                                                    <div class="flex" style="gap: 10px;align-items: center;">
+                                                        <img style="object-fit: cover"
+                                                            class="transform border border-gray-200 rounded-md w-14 h-14 hover:scale-125"
+                                                            src="{{ Storage::url($destination->image) }}" />
+                                                        <p class="font-light font-black text-gray-800">
+                                                            {{ $destination->destination }}</p>
+                                                    </div>
+                                                @empty
+                                                @endforelse
 
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
 
 
                             <div class="p-6 pt-0">
                                 <div>
-                                    <div class="inline-block mr-5 align-bottom">
-                                        <span class="text-5xl leading-none align-baseline">$</span>
-                                        <span
-                                            class="text-5xl font-bold leading-none align-baseline">{{ number_format($package->price) }}</span>
-                                    </div>
+
                                     <div class="inline-block align-bottom">
                                         <a href="{{ route('package', ['id' => $package->id]) }}"
                                             class="px-10 font-semibold text-white bg-green-500 rounded-full opacity-75 hover:opacity-100 hover:text-gray-900"><i
-                                                class="mr-2 -ml-2 mdi mdi-cart"></i>More Details</a>
+                                                class="mr-4 -ml-4 "></i>More Details</a>
                                     </div>
                                 </div>
 
@@ -286,9 +292,11 @@
                             <img src="{{ Storage::url($service->image) }}" alt="burger illustration">
 
                             <div class="space-y-2">
-                                <h5 class="text-xl font-medium text-gray-800 transition group-hover:text-yellow-600">
-                                    {{ $service->service_name }}
-                                </h5>
+                                <a href="{{ $service->location }}" target="_blank" rel="noopener noreferrer">
+                                    <h5 class="text-xl font-medium text-gray-800 transition group-hover:text-yellow-600">
+                                        {{ $service->service_name }}
+                                    </h5>
+                                </a>
                                 <p class="text-sm font-bold text-green-400">Discount: %{{ $service->discount_amount }}</p>
                                 <p class="text-sm font-bold text-gray-600">Area: {{ $service->area }}</p>
                             </div>

@@ -198,10 +198,9 @@ class Package extends Component
 
     public function submitBooking()
     {
-
         $this->validate([
-            'adult_count' => 'required',
-            'children_count' => 'required',
+            'adult_count' => 'required|integer|min:1|max:50',
+            'children_count' => 'required|integer|min:0|max:50',
         ]);
 
         if ($this->esimOption == true) {
@@ -304,25 +303,32 @@ class Package extends Component
                 'payment_status' => 'pending',
             ];
 
-            $booking = Booking::create($PackageData);
-
-            $genrateQrCode->genarate($PackageData, $booking, $customer);
-
-
-            if (isset($this->coupon_code)) {
-                $agent = Agent::where('coupon_code', $this->coupon_code);
-
-                if ($agent->exists()) {
+            if ($this->adult_count > 50 || $this->children_count > 50 || ($this->adult_count + $this->children_count) > 50) {
+                toastr()->error('Maximum Guest count is 50');
+            } else {
 
 
-                    $getAgent = $agent->where('coupon_code', $this->coupon_code)->first();
 
-                    $getAgent->increment('points', env('AGENT_DISCONUNT_MARGIN', 5));
+                $booking = Booking::create($PackageData);
+
+                $genrateQrCode->genarate($PackageData, $booking, $customer);
+
+
+                if (isset($this->coupon_code)) {
+                    $agent = Agent::where('coupon_code', $this->coupon_code);
+
+                    if ($agent->exists()) {
+
+
+                        $getAgent = $agent->where('coupon_code', $this->coupon_code)->first();
+
+                        $getAgent->increment('points', env('AGENT_DISCONUNT_MARGIN', 5));
+                    }
                 }
-            }
 
-            toastr()->success('Booking Successfully');
-            $this->redirectRoute('payment.info');
+                toastr()->success('Booking Successfully');
+                $this->redirectRoute('payment.info');
+            }
         }
     }
 

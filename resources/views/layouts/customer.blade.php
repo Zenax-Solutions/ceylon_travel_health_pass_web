@@ -47,14 +47,15 @@
 </head>
 
 
-<body class="relative antialiased bg-gray-100">
+<body class="container flex flex-col mx-auto bg-white bg-gray-100 rounded-md" style="padding: 10px">
 
-    <nav class="p-4 md:py-8 xl:px-0 md:container md:mx-w-6xl md:mx-auto">
+    <nav style="background-color: #e3efc9; padding:10px"
+        class="relative flex flex-wrap items-center justify-between w-full rounded-md group py-7 shrink-0">
         <div class="hidden lg:flex lg:justify-between lg:items-center">
             <a href="/" class="flex items-start gap-2 group">
                 <img style="width: 200px" src="{{ asset('images/logo.png') }}">
             </a>
-            <ul class="flex items-center space-x-4 text-sm font-semibold">
+            <ul class="flex items-center ml-4 space-x-4 text-sm font-semibold">
                 <li><a href="/" class="px-2 py-2 text-gray-800 rounded-md xl:px-4 hover:bg-gray-200">Home</a>
                 </li>
 

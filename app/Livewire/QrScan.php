@@ -29,6 +29,10 @@ class QrScan extends Component
         if (Session::has('auth_agent')) {
             $this->agent = Agent::where('email', Session::get('auth_agent'))->first();
 
+            if ($this->agent->type == 'tour_agent') {
+                $this->redirectRoute('agent.dashboard');
+            }
+
             if (Session::has('selection')) {
                 $this->selection = Session::get('selection');
             } else {
@@ -67,9 +71,9 @@ class QrScan extends Component
                         $status = $discount_service_agent->read($this->selection, $record);
                         break;
 
-                    case 'esim_agent':
-                        //$status = $this->esim_agent->read($this->selection, $record);
-                        break;
+                        // case 'esim_agent':
+                        //     $status = $esim_agent->read($this->selection, $record);
+                        //     break;
 
                     default:
                         $status = 'invalid';
