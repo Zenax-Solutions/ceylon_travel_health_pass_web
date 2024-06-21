@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\WelcomeEmail;
 use App\Models\Booking;
 use App\Models\Customer;
 use App\Models\Ticket;
@@ -9,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class CustomerController extends Controller
 {
@@ -114,6 +116,8 @@ class CustomerController extends Controller
             toastr()->success('Registration Successfully!', 'Congrats');
 
             //$request->session()->put('auth_customer', $request->email);
+
+            Mail::to($request->email)->send(new WelcomeEmail($request));
 
             return redirect()->route('customer.login');
         }

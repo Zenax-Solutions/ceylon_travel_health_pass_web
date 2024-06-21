@@ -8,4 +8,12 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateAgent extends CreateRecord
 {
     protected static string $resource = AgentResource::class;
+
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        //dd($data);
+
+        return $data;
+    }
 }

@@ -94,24 +94,24 @@ class TicketResource extends Resource
                 Tables\Columns\TextColumn::make('booking.id')
                     ->toggleable()
                     ->label('Bookig No')
+                    ->searchable()
                     ->limit(50),
                 Tables\Columns\TextColumn::make('ticket_id')
                     ->toggleable()
                     ->label('Ticket No')
-                    ->searchable(true, null, true)
+                    ->searchable()
                     ->limit(50),
                 Tables\Columns\TextColumn::make('expiry_date')
                     ->toggleable()
                     ->date(),
-                // Tables\Columns\TextColumn::make('status')
-                //     ->toggleable()
-                //     ->searchable()
-                //     ->enum([
-                //         'active' => 'Active',
-                //         'used' => 'Used',
-                //         'pending' => 'Pending',
-                //         'expired' => 'Expired',
-                //     ]),
+
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'expired' => 'warning',
+                        'active' => 'success',
+                    }),
+
             ])
             ->filters([
                 DateRangeFilter::make('created_at'),
@@ -123,11 +123,13 @@ class TicketResource extends Resource
                     ->label('Booking'),
             ])
             ->actions([
-                ViewAction::make(),
-                EditAction::make(),
-                DeleteAction::make(),
+                // ViewAction::make(),
+                // EditAction::make(),
+                //DeleteAction::make(),
             ])
-            ->headerActions([CreateAction::make()]);
+            ->headerActions([
+                //CreateAction::make()
+            ]);
     }
 
     public static function getRelations(): array

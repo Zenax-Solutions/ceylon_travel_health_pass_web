@@ -61,7 +61,6 @@ class BookingResource extends Resource
                         ]),
 
                     TextInput::make('adult_pass_count')
-                        ->rules([])
                         ->required()
                         ->placeholder('Adult Pass Count')
                         ->default('0')
@@ -72,7 +71,6 @@ class BookingResource extends Resource
                         ]),
 
                     TextInput::make('child_pass_count')
-                        ->rules([])
                         ->nullable()
                         ->placeholder('Child Pass Count')
                         ->columnSpan([
@@ -148,24 +146,32 @@ class BookingResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('package.main_title')
                     ->toggleable()
+                    ->searchable()
                     ->limit(50),
-                Tables\Columns\TextColumn::make('customer.first_name')
+                Tables\Columns\TextColumn::make('customer')
+                    ->formatStateUsing(function ($state) {
+                        return $state->first_name . ' ' . $state->last_name;
+                    })
                     ->toggleable()
+                    ->searchable()
                     ->limit(50),
                 Tables\Columns\TextColumn::make('adult_pass_count')
                     ->toggleable()
-                    ->searchable(true, null, true)
                     ->limit(50),
                 Tables\Columns\TextColumn::make('child_pass_count')
                     ->toggleable()
-                    ->searchable(true, null, true)
                     ->limit(50),
                 Tables\Columns\TextColumn::make('total')
-                    ->toggleable()
-                    ->searchable(true, null, true),
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('date')
                     ->toggleable()
                     ->date(),
+                Tables\Columns\TextColumn::make('payment_status')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'pending' => 'danger',
+                        'paid' => 'success',
+                    }),
 
             ])
             ->filters([
@@ -184,11 +190,13 @@ class BookingResource extends Resource
                     ->label('Customer'),
             ])
             ->actions([
-                ViewAction::make(),
-                EditAction::make(),
-                DeleteAction::make(),
+                //ViewAction::make(),
+                //EditAction::make(),
+                //DeleteAction::make(),
             ])
-            ->headerActions([CreateAction::make()]);
+            ->headerActions([
+                // CreateAction::make()
+            ]);
     }
 
     public static function getRelations(): array

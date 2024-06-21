@@ -22,6 +22,7 @@ use Filament\Forms\Components\RichEditor;
 use App\Filament\Filters\DateRangeFilter;
 use App\Filament\Resources\AgentResource\Pages;
 use Filament\Forms\Components\ToggleButtons;
+use Filament\Forms\Get;
 
 class AgentResource extends Resource
 {
@@ -54,6 +55,12 @@ class AgentResource extends Resource
                             'tour_agent' => 'Tour Agent',
                         ])
                         ->placeholder('Type')
+                        ->live()
+                        ->afterStateUpdated(fn (Select $component) => $component
+                            ->getContainer()
+                            ->getComponent('dynamicTypeFields')
+                            ->getChildComponentContainer()
+                            ->fill())
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
@@ -107,6 +114,7 @@ class AgentResource extends Resource
                     TextInput::make('id_no')
                         ->rules(['string'])
                         ->nullable()
+                        ->label('ID Number')
                         ->placeholder('Id No')
                         ->columnSpan([
                             'default' => 12,
@@ -114,16 +122,19 @@ class AgentResource extends Resource
                             'lg' => 4,
                         ]),
 
-                    TextInput::make('license_no')
-                        ->rules(['string'])
-                        ->nullable()
-                        ->placeholder('License No')
-                        ->columnSpan([
+
+                    ToggleButtons::make('status')
+                        ->options([
+                            'pending' => 'Pending',
+                            'publish' => 'Approved'
+                        ])->colors([
+                            'pending' => 'danger',
+                            'publish' => 'success',
+                        ])->default('pending')->columnSpan([
                             'default' => 12,
                             'md' => 12,
-                            'lg' => 4,
+                            'lg' => 3,
                         ]),
-
                     RichEditor::make('bank_details')
                         ->rules(['string'])
                         ->nullable()
@@ -134,88 +145,112 @@ class AgentResource extends Resource
                             'lg' => 12,
                         ]),
 
-                    TextInput::make('points')
-                        ->rules([])
-                        ->nullable()
-                        ->placeholder('Points')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 4,
-                        ]),
+                    Section::make('Tour Agent')
+                        ->schema(fn (Get $get): array => match ($get('type')) {
+                            'tour_agent' => [
 
-                    TextInput::make('commission')
-                        ->rules([])
-                        ->nullable()
-                        ->placeholder('Commission')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 4,
-                        ]),
+                                TextInput::make('license_no')
+                                    ->rules(['string'])
+                                    ->nullable()
+                                    ->label('Tourism License Number')
+                                    ->placeholder('License No')
+                                    ->required()
+                                    ->columnSpan([
+                                        'default' => 12,
+                                        'md' => 12,
+                                        'lg' => 4,
+                                    ]),
 
-                    TextInput::make('commission_payment_status')
-                        ->rules(['string'])
-                        ->nullable()
-                        ->placeholder('Commission Payment Status')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 4,
-                        ]),
+                                // TextInput::make('points')
+                                //     ->rules([])
+                                //     ->nullable()
+                                //     ->placeholder('Points')
+                                //     ->columnSpan([
+                                //         'default' => 12,
+                                //         'md' => 12,
+                                //         'lg' => 4,
+                                //     ]),
 
-                    DatePicker::make('commission_payment_date')
-                        ->rules(['date'])
-                        ->nullable()
-                        ->placeholder('Commission Payment Date')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 6,
-                        ]),
 
-                    DatePicker::make('recent_commission_payment_date')
-                        ->rules(['date'])
-                        ->nullable()
-                        ->placeholder('Recent Commission Payment Date')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 6,
-                        ]),
+                                TextInput::make('coupon_code')
+                                    ->rules(['string'])
+                                    ->disabled()
+                                    ->placeholder('Auto Generated')
+                                    ->columnSpan([
+                                        'default' => 12,
+                                        'md' => 12,
+                                        'lg' => 3,
+                                    ]),
 
-                    RichEditor::make('recent_info')
-                        ->rules(['string'])
-                        ->nullable()
-                        ->placeholder('Recent Info')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 6,
-                        ]),
+                            ],
+                            default => [],
+                        })
+                        ->key('dynamicTypeFields'),
 
-                    TextInput::make('coupon_code')
-                        ->rules(['string'])
-                        ->nullable()
-                        ->placeholder('Coupon Code')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 3,
-                        ]),
 
-                    ToggleButtons::make('status')
-                        ->options([
-                            'pending' => 'Pending',
-                            'publish' => 'Approved'
-                        ])->colors([
-                            'pending' => 'danger',
-                            'publish' => 'success',
-                        ])->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 3,
-                        ]),
+                    Section::make('Login Password')->schema([
+
+                        TextInput::make('password')
+                            ->password()
+                            ->required()
+                            ->placeholder('New Login Password')
+                    ])->columnSpan([
+                        'default' => 12,
+                        'md' => 12,
+                        'lg' => 3,
+                    ]),
+
+                    // TextInput::make('commission')
+                    //     ->rules([])
+                    //     ->nullable()
+                    //     ->placeholder('Commission')
+                    //     ->columnSpan([
+                    //         'default' => 12,
+                    //         'md' => 12,
+                    //         'lg' => 4,
+                    //     ]),
+
+                    // TextInput::make('commission_payment_status')
+                    //     ->rules(['string'])
+                    //     ->nullable()
+                    //     ->placeholder('Commission Payment Status')
+                    //     ->columnSpan([
+                    //         'default' => 12,
+                    //         'md' => 12,
+                    //         'lg' => 4,
+                    //     ]),
+
+                    // DatePicker::make('commission_payment_date')
+                    //     ->rules(['date'])
+                    //     ->nullable()
+                    //     ->placeholder('Commission Payment Date')
+                    //     ->columnSpan([
+                    //         'default' => 12,
+                    //         'md' => 12,
+                    //         'lg' => 6,
+                    //     ]),
+
+                    // DatePicker::make('recent_commission_payment_date')
+                    //     ->rules(['date'])
+                    //     ->nullable()
+                    //     ->placeholder('Recent Commission Payment Date')
+                    //     ->columnSpan([
+                    //         'default' => 12,
+                    //         'md' => 12,
+                    //         'lg' => 6,
+                    //     ]),
+
+                    // RichEditor::make('recent_info')
+                    //     ->rules(['string'])
+                    //     ->nullable()
+                    //     ->placeholder('Recent Info')
+                    //     ->columnSpan([
+                    //         'default' => 12,
+                    //         'md' => 12,
+                    //         'lg' => 6,
+                    //     ]),
+
+
                 ]),
             ]),
         ]);
@@ -240,35 +275,35 @@ class AgentResource extends Resource
                     ->toggleable()
                     ->html()
                     ->limit(50),
-                Tables\Columns\TextColumn::make('id_no')
-                    ->toggleable()
-                    ->limit(50),
-                Tables\Columns\TextColumn::make('license_no')
-                    ->toggleable()
-                    ->limit(50),
-                Tables\Columns\TextColumn::make('points')
-                    ->toggleable()
-                    ->limit(50),
-                Tables\Columns\TextColumn::make('commission')
-                    ->toggleable()
-                    ->limit(50),
-                Tables\Columns\TextColumn::make('commission_payment_status')
-                    ->toggleable()
-                    ->limit(50),
-                Tables\Columns\TextColumn::make('commission_payment_date')
-                    ->toggleable()
-                    ->date(),
-                Tables\Columns\TextColumn::make(
-                    'recent_commission_payment_date'
-                )
-                    ->toggleable()
-                    ->date(),
-                Tables\Columns\TextColumn::make('recent_info')
-                    ->toggleable()
-                    ->limit(50),
-                Tables\Columns\TextColumn::make('coupon_code')
-                    ->toggleable()
-                    ->limit(50),
+                // Tables\Columns\TextColumn::make('id_no')
+                //     ->toggleable()
+                //     ->limit(50),
+                // Tables\Columns\TextColumn::make('license_no')
+                //     ->toggleable()
+                //     ->limit(50),
+                // Tables\Columns\TextColumn::make('points')
+                //     ->toggleable()
+                //     ->limit(50),
+                // Tables\Columns\TextColumn::make('commission')
+                //     ->toggleable()
+                //     ->limit(50),
+                // Tables\Columns\TextColumn::make('commission_payment_status')
+                //     ->toggleable()
+                //     ->limit(50),
+                // Tables\Columns\TextColumn::make('commission_payment_date')
+                //     ->toggleable()
+                //     ->date(),
+                // Tables\Columns\TextColumn::make(
+                //     'recent_commission_payment_date'
+                // )
+                //     ->toggleable()
+                //     ->date(),
+                // Tables\Columns\TextColumn::make('recent_info')
+                //     ->toggleable()
+                //     ->limit(50),
+                // Tables\Columns\TextColumn::make('coupon_code')
+                //     ->toggleable()
+                //     ->limit(50),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->formatStateUsing(function (string $state): string {
