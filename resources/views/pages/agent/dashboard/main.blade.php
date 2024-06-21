@@ -48,11 +48,11 @@
         </div>
     @else
         <section class="flex items-center justify-center px-4 mt-20 ">
-            <div class="w-full max-w-lg p-4 rounded-lg shadow-lg">
+            <div class="w-full max-w-lg p-4 bg-green-500 rounded-lg shadow-lg">
                 <h3 class="text-xl font-semibold font-bold tracking-wide text-center">Approval Pending</h3>
                 <img src="{{ asset('images/pending.png') }}">
 
-                <h3 class="text-lg font-semibold tracking-wide text-green-500">"Your submission is currently pending admin
+                <h3 class="text-lg font-semibold tracking-wide text-white">"Your submission is currently pending admin
                     approval. Please
                     allow some time for the process to complete. You will be notified accordingly."</h3>
 
