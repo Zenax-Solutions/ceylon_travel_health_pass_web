@@ -85,7 +85,7 @@
             Promise.all(imageLoadPromises).then(() => {
                 // Use html2canvas to take a screenshot of the card
                 html2canvas(card, {
-                    scale: 1
+                    scale: 4
                 }).then(canvas => {
                     // Convert the canvas to an image
                     const imgData = canvas.toDataURL('image/png');
