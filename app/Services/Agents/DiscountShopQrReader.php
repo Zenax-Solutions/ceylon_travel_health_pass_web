@@ -27,6 +27,11 @@ class DiscountShopQrReader
                 if (!empty($record->expiry_date)) {
                     // Check if the ticket is expired
                     if (now()->greaterThan($record->expiry_date)) {
+
+                        $record->update([
+                            'status' => 'expired',
+                        ]);
+
                         return 'expired'; // Return 'expired' if the ticket is expired
                     }
                 }
