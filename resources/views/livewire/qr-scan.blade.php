@@ -3,7 +3,7 @@
 
         <div class="flex items-center justify-center min-h-screen bg-gradient-to-r from-green-400 to-green-500">
             <div
-                class="w-full max-w-md p-8 transition-all duration-500 ease-in-out transform bg-white rounded-lg shadow-lg hover:scale-105 hover:shadow-2xl">
+                class="w-full max-w-screen-sm p-8 transition-all duration-500 ease-in-out transform bg-white rounded-lg shadow-lg hover:scale-105 hover:shadow-2xl">
                 <div class="mb-2" style="display: flex; justify-content: center;">
 
                     <img style="width: 200px" src="{{ asset('images/logo.png') }}">
