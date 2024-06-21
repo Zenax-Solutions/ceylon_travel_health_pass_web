@@ -13,7 +13,7 @@
                                 <img src="{{ asset('storage/tickets/' . $ticket->ticket_id . '.png') }}" alt="QR Code">
                             </div>
                         </div>
-                        <div class="px-3 py-4 bg-white" style="text-align: center">
+                        <div class="px-3 py-4 " style="text-align: center; background-color:#e3efc9">
                             <div class="pb-2">
 
                                 @if ($ticket->is_adult)
@@ -30,17 +30,15 @@
 
                             </div>
                             <h3 class="mb-2 text-lg font-medium">Ticket Number</h3>
-                            <h3 class="mb-2 text-xs font-bold text-green-500">{{ $key + 1 }}</h3>
+                            <h3 class="mb-2 text-xs font-bold text-red-500">{{ $key + 1 }}</h3>
                             <h3 class="mb-2 text-lg font-medium">Bookig ID</h3>
-                            <h3 class="mb-2 text-xs font-bold text-green-500">#{{ $ticket->booking_id }}</h3>
+                            <h3 class="mb-2 text-xs font-bold text-red-500">#{{ $ticket->booking_id }}</h3>
                             <h3 class="mb-2 text-lg font-medium">Ticket ID</h3>
-                            <h3 class="p-4 mb-2 text-xs font-bold text-green-500">{{ $ticket->ticket_id }}</h3>
+                            <h3 class="p-4 mb-2 text-xs font-bold text-red-500">{{ $ticket->ticket_id }}</h3>
                             <h3 class="mb-2 text-lg font-medium">Expiry Date</h3>
-                            <h3 class="mb-2 text-xs font-bold text-green-500">
+                            <h3 class="mb-2 text-xs font-bold text-red-500">
                                 {{ $ticket->expiry_date->format('Y/m/d') }}</h3>
-                            <h3 class="mb-2 text-lg font-medium">Status</h3>
-                            <h3 class="mb-2 text-xs font-bold text-green-500">
-                                {{ $ticket->status }}</h3>
+
                             <div class="flex items-center justify-end">
 
                                 <div class="relative z-40 flex items-center gap-2">
@@ -89,7 +87,7 @@
             Promise.all(imageLoadPromises).then(() => {
                 // Use html2canvas to take a screenshot of the card
                 html2canvas(card, {
-                    scale: 2
+                    scale: 1
                 }).then(canvas => {
                     // Convert the canvas to an image
                     const imgData = canvas.toDataURL('image/png');
@@ -97,7 +95,7 @@
                     // Create a temporary link element
                     const link = document.createElement('a');
                     link.href = imgData;
-                    link.download = 'card.png';
+                    link.download = 'HealthPass.png';
 
                     // Append the link to the body
                     document.body.appendChild(link);
