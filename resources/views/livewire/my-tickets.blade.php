@@ -8,9 +8,9 @@
 
 
                         <div class="h-auto mb-4 overflow-hidden">
-                            <div class="relative overflow-hidden h-44">
-                                <img class="p-8" src="{{ asset('storage/tickets/' . $ticket->ticket_id . '.png') }}"
-                                    alt="QR Code">
+                            <div class="relative overflow-hidden"
+                                style="background: white;display: flex; justify-content: center;padding: 10px;">
+                                <img src="{{ asset('storage/tickets/' . $ticket->ticket_id . '.png') }}" alt="QR Code">
                             </div>
                         </div>
                         <div class="px-3 py-4 bg-white" style="text-align: center">
