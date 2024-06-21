@@ -41,7 +41,7 @@
                             <h3 class="p-4 mb-2 text-xs font-bold text-red-500">{{ $ticket->ticket_id }}</h3>
                             <h3 class="mb-2 text-lg font-medium">Expiry Date</h3>
                             <h3 class="mb-2 text-xs font-bold text-red-500">
-                                {{ $ticket->expiry_date->format('Y/m/d') }}</h3>
+                                {{ $ticket->expiry_date == null ? '-' : $ticket->expiry_date->format('Y/m/d') }}</h3>
 
                             <div class="flex items-center justify-end">
 
