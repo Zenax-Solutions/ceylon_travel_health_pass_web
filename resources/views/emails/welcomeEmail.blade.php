@@ -71,7 +71,7 @@
         </div>
         <div class="content">
             <h1>Welcome to Ceylon Travel & Health Pass</h1>
-            <p>Hi {{ $userData->first_name . ' ' . $userData->last_name }},</p>
+            <p>Hi {{ $first_name . ' ' . $last_name }},</p>
             <p>Thank you for registering with us. We're thrilled to have you on board!</p>
         </div>
 

@@ -117,7 +117,7 @@ class CustomerController extends Controller
 
             //$request->session()->put('auth_customer', $request->email);
 
-            Mail::to($request->email)->send(new WelcomeEmail($request));
+            Mail::to($request->email)->send(new WelcomeEmail($request->first_name, $request->last_name));
 
             return redirect()->route('customer.login');
         }
