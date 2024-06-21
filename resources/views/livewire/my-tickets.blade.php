@@ -6,8 +6,7 @@
                     <div
                         class="relative flex flex-col max-w-sm overflow-hidden transition-all duration-300 shadow-md rounded-xl hover:shadow-lg hover:-translate-y-1">
 
-
-                        <div class="h-auto mb-4 overflow-hidden bg-white">
+                        <div class="h-auto overflow-hidden bg-white">
                             <div class="p-2 mb-2" style="display: flex; justify-content: center;">
 
                                 <img style="width: 200px" src="{{ asset('images/logo.png') }}">
