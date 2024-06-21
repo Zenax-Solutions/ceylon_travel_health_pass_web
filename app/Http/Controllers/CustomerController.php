@@ -39,9 +39,9 @@ class CustomerController extends Controller
 
     public function myTickets(Request $request)
     {
-        $tickets = Ticket::where('booking_id', $request->id)->get();
-
-        dd($tickets == null);
+        if ($request->id == null) {
+            return redirect()->back();
+        }
 
         return view('pages.customer.dashboard.my-tickets');
     }
