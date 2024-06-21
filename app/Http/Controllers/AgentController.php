@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AgentWelcomeEmail;
 use App\Models\Agent;
 use App\Models\Booking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 
 class AgentController extends Controller
@@ -76,6 +77,8 @@ class AgentController extends Controller
             toastr()->success('Registration Successfully!', 'Congrats');
 
             //$request->session()->put('auth_agent', $request->email);
+
+            Mail::to($request->email)->send(new AgentWelcomeEmail($request->name));
 
             return redirect()->route('agent.login');
         }
