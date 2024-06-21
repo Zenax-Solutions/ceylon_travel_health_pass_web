@@ -7,9 +7,15 @@
                         class="relative flex flex-col max-w-sm overflow-hidden transition-all duration-300 shadow-md rounded-xl hover:shadow-lg hover:-translate-y-1">
 
 
-                        <div class="h-auto mb-4 overflow-hidden">
+                        <div class="h-auto mb-4 overflow-hidden bg-white">
+                            <div class="p-2 mb-2" style="display: flex; justify-content: center;">
+
+                                <img style="width: 200px" src="{{ asset('images/logo.png') }}">
+
+                            </div>
                             <div class="relative overflow-hidden"
-                                style="background: white;display: flex; justify-content: center;padding: 10px;">
+                                style="display: flex; justify-content: center;padding: 10px;">
+
                                 <img src="{{ asset('storage/tickets/' . $ticket->ticket_id . '.png') }}" alt="QR Code">
                             </div>
                         </div>
