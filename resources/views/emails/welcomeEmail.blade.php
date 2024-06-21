@@ -27,10 +27,6 @@
             padding: 10px 0;
         }
 
-        .header img {
-            max-width: 100px;
-        }
-
         .content {
             margin: 20px 0;
             text-align: center;
