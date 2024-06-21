@@ -26,6 +26,10 @@ class Records extends Component
         if (Session::has('auth_agent')) {
             $this->agent = Agent::where('email', Session::get('auth_agent'))->first();
 
+            if ($this->agent->status == 'pending') {
+                $this->redirectRoute('agent.dashboard');
+            }
+
             if ($this->agent->type == 'tour_agent') {
                 $this->redirectRoute('agent.dashboard');
             }
