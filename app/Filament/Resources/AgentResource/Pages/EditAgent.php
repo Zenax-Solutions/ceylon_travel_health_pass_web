@@ -12,7 +12,7 @@ class EditAgent extends EditRecord
     protected static string $resource = AgentResource::class;
 
 
-    protected function mutateFormDataBeforeFill(array $data): array
+    protected function mutateFormDataBeforeSave(array $data): array
     {
 
         if ($data['status'] == 'publish') {
