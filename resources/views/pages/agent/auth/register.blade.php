@@ -25,22 +25,17 @@
 
             <main class="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
                 <div class="max-w-xl lg:max-w-3xl">
-                    <div class="relative block -mt-16 lg:hidden">
-                        <a class="inline-flex items-center justify-center text-blue-600 bg-white " href="/">
+                    <div class="relative block lg:hidden">
+                        <a class="inline-flex items-center justify-center text-blue-600 " href="/">
                             <span class="sr-only">Home</span>
                             <div>
                                 <img src="{{ asset('images/logo.png') }}">
                             </div>
                         </a>
 
-                        <h1 class="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
-                            Welcome to Ceylon Travel Agent Program
-                        </h1>
-
-
                     </div>
 
-                    <div class="flex flex-col space-y-2 text-center">
+                    <div class="flex flex-col mt-2 space-y-2 text-center">
                         <h2 class="text-3xl font-bold md:text-4xl">New Agent Registration</h2>
                     </div>
 
@@ -124,7 +119,8 @@
                         </div>
                         <!-- License Number Field -->
                         <div class="col-span-6" x-show="showLicenseField" x-transition>
-                            <label for="license_no" class="block text-sm font-medium text-gray-700"> License Number </label>
+                            <label for="license_no" class="block text-sm font-medium text-gray-700">Tourism License Number
+                            </label>
                             <input type="text" value="{{ old('license_no') }}" x-bind:required="showLicenseField"
                                 name="license_no"
                                 class="flex w-full px-3 py-2 font-medium border-2 {{ $errors->has('license_no') ? 'border-red-400' : 'border-black' }}  rounded-lg md:px-4 md:py-3 placeholder:font-normal" />

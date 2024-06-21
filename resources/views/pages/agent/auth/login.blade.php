@@ -25,23 +25,19 @@
 
             <main class="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
                 <div class="max-w-xl lg:max-w-3xl">
-                    <div class="relative block -mt-16 lg:hidden">
-                        <a class="inline-flex items-center justify-center text-blue-600 bg-white " href="/">
+                    <div class="relative block lg:hidden">
+                        <a class="inline-flex items-center justify-center text-blue-600 " href="/">
                             <span class="sr-only">Home</span>
                             <div>
                                 <img src="{{ asset('images/logo.png') }}">
                             </div>
                         </a>
 
-                        <h1 class="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
-                            Welcome to Ceylon Travel Agent Program
-                        </h1>
-
 
                     </div>
 
                     <div class="flex flex-col space-y-2 text-center">
-                        <h2 class="text-3xl font-bold md:text-4xl">Registerd Agent Portal</h2>
+                        <h2 class="text-3xl font-bold md:text-4xl">Agent Portal</h2>
                     </div>
 
                     <form action="{{ route('agent.login.validate') }}" method="POST" class="grid grid-cols-6 gap-6 mt-8">
