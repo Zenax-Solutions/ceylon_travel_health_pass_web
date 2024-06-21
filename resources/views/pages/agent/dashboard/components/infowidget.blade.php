@@ -7,7 +7,7 @@
         <div class="flex items-end justify-between">
             <a href="{{ route('agent.qrscan') }}"
                 class="px-4 py-3 text-xs font-semibold tracking-wider text-white bg-gray-800 rounded-lg hover:bg-green-600 hover:text-white">
-                open the scanner
+                start
             </a>
             <img src="{{ asset('images/qr-image.png') }}" alt="calendar" class="object-cover" style="width: 50%">
         </div>
