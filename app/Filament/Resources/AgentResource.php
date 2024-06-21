@@ -21,6 +21,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use App\Filament\Filters\DateRangeFilter;
 use App\Filament\Resources\AgentResource\Pages;
+use Filament\Forms\Components\ToggleButtons;
 
 class AgentResource extends Resource
 {
@@ -203,12 +204,14 @@ class AgentResource extends Resource
                             'lg' => 3,
                         ]),
 
-                    TextInput::make('status')
-                        ->rules(['string'])
-                        ->nullable()
-                        ->placeholder('Status')
-                        ->default('pending')
-                        ->columnSpan([
+                    ToggleButtons::make('status')
+                        ->options([
+                            'pending' => 'Pending',
+                            'publish' => 'Approved'
+                        ])->colors([
+                            'pending' => 'danger',
+                            'publish' => 'success',
+                        ])->columnSpan([
                             'default' => 12,
                             'md' => 12,
                             'lg' => 3,
@@ -267,8 +270,19 @@ class AgentResource extends Resource
                     ->toggleable()
                     ->limit(50),
                 Tables\Columns\TextColumn::make('status')
-                    ->toggleable()
-                    ->limit(50),
+                    ->badge()
+                    ->formatStateUsing(function (string $state): string {
+
+                        if ($state == 'publish') {
+                            return 'Approved';
+                        } else {
+                            return 'Pending';
+                        }
+                    })
+                    ->color(fn (string $state): string => match ($state) {
+                        'pending' => 'danger',
+                        'publish' => 'success',
+                    }),
                 Tables\Columns\TextColumn::make('created_at')
                     ->toggleable()
                     ->limit(50),
