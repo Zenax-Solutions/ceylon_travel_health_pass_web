@@ -217,7 +217,10 @@ class CustomerResource extends Resource
                 EditAction::make(),
                 DeleteAction::make(),
             ])
-            ->headerActions([CreateAction::make()]);
+            ->headerActions([
+
+                //CreateAction::make()
+            ]);
     }
 
     public static function getRelations(): array
