@@ -13,7 +13,7 @@
 
                             </div>
                             <div class="relative overflow-hidden"
-                                style="display: flex; justify-content: center;padding: 10px;">
+                                style="display: flex; justify-content: center;padding: 10px; margin-bottom: 20px;">
 
                                 <img src="{{ asset('storage/tickets/' . $ticket->ticket_id . '.png') }}" alt="QR Code">
                             </div>
