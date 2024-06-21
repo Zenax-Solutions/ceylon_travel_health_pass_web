@@ -3,7 +3,9 @@
 namespace App\Filament\Resources\AgentResource\Pages;
 
 use App\Filament\Resources\AgentResource;
+use App\Mail\AgentWelcomeEmail;
 use Filament\Resources\Pages\CreateRecord;
+use Illuminate\Support\Facades\Mail;
 
 class CreateAgent extends CreateRecord
 {
@@ -12,7 +14,8 @@ class CreateAgent extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        //dd($data);
+
+        Mail::to($data['email'])->send(new AgentWelcomeEmail($data['name']));
 
         return $data;
     }

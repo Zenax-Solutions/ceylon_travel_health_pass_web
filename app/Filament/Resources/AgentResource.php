@@ -334,9 +334,9 @@ class AgentResource extends Resource
     public static function getRelations(): array
     {
         return [
-            AgentResource\RelationManagers\DiscountShopsRelationManager::class,
-            AgentResource\RelationManagers\DiscountServicesRelationManager::class,
-            AgentResource\RelationManagers\EsimServicesRelationManager::class,
+            // AgentResource\RelationManagers\DiscountShopsRelationManager::class,
+            // AgentResource\RelationManagers\DiscountServicesRelationManager::class,
+            // AgentResource\RelationManagers\EsimServicesRelationManager::class,
         ];
     }
 
