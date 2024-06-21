@@ -1,6 +1,6 @@
 <div>
     <div>
-        <div class="w-full max-w-screen-xl px-4 mx-auto">
+        <div class="w-full mx-auto">
             <div class="grid w-full gap-6 sm:grid-cols-2 xl:grid-cols-4">
                 @forelse ($tickets as $key => $ticket)
                     <div
