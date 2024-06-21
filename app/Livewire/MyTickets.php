@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Livewire\Component;
+use Illuminate\Support\Facades\Session;
 
 class MyTickets extends Component
 {
@@ -13,7 +14,12 @@ class MyTickets extends Component
 
     public function mount(Request $request)
     {
-        $this->tickets = Ticket::where('booking_id', $request->id)->get();
+        if (Session::has('auth_customer')) {
+
+            $this->tickets = Ticket::where('booking_id', $request->id)->get();
+        } else {
+            $this->redirectRoute('customer.login');
+        }
     }
 
     public function render()
