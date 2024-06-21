@@ -67,7 +67,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <img style="width: 200px" src="{{ asset('images/logo.png') }}alt="Company Logo">
+            <img style="width: 200px" src="{{ asset('images/logo.png') }}" alt="Company Logo">
         </div>
         <div class="content">
             <h1>Welcome to Ceylon Travel & Health Pass</h1>
