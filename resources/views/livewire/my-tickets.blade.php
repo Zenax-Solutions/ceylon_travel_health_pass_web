@@ -29,8 +29,6 @@
                                 @endif
 
                             </div>
-                            <h3 class="mb-2 text-lg font-medium">Ticket Number</h3>
-                            <h3 class="mb-2 text-xs font-bold text-red-500">{{ $key + 1 }}</h3>
                             <h3 class="mb-2 text-lg font-medium">Bookig ID</h3>
                             <h3 class="mb-2 text-xs font-bold text-red-500">#{{ $ticket->booking_id }}</h3>
                             <h3 class="mb-2 text-lg font-medium">Ticket ID</h3>

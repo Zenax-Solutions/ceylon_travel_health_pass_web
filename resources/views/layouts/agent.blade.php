@@ -100,7 +100,8 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
-            <div x-show="open" x-transition class="absolute left-0 right-0 w-full bg-white border rounded-md top-14">
+            <div x-show="open" x-transition class="absolute left-0 right-0 w-full bg-white border rounded-md top-14"
+                style="z-index: 1;">
                 <ul class="p-4">
                     <li class="px-4 py-2 font-bold rounded hover:bg-gray-200">
                         <a href="{{ route('agent.dashboard') }}" class="flex items-center gap-4">
