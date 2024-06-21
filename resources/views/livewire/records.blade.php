@@ -16,7 +16,7 @@
                     </div>
 
                     <div class="ml-4">
-                        <h2 class="font-semibold">Today Scanned Records Count</h2>
+                        <h2 class="font-semibold">Today Records Count</h2>
                         <p class="mt-2 text-lg font-bold text-gray-500">{{ number_format($todayCount) }}</p>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                     </div>
 
                     <div class="ml-4">
-                        <h2 class="font-semibold">Monthly Scanned Records Count</h2>
+                        <h2 class="font-semibold">Monthly Records Count</h2>
                         <p class="mt-2 text-lg font-bold text-gray-500">{{ number_format($monthlyCount) }}</p>
                     </div>
                 </div>
