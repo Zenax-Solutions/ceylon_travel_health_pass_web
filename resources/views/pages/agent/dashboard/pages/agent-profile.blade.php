@@ -53,7 +53,7 @@
 
                 @if ($agent->type == 'tour_agent')
                     <div class="pb-4">
-                        <label for="email" class="block pb-1 font-semibold text-gray-700">ID Number</label>
+                        <label for="email" class="block pb-1 font-semibold text-gray-700">Tourism License Number</label>
                         <input disabled id="email" class="w-full px-4 py-2 rounded-r border-1" type="text"
                             value="{{ $agent->license_no }}" />
                     </div>
