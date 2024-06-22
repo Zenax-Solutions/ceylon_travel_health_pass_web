@@ -161,6 +161,8 @@ class AgentController extends Controller
             $agent->update([
                 'profile_image' => $imagePath,
             ]);
+
+            toastr()->success('Profile Image Updated Successfully');
         }
 
         return redirect()->back();
