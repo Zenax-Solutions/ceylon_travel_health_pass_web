@@ -61,6 +61,7 @@ Route::middleware('agent_auth')->group(function () {
     Route::get('/agent/dashboard', [AgentController::class, 'dashboard'])->name('agent.dashboard');
     Route::get('/agent/dashboard/qrscan', [AgentController::class, 'qrscan'])->name('agent.qrscan');
     Route::get('/agent/dashboard/records', [AgentController::class, 'records'])->name('agent.records');
+    Route::get('/agent/dashboard/sevices', [AgentController::class, 'services'])->name('agent.services');
     Route::get('/agent/register', [AgentController::class, 'registerView'])->name('agent.register');
     Route::get('/agent/login', [AgentController::class, 'loginView'])->name('agent.login');
 });

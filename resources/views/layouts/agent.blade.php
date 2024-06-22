@@ -68,6 +68,9 @@
                 <li><a href="{{ route('agent.records') }}"
                         class="px-2 py-2 text-gray-800 rounded-md xl:px-4 hover:bg-gray-200">Records</a>
                 </li>
+                <li><a href="{{ route('agent.services') }}"
+                        class="px-2 py-2 text-gray-800 rounded-md xl:px-4 hover:bg-gray-200">Our Services</a>
+                </li>
 
             </ul>
 
@@ -123,7 +126,16 @@
                             Records
                         </a>
                     </li>
-
+                    <li class="px-4 py-2 font-bold rounded hover:bg-gray-200">
+                        <a href="{{ route('agent.services') }}" class="flex items-center gap-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5l7 7-7 7" />
+                            </svg>
+                            Our Services
+                        </a>
+                    </li>
 
                     <li class="px-4 py-2 font-bold rounded hover:bg-gray-200">
                         <a href="{{ route('agent.logout') }}">

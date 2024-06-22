@@ -118,6 +118,11 @@ class AgentController extends Controller
         return view('pages.agent.dashboard.pages.records');
     }
 
+    public function services()
+    {
+        return view('pages.agent.dashboard.pages.services');
+    }
+
 
     public function logout()
     {
