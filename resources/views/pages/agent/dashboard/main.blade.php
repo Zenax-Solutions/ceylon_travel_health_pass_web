@@ -16,8 +16,13 @@
 
                         </div>
                         <div class="flex items-center justify-between gap-2 md:gap-4">
-                            <img style="width: 50%" src="{{ Storage::url($agent?->profile_image) }}" alt=""
-                                srcset="">
+
+                            @if (!empty($agent?->profile_image))
+                                <img style="width: 50%" src="{{ Storage::url($agent?->profile_image) }}" alt=""
+                                    srcset="">
+                            @endif
+
+
                             <div class="flex flex-col space-y-4">
 
                                 <h1 class="font-bold leading-tight tracking-widest text-gray-800">

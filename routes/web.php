@@ -62,6 +62,9 @@ Route::middleware('agent_auth')->group(function () {
     Route::get('/agent/dashboard/qrscan', [AgentController::class, 'qrscan'])->name('agent.qrscan');
     Route::get('/agent/dashboard/records', [AgentController::class, 'records'])->name('agent.records');
     Route::get('/agent/dashboard/sevices', [AgentController::class, 'services'])->name('agent.services');
+    Route::get('/agent/dashboard/my-profile', [AgentController::class, 'myProfile'])->name('agent.profile');
+    Route::post('agent/profile/reset-password', [AgentController::class, 'resetPassword'])->name('agent.profile.resetPassword');
+    Route::post('agent/profile/image-update', [AgentController::class, 'imageUpdate'])->name('agent.profile.imageUpdate');
     Route::get('/agent/register', [AgentController::class, 'registerView'])->name('agent.register');
     Route::get('/agent/login', [AgentController::class, 'loginView'])->name('agent.login');
 });

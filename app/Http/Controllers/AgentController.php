@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class AgentController extends Controller
 {
@@ -123,6 +124,66 @@ class AgentController extends Controller
         return view('pages.agent.dashboard.pages.services');
     }
 
+    public function myProfile()
+    {
+        $authAgentEmail = Session::get('auth_agent');
+        $agent = Agent::where('email', $authAgentEmail)->firstOrFail();
+
+        if ($agent->status == 'pending') {
+            return redirect()->route('agent.dashboard');
+        }
+
+        return view('pages.agent.dashboard.pages.agent-profile', compact('agent'));
+    }
+
+
+    public function imageUpdate(Request $request)
+    {
+        // Validate the uploaded file
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $authAgentEmail = Session::get('auth_agent');
+        $agent = Agent::where('email', $authAgentEmail)->firstOrFail();
+
+        // Handle the upload and save
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $imagePath = $image->storeAs('', $imageName, 'public');
+
+            // Delete old image if exists
+            if ($agent->profile_image) {
+                Storage::disk('public')->delete($agent->profile_image);
+            }
+
+            $agent->update([
+                'profile_image' => $imagePath,
+            ]);
+        }
+
+        return redirect()->back();
+    }
+
+
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'password' => 'required|confirmed|min:4',
+        ]);
+
+        $authAgentEmail = Session::get('auth_agent');
+        $agent = Agent::where('email', $authAgentEmail)->firstOrFail();
+        $agent->update([
+            'password' => Hash::make($request->password),
+        ]);
+
+        toastr()->success('Password Reset Successfully');
+
+        return redirect()->route('agent.profile');
+    }
+
 
     public function logout()
     {
@@ -137,6 +198,9 @@ class AgentController extends Controller
         return redirect()->back();
     }
 
+
+
+    //genrate uniqe coupon code
 
     public function generateUniqueCouponCode()
     {

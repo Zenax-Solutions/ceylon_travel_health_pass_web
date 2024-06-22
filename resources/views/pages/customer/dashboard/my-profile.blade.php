@@ -37,21 +37,10 @@
                             <span class="font-bold text-red-400 invalid-feedback">{{ $message }}</span>
                         @enderror
                     </div>
-                    <button type="submit" class="px-4 py-2 text-white bg-blue-500 rounded">Reset Password</button>
+                    <button type="submit" class="px-4 py-2 text-white bg-green-500 rounded">Reset Password</button>
                 </form>
 
-                <!-- Account Deletion Form -->
-                {{-- <form action="{{ route('customer.profile.deleteAccount') }}" method="POST" class="pb-6">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="px-4 py-2 text-white bg-red-500 rounded">Delete Account</button>
-                </form> --}}
 
-                @if (session('status'))
-                    <div class="mt-4 text-green-500">
-                        {{ session('status') }}
-                    </div>
-                @endif
             </div>
         </div>
 
