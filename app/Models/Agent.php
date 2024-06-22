@@ -18,6 +18,7 @@ class Agent extends Model
         'email',
         'password',
         'contact_no',
+        'agent_discount_margin',
         'id_no',
         'license_no',
         'bank_details',

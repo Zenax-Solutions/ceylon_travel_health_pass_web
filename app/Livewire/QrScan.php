@@ -114,11 +114,11 @@ class QrScan extends Component
     public function render()
     {
         if ($this->agent->type == 'discount_agent') {
-            $this->selectionList = $this->agent->discountShops;
+            $this->selectionList = $this->agent->discountShops->where('status', 'publish');
         } elseif ($this->agent->type == 'service_agent') {
-            $this->selectionList = $this->agent->discountServices;
+            $this->selectionList = $this->agent->discountServices->where('status', 'publish');
         } elseif ($this->agent->type == 'esim_agent') {
-            $this->selectionList = $this->agent->esimServices;
+            $this->selectionList = $this->agent->esimServices->where('status', 'publish');
         }
 
         return view('livewire.qr-scan');
