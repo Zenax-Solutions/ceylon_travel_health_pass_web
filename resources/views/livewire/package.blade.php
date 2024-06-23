@@ -346,17 +346,7 @@
                                 <div
                                     class="flex items-center justify-between px-2 text-base font-medium text-gray-700">
                                     <div>Destination's List</div>
-                                    {{-- <div>
-                                        <button
-                                            class="flex items-center justify-center w-8 h-8 text-black bg-gray-200 rounded-full">
-                                            <svg class="w-5 h-5" aria-hidden="true" fill="none"
-                                                stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round"
-                                                    stroke-linejoin="round"></path>
-                                            </svg>
-                                        </button>
-                                    </div> --}}
+
                                 </div>
                                 <div class="mt-4">
                                     <div class="flex max-h-[400px] w-full flex-col overflow-y-scroll">
@@ -783,7 +773,7 @@
                                                                     {{ $coupon_data[0]['license_no'] }} </p>
                                                             </div>
                                                             <img class="flex-shrink-0 w-10 h-10 bg-gray-300 rounded-full"
-                                                                src="{{ isset($coupon_data[0]['profile_image']) ? $coupon_data[0]['profile_image'] : 'https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/default-avatar-profile-picture-male-icon.png' }}"
+                                                                src="{{ isset($coupon_data[0]['profile_image']) ? Storage::url($coupon_data[0]['profile_image']) : 'https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/default-avatar-profile-picture-male-icon.png' }}"
                                                                 alt="">
                                                         </div>
                                                     @endif

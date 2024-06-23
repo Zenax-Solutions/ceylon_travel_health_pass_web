@@ -30,7 +30,8 @@
                 <div class="w-full bg-white divide-y divide-gray-200 rounded-lg shadow">
                     <div class="px-5 py-7">
                         <label class="block pb-1 text-sm font-semibold text-gray-600">Branch Code</label>
-                        <input type="text" name="branch_code" class="w-full px-3 py-2 mt-1 text-sm border rounded-lg"
+                        <input type="text" required name="branch_code"
+                            class="w-full px-3 py-2 mt-1 text-sm border rounded-lg"
                             placeholder="Enter Your Destination Branch Code" />
                         @error('branch_code')
                             <span class="mt-2 text-center text-red-400 invalid-feedback">{{ $message }}</span>
