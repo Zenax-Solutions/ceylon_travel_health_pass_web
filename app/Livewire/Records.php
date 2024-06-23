@@ -85,7 +85,7 @@ class Records extends Component
                 ->whereYear('created_at', Carbon::now()->year)
                 ->count();
         } elseif ($this->destination != null) {
-            $query = DestinationQrScanRecord::where('branch_number', Session::get('branch_code'))->where('status', 'publish')->orderBy('created_at', 'desc');
+            $query = DestinationQrScanRecord::where('destination_id', $this->destination->id)->orderBy('created_at', 'desc');
 
             if ($this->limit != null) {
                 $query = $query->limit($this->limit);
