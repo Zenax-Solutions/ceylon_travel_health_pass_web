@@ -288,7 +288,7 @@ class Package extends Component
                     //$getAgent->increment('points', env('AGENT_DISCONUNT_MARGIN', 5));
 
                     PointsHistory::create([
-                        'agent_id' => $getAgent,
+                        'agent_id' => $getAgent->id,
                         'points' => env('AGENT_DISCONUNT_MARGIN', 5),
                         'date' => Carbon::now(),
                     ]);
@@ -329,7 +329,11 @@ class Package extends Component
 
                         $getAgent = $agent->where('coupon_code', $this->coupon_code)->first();
 
-                        $getAgent->increment('points', env('AGENT_DISCONUNT_MARGIN', 5));
+                        PointsHistory::create([
+                            'agent_id' => $getAgent->id,
+                            'points' => env('AGENT_DISCONUNT_MARGIN', 5),
+                            'date' => Carbon::now(),
+                        ]);
                     }
                 }
 
