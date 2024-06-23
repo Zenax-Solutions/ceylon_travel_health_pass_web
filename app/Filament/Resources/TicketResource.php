@@ -99,7 +99,6 @@ class TicketResource extends Resource
                 Tables\Columns\TextColumn::make('ticket_id')
                     ->toggleable()
                     ->label('Ticket No')
-                    ->searchable()
                     ->limit(50),
                 Tables\Columns\TextColumn::make('expiry_date')
                     ->toggleable()
