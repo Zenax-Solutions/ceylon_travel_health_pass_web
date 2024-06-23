@@ -82,7 +82,21 @@ class QrScan extends Component
 
             if ($record) {
 
-                $status = $destination_portal->read($this->selection, $record);
+                if (isset($this->destination)) {
+                    $status = $destination_portal->read($this->selection, $record);
+
+                    if ($status) {
+                        $this->dispatch('qrCodeValidated', status: $status, data: $record);
+                    } else {
+                        $status = 'invalid';
+                    }
+                } else {
+                    $status = 'invalid';
+                }
+            } else {
+
+                // Handle failed validation
+                $this->dispatch('qrCodeValidated', status: 'invalid');
             }
         } else {
 
