@@ -43,7 +43,7 @@ class PointsHistoryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('agent_id')
+                Tables\Columns\TextColumn::make('agent.name')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('points')
@@ -53,7 +53,11 @@ class PointsHistoryResource extends Resource
                     ->date()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('paid_status')
-                    ->searchable(),
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'pending' => 'danger',
+                        'paid' => 'success',
+                    }),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -67,11 +71,11 @@ class PointsHistoryResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                //s Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    // Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -87,8 +91,8 @@ class PointsHistoryResource extends Resource
     {
         return [
             'index' => Pages\ListPointsHistories::route('/'),
-            'create' => Pages\CreatePointsHistory::route('/create'),
-            'edit' => Pages\EditPointsHistory::route('/{record}/edit'),
+            //'create' => Pages\CreatePointsHistory::route('/create'),
+            //'edit' => Pages\EditPointsHistory::route('/{record}/edit'),
         ];
     }
 }

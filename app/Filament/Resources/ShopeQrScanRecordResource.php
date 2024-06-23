@@ -44,13 +44,16 @@ class ShopeQrScanRecordResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('shop_id')
+                Tables\Columns\TextColumn::make('discountShop.shope_name')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('ticket_id')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status')
-                    ->searchable(),
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'used' => 'danger',
+                    }),
                 Tables\Columns\TextColumn::make('date')
                     ->date()
                     ->sortable(),
@@ -72,11 +75,11 @@ class ShopeQrScanRecordResource extends Resource
                     ->label('Shop List'),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                // Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    // Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

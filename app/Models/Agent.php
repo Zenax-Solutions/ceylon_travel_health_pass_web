@@ -55,4 +55,9 @@ class Agent extends Model
     {
         return $this->hasMany(EsimService::class);
     }
+
+    public function pointHistory()
+    {
+        return $this->hasMany(PointsHistory::class, 'agent_id', 'id');
+    }
 }

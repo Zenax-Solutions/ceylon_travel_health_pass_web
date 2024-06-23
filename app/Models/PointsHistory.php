@@ -10,4 +10,10 @@ class PointsHistory extends Model
     use HasFactory;
 
     protected $fillable = ['agent_id', 'points', 'date', 'paid_status'];
+
+
+    public function agent()
+    {
+        return $this->belongsTo(Agent::class, 'agent_id', 'id');
+    }
 }

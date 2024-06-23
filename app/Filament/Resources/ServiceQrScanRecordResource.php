@@ -52,7 +52,10 @@ class ServiceQrScanRecordResource extends Resource
                 Tables\Columns\TextColumn::make('ticket_id')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status')
-                    ->searchable(),
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'used' => 'danger',
+                    }),
                 Tables\Columns\TextColumn::make('date')
                     ->date()
                     ->sortable(),
@@ -72,13 +75,13 @@ class ServiceQrScanRecordResource extends Resource
                     ->relationship('discountService', 'service_name')
                     ->indicator('Services')
                     ->label('Services List'),
-            ], layout: FiltersLayout::AboveContent)
+            ])
             ->actions([
                 //Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    // Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
