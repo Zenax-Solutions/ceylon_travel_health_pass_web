@@ -41,7 +41,7 @@ class DestinationBranchQrReader
                 } else {
                     // Create a new DiscountShopQrRecord since it doesn't exist
                     DestinationQrScanRecord::create([
-                        'destinatio_id' => $selection,
+                        'destination_id' => $selection,
                         'ticket_id' => $record->ticket_id,
                         'date' => now()
                     ]);
