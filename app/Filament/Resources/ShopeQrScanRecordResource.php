@@ -67,7 +67,7 @@ class ShopeQrScanRecordResource extends Resource
                 DateRangeFilter::make('created_at'),
 
                 SelectFilter::make('shop_id')
-                    ->relationship('discountShop', 'shop_name')
+                    ->relationship('discountShop', 'shope_name')
                     ->indicator('Shop')
                     ->label('Shop List'),
             ])
