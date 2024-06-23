@@ -19,6 +19,8 @@ use Filament\Tables\Actions\DeleteAction;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Filters\SelectFilter;
 use App\Filament\Filters\DateRangeFilter;
+use Filament\Forms\Components\ToggleButtons;
+use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\DiscountShopResource\Pages;
 
 class DiscountShopResource extends Resource
@@ -106,20 +108,17 @@ class DiscountShopResource extends Resource
                             'lg' => 4,
                         ]),
 
-                    Select::make('status')
-                        ->rules(['string'])
-                        ->nullable()
-                        ->searchable()
+                    ToggleButtons::make('status')
                         ->options([
-                            'draft' => 'Draft',
-                            'publish' => 'Publish',
-                        ])
-                        ->placeholder('Status')
-                        ->default('draft')
-                        ->columnSpan([
+                            'pending' => 'Pending',
+                            'publish' => 'Approved'
+                        ])->colors([
+                            'pending' => 'danger',
+                            'publish' => 'success',
+                        ])->default('pending')->columnSpan([
                             'default' => 12,
                             'md' => 12,
-                            'lg' => 4,
+                            'lg' => 3,
                         ]),
                 ]),
             ]),
@@ -152,22 +151,35 @@ class DiscountShopResource extends Resource
                 Tables\Columns\TextColumn::make('created_at')
                     ->toggleable()
                     ->limit(50),
-                // Tables\Columns\TextColumn::make('status')
-                //     ->toggleable()
-                //     ->searchable()
-                //     ->enum([
-                //         'draft' => 'Draft',
-                //         'publish' => 'Publish',
-                //     ]),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->formatStateUsing(function (string $state): string {
+
+                        if ($state == 'publish') {
+                            return 'Approved';
+                        } else {
+                            return 'Pending';
+                        }
+                    })
+                    ->color(fn (string $state): string => match ($state) {
+                        'pending' => 'danger',
+                        'publish' => 'success',
+                    }),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->toggleable()
+                    ->limit(50),
             ])
             ->filters([
                 DateRangeFilter::make('created_at'),
 
                 SelectFilter::make('agent_id')
-                    ->relationship('agent', 'name')
+                    ->relationship('agent', 'name', function (Builder $query) {
+                        $query->where(function ($query) {
+                            $query->where('type', 'discount_agent');
+                        });
+                    })
                     ->indicator('Agent')
-                    ->multiple()
-                    ->label('Agent'),
+                    ->label('Discount Agent'),
             ])
             ->actions([
                 ViewAction::make(),

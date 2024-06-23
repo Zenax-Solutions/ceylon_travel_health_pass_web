@@ -23,6 +23,7 @@ use App\Filament\Filters\DateRangeFilter;
 use App\Filament\Resources\AgentResource\Pages;
 use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Get;
+use Illuminate\Support\Facades\Hash;
 
 class AgentResource extends Resource
 {
@@ -192,7 +193,9 @@ class AgentResource extends Resource
 
                         TextInput::make('password')
                             ->password()
-                            ->required()
+                            ->dehydrateStateUsing(fn (string $state): string => Hash::make($state))
+                            ->dehydrated(fn (?string $state): bool => filled($state))
+                            ->required(fn (string $operation): bool => $operation === 'create')
                             ->placeholder('New Login Password')
                     ])->columnSpan([
                         'default' => 12,

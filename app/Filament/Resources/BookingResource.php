@@ -186,7 +186,6 @@ class BookingResource extends Resource
                 SelectFilter::make('customer_id')
                     ->relationship('customer', 'first_name')
                     ->indicator('Customer')
-                    ->multiple()
                     ->label('Customer'),
             ])
             ->actions([

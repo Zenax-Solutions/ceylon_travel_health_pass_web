@@ -81,8 +81,8 @@
                         <select value="{{ old('region_type') }}" name="region_type" required
                             class="flex px-3 py-2 font-medium border-2 border-black rounded-lg md:px-4 md:py-3 placeholder:font-normal">
                             <option value="">Select One</option>
-                            <option value="south_asian">South Asian</option>
-                            <option value="non_south_asian">Non South Asian</option>
+                            <option value="south_asian">SAARC Nations</option>
+                            <option value="non_south_asian">Non-SAARC Nations</option>
                         </select>
                         @error('region_type')
                             <span class="text-red-400 invalid-feedback">{{ $message }}</span>

@@ -122,7 +122,7 @@ class PackageResource extends Resource
                     Select::make('discount_shop_list')
                         ->multiple()
                         ->searchable()
-                        ->getSearchResultsUsing(fn (string $search): array => DiscountShop::where('shope_name', 'like', "%{$search}%")->limit(50)->pluck('shope_name', 'id')->toArray())
+                        ->getSearchResultsUsing(fn (string $search): array => DiscountShop::where('shope_name', 'like', "%{$search}%")->where('status', 'publish')->limit(50)->pluck('shope_name', 'id')->toArray())
                         ->getOptionLabelsUsing(fn (array $values): array => DiscountShop::whereIn('id', $values)->pluck('shope_name', 'id')->toArray())
                         ->columnSpan([
                             'default' => 12,
@@ -134,7 +134,7 @@ class PackageResource extends Resource
                     Select::make('discount_service_list')
                         ->multiple()
                         ->searchable()
-                        ->getSearchResultsUsing(fn (string $search): array => DiscountService::where('service_name', 'like', "%{$search}%")->limit(50)->pluck('service_name', 'id')->toArray())
+                        ->getSearchResultsUsing(fn (string $search): array => DiscountService::where('service_name', 'like', "%{$search}%")->where('status', 'publish')->limit(50)->pluck('service_name', 'id')->toArray())
                         ->getOptionLabelsUsing(fn (array $values): array => DiscountService::whereIn('id', $values)->pluck('service_name', 'id')->toArray())
                         ->columnSpan([
                             'default' => 12,

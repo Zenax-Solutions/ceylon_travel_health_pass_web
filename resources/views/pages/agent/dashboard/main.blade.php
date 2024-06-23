@@ -28,11 +28,34 @@
                                 <h1 class="font-bold leading-tight tracking-widest text-gray-800">
                                     Hello, {{ $agent?->name }}</h1>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                @if ($agent->type == 'tour_agent')
+                    <div class="bg-white border md:col-span-2 xl:col-span-2 rounded-2xl border-gray-50">
 
+                        <div class="flex flex-col justify-between col-span-2 p-6 rounded-2xl ">
+                            <div class="flex flex-col space-y-6 md:h-full md:justify-between">
+                                <div class="flex justify-between">
+                                    <span class="text-xs font-semibold tracking-wider text-gray-500 uppercase">
+                                        My Coupon Code
+                                    </span>
+
+                                </div>
+                                <div class="flex items-center justify-between gap-2 md:gap-4">
+
+                                    <div class="flex flex-col space-y-4">
+
+                                        <h1 class="text-lg font-bold leading-tight tracking-widest text-green-500">
+                                            {{ $agent?->coupon_code }}</h1>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
 
                     </div>
-                </div>
+                @endif
 
                 @if ($agent->type != 'tour_agent')
                     @include('pages.agent.dashboard.components.infowidget')

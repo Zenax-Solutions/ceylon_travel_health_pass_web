@@ -3,6 +3,8 @@
 namespace App\Livewire;
 
 use App\Models\Agent;
+use App\Models\Destination;
+use App\Models\DestinationQrScanRecord;
 use App\Models\ServiceQrScanRecord;
 use App\Models\ShopeQrScanRecord;
 use Livewire\Component;
@@ -16,11 +18,13 @@ class Records extends Component
 
     public $agent;
 
+    public $destination;
+
     public $limit, $title;
 
     use WithPagination;
 
-    public function mount($limit = null, $title = '')
+    public function mount($limit = null, $title = '', $destinationMode = null)
     {
         //checking the auth agent and redirect
         if (Session::has('auth_agent')) {
@@ -35,14 +39,26 @@ class Records extends Component
             }
             $this->limit = $limit;
             $this->title = $title;
+        } elseif (Session::has('branch_code')) {
+
+            $this->destination = Destination::where('branch_number', Session::get('branch_code'))->where('status', 'publish')->first();
+
+            $this->limit = $limit;
+            $this->title = $title;
         } else {
-            $this->redirectRoute('agent.login');
+
+            if ($destinationMode == 'true') {
+
+                $this->redirectRoute('destination.login');
+            } else {
+                $this->redirectRoute('agent.login');
+            }
         }
     }
 
     public function render()
     {
-        if ($this->agent->type == 'discount_agent') {
+        if ($this->agent?->type == 'discount_agent') {
             $query = ShopeQrScanRecord::orderBy('created_at', 'desc');
 
             if ($this->limit != null) {
@@ -55,7 +71,7 @@ class Records extends Component
             $monthlyCount = ShopeQrScanRecord::whereMonth('created_at', Carbon::now()->month)
                 ->whereYear('created_at', Carbon::now()->year)
                 ->count();
-        } elseif ($this->agent->type == 'service_agent') {
+        } elseif ($this->agent?->type == 'service_agent') {
             $query = ServiceQrScanRecord::orderBy('created_at', 'desc');
 
             if ($this->limit != null) {
@@ -66,6 +82,19 @@ class Records extends Component
 
             $todayCount = ServiceQrScanRecord::whereDate('created_at', Carbon::today())->count();
             $monthlyCount = ServiceQrScanRecord::whereMonth('created_at', Carbon::now()->month)
+                ->whereYear('created_at', Carbon::now()->year)
+                ->count();
+        } elseif ($this->destination != null) {
+            $query = DestinationQrScanRecord::orderBy('created_at', 'desc');
+
+            if ($this->limit != null) {
+                $query = $query->limit($this->limit);
+            }
+
+            $records = $query->paginate(10);
+
+            $todayCount = DestinationQrScanRecord::whereDate('created_at', Carbon::today())->count();
+            $monthlyCount = DestinationQrScanRecord::whereMonth('created_at', Carbon::now()->month)
                 ->whereYear('created_at', Carbon::now()->year)
                 ->count();
         } else {

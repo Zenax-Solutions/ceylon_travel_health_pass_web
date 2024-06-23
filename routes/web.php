@@ -46,7 +46,6 @@ Route::middleware('customer_auth')->group(function () {
     Route::post('customer/profile/reset-password', [CustomerController::class, 'resetPassword'])->name('customer.profile.resetPassword');
     Route::delete('customer/profile/delete', [CustomerController::class, 'deleteAccount'])->name('customer.profile.deleteAccount');
 });
-
 Route::controller(CustomerController::class)->group(function () {
     Route::post('/customer/login/validate/{redirect?}', 'loginCustomer')->name('customer.login.validate');
     Route::post('/customer/register/submit', 'registerCustomer')->name('customer.register.submit');
@@ -68,10 +67,23 @@ Route::middleware('agent_auth')->group(function () {
     Route::get('/agent/register', [AgentController::class, 'registerView'])->name('agent.register');
     Route::get('/agent/login', [AgentController::class, 'loginView'])->name('agent.login');
 });
-
-
 Route::controller(AgentController::class)->group(function () {
     Route::post('/agent/login/validate', 'loginAgent')->name('agent.login.validate');
     Route::post('/agent/register/submit', 'registerAgent')->name('agent.register.submit');
     Route::get('/agent/logout', 'logout')->name('agent.logout');
+});
+
+
+
+// Destination Portal
+Route::middleware('destination_code_check')->group(function () {
+    Route::get('/destination/dashboard', [DestinationController::class, 'dashboard'])->name('destination.dashboard');
+    Route::get('/destination/dashboard/qrscan', [DestinationController::class, 'qrscan'])->name('destination.qrscan');
+    Route::get('/destination/dashboard/records', [DestinationController::class, 'records'])->name('destination.records');
+    Route::get('/destination/login', [DestinationController::class, 'loginView'])->name('destination.login');
+});
+
+Route::controller(DestinationController::class)->group(function () {
+    Route::post('/destination/login/validate', 'loginDestination')->name('destination.login.validate');
+    Route::get('/destination/logout', 'logout')->name('destination.logout');
 });

@@ -34,6 +34,8 @@ class Agent extends Model
 
     protected $searchableFields = ['*'];
 
+    protected $hidden = ['password'];
+
     protected $casts = [
         'commission_payment_date' => 'date',
         'recent_commission_payment_date' => 'date',

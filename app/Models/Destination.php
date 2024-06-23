@@ -33,4 +33,14 @@ class Destination extends Model
     {
         return $this->belongsTo(City::class);
     }
+
+    public function destinationQrScanRecord()
+    {
+        return $this->hasMany(DestinationQrScanRecord::class, 'destination_id', 'id');
+    }
+
+    public function destinationStock()
+    {
+        return $this->hasMany(DestinationTicketStockHistory::class, 'destination_id', 'id');
+    }
 }

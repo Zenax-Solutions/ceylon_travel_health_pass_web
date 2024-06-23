@@ -215,7 +215,7 @@
                                 </p>
                             </div>
 
-                            @if (!empty($package->discount_shop_list) && !empty($package->discount_service_list))
+                            @if (!empty($package->discount_shop_list) || !empty($package->discount_service_list))
                                 <div
                                     class="w-full px-2 py-4 mt-4 bg-white border border-gray-200 shadow-md rounded-xl shadow-gray-100">
                                     <div
@@ -226,66 +226,73 @@
                                     <div class="mt-4">
                                         <div class="flex max-h-[400px] w-full flex-col overflow-y-scroll">
 
-                                            <h1 class="my-2 px-4 text-[15px] text-green-400 text-bolder font-bold">
-                                                Shop's
-                                                List</h1>
+                                            @if (!empty($package->discount_shop_list))
 
-                                            @forelse ($package->discount_shop_list as $shopId)
-                                                @php
-                                                    $shop = \App\Models\DiscountShop::find($shopId);
-                                                @endphp
-                                                <div
-                                                    class="group flex items-center gap-x-5 rounded-md px-2.5 py-2 transition-all duration-75 hover:bg-green-100">
+                                                <h1 class="my-2 px-4 text-[15px] text-green-400 text-bolder font-bold">
+                                                    Shop's
+                                                    List</h1>
+
+                                                @forelse ($package->discount_shop_list as $shopId)
+                                                    @php
+                                                        $shop = \App\Models\DiscountShop::find($shopId);
+                                                    @endphp
                                                     <div
-                                                        class="flex items-center w-12 h-12 text-black bg-gray-200 rounded-lg group-hover:bg-green-200">
-                                                        <img style="object-fit: cover; height: inherit;"
-                                                            src="{{ Storage::url($shop->image) }}" alt="">
+                                                        class="group flex items-center gap-x-5 rounded-md px-2.5 py-2 transition-all duration-75 hover:bg-green-100">
+                                                        <div
+                                                            class="flex items-center w-12 h-12 text-black bg-gray-200 rounded-lg group-hover:bg-green-200">
+                                                            <img style="object-fit: cover; height: inherit;"
+                                                                src="{{ Storage::url($shop?->image) }}" alt="">
+                                                        </div>
+                                                        <div
+                                                            class="flex flex-col items-start justify-between font-light text-gray-600">
+                                                            <p class="text-[15px] text-black font-bold">
+                                                                {{ $shop?->shope_name }}
+                                                            </p>
+                                                            <span class="text-xs font-light text-black">Area :
+                                                                {{ $shop?->area }}</span>
+
+                                                            <span class="text-xs font-bold text-black">Discount :
+                                                                %{{ $shop?->discount_amount }}</span>
+                                                        </div>
                                                     </div>
+                                                @empty
+                                                    <h3 class="my-2 px-4 text-[15px] text-red-400">empty list 😢</h3>
+                                                @endforelse
+                                            @endif
+
+
+
+                                            @if (!empty($package->discount_service_list))
+                                                <h3 class="my-2 px-4 text-[15px] text-gray-400 font-bold">Service's
+                                                    List
+                                                </h3>
+                                                @forelse ($package->discount_service_list as $serviceId)
+                                                    @php
+                                                        $service = \App\Models\DiscountService::find($serviceId);
+                                                    @endphp
                                                     <div
-                                                        class="flex flex-col items-start justify-between font-light text-gray-600">
-                                                        <p class="text-[15px] text-black font-bold">
-                                                            {{ $shop->shope_name }}
-                                                        </p>
-                                                        <span class="text-xs font-light text-black">Area :
-                                                            {{ $shop->area }}</span>
+                                                        class="group flex items-center gap-x-5 rounded-md px-2.5 py-2 transition-all duration-75 hover:bg-green-100">
+                                                        <div
+                                                            class="flex items-center w-12 h-12 text-black bg-gray-200 rounded-lg group-hover:bg-green-200">
+                                                            <img style="object-fit: cover; height: inherit;"
+                                                                src="{{ Storage::url($service?->image) }}"
+                                                                alt="">
+                                                        </div>
+                                                        <div
+                                                            class="flex flex-col items-start justify-between font-light text-gray-600">
+                                                            <p class="text-[15px] font-bold text-black">
+                                                                {{ $service?->service_name }}</p>
+                                                            <span class="text-xs font-light text-black">Area :
+                                                                {{ $service?->area }}</span>
 
-                                                        <span class="text-xs font-bold text-black">Discount :
-                                                            %{{ $shop->discount_amount }}</span>
+                                                            <span class="text-xs font-bold text-black">Discount :
+                                                                %{{ $service?->discount_amount }}</span>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            @empty
-                                                <h3 class="my-2 px-4 text-[15px] text-red-400">empty list 😢</h3>
-                                            @endforelse
-
-
-
-                                            <h3 class="my-2 px-4 text-[15px] text-gray-400 font-bold">Service's List
-                                            </h3>
-                                            @forelse ($package->discount_service_list as $serviceId)
-                                                @php
-                                                    $service = \App\Models\DiscountService::find($serviceId);
-                                                @endphp
-                                                <div
-                                                    class="group flex items-center gap-x-5 rounded-md px-2.5 py-2 transition-all duration-75 hover:bg-green-100">
-                                                    <div
-                                                        class="flex items-center w-12 h-12 text-black bg-gray-200 rounded-lg group-hover:bg-green-200">
-                                                        <img style="object-fit: cover; height: inherit;"
-                                                            src="{{ Storage::url($service->image) }}" alt="">
-                                                    </div>
-                                                    <div
-                                                        class="flex flex-col items-start justify-between font-light text-gray-600">
-                                                        <p class="text-[15px] font-bold text-black">
-                                                            {{ $service->service_name }}</p>
-                                                        <span class="text-xs font-light text-black">Area :
-                                                            {{ $service->area }}</span>
-
-                                                        <span class="text-xs font-bold text-black">Discount :
-                                                            %{{ $service->discount_amount }}</span>
-                                                    </div>
-                                                </div>
-                                            @empty
-                                                <h3 class="my-2 px-4 text-[15px] text-red-400">empty list 😢</h3>
-                                            @endforelse
+                                                @empty
+                                                    <h3 class="my-2 px-4 text-[15px] text-red-400">empty list 😢</h3>
+                                                @endforelse
+                                            @endif
 
                                         </div>
                                     </div>

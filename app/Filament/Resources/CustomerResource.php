@@ -20,6 +20,8 @@ use Filament\Tables\Actions\DeleteAction;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use App\Filament\Filters\DateRangeFilter;
+use Filament\Forms\Components\ToggleButtons;
+use Illuminate\Support\Facades\Hash;
 use App\Filament\Resources\CustomerResource\Pages;
 
 class CustomerResource extends Resource
@@ -84,14 +86,11 @@ class CustomerResource extends Resource
                         ]),
 
                     TextInput::make('password')
-                        ->required()
                         ->password()
-                        ->dehydrateStateUsing(fn ($state) => \Hash::make($state))
-                        ->required(
-                            fn (Component $livewire) => $livewire instanceof
-                                Pages\CreateCustomer
-                        )
                         ->placeholder('Password')
+                        ->dehydrateStateUsing(fn (string $state): string => Hash::make($state))
+                        ->dehydrated(fn (?string $state): bool => filled($state))
+                        ->required(fn (string $operation): bool => $operation === 'create')
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
@@ -103,8 +102,8 @@ class CustomerResource extends Resource
                         ->required()
                         ->searchable()
                         ->options([
-                            'south_asian' => 'South Asian',
-                            'non_south_asian' => 'Non South Asian',
+                            'south_asian' => 'SAARC Nations',
+                            'non_south_asian' => 'Non-SAARC Nations',
                         ])
                         ->placeholder('Region Type')
                         ->columnSpan([
@@ -144,20 +143,20 @@ class CustomerResource extends Resource
                             'lg' => 12,
                         ]),
 
-                    Select::make('status')
-                        ->rules(['string'])
-                        ->nullable()
-                        ->searchable()
+
+                    ToggleButtons::make('status')
                         ->options([
-                            'pending' => 'Pending',
+                            'suspended' => 'Suspended',
                             'active' => 'Active',
-                        ])
-                        ->placeholder('Status')
-                        ->columnSpan([
+                        ])->colors([
+                            'suspended' => 'danger',
+                            'active' => 'success',
+                        ])->default('pending')->columnSpan([
                             'default' => 12,
                             'md' => 12,
                             'lg' => 3,
                         ]),
+
                 ]),
             ]),
         ]);
@@ -193,23 +192,22 @@ class CustomerResource extends Resource
                     ->toggleable()
                     ->searchable()
                     ->limit(50),
-                Tables\Columns\TextColumn::make('whatsapp_no')
-                    ->toggleable()
-                    ->searchable()
-                    ->limit(50),
-                Tables\Columns\TextColumn::make('address')
-                    ->toggleable()
-                    ->limit(50),
+                // Tables\Columns\TextColumn::make('whatsapp_no')
+                //     ->toggleable()
+                //     ->searchable()
+                //     ->limit(50),
+                // Tables\Columns\TextColumn::make('address')
+                //     ->toggleable()
+                //     ->limit(50),
                 Tables\Columns\TextColumn::make('created_at')
                     ->toggleable()
                     ->limit(50),
-                // Tables\Columns\TextColumn::make('status')
-                //     ->toggleable()
-                //     ->searchable()
-                //     ->enum([
-                //         'pending' => 'Pending',
-                //         'active' => 'Active',
-                //     ]),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'suspended' => 'danger',
+                        'active' => 'success',
+                    }),
             ])
             ->filters([DateRangeFilter::make('created_at')])
             ->actions([

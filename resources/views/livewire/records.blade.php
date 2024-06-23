@@ -50,7 +50,7 @@
                                 <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                                     <thead class="bg-gray-50 dark:bg-gray-800">
 
-                                        @if ($agent->type == 'discount_agent')
+                                        @if ($agent?->type == 'discount_agent')
                                             <tr>
 
                                                 <th scope="col"
@@ -75,7 +75,7 @@
 
 
                                             </tr>
-                                        @elseif($agent->type == 'service_agent')
+                                        @elseif($agent?->type == 'service_agent')
                                             <tr>
 
                                                 <th scope="col"
@@ -100,12 +100,37 @@
 
 
                                             </tr>
+                                        @elseif ($destination != null)
+                                            <tr>
+
+                                                <th scope="col"
+                                                    class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                                    Destination
+                                                </th>
+
+                                                <th scope="col"
+                                                    class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                                    Ticket No.
+                                                </th>
+
+                                                <th scope="col"
+                                                    class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                                    Status
+                                                </th>
+
+                                                <th scope="col"
+                                                    class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                                    Date
+                                                </th>
+
+
+                                            </tr>
                                         @endif
                                     </thead>
                                     <tbody
                                         class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
 
-                                        @if ($agent->type == 'discount_agent')
+                                        @if ($agent?->type == 'discount_agent')
                                             @forelse ($records as $record)
                                                 <tr>
                                                     <td
@@ -136,7 +161,7 @@
                                                 </tr>
                                             @empty
                                             @endforelse
-                                        @elseif ($agent->type == 'service_agent')
+                                        @elseif ($agent?->type == 'service_agent')
                                             @forelse ($records as $record)
                                                 <tr>
                                                     <td
@@ -172,6 +197,44 @@
                                                 </tr>
                                             @empty
                                             @endforelse
+                                        @elseif ($destination != null)
+                                            @forelse ($records as $record)
+                                                <tr>
+                                                    <td
+                                                        class="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
+
+
+                                                        <span>{{ $record->destination->destination }}</span>
+
+                                                    </td>
+                                                    <td
+                                                        class="px-4 py-4 text-sm font-bold text-black dark:text-gray-300 whitespace-nowrap">
+                                                        {{ $record->ticket_id }}
+                                                    </td>
+
+                                                    <td
+                                                        class="px-4 py-4 text-sm font-bold text-black dark:text-gray-300 whitespace-nowrap">
+
+                                                        <div
+                                                            class="inline-flex items-center px-3 py-1 text-red-500 bg-red-100 rounded-full gap-x-2 dark:bg-gray-800">
+
+                                                            {{ $record->status }}
+                                                        </div>
+
+
+                                                    </td>
+
+                                                    <td
+                                                        class="px-4 py-4 text-sm font-bold text-black dark:text-gray-300 whitespace-nowrap">
+                                                        {{ $record->date }}
+                                                    </td>
+
+
+                                                </tr>
+                                            @empty
+                                            @endforelse
+
+
                                         @endif
                                     </tbody>
                                 </table>

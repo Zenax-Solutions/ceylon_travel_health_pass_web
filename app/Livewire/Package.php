@@ -9,6 +9,7 @@ use App\Models\Customer;
 use App\Models\Destination;
 use App\Models\EsimService;
 use App\Models\Package as ModelsPackage;
+use App\Models\PointsHistory;
 use App\Services\GenarateQrCodes;
 use Illuminate\Http\Request;
 use Livewire\Component;
@@ -284,7 +285,13 @@ class Package extends Component
 
                     $getAgent = $agent->where('coupon_code', $this->coupon_code)->first();
 
-                    $getAgent->increment('points', env('AGENT_DISCONUNT_MARGIN', 5));
+                    //$getAgent->increment('points', env('AGENT_DISCONUNT_MARGIN', 5));
+
+                    PointsHistory::create([
+                        'agent_id' => $getAgent,
+                        'points' => env('AGENT_DISCONUNT_MARGIN', 5),
+                        'date' => Carbon::now(),
+                    ]);
                 }
             }
 

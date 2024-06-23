@@ -20,6 +20,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Filters\SelectFilter;
 use App\Filament\Filters\DateRangeFilter;
 use App\Filament\Resources\DestinationResource\Pages;
+use App\Filament\Resources\DestinationResource\RelationManagers\DestinationStockRelationManager;
 use Filament\Support\RawJs;
 
 class DestinationResource extends Resource
@@ -200,13 +201,17 @@ class DestinationResource extends Resource
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('stock_count')
                     ->label('Ticket stock count')
-                    ->description(fn (Destination $record): string => 'remaining : ' . $record->current_stock_count)
+                    ->formatStateUsing(fn (Destination $record): string => $record->destinationStock()->orderBy('id', 'desc')->firstOr(function () {
+                        return (object) ['ticket_stock_count' => 'stock not available'];
+                    })->ticket_stock_count)
                     ->badge()
                     ->color('warning')
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('current_stock_count')
                     ->label('Sold ticket count')
-                    ->formatStateUsing(fn (Destination $record): string => $record->stock_count - $record->current_stock_count)
+                    ->formatStateUsing(fn (Destination $record): string => $record->destinationStock()->orderBy('id', 'desc')->firstOr(function () {
+                        return (object) ['selling_ticket_count' => 'stock not available'];
+                    })->selling_ticket_count)
                     ->badge()
                     ->color('danger')
                     ->toggleable(),
@@ -224,7 +229,6 @@ class DestinationResource extends Resource
                 SelectFilter::make('city_id')
                     ->relationship('city', 'name')
                     ->indicator('City')
-                    ->multiple()
                     ->label('City'),
             ])
             ->actions([
@@ -237,7 +241,9 @@ class DestinationResource extends Resource
 
     public static function getRelations(): array
     {
-        return [];
+        return [
+            DestinationStockRelationManager::class
+        ];
     }
 
     public static function getPages(): array
