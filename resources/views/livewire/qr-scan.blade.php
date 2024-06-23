@@ -10,28 +10,55 @@
 
                 </div>
                 <h2 class="mb-4 text-3xl font-bold text-center text-gray-800">QR Ticket Scanner</h2>
-                <div style="display: flex; justify-content: center;">
-                    <img style="width: 50%" src="{{ Storage::url($agent?->profile_image) }}" alt=""
-                        srcset="">
 
-                </div>
-                <p class="mt-4 text-sm text-gray-500 sm:mt-0" style="text-align: center">
-                    <a href="{{ route('agent.dashboard') }}" class="font-bold text-red-700 underline">Back To
-                        Dashboard</a>.
-                </p>
+                @if ($destination == null)
+                    <div style="display: flex; justify-content: center;">
+                        <img style="width: 50%" src="{{ Storage::url($agent?->profile_image) }}" alt=""
+                            srcset="">
+
+                    </div>
+                    <p class="mt-4 text-sm text-gray-500 sm:mt-0" style="text-align: center">
+                        <a href="{{ route('agent.dashboard') }}" class="font-bold text-red-700 underline">Back To
+                            Dashboard</a>.
+                    </p>
+                @else
+                    <div style="display: flex; justify-content: center;">
+                        <img class="rounded-full" style="width: 30%" src="{{ Storage::url($destination?->image) }}"
+                            alt="" srcset="">
+
+                    </div>
+
+                    <div class="pt-2 pb-2 font-bold text-center">
+                        <h2>{{ $destination?->destination }}</h2>
+                        <h2>{{ $destination?->branch_number }}</h2>
+                    </div>
+
+
+                    <p class="mt-4 text-sm text-gray-500 sm:mt-0" style="text-align: center">
+                        <a href="{{ route('destination.dashboard') }}" class="font-bold text-red-700 underline">Back To
+                            Dashboard</a>.
+                    </p>
+                @endif
+
+
 
                 <div class="p-4">
 
-                    <label for="countries"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Selections</label>
-                    <select wire:model = "selection"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option selected>select here</option>
-                        @foreach ($selectionList as $list)
-                            <option value="{{ $list->id }}"> {{ $list->shope_name ?? $list->service_name }}</option>
-                        @endforeach
+                    @if ($destination == null)
+                        <label for="countries"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Selections</label>
+                        <select wire:model = "selection"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected>select here</option>
+                            @foreach ($selectionList as $list)
+                                <option value="{{ $list->id }}"> {{ $list->shope_name ?? $list->service_name }}
+                                </option>
+                            @endforeach
 
-                    </select>
+                        </select>
+                    @endif
+
+
                 </div>
                 <div id="result"
                     class="mt-4 mb-4 font-bold text-center text-gray-600 transition duration-500 ease-in-out">

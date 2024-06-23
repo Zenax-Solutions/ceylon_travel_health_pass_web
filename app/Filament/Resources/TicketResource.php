@@ -116,7 +116,7 @@ class TicketResource extends Resource
                 DateRangeFilter::make('created_at'),
 
                 SelectFilter::make('booking_id')
-                    ->relationship('booking', 'date')
+                    ->relationship('booking', 'id')
                     ->indicator('Booking')
                     ->multiple()
                     ->label('Booking'),
