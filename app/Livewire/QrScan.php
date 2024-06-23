@@ -163,7 +163,7 @@ class QrScan extends Component
                 $this->selectionList = $this->agent->esimServices->where('status', 'publish');
             }
         } else {
-            $this->selection = Session::has('branch_code');
+            $this->selection = $this->destination->id;
         }
 
         return view('livewire.qr-scan');
