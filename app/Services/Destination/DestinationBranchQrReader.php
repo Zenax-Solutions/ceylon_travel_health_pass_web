@@ -46,6 +46,9 @@ class DestinationBranchQrReader
                         'date' => now()
                     ]);
 
+                    // Update expiry dates for other tickets associated with the same booking ID
+                    $this->updateOtherTicketExpiryDates($record);
+
                     return 'valid'; // Return 'valid' if the operation succeeded
                 }
             } else {
