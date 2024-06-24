@@ -16,9 +16,9 @@ class HomeController extends Controller
 
         $destinations = Destination::all()->shuffle()->take(5);
 
-        $discountShops = DiscountShop::all()->shuffle()->take(3);
+        $discountShops = DiscountShop::where('status', 'publish')->shuffle()->take(3);
 
-        $discountServices = DiscountService::all()->shuffle()->take(3);
+        $discountServices = DiscountService::where('status', 'publish')->shuffle()->take(3);
 
         return view('pages.home.welcome', compact('packages', 'destinations', 'discountShops', 'discountServices'));
     }
