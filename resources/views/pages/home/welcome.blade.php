@@ -206,9 +206,14 @@
                                 <div>
 
                                     <div class="inline-block align-bottom">
+
                                         <a href="{{ route('package', ['id' => $package->id]) }}"
-                                            class="px-10 font-semibold text-white bg-green-500 rounded-full opacity-75 hover:opacity-100 hover:text-gray-900"><i
-                                                class="mr-4 -ml-4 "></i>More Details</a>
+                                            class="middle none center mr-3 rounded-lg bg-green-500 py-3 px-6 font-sans text-xs font-bold  text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                                            data-ripple-light="true">
+                                            More Details
+                                        </a>
+
+
                                     </div>
                                 </div>
 
