@@ -107,6 +107,13 @@
                                     </svg>
                                     <h1 class="mt-2 text-2xl font-bold text-center text-gray-500">Valid QR Code</h1>
                                     <div class="mt-3">
+
+                                        <div class="pt-2">
+
+                                            <span id="pass_type" class="text-xl font-bold text-blue-400"></span>
+
+                                        </div>
+
                                         <div class="pt-2">
                                             <p class="text-sm font-medium leading-none text-gray-800">
                                                 Booking No
@@ -191,7 +198,7 @@
             const modal = document.getElementById('QrModal');
 
             let bookigId = document.getElementById('bookingId');
-
+            let passType = document.getElementById('pass_type');
             let ticketNo = document.getElementById('ticketNo');
 
             if (resultElement && modal) {
@@ -203,6 +210,13 @@
 
                     bookigId.textContent = event.detail.data.booking_id;
                     ticketNo.textContent = event.detail.data.ticket_id;
+
+                    if (event.detail.data.is_adult == true) {
+                        passType.textContent = 'Adult Pass';
+                    } else {
+                        passType.textContent = 'Child Pass';
+                    }
+
 
 
 
