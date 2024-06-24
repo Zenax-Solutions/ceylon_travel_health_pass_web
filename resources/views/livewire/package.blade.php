@@ -262,7 +262,7 @@
 
 
                                             @if (!empty($package->discount_service_list))
-                                                <h3 class="my-2 px-4 text-[15px] text-gray-400 font-bold">Service's
+                                                <h3 class="my-2 px-4 text-[15px] text-green-400 font-bold">Service's
                                                     List
                                                 </h3>
                                                 @forelse ($package->discount_service_list as $serviceId)
