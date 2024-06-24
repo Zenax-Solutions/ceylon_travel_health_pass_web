@@ -72,7 +72,7 @@ class Records extends Component
                 ->whereYear('created_at', Carbon::now()->year)
                 ->count();
         } elseif ($this->agent?->type == 'service_agent') {
-            $query = ServiceQrScanRecord::orderBy('created_at', 'desc');
+            $query = ServiceQrScanRecord::where('service_id', $this->agent->discountServices->first()?->id)->orderBy('created_at', 'desc');
 
             if ($this->limit != null) {
                 $query = $query->limit($this->limit);
@@ -80,8 +80,8 @@ class Records extends Component
 
             $records = $query->paginate(10);
 
-            $todayCount = ServiceQrScanRecord::whereDate('created_at', Carbon::today())->count();
-            $monthlyCount = ServiceQrScanRecord::whereMonth('created_at', Carbon::now()->month)
+            $todayCount = ServiceQrScanRecord::where('service_id', $this->agent->discountServices->first()?->id)->whereDate('created_at', Carbon::today())->count();
+            $monthlyCount = ServiceQrScanRecord::where('service_id', $this->agent->discountServices->first()?->id)->whereMonth('created_at', Carbon::now()->month)
                 ->whereYear('created_at', Carbon::now()->year)
                 ->count();
         } elseif ($this->destination != null) {
