@@ -19,6 +19,13 @@
                             </div>
                         </div>
                         <div class="px-3 py-4 " style="text-align: center; background-color:#e3efc9">
+
+                            <div class="pb-4">
+                                <p <span class="text-3xl font-bold leading-none align-baseline">
+                                    {{ $ticket->booking->package->main_title }}</span>
+                                </p>
+                            </div>
+
                             <div class="pb-2">
 
                                 @if ($ticket->is_adult)
