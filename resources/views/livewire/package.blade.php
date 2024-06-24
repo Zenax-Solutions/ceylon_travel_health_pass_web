@@ -240,8 +240,7 @@
                                                         class="group flex items-center gap-x-5 rounded-md px-2.5 py-2 transition-all duration-75 hover:bg-green-100">
                                                         <div
                                                             class="flex items-center w-12 h-12 text-black bg-gray-200 rounded-lg group-hover:bg-green-200">
-                                                            <img style=" height: inherit;"
-                                                                src="{{ Storage::url($shop?->image) }}" alt="">
+                                                            <img src="{{ Storage::url($shop?->image) }}" alt="">
                                                         </div>
                                                         <div
                                                             class="flex flex-col items-start justify-between font-light text-gray-600">
@@ -274,8 +273,7 @@
                                                         class="group flex items-center gap-x-5 rounded-md px-2.5 py-2 transition-all duration-75 hover:bg-green-100">
                                                         <div
                                                             class="flex items-center w-12 h-12 text-black bg-gray-200 rounded-lg group-hover:bg-green-200">
-                                                            <img style=" height: inherit;"
-                                                                src="{{ Storage::url($service?->image) }}"
+                                                            <img src="{{ Storage::url($service?->image) }}"
                                                                 alt="">
                                                         </div>
                                                         <div
