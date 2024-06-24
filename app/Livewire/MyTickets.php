@@ -12,13 +12,23 @@ class MyTickets extends Component
 
     public $tickets;
 
-    public function mount(Request $request)
+    public function mount(Request $request, $agent_mode = null)
     {
-        if (Session::has('auth_customer')) {
+        if ($agent_mode == 'true') {
 
-            $this->tickets = Ticket::where('booking_id', $request->id)->get();
+            if (Session::has('auth_agent')) {
+
+                $this->tickets = Ticket::where('booking_id', $request->id)->get();
+            } else {
+                $this->redirectRoute('agent.login');
+            }
         } else {
-            $this->redirectRoute('customer.login');
+            if (Session::has('auth_customer')) {
+
+                $this->tickets = Ticket::where('booking_id', $request->id)->get();
+            } else {
+                $this->redirectRoute('customer.login');
+            }
         }
     }
 

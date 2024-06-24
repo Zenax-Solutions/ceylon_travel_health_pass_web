@@ -62,6 +62,9 @@ Route::middleware('agent_auth')->group(function () {
     Route::get('/agent/dashboard/records', [AgentController::class, 'records'])->name('agent.records');
     Route::get('/agent/dashboard/sevices', [AgentController::class, 'services'])->name('agent.services');
     Route::get('/agent/dashboard/my-profile', [AgentController::class, 'myProfile'])->name('agent.profile');
+    Route::get('/agent/dashboard/packages', [AgentController::class, 'packages'])->name('agent.packages');
+    Route::get('/agent/dashboard/packages/{id}/booking', [AgentController::class, 'booking'])->name('agent.booking');
+    Route::get('/agent/dashboard/{id?}/my-tickets', [AgentController::class, 'myTickets'])->name('agent.tickets');
     Route::post('agent/profile/reset-password', [AgentController::class, 'resetPassword'])->name('agent.profile.resetPassword');
     Route::post('agent/profile/image-update', [AgentController::class, 'imageUpdate'])->name('agent.profile.imageUpdate');
     Route::get('/agent/register', [AgentController::class, 'registerView'])->name('agent.register');

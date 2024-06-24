@@ -14,14 +14,23 @@
                         </span>
 
                     </div>
+                    <div>
+                        <img class="rounded" style="width: 50%" src="{{ Storage::url($branch?->image) }}" alt=""
+                            srcset="">
+
+                    </div>
                     <div class="flex items-center justify-between gap-2 md:gap-4">
+
 
 
 
                         <div class="flex flex-col space-y-4">
 
                             <h1 class="font-bold leading-tight tracking-widest text-gray-800">
-                                Hello, </h1>
+                                {{ $branch?->destination }} </h1>
+                            <h1 class="font-bold leading-tight tracking-widest text-gray-800">
+                                Destination Branch Code : <span class="text-green-500">{{ $branch?->branch_number }}</span>
+                            </h1>
                         </div>
                     </div>
                 </div>

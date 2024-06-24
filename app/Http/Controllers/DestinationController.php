@@ -50,7 +50,7 @@ class DestinationController extends Controller
 
             $branch = Destination::where('branch_number', Session::get('branch_code'))->where('status', 'publish')->first();
 
-            return view('pages.destination.dashboard.main');
+            return view('pages.destination.dashboard.main', compact('branch'));
         }
 
         return redirect()->route('destination.login');

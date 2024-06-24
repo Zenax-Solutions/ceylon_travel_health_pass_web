@@ -200,10 +200,19 @@
                                     <h3 style="font-size:30px" class="text-xl font-black text-gray-800 md:text-3xl">
                                         {{ $package?->main_title }}</h3>
 
-                                    <p style="font-size: 30px"
-                                        class="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900">
-                                        {{ env('CURRENCY', '$') . $package?->price }}
-                                    </p>
+                                    @if ($auth_agent != null)
+                                        <p style="font-size: 30px"
+                                            class="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900">
+                                            {{ env('CURRENCY', '$') . $package?->price - $discount }}
+                                        </p>
+                                    @else
+                                        <p style="font-size: 30px"
+                                            class="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900">
+                                            {{ env('CURRENCY', '$') . $package?->price }}
+                                        </p>
+                                    @endif
+
+
                                 </div>
                                 <p class="text-base text-gray-500 md:text-lg">
                                 <h1 class="text-lg font-black text-gray-800 md:text-2xl">Travel</h1>
@@ -240,7 +249,8 @@
                                                         class="group flex items-center gap-x-5 rounded-md px-2.5 py-2 transition-all duration-75 hover:bg-green-100">
                                                         <div
                                                             class="flex items-center w-12 h-12 text-black bg-gray-200 rounded-lg group-hover:bg-green-200">
-                                                            <img src="{{ Storage::url($shop?->image) }}" alt="">
+                                                            <img src="{{ Storage::url($shop?->image) }}"
+                                                                alt="">
                                                         </div>
                                                         <div
                                                             class="flex flex-col items-start justify-between font-light text-gray-600">
@@ -314,11 +324,23 @@
                                                     {{ $this->getSelectedDestinationCount() }}</p>
                                             </div>
                                         </div>
-                                        <div class="w-1/2">
-                                            <h2 class="text-gray-500">Package Price:</h2>
-                                            <p wire:transition class="text-xl text-green-400 text-normal">
-                                                {{ env('CURRENCY', '$') . $package->price }}</p>
-                                        </div>
+
+
+                                        @if ($auth_agent != null)
+                                            <div class="w-1/2">
+                                                <h2 class="text-gray-500">Package Price:</h2>
+                                                <p wire:transition class="text-xl text-green-400 text-normal">
+                                                    {{ env('CURRENCY', '$') . $package->price - $discount }}</p>
+                                            </div>
+                                        @else
+                                            <div class="w-1/2">
+                                                <h2 class="text-gray-500">Package Price:</h2>
+                                                <p wire:transition class="text-xl text-green-400 text-normal">
+                                                    {{ env('CURRENCY', '$') . $package->price }}</p>
+                                            </div>
+                                        @endif
+
+
                                     </div>
                                     <div class="flex w-full space-x-3 md:w-1/2">
                                         <div class="w-1/2">
@@ -360,7 +382,17 @@
                                                 <div
                                                     class="group flex items-center gap-x-5 rounded-md px-2.5 py-2 transition-all duration-75 hover:bg-green-100">
 
-                                                    @if ($destination->current_stock_count > 0)
+
+                                                    @php
+                                                        $ticketCount = $destination
+                                                            ->destinationStock()
+                                                            ->orderBy('id', 'desc')
+                                                            ->first();
+
+                                                    @endphp
+
+                                                    @if ($ticketCount?->selling_ticket_count < $ticketCount?->ticket_stock_count)
+
                                                         <div class="inline-flex items-center">
                                                             <label
                                                                 class="relative flex items-center p-3 rounded-full cursor-pointer"
@@ -371,11 +403,14 @@
                                                                     id="checkbox-{{ $destination->id }}"
                                                                     onchange="calculateTotal()"
                                                                     @if ($auth_customer != null) @if ($auth_customer->region_type == 'south_asian')
-                                                                    data-price="{{ $destination->south_asian_price }}"
-                                                                    data-child-price="{{ $destination->child_south_asian_price }}"
-                                                                @elseif ($auth_customer->region_type == 'non_south_asian')
+                                                                            data-price="{{ $destination->south_asian_price }}"
+                                                                            data-child-price="{{ $destination->child_south_asian_price }}"
+                                                                        @elseif ($auth_customer->region_type == 'non_south_asian')
+                                                                            data-price="{{ $destination->non_south_asian_price }}"
+                                                                            data-child-price="{{ $destination->child_non_south_asian_price }}" @endif
+                                                                @elseif ($auth_agent != null)
                                                                     data-price="{{ $destination->non_south_asian_price }}"
-                                                                    data-child-price="{{ $destination->child_non_south_asian_price }}" @endif
+                                                                    data-child-price="{{ $destination->child_non_south_asian_price }}"
                                                                     @endif
                                                                 />
 
@@ -426,11 +461,19 @@
                                                                         Children:
                                                                         {{ env('CURRENCY', '$') . $destination->child_non_south_asian_price }}
                                                                     @endif
-
                                                                 @endif
+                                                            @elseif ($auth_agent != null)
+                                                                Adult:
+                                                                {{ env('CURRENCY', '$') . $destination->non_south_asian_price }}
+                                                                <br>
+                                                                @if ($destination->child_non_south_asian_price > 0)
+                                                                    Children:
+                                                                    {{ env('CURRENCY', '$') . $destination->child_non_south_asian_price }}
+                                                                @endif
+
                                                             @endif
                                                         </p>
-                                                        @if ($destination->current_stock_count == 0)
+                                                        @if ($ticketCount?->selling_ticket_count == $ticketCount?->ticket_stock_count)
                                                             <div
                                                                 class="center relative inline-block select-none whitespace-nowrap rounded-lg bg-red-500 py-2 px-3.5 align-baseline font-sans text-xs font-bold  leading-none text-white">
                                                                 <div class="mt-px">not available</div>
@@ -476,40 +519,44 @@
                             <div class="w-full p-4 mx-auto bg-gray-500 md:p-8">
 
                                 <form>
-                                    <div class="grid gap-6 mb-6 lg:grid-cols-2">
-                                        <div>
-                                            <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">First
-                                                name</label>
-                                            <input type="text" value="{{ $auth_customer?->first_name }}"
-                                                class="bg-gray-50 border font-bold border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                required readonly>
-                                        </div>
-                                        <div>
-                                            <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Last
-                                                name</label>
-                                            <input type="text"
-                                                class="bg-gray-50 border font-bold border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                value="{{ $auth_customer?->last_name }}" required readonly>
-                                        </div>
-                                        <div>
-                                            <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
-                                            <input type="email"
-                                                class="bg-gray-50 border font-bold border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                value="{{ $auth_customer?->email }}" readonly required>
-                                        </div>
-                                        <div>
-                                            <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Region</label>
-                                            <input type="text"
-                                                class="bg-gray-50 border border-gray-300 font-bold text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                value="{{ str_replace('_', ' ', $auth_customer?->region_type) == 'south asian' ? 'SAARC Nations' : 'Non-SAARC Nations' }}"
-                                                readonly required>
+                                    @if ($auth_agent == null)
+                                        <div class="grid gap-6 mb-6 lg:grid-cols-2">
+                                            <div>
+                                                <label
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">First
+                                                    name</label>
+                                                <input type="text" value="{{ $auth_customer?->first_name }}"
+                                                    class="bg-gray-50 border font-bold border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    required readonly>
+                                            </div>
+                                            <div>
+                                                <label
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Last
+                                                    name</label>
+                                                <input type="text"
+                                                    class="bg-gray-50 border font-bold border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    value="{{ $auth_customer?->last_name }}" required readonly>
+                                            </div>
+                                            <div>
+                                                <label
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
+                                                <input type="email"
+                                                    class="bg-gray-50 border font-bold border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    value="{{ $auth_customer?->email }}" readonly required>
+                                            </div>
+                                            <div>
+                                                <label
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Region</label>
+                                                <input type="text"
+                                                    class="bg-gray-50 border border-gray-300 font-bold text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    value="{{ str_replace('_', ' ', $auth_customer?->region_type) == 'south asian' ? 'SAARC Nations' : 'Non-SAARC Nations' }}"
+                                                    readonly required>
+                                            </div>
+
                                         </div>
 
-                                    </div>
+                                    @endif
+
                                     <hr>
                                     <div class="flex items-center justify-center pt-4">
 
@@ -712,6 +759,22 @@
                                                         </div>
                                                     @endif
 
+                                                    @if ($auth_agent != null)
+                                                        <div wire:transition
+                                                            class="flex items-center w-full mt-2 mb-3">
+                                                            <div class="flex-grow">
+                                                                <span class="font-semibold text-white">Discount</span>
+                                                            </div>
+                                                            <div class="pl-3">
+                                                                <span class="font-semibold text-white">
+
+                                                                    -
+                                                                    <span>{{ env('CURRENCY', '$') . $discount }}</span>
+
+                                                            </div>
+                                                        </div>
+                                                    @endif
+
                                                     <div class="flex items-center w-full">
                                                         <div class="flex-grow">
                                                             <span class="font-semibold text-white">Total</span>
@@ -733,25 +796,29 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="pt-4 pb-12 w-72">
-                                                        <div class="relative h-10 w-full min-w-[200px]">
-                                                            <div
-                                                                class="absolute grid w-5 h-5 top-2/4 right-3 -translate-y-2/4 place-items-center text-blue-gray-500">
-                                                                <i class="fas fa-heart" aria-hidden="true"></i>
+                                                    @if ($auth_agent == null)
+                                                        <div class="pt-4 pb-12 w-72">
+                                                            <div class="relative h-10 w-full min-w-[200px]">
+                                                                <div
+                                                                    class="absolute grid w-5 h-5 top-2/4 right-3 -translate-y-2/4 place-items-center text-blue-gray-500">
+                                                                    <i class="fas fa-heart" aria-hidden="true"></i>
+                                                                </div>
+                                                                <input wire:model.live='coupon_code'
+                                                                    class="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 !pr-9 font-sans text-lg font-bold text-white outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-green-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+                                                                    placeholder=" " />
+                                                                <label
+                                                                    class="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-bold leading-tight text-white transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-green-400 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-pink-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-green-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-pink-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-green-400">
+                                                                    Enter Coupon Code
+                                                                </label>
                                                             </div>
-                                                            <input wire:model.live='coupon_code'
-                                                                class="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 !pr-9 font-sans text-lg font-bold text-white outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-green-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-                                                                placeholder=" " />
-                                                            <label
-                                                                class="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-bold leading-tight text-white transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-green-400 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-pink-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-green-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-pink-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-green-400">
-                                                                Enter Coupon Code
-                                                            </label>
                                                         </div>
-                                                    </div>
-                                                    <p class="pt-2 pb-2 font-bold {{ $coupon_message['color'] }}">
-                                                        {{ $coupon_message['message'] }}
+                                                        <p class="pt-2 pb-2 font-bold {{ $coupon_message['color'] }}">
+                                                            {{ $coupon_message['message'] }}
 
-                                                    </p>
+                                                        </p>
+                                                    @endif
+
+
 
 
                                                     @if ($coupon_data != null)
@@ -845,6 +912,7 @@
 
     <!-----------Model----------->
 
+
     <div x-show="$wire.showModal" x-transition.duration.1500ms class="flex items-center justify-center" x-cloak>
         <!-- Background overlay -->
         <div
@@ -904,10 +972,6 @@
             </div>
         </div>
     </div>
-
-
-
-
 
 
 

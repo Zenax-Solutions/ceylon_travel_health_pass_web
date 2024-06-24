@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\AgentWelcomeEmail;
 use App\Models\Agent;
 use App\Models\Booking;
+use App\Models\Package;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
@@ -124,6 +125,39 @@ class AgentController extends Controller
         return view('pages.agent.dashboard.pages.services');
     }
 
+    public function packages()
+    {
+
+        $authAgentEmail = Session::get('auth_agent');
+        $agent = Agent::where('email', $authAgentEmail)->firstOrFail();
+
+        if ($agent->type != 'tour_agent' || $agent->status == 'pending') {
+            return redirect()->route('agent.dashboard');
+        }
+
+        $packages = Package::all();
+
+        return view('pages.agent.dashboard.pages.agent-packages', compact('packages', 'agent'));
+    }
+
+    public function booking(Request $request)
+    {
+        $authAgentEmail = Session::get('auth_agent');
+        $agent = Agent::where('email', $authAgentEmail)->firstOrFail();
+
+        if ($agent->type != 'tour_agent' || $agent->status == 'pending') {
+            return redirect()->route('agent.dashboard');
+        }
+
+        $package = Package::find($request->id);
+
+        if ($package == null) {
+            return redirect()->route('agent.packages');
+        }
+
+        return view('pages.agent.dashboard.pages.agent-booking');
+    }
+
     public function myProfile()
     {
         $authAgentEmail = Session::get('auth_agent');
@@ -134,6 +168,15 @@ class AgentController extends Controller
         }
 
         return view('pages.agent.dashboard.pages.agent-profile', compact('agent'));
+    }
+
+    public function myTickets(Request $request)
+    {
+        if ($request->id == null) {
+            return redirect()->back();
+        }
+
+        return view('pages.agent.dashboard.pages.my-tickets');
     }
 
 

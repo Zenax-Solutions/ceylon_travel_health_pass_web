@@ -18,6 +18,7 @@ use Livewire\Attributes\Validate;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Session;
 
 class Package extends Component
 {
@@ -50,29 +51,52 @@ class Package extends Component
 
     public $showModal = false;
     public $auth_customer;
+    public $auth_agent;
 
     public $coupon_code;
     public $coupon_data, $coupon_message = ['color' => '', 'message' => ''];
     public $discount = 0;
 
     #[Computed]
-    public function mount(Request $request)
+    public function mount(Request $request, $tour_agent_mode = null)
     {
         $this->packageId = $request->id;
 
-        if ($request->session()->has('auth_customer')) {
+        if ($tour_agent_mode == null) {
+            if ($request->session()->has('auth_customer')) {
 
-            $customer = Customer::where('email', $request->session()->get('auth_customer'))->first();
+                $customer = Customer::where('email', $request->session()->get('auth_customer'))->first();
 
-            if ($customer != null) {
-                $this->auth_customer = $customer;
-                $this->showModal = false;
+                if ($customer != null) {
+                    $this->auth_customer = $customer;
+                    $this->showModal = false;
+                } else {
+                    $this->showModal = true;
+                    $this->redirect('/');
+                }
             } else {
                 $this->showModal = true;
-                return redirect('/');
             }
         } else {
-            $this->showModal = true;
+            if ($request->session()->has('auth_agent')) {
+
+                $agent = Agent::where('email', Session::get('auth_agent'))->firstOrFail();
+
+                if ($agent != null) {
+                    $this->auth_agent = $agent;
+                    $this->showModal = false;
+
+                    if ($agent->agent_discount_margin > 5) {
+                        $this->discount = $agent->agent_discount_margin;
+                    } else {
+                        $this->discount = env('AGENT_DISCONUNT_MARGIN', 5);
+                    }
+                } else {
+                    $this->redirectRoute('agent.packages');
+                }
+            } else {
+                $this->redirectRoute('agent.packages');
+            }
         }
     }
 
@@ -105,7 +129,7 @@ class Package extends Component
         }
 
         if (isset($this->coupon_code)) {
-            $validate = Agent::where('coupon_code', $this->coupon_code);
+            $validate = Agent::where('type', 'tour_agent')->where('coupon_code', $this->coupon_code);
 
             if ($validate->exists()) {
                 $this->coupon_message = [
@@ -133,10 +157,14 @@ class Package extends Component
 
         if ($this->package == null) {
 
-            $this->redirect('/');
+            if ($this->auth_agent != null) {
+                $this->redirectRoute('agent.packages');
+            } else {
+                $this->redirect('/');
+            }
         } else {
             $this->package->first();
-            $this->destinations = Destination::where('current_stock_count', '>', 0)->get();
+            $this->destinations = Destination::all();
             $this->citys = City::all();
             $this->esimServiceProviderList = EsimService::where('status', 'publish')->get();
         }
@@ -150,6 +178,7 @@ class Package extends Component
     #[On('selectedDestinationIds')]
     public function submit($selectedDestinationIds)
     {
+
         $this->selectedDestinationIds = $selectedDestinationIds;
     }
 
@@ -298,27 +327,49 @@ class Package extends Component
             toastr()->success('Booking Successfully');
             $this->redirectRoute('payment.info');
         } elseif ($type == 'withOutEsim') {
-            $PackageData = [
-                'package_id' => $this->packageId,
-                'customer_id' =>  $this->auth_customer->id,
-                'adult_pass_count' => $this->adult_count,
-                'child_pass_count' => $this->children_count,
-                'destination_list' => $this->selectedDestinationIds,
-                'esim_list' => $esimData,
-                'total' => $this->calculateTotalPrice(),
-                'date' => Carbon::now(),
-                'payment_status' => 'pending',
-            ];
+
+            if ($this->auth_agent != null) {
+
+                $PackageData = [
+                    'package_id' => $this->packageId,
+                    'agent_id' =>  $this->auth_agent->id,
+                    'adult_pass_count' => $this->adult_count,
+                    'child_pass_count' => $this->children_count,
+                    'destination_list' => $this->selectedDestinationIds,
+                    'esim_list' => $esimData,
+                    'total' => $this->calculateTotalPrice(),
+                    'date' => Carbon::now(),
+                    'payment_status' => 'pending',
+                ];
+            } else {
+                $PackageData = [
+                    'package_id' => $this->packageId,
+                    'customer_id' =>  $this->auth_customer->id,
+                    'adult_pass_count' => $this->adult_count,
+                    'child_pass_count' => $this->children_count,
+                    'destination_list' => $this->selectedDestinationIds,
+                    'esim_list' => $esimData,
+                    'total' => $this->calculateTotalPrice(),
+                    'date' => Carbon::now(),
+                    'payment_status' => 'pending',
+                ];
+            }
+
+
 
             if ($this->adult_count > 50 || $this->children_count > 50 || ($this->adult_count + $this->children_count) > 50) {
                 toastr()->error('Maximum Guest count is 50');
             } else {
 
-
-
                 $booking = Booking::create($PackageData);
 
-                $genrateQrCode->genarate($PackageData, $booking, $customer);
+
+                if ($this->auth_agent != null) {
+                    $genrateQrCode->genarate($PackageData, $booking, $this->auth_agent);
+                } else {
+                    $genrateQrCode->genarate($PackageData, $booking, $customer);
+                }
+
 
 
                 if (isset($this->coupon_code)) {
@@ -338,7 +389,12 @@ class Package extends Component
                 }
 
                 toastr()->success('Booking Successfully');
-                $this->redirectRoute('payment.info');
+
+                if ($this->auth_agent != null) {
+                    $this->redirectRoute('agent.dashboard');
+                } else {
+                    $this->redirectRoute('payment.info');
+                }
             }
         }
     }

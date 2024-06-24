@@ -121,7 +121,7 @@
                                             <div class="flex items-center gap-x-6">
 
 
-                                                <a href="{{ route('customer.tickets', ['id' => $booking->id]) }}"
+                                                <a href="{{ route('agent.tickets', ['id' => $booking->id]) }}"
                                                     class="font-bold text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
                                                     View Tickets
                                                 </a>
