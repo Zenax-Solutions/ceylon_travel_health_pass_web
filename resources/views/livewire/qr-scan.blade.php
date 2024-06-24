@@ -108,11 +108,13 @@
                                     <h1 class="mt-2 text-2xl font-bold text-center text-gray-500">Valid QR Code</h1>
                                     <div class="mt-3">
 
-                                        <div class="pt-2">
+                                        @if ($destination != null)
+                                            <div class="pt-2">
 
-                                            <span id="pass_type" class="text-xl font-bold text-blue-400"></span>
+                                                <span id="pass_type" class="text-xl font-bold text-blue-400"></span>
 
-                                        </div>
+                                            </div>
+                                        @endif
 
                                         <div class="pt-2">
                                             <p class="text-sm font-medium leading-none text-gray-800">
