@@ -229,6 +229,12 @@ class DestinationResource extends Resource
                 Tables\Columns\TextColumn::make('non_south_asian_price')
                     ->money('USD')
                     ->toggleable(),
+                Tables\Columns\TextColumn::make('child_south_asian_price')
+                    ->money('USD')
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('child_non_south_asian_price')
+                    ->money('USD')
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('stock_count')
                     ->label('Ticket stock count')
                     ->formatStateUsing(fn (Destination $record): string => $record->destinationStock()->orderBy('id', 'desc')->firstOr(function () {
