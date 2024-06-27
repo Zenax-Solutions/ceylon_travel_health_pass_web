@@ -19,7 +19,7 @@ class ShopeQrScanRecordResource extends Resource
 {
     protected static ?string $model = ShopeQrScanRecord::class;
 
-    protected static ?string $title = 'Shop Qr Scan Records';
+    protected static ?string $navigationLabel  = 'Shop Qr Scan Records';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
