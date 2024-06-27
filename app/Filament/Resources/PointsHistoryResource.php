@@ -17,6 +17,10 @@ class PointsHistoryResource extends Resource
 {
     protected static ?string $model = PointsHistory::class;
 
+    protected static ?string $navigationLabel  = 'Points record history';
+
+    protected static ?string $navigationGroup = 'Tourism agent point records';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
