@@ -137,6 +137,7 @@ class DiscountShopResource extends Resource
                     ->searchable()
                     ->limit(50),
                 Tables\Columns\TextColumn::make('shope_name')
+                    ->label('Shop name')
                     ->toggleable()
                     ->searchable()
                     ->limit(50),

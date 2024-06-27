@@ -165,6 +165,11 @@ class EsimServiceResource extends Resource
         return [];
     }
 
+    public static function canViewAny(): bool
+    {
+        return false;
+    }
+
     public static function getPages(): array
     {
         return [

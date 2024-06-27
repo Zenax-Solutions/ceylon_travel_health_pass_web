@@ -20,6 +20,8 @@ class EsimQrScanRecordResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationGroup = 'QR Records';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -59,6 +61,12 @@ class EsimQrScanRecordResource extends Resource
         return [
             //
         ];
+    }
+
+
+    public static function canViewAny(): bool
+    {
+        return false;
     }
 
     public static function getPages(): array
