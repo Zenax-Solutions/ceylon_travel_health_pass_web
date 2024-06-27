@@ -119,6 +119,36 @@ class DestinationResource extends Resource
                             'lg' => 4,
                         ]),
 
+                    TextInput::make('child_south_asian_price')
+                        ->rules(['numeric'])
+                        ->required()
+                        ->numeric()
+                        ->mask(RawJs::make('$money($input)'))
+                        ->stripCharacters(',')
+                        ->prefix('$')
+                        ->placeholder('Child South Asian Price')
+                        ->default('0')
+                        ->columnSpan([
+                            'default' => 12,
+                            'md' => 12,
+                            'lg' => 4,
+                        ]),
+
+                    TextInput::make('child_non_south_asian_price')
+                        ->rules(['numeric'])
+                        ->required()
+                        ->numeric()
+                        ->mask(RawJs::make('$money($input)'))
+                        ->stripCharacters(',')
+                        ->prefix('$')
+                        ->placeholder('Child Non South Asian Price')
+                        ->default('0')
+                        ->columnSpan([
+                            'default' => 12,
+                            'md' => 12,
+                            'lg' => 4,
+                        ]),
+
                     // TextInput::make('discount_price')
                     //     ->rules(['numeric'])
                     //     ->nullable()
@@ -131,28 +161,28 @@ class DestinationResource extends Resource
                     //         'lg' => 4,
                     //     ]),
 
-                    TextInput::make('stock_count')
-                        ->rules(['numeric'])
-                        ->required()
-                        ->default('0')
-                        ->debounce('2s')
-                        ->afterStateUpdated(fn ($state, callable $set) => $set('current_stock_count', $state))
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 4,
-                        ]),
+                    // TextInput::make('stock_count')
+                    //     ->rules(['numeric'])
+                    //     ->required()
+                    //     ->default('0')
+                    //     ->debounce('2s')
+                    //     ->afterStateUpdated(fn ($state, callable $set) => $set('current_stock_count', $state))
+                    //     ->columnSpan([
+                    //         'default' => 12,
+                    //         'md' => 12,
+                    //         'lg' => 4,
+                    //     ]),
 
-                    TextInput::make('current_stock_count')
-                        ->rules(['numeric'])
-                        ->required()
-                        ->readOnly()
-                        ->default('0')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 4,
-                        ]),
+                    // TextInput::make('current_stock_count')
+                    //     ->rules(['numeric'])
+                    //     ->required()
+                    //     ->readOnly()
+                    //     ->default('0')
+                    //     ->columnSpan([
+                    //         'default' => 12,
+                    //         'md' => 12,
+                    //         'lg' => 4,
+                    //     ]),
 
                     Select::make('status')
                         ->rules(['string'])
