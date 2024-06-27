@@ -2,16 +2,16 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Filters\DateRangeFilter;
+use Filament\Tables\Filters\SelectFilter;
 use App\Filament\Resources\PointsHistoryResource\Pages;
-use App\Filament\Resources\PointsHistoryResource\RelationManagers;
 use App\Models\PointsHistory;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+
 
 class PointsHistoryResource extends Resource
 {
@@ -72,7 +72,12 @@ class PointsHistoryResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                DateRangeFilter::make('created_at'),
+
+                SelectFilter::make('agent.name')
+                    ->relationship('agent', 'name')
+                    ->indicator('Agent')
+                    ->label('Tourism Agent List'),
             ])
             ->actions([
                 //s Tables\Actions\EditAction::make(),
