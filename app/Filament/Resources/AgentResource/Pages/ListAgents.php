@@ -21,7 +21,7 @@ class ListAgents extends ListRecords
     {
         return [
 
-            'Tour Agent' => Tab::make()
+            'Tourism Agent' => Tab::make()
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('type', 'tour_agent'))
                 ->badge(number_format(Agent::where('type', 'tour_agent')->count()))->icon('heroicon-o-user-group')
                 ->badgeColor('primary'),
