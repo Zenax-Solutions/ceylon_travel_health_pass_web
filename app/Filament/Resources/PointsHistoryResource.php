@@ -11,6 +11,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 
 class PointsHistoryResource extends Resource
@@ -75,12 +76,16 @@ class PointsHistoryResource extends Resource
                 DateRangeFilter::make('created_at'),
 
                 SelectFilter::make('agent.name')
-                    ->relationship('agent', 'name')
+                    ->relationship('agent', 'name', function (Builder $query) {
+                        $query->where(function ($query) {
+                            $query->where('type', 'tour_agent');
+                        });
+                    })
                     ->indicator('Agent')
                     ->label('Tourism Agent List'),
             ])
             ->actions([
-                //s Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
