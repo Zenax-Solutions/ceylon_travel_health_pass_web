@@ -12,7 +12,7 @@ class HomeController extends Controller
 {
     public function home()
     {
-        $packages = Package::all();
+        $packages = Package::where('show_tour_agent_only', false)->get();
 
         $destinations = Destination::all()->shuffle()->take(5);
 

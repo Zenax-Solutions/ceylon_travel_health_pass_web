@@ -11,66 +11,98 @@ class DiscountShopPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the discountShop can view any models.
+     * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return true;
+        return $user->can('view_any_discount::shop');
     }
 
     /**
-     * Determine whether the discountShop can view the model.
+     * Determine whether the user can view the model.
      */
-    public function view(User $user, DiscountShop $model): bool
+    public function view(User $user, DiscountShop $discountShop): bool
     {
-        return true;
+        return $user->can('view_discount::shop');
     }
 
     /**
-     * Determine whether the discountShop can create models.
+     * Determine whether the user can create models.
      */
     public function create(User $user): bool
     {
-        return true;
+        return $user->can('create_discount::shop');
     }
 
     /**
-     * Determine whether the discountShop can update the model.
+     * Determine whether the user can update the model.
      */
-    public function update(User $user, DiscountShop $model): bool
+    public function update(User $user, DiscountShop $discountShop): bool
     {
-        return true;
+        return $user->can('update_discount::shop');
     }
 
     /**
-     * Determine whether the discountShop can delete the model.
+     * Determine whether the user can delete the model.
      */
-    public function delete(User $user, DiscountShop $model): bool
+    public function delete(User $user, DiscountShop $discountShop): bool
     {
-        return true;
+        return $user->can('delete_discount::shop');
     }
 
     /**
-     * Determine whether the user can delete multiple instances of the model.
+     * Determine whether the user can bulk delete.
      */
     public function deleteAny(User $user): bool
     {
-        return true;
+        return $user->can('delete_any_discount::shop');
     }
 
     /**
-     * Determine whether the discountShop can restore the model.
+     * Determine whether the user can permanently delete.
      */
-    public function restore(User $user, DiscountShop $model): bool
+    public function forceDelete(User $user, DiscountShop $discountShop): bool
     {
-        return false;
+        return $user->can('force_delete_discount::shop');
     }
 
     /**
-     * Determine whether the discountShop can permanently delete the model.
+     * Determine whether the user can permanently bulk delete.
      */
-    public function forceDelete(User $user, DiscountShop $model): bool
+    public function forceDeleteAny(User $user): bool
     {
-        return false;
+        return $user->can('force_delete_any_discount::shop');
+    }
+
+    /**
+     * Determine whether the user can restore.
+     */
+    public function restore(User $user, DiscountShop $discountShop): bool
+    {
+        return $user->can('restore_discount::shop');
+    }
+
+    /**
+     * Determine whether the user can bulk restore.
+     */
+    public function restoreAny(User $user): bool
+    {
+        return $user->can('restore_any_discount::shop');
+    }
+
+    /**
+     * Determine whether the user can replicate.
+     */
+    public function replicate(User $user, DiscountShop $discountShop): bool
+    {
+        return $user->can('replicate_discount::shop');
+    }
+
+    /**
+     * Determine whether the user can reorder.
+     */
+    public function reorder(User $user): bool
+    {
+        return $user->can('reorder_discount::shop');
     }
 }

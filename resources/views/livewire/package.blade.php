@@ -759,7 +759,7 @@
                                                         </div>
                                                     @endif
 
-                                                    @if ($auth_agent != null)
+                                                    @if ($auth_agent != null && $discount > 0)
                                                         <div wire:transition
                                                             class="flex items-center w-full mt-2 mb-3">
                                                             <div class="flex-grow">

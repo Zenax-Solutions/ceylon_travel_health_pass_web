@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\Package;
+use Spatie\Permission\Models\Role;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class PackagePolicy
+class RolePolicy
 {
     use HandlesAuthorization;
 
@@ -15,15 +15,15 @@ class PackagePolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_package');
+        return $user->can('view_any_role');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Package $package): bool
+    public function view(User $user, Role $role): bool
     {
-        return $user->can('view_package');
+        return $user->can('view_role');
     }
 
     /**
@@ -31,23 +31,23 @@ class PackagePolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_package');
+        return $user->can('create_role');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Package $package): bool
+    public function update(User $user, Role $role): bool
     {
-        return $user->can('update_package');
+        return $user->can('update_role');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Package $package): bool
+    public function delete(User $user, Role $role): bool
     {
-        return $user->can('delete_package');
+        return $user->can('delete_role');
     }
 
     /**
@@ -55,15 +55,15 @@ class PackagePolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_package');
+        return $user->can('delete_any_role');
     }
 
     /**
      * Determine whether the user can permanently delete.
      */
-    public function forceDelete(User $user, Package $package): bool
+    public function forceDelete(User $user, Role $role): bool
     {
-        return $user->can('force_delete_package');
+        return $user->can('{{ ForceDelete }}');
     }
 
     /**
@@ -71,15 +71,15 @@ class PackagePolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_package');
+        return $user->can('{{ ForceDeleteAny }}');
     }
 
     /**
      * Determine whether the user can restore.
      */
-    public function restore(User $user, Package $package): bool
+    public function restore(User $user, Role $role): bool
     {
-        return $user->can('restore_package');
+        return $user->can('{{ Restore }}');
     }
 
     /**
@@ -87,15 +87,15 @@ class PackagePolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_package');
+        return $user->can('{{ RestoreAny }}');
     }
 
     /**
      * Determine whether the user can replicate.
      */
-    public function replicate(User $user, Package $package): bool
+    public function replicate(User $user, Role $role): bool
     {
-        return $user->can('replicate_package');
+        return $user->can('{{ Replicate }}');
     }
 
     /**
@@ -103,6 +103,6 @@ class PackagePolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_package');
+        return $user->can('{{ Reorder }}');
     }
 }

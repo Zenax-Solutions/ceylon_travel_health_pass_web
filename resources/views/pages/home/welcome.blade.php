@@ -60,6 +60,19 @@
 
                 </div>
                 </p>
+                <div class="flex justify-center pb-8">
+                    <a href="#buynow"
+                        class="flex w-40 select-none items-center gap-3 rounded-lg bg-green-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                        type="button" data-ripple-light="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" aria-hidden="true" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z">
+                            </path>
+                        </svg>
+                        Buy Now
+                    </a>
+                </div>
 
             </div>
             <div class="items-center justify-end hidden md:flex">
@@ -77,9 +90,8 @@
 
     <section class="text-gray-600 bg-gray-100 body-font">
         <div class="container mx-auto">
-            <div class="flex flex-wrap">
+            <div class="flex flex-wrap" id="buynow">
                 <!--start here-->
-
                 @forelse ($packages as $key => $package)
                     <div class="p-4 md:w-1/2 lg:w-1/2">
 
@@ -146,8 +158,8 @@
                                             <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                                                 viewBox="0 0 6 10">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke-width="2" d="m1 9 4-4-4-4" />
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
                                             </svg>
                                             <span class="sr-only">Next</span>
                                         </span>
@@ -240,7 +252,11 @@
                 @forelse ($discountShops as $shop)
                     <div class="relative group bg-white transition hover:z-[1] hover:shadow-2xl">
                         <div class="relative p-8 space-y-8">
-                            <img src="{{ Storage::url($shop->image) }}" alt="burger illustration">
+                            <div style="height: 200px; display:flex; justify-content:center">
+                                <img style="object-fit: contain;" src="{{ Storage::url($shop->image) }}"
+                                    alt="burger illustration">
+                            </div>
+
 
                             <div class="space-y-2">
                                 <a href="{{ $shop->location }}" target="_blank" rel="noopener noreferrer">
@@ -294,8 +310,11 @@
                 @forelse ($discountServices as $service)
                     <div class="relative group bg-white transition hover:z-[1] hover:shadow-2xl">
                         <div class="relative p-8 space-y-8">
-                            <img src="{{ Storage::url($service->image) }}" alt="burger illustration">
 
+                            <div style="height: 200px; display:flex; justify-content:center">
+                                <img style="object-fit: contain;" src="{{ Storage::url($service->image) }}"
+                                    alt="burger illustration">
+                            </div>
                             <div class="space-y-2">
                                 <a href="{{ $service->location }}" target="_blank" rel="noopener noreferrer">
                                     <h5 class="text-xl font-medium text-gray-800 transition group-hover:text-yellow-600">

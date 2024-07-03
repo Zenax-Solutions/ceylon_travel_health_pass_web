@@ -135,7 +135,7 @@ class AgentController extends Controller
             return redirect()->route('agent.dashboard');
         }
 
-        $packages = Package::all();
+        $packages = Package::where('show_tour_agent_only', true)->get();
 
         return view('pages.agent.dashboard.pages.agent-packages', compact('packages', 'agent'));
     }

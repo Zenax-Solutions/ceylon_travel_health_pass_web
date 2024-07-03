@@ -170,7 +170,7 @@ class AgentResource extends Resource
                                     ->stripCharacters(',')
                                     ->prefix('$')
                                     ->placeholder('Default 5 USD')
-                                    ->minValue(env('AGENT_DISCONUNT_MARGIN', 5))
+                                    ->minValue(env('AGENT_DISCONUNT_MARGIN', 0))
                                     ->columnSpan([
                                         'default' => 12,
                                         'md' => 12,

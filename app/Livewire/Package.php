@@ -89,7 +89,7 @@ class Package extends Component
                     if ($agent->agent_discount_margin > 5) {
                         $this->discount = $agent->agent_discount_margin;
                     } else {
-                        $this->discount = env('AGENT_DISCONUNT_MARGIN', 5);
+                        $this->discount = env('AGENT_DISCONUNT_MARGIN', 0);
                     }
                 } else {
                     $this->redirectRoute('agent.packages');

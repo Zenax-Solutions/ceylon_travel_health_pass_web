@@ -23,10 +23,10 @@
 
                                             $discount = 0;
 
-                                            if ($agentDiscountMargin > 5) {
+                                            if ($agentDiscountMargin > 0) {
                                                 $discount = $agentDiscountMargin;
                                             } else {
-                                                $discount = env('AGENT_DISCONUNT_MARGIN', 5);
+                                                $discount = env('AGENT_DISCONUNT_MARGIN', 0);
                                             }
 
                                         @endphp

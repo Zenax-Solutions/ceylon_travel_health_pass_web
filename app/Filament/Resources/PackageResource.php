@@ -146,6 +146,11 @@ class PackageResource extends Resource
                         ->label("Accept Children's")
                         ->onColor('success')
                         ->offColor('danger'),
+
+
+                    Toggle::make('show_tour_agent_only')
+                        ->onColor('success')
+                        ->offColor('danger'),
                 ]),
             ]),
         ]);
@@ -166,6 +171,7 @@ class PackageResource extends Resource
                     ->money('USD')
                     ->toggleable(),
                 Tables\Columns\ToggleColumn::make('child_price')->label("Accept Children's"),
+                Tables\Columns\ToggleColumn::make('show_tour_agent_only'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->toggleable()
 

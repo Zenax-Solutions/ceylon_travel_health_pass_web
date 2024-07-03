@@ -11,66 +11,98 @@ class EsimServicePolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the esimService can view any models.
+     * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return true;
+        return $user->can('view_any_esim::service');
     }
 
     /**
-     * Determine whether the esimService can view the model.
+     * Determine whether the user can view the model.
      */
-    public function view(User $user, EsimService $model): bool
+    public function view(User $user, EsimService $esimService): bool
     {
-        return true;
+        return $user->can('view_esim::service');
     }
 
     /**
-     * Determine whether the esimService can create models.
+     * Determine whether the user can create models.
      */
     public function create(User $user): bool
     {
-        return true;
+        return $user->can('create_esim::service');
     }
 
     /**
-     * Determine whether the esimService can update the model.
+     * Determine whether the user can update the model.
      */
-    public function update(User $user, EsimService $model): bool
+    public function update(User $user, EsimService $esimService): bool
     {
-        return true;
+        return $user->can('update_esim::service');
     }
 
     /**
-     * Determine whether the esimService can delete the model.
+     * Determine whether the user can delete the model.
      */
-    public function delete(User $user, EsimService $model): bool
+    public function delete(User $user, EsimService $esimService): bool
     {
-        return true;
+        return $user->can('delete_esim::service');
     }
 
     /**
-     * Determine whether the user can delete multiple instances of the model.
+     * Determine whether the user can bulk delete.
      */
     public function deleteAny(User $user): bool
     {
-        return true;
+        return $user->can('delete_any_esim::service');
     }
 
     /**
-     * Determine whether the esimService can restore the model.
+     * Determine whether the user can permanently delete.
      */
-    public function restore(User $user, EsimService $model): bool
+    public function forceDelete(User $user, EsimService $esimService): bool
     {
-        return false;
+        return $user->can('force_delete_esim::service');
     }
 
     /**
-     * Determine whether the esimService can permanently delete the model.
+     * Determine whether the user can permanently bulk delete.
      */
-    public function forceDelete(User $user, EsimService $model): bool
+    public function forceDeleteAny(User $user): bool
     {
-        return false;
+        return $user->can('force_delete_any_esim::service');
+    }
+
+    /**
+     * Determine whether the user can restore.
+     */
+    public function restore(User $user, EsimService $esimService): bool
+    {
+        return $user->can('restore_esim::service');
+    }
+
+    /**
+     * Determine whether the user can bulk restore.
+     */
+    public function restoreAny(User $user): bool
+    {
+        return $user->can('restore_any_esim::service');
+    }
+
+    /**
+     * Determine whether the user can replicate.
+     */
+    public function replicate(User $user, EsimService $esimService): bool
+    {
+        return $user->can('replicate_esim::service');
+    }
+
+    /**
+     * Determine whether the user can reorder.
+     */
+    public function reorder(User $user): bool
+    {
+        return $user->can('reorder_esim::service');
     }
 }

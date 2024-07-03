@@ -14,7 +14,10 @@
                 @forelse ($discountShops as $shop)
                     <div class="relative group bg-white transition hover:z-[1] hover:shadow-2xl">
                         <div class="relative p-8 space-y-8">
-                            <img src="{{ Storage::url($shop->image) }}" alt="burger illustration">
+                            <div style="height: 200px; display:flex; justify-content:center">
+                                <img style="object-fit: contain;" src="{{ Storage::url($shop->image) }}"
+                                    alt="burger illustration">
+                            </div>
 
                             <div class="space-y-2">
                                 <a href="{{ $shop->location }}" target="_blank" rel="noopener noreferrer">
