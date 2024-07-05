@@ -3,7 +3,6 @@
 
 
 <style>
-
     .swiper-slide {
         position: relative;
     }
@@ -11,7 +10,8 @@
     /* Swiper Navigation Buttons */
     .swiper-button-next,
     .swiper-button-prev {
-        color: #fff; /* Change to the color you prefer */
+        color: #fff;
+        /* Change to the color you prefer */
         width: 50px;
         height: 50px;
         background: rgba(0, 0, 0, 0.5);
@@ -28,47 +28,42 @@
     }
 
     .swiper-pagination-bullet {
-        background: #fff; /* Change to the color you prefer */
-    }
-
-    @media (max-width: 768px) {
-        .slide-images {
-            height: 200vh; /* Adjust height for mobile */
-        }
+        background: #fff;
+        /* Change to the color you prefer */
     }
 
 </style>
 
 
 
-<div id="default-carousel" class="relative w-full" style="background-color: rgb(0 0 0 / 16%);">
+<div id="default-carousel" class="relative w-full">
     <div class="relative  overflow-hidden ">
         <!-- Swiper -->
         <div class="swiper-container">
             <div class="swiper-wrapper" style="z-index: -1; ">
                 <!-- Slide 1 -->
                 <div class="swiper-slide">
-                <div class="overlay">
-                    <img src="https://images.unsplash.com/photo-1646894232861-a0ad84f1ad5d?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        class="slide-images absolute block object-cover object-center w-full md:h-lvh lg:h-lvh"
-                        alt="...">
-                        </div>
+                    <div class="overlay">
+                        <img src="https://images.unsplash.com/photo-1651264042792-78a19a6abbf1?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                            class="slide-images absolute block object-cover object-center w-full h-lvh md:h-lvh lg:h-lvh"
+                            alt="...">
+                    </div>
                 </div>
                 <!-- Slide 2 -->
                 <div class="swiper-slide">
-                <div class="overlay">
-                    <img src="https://images.unsplash.com/photo-1682316953238-f1520b80618f?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        class="slide-images absolute block w-full object-cover object-center md:h-lvh lg:h-lvh"
-                        alt="...">
-                        </div>
+                    <div class="overlay">
+                        <img src="https://images.unsplash.com/photo-1711100360031-24aaccbcd408?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                            class="slide-images absolute block w-full object-cover object-center h-lvh md:h-lvh lg:h-lvh"
+                            alt="...">
+                    </div>
                 </div>
                 <!-- Slide 3 -->
                 <div class="swiper-slide">
-                <div class="overlay">
-                    <img src="https://images.unsplash.com/photo-1510473418088-5caae6b2998f?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        class="slide-images absolute block w-full  object-cover object-center md:h-lvh lg:h-lvh"
-                        alt="...">
-                        </div>
+                    <div class="overlay">
+                        <img src="https://images.unsplash.com/photo-1701544872167-7f5ee73cb435?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                            class="slide-images absolute block w-full  object-cover object-center h-lvh md:h-lvh lg:h-lvh"
+                            alt="...">
+                    </div>
                 </div>
             </div>
             <!-- Navigation Buttons -->
@@ -84,22 +79,28 @@
                         Pass</h1>
                     <p class="text-base font-normal leading-7 lg:w-3/4 text-white">
                         <div class="p-6 mb-8 space-y-6 border-l-2 border-dashed">
-                            <div class="relative w-full grid justify-items-center md:justify-items-start">
-                            <img width="48" height="48" src="https://img.icons8.com/pulsar-gradient/48/skip.png" alt="skip"/>
+                            <div
+                                class="relative w-full grid justify-items-center md:justify-items-start md:flex md:items-center md:gap-7">
+                                <img width="48" height="48" src="https://img.icons8.com/pulsar-gradient/48/skip.png"
+                                    alt="skip" />
                                 <div>
                                     <p class="max-w-screen-sm mt-2 text-sm font-bold text-white">Skip the Lines with One
                                         Digital Pass – No Waiting at Ticket Counters. </p>
                                 </div>
                             </div>
-                            <div class="relative w-full grid justify-items-center md:justify-items-start">
-                            <img width="48" height="48" src="https://img.icons8.com/pulsar-gradient/48/roadmap.png" alt="roadmap"/>
+                            <div
+                                class="relative w-full grid justify-items-center md:justify-items-start md:justify-items-start md:flex md:items-center md:gap-7">
+                                <img width="48" height="48" src="https://img.icons8.com/pulsar-gradient/48/roadmap.png"
+                                    alt="roadmap" />
                                 <div>
                                     <p class="max-w-screen-sm mt-2 text-sm font-bold text-white">Plan your trip from our
                                         huge selection of attractions.</p>
                                 </div>
                             </div>
-                            <div class="relative w-full grid justify-items-center md:justify-items-start">
-                            <img width="48" height="48" src="https://img.icons8.com/pulsar-gradient/48/pass.png" alt="pass"/>
+                            <div
+                                class="relative w-full grid justify-items-center md:justify-items-start md:justify-items-start md:flex md:items-center md:gap-7">
+                                <img width="48" height="48" src="https://img.icons8.com/pulsar-gradient/48/pass.png"
+                                    alt="pass" />
                                 <div>
                                     <p class="max-w-screen-sm mt-2 text-sm font-bold text-white">Download your digital
                                         pass and start exploring. There are no additional entry fees to pay. </p>
@@ -134,7 +135,7 @@
     var swiper = new Swiper('.swiper-container', {
         loop: false,
         autoplay: {
-            delay:5000,
+            delay: 5000,
         },
         speed: 2000,
         spaceBetween: 30,
