@@ -77,21 +77,21 @@
                         Pass</h1>
                     <p class="text-base font-normal leading-7 lg:w-3/4 text-white">
                         <div class="p-6 mb-8 space-y-6 border-l-2 border-dashed">
-                            <div class="relative w-full sm:grid sm:justify-items-center md:justify-items-start">
+                            <div class="relative w-full grid justify-items-center md:justify-items-start">
                             <img width="48" height="48" src="https://img.icons8.com/pulsar-gradient/48/skip.png" alt="skip"/>
                                 <div>
                                     <p class="max-w-screen-sm mt-2 text-sm font-bold text-white">Skip the Lines with One
                                         Digital Pass – No Waiting at Ticket Counters. </p>
                                 </div>
                             </div>
-                            <div class="relative w-full sm:grid sm:justify-items-center md:justify-items-start">
+                            <div class="relative w-full grid justify-items-center md:justify-items-start">
                             <img width="48" height="48" src="https://img.icons8.com/pulsar-gradient/48/roadmap.png" alt="roadmap"/>
                                 <div>
                                     <p class="max-w-screen-sm mt-2 text-sm font-bold text-white">Plan your trip from our
                                         huge selection of attractions.</p>
                                 </div>
                             </div>
-                            <div class="relative w-full sm:grid sm:justify-items-center md:justify-items-start">
+                            <div class="relative w-full grid justify-items-center md:justify-items-start">
                             <img width="48" height="48" src="https://img.icons8.com/pulsar-gradient/48/pass.png" alt="pass"/>
                                 <div>
                                     <p class="max-w-screen-sm mt-2 text-sm font-bold text-white">Download your digital
