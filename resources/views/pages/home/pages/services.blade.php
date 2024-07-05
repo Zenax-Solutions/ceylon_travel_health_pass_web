@@ -13,7 +13,7 @@
 
                 @forelse ($discountServices as $service)
                     <div class="relative group bg-white transition hover:z-[1] hover:shadow-2xl">
-                        <div class="relative p-8 space-y-8">
+                        <div class="relative p-8 space-y-8 text-center md:text-left lg:text-left">
                             <div style="height: 200px; display:flex; justify-content:center">
                                 <img style="object-fit: contain;" src="{{ Storage::url($service->image) }}"
                                     alt="burger illustration">

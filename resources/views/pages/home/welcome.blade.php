@@ -172,7 +172,7 @@
 
             @forelse($discountShops as $shop)
                 <div class="relative group bg-white transition hover:z-[1] hover:shadow-2xl">
-                    <div class="relative p-8 space-y-8">
+                    <div class="relative p-8 space-y-8 text-center md:text-left lg:text-left">
                         <div style="height: 200px; display:flex; justify-content:center">
                             <img style="object-fit: contain;" src="{{ Storage::url($shop->image) }}"
                                 alt="burger illustration">
@@ -199,16 +199,21 @@
             <div class="relative group bg-gray-100 transition hover:z-[1] hover:shadow-2xl lg:hidden xl:block">
                 <div
                     class="relative p-8 space-y-8 transition duration-300 border-dashed rounded-lg group-hover:bg-white group-hover:border group-hover:scale-90">
-                    <img width="50" height="50" src="https://img.icons8.com/ios-glyphs/90/shop.png" alt="shop" />
 
-                    <div class="space-y-2">
+                    <div class=" flex justify-center md:justify-start lg:justify-start">
+                        <img width="50" height="50" src="https://img.icons8.com/ios-glyphs/90/shop.png" alt="shop" />
+
+                    </div>
+
+                    <div class="space-y-2 text-center md:text-left lg:text-left">
                         <h5 class="text-xl font-medium text-gray-800 transition group-hover:text-green-400">Find More
                             Shop's</h5>
 
                     </div>
                     <a href="{{ route('shops') }}"
-                        class="flex items-center justify-between group-hover:text-green-400">
+                        class="flex items-center group-hover:text-green-400 justify-center md:justify-start lg:justify-start">
                         <span class="text-sm font-bold">View More</span>
+                        &nbsp; &nbsp;
                         <span
                             class="text-2xl transition duration-300 -translate-x-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0">&RightArrow;</span>
                     </a>
@@ -229,7 +234,7 @@
 
             @forelse($discountServices as $service)
                 <div class="relative group bg-white transition hover:z-[1] hover:shadow-2xl">
-                    <div class="relative p-8 space-y-8">
+                    <div class="relative p-8 space-y-8 text-center md:text-left lg:text-left">
 
                         <div style="height: 200px; display:flex; justify-content:center">
                             <img style="object-fit: contain;" src="{{ Storage::url($service->image) }}"
@@ -255,16 +260,22 @@
             <div class="relative group bg-gray-100 transition hover:z-[1] hover:shadow-2xl lg:hidden xl:block">
                 <div
                     class="relative p-8 space-y-8 transition duration-300 border-dashed rounded-lg group-hover:bg-white group-hover:border group-hover:scale-90">
-                    <img width="50" height="50" src="https://img.icons8.com/ios-filled/50/service.png" alt="service" />
 
-                    <div class="space-y-2">
-                        <h5 class="text-xl font-medium text-gray-800 transition group-hover:text-green-400">Find More
+                    <div class="flex justify-center md:justify-start lg:justify-start">
+                        <img width="50" height="50" src="https://img.icons8.com/ios-filled/50/service.png"
+                            alt="service" />
+                    </div>
+
+
+                    <div class="space-y-2 text-center md:text-left lg:text-left">
+                        <h5 class="text-xl font-medium text-gray-800 transition  group-hover:text-green-400">Find More
                             Service's</h5>
 
                     </div>
                     <a href="{{ route('services') }}"
-                        class="flex items-center justify-between group-hover:text-green-400">
+                        class="flex items-center group-hover:text-green-400 justify-center md:justify-start lg:justify-start">
                         <span class="text-sm font-bold">View More</span>
+                        &nbsp; &nbsp;
                         <span
                             class="text-2xl transition duration-300 -translate-x-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0">&RightArrow;</span>
                     </a>
