@@ -77,38 +77,23 @@
                         Pass</h1>
                     <p class="text-base font-normal leading-7 lg:w-3/4 text-white">
                         <div class="p-6 mb-8 space-y-6 border-l-2 border-dashed">
-                            <div class="relative w-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    class="absolute -top-0.5 z-10 -ml-3.5 h-7 w-7 rounded-full text-green-500">
-                                    <path fill-rule="evenodd"
-                                        d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <div class="ml-6">
+                            <div class="relative w-full sm:grid sm:justify-items-center md:justify-items-start">
+                            <img width="48" height="48" src="https://img.icons8.com/pulsar-gradient/48/skip.png" alt="skip"/>
+                                <div>
                                     <p class="max-w-screen-sm mt-2 text-sm font-bold text-white">Skip the Lines with One
                                         Digital Pass – No Waiting at Ticket Counters. </p>
                                 </div>
                             </div>
-                            <div class="relative w-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    class="absolute -top-0.5 z-10 -ml-3.5 h-7 w-7 rounded-full text-green-500">
-                                    <path fill-rule="evenodd"
-                                        d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <div class="ml-6">
+                            <div class="relative w-full sm:grid sm:justify-items-center md:justify-items-start">
+                            <img width="48" height="48" src="https://img.icons8.com/pulsar-gradient/48/roadmap.png" alt="roadmap"/>
+                                <div>
                                     <p class="max-w-screen-sm mt-2 text-sm font-bold text-white">Plan your trip from our
                                         huge selection of attractions.</p>
                                 </div>
                             </div>
-                            <div class="relative w-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    class="absolute -top-0.5 z-10 -ml-3.5 h-7 w-7 rounded-full text-green-500">
-                                    <path fill-rule="evenodd"
-                                        d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <div class="ml-6">
+                            <div class="relative w-full sm:grid sm:justify-items-center md:justify-items-start">
+                            <img width="48" height="48" src="https://img.icons8.com/pulsar-gradient/48/pass.png" alt="pass"/>
+                                <div>
                                     <p class="max-w-screen-sm mt-2 text-sm font-bold text-white">Download your digital
                                         pass and start exploring. There are no additional entry fees to pay. </p>
                                 </div>
