@@ -74,8 +74,8 @@
 
         <div class="container flex flex-col mx-auto" style="padding: 10px">
             <div class="grid w-full grid-cols-1 my-auto mt-12 mb-8 md:grid-cols-2 ">
-                <div class="flex flex-col justify-center text-center lg:text-start">
-                    <h1 class="mb-4 text-4xl font-extrabold leading-tight lg:text-6xl text-white">Ceylon Travel & Health
+                <div class="flex flex-col justify-center text-center md:text-left lg:text-left lg:text-start">
+                    <h1 class="mb-4 text-5xl font-extrabold leading-tight lg:text-7xl text-white">Ceylon Travel & Health
                         Pass</h1>
                     <p class="text-base font-normal leading-7 lg:w-3/4 text-white">
                         <div class="p-6 mb-8 space-y-6 border-l-2 border-dashed">
