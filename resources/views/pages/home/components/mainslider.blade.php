@@ -42,7 +42,7 @@
                 <!-- Slide 1 -->
                 <div class="swiper-slide">
                 <div class="overlay">
-                    <img src="https://frugalfrolicker.com/wp-content/uploads/2023/11/sri-lanka-beautiful-places-8.jpg"
+                    <img src="https://images.unsplash.com/photo-1646894232861-a0ad84f1ad5d?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                         class="absolute block object-cover object-center w-full h-screen"
                         alt="...">
                         </div>
@@ -50,7 +50,7 @@
                 <!-- Slide 2 -->
                 <div class="swiper-slide">
                 <div class="overlay">
-                    <img src="https://cdn-v2.theculturetrip.com/1200x675/wp-content/uploads/2023/09/sigiriya_brian_kyed_unsplash.webp"
+                    <img src="https://images.unsplash.com/photo-1682316953238-f1520b80618f?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                         class="absolute block w-full object-cover object-center h-screen"
                         alt="...">
                         </div>
@@ -58,7 +58,7 @@
                 <!-- Slide 3 -->
                 <div class="swiper-slide">
                 <div class="overlay">
-                    <img src="https://thetripconnections.com/wp-content/uploads/2024/06/873832-Kandy-Lake-Sri-Lanka-Lake-Houses-Sunrises-and-sunsets-scaled.jpg"
+                    <img src="https://images.unsplash.com/photo-1510473418088-5caae6b2998f?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                         class="absolute block w-full  object-cover object-center h-screen"
                         alt="...">
                         </div>
