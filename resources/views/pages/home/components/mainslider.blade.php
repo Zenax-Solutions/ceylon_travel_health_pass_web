@@ -78,7 +78,7 @@
                     <h1 class="mb-4 text-5xl font-extrabold leading-tight lg:text-7xl text-white">Ceylon Travel & Health
                         Pass</h1>
                     <p class="text-base font-normal leading-7 lg:w-3/4 text-white">
-                        <div class="p-6 mb-8 space-y-6 border-l-2 border-dashed">
+                        <div class="p-6 mb-8 md:pl-0 lg:pl-0 space-y-4">
                             <div
                                 class="relative w-full grid justify-items-center md:justify-items-start md:flex md:items-center md:gap-7">
                                 <img width="48" height="48" src="https://img.icons8.com/pulsar-gradient/48/skip.png"
@@ -108,7 +108,7 @@
                             </div>
                         </div>
                     </p>
-                    <div class="flex justify-center pb-8">
+                    <div class="flex  justify-center md:justify-start lg:justify-start pb-8">
                         <a href="#buynow"
                             class="flex w-40 select-none items-center gap-3 rounded-lg bg-green-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                             type="button" data-ripple-light="true">
