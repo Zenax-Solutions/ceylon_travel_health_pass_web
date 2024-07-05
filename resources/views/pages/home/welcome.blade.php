@@ -172,7 +172,7 @@
 
             @forelse($discountShops as $shop)
                 <div class="relative group bg-white transition hover:z-[1] hover:shadow-2xl">
-                    <div class="relative p-8 space-y-8 text-center md:text-left lg:text-left">
+                    <div class="relative p-8 space-y-8 text-center">
                         <div style="height: 200px; display:flex; justify-content:center">
                             <img style="object-fit: contain;" src="{{ Storage::url($shop->image) }}"
                                 alt="burger illustration">
@@ -195,7 +195,6 @@
             @endforelse
 
 
-
             <div class="relative group bg-gray-100 transition hover:z-[1] hover:shadow-2xl lg:hidden xl:block">
                 <div
                     class="relative p-8 space-y-8 transition duration-300 border-dashed rounded-lg group-hover:bg-white group-hover:border group-hover:scale-90">
@@ -213,7 +212,6 @@
                     <a href="{{ route('shops') }}"
                         class="flex items-center group-hover:text-green-400 justify-center md:justify-start lg:justify-start">
                         <span class="text-sm font-bold">View More</span>
-                      
                     </a>
                 </div>
             </div>
@@ -232,7 +230,7 @@
 
             @forelse($discountServices as $service)
                 <div class="relative group bg-white transition hover:z-[1] hover:shadow-2xl">
-                    <div class="relative p-8 space-y-8 text-center md:text-left lg:text-left">
+                    <div class="relative p-8 space-y-8 text-center">
 
                         <div style="height: 200px; display:flex; justify-content:center">
                             <img style="object-fit: contain;" src="{{ Storage::url($service->image) }}"
