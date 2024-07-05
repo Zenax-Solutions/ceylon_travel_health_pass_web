@@ -213,9 +213,7 @@
                     <a href="{{ route('shops') }}"
                         class="flex items-center group-hover:text-green-400 justify-center md:justify-start lg:justify-start">
                         <span class="text-sm font-bold">View More</span>
-                        &nbsp; &nbsp;
-                        <span
-                            class="text-2xl transition duration-300 -translate-x-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0">&RightArrow;</span>
+                      
                     </a>
                 </div>
             </div>
@@ -275,9 +273,7 @@
                     <a href="{{ route('services') }}"
                         class="flex items-center group-hover:text-green-400 justify-center md:justify-start lg:justify-start">
                         <span class="text-sm font-bold">View More</span>
-                        &nbsp; &nbsp;
-                        <span
-                            class="text-2xl transition duration-300 -translate-x-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0">&RightArrow;</span>
+                       
                     </a>
                 </div>
             </div>
