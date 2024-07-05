@@ -28,6 +28,11 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-lock-closed';
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
     public static function getNavigationLabel(): string
     {
         return trans('filament-users::user.resource.label');
@@ -69,8 +74,8 @@ class UserResource extends Resource
                 ->maxLength(255)
                 ->dehydrateStateUsing(static function ($state) use ($form) {
                     return !empty($state)
-                            ? Hash::make($state)
-                            : User::find($form->getColumns())?->password;
+                        ? Hash::make($state)
+                        : User::find($form->getColumns())?->password;
                 }),
         ];
 
@@ -90,7 +95,7 @@ class UserResource extends Resource
 
     public static function table(Table $table): Table
     {
-        if(class_exists( STS\FilamentImpersonate\Tables\Actions\Impersonate::class) && config('filament-users.impersonate')){
+        if (class_exists(STS\FilamentImpersonate\Tables\Actions\Impersonate::class) && config('filament-users.impersonate')) {
             $table->actions([Impersonate::make('impersonate')]);
         }
         $table
@@ -123,10 +128,10 @@ class UserResource extends Resource
             ->filters([
                 Tables\Filters\Filter::make('verified')
                     ->label(trans('filament-users::user.resource.verified'))
-                    ->query(fn(Builder $query): Builder => $query->whereNotNull('email_verified_at')),
+                    ->query(fn (Builder $query): Builder => $query->whereNotNull('email_verified_at')),
                 Tables\Filters\Filter::make('unverified')
                     ->label(trans('filament-users::user.resource.unverified'))
-                    ->query(fn(Builder $query): Builder => $query->whereNull('email_verified_at')),
+                    ->query(fn (Builder $query): Builder => $query->whereNull('email_verified_at')),
             ])
             ->actions([
                 ActionGroup::make([
