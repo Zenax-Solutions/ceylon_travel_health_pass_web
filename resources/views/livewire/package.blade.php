@@ -138,7 +138,7 @@
                                             @forelse ($package->gallery as $image)
                                                 <div class="hidden duration-700 ease-in-out rounded" data-carousel-item>
                                                     <img src="{{ Storage::url($image) }}"
-                                                        class="absolute block object-cover w-40 w-full h-64 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                                                        class="absolute block object-cover  w-full h-64 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
                                                         alt="...">
                                                 </div>
                                             @empty
