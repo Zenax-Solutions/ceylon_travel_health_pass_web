@@ -30,6 +30,13 @@
     .swiper-pagination-bullet {
         background: #fff; /* Change to the color you prefer */
     }
+
+    @media (max-width: 768px) {
+        .slide-images {
+            height: 200vh; /* Adjust height for mobile */
+        }
+    }
+
 </style>
 
 
@@ -43,7 +50,7 @@
                 <div class="swiper-slide">
                 <div class="overlay">
                     <img src="https://images.unsplash.com/photo-1646894232861-a0ad84f1ad5d?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        class="absolute block object-cover object-center w-full h-lvh"
+                        class="slide-images absolute block object-cover object-center w-full md:h-lvh lg:h-lvh"
                         alt="...">
                         </div>
                 </div>
@@ -51,7 +58,7 @@
                 <div class="swiper-slide">
                 <div class="overlay">
                     <img src="https://images.unsplash.com/photo-1682316953238-f1520b80618f?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        class="absolute block w-full object-cover object-center h-lvh"
+                        class="slide-images absolute block w-full object-cover object-center md:h-lvh lg:h-lvh"
                         alt="...">
                         </div>
                 </div>
@@ -59,7 +66,7 @@
                 <div class="swiper-slide">
                 <div class="overlay">
                     <img src="https://images.unsplash.com/photo-1510473418088-5caae6b2998f?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        class="absolute block w-full  object-cover object-center h-lvh"
+                        class="slide-images absolute block w-full  object-cover object-center md:h-lvh lg:h-lvh"
                         alt="...">
                         </div>
                 </div>
