@@ -126,7 +126,7 @@
     <!-- component -->
     <footer class="font-sans bg-gray-900 dark:bg-gray-900">
         <div class="container px-6 py-12 mx-auto">
-            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4">
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4 text-center md:text-left lg:text-left">
 
                 <div>
                     <a href="/">
@@ -137,7 +137,7 @@
                 <div>
                     <p class="font-semibold text-gray-800 dark:text-white">Contact Us</p>
 
-                    <div class="flex flex-col items-start mt-5 space-y-2">
+                    <div class="flex flex-col items-center md:items-start lg:items-start mt-5 space-y-2">
                         <p
                             class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">
                             Colombo,Sri Lanka <br>
@@ -151,7 +151,7 @@
                 <div>
                     <p class="font-semibold text-gray-800 dark:text-white">Quick Link</p>
 
-                    <div class="flex flex-col items-start mt-5 space-y-2">
+                    <div class="flex flex-col items-center md:items-start lg:items-start mt-5 space-y-2">
                         <a href="/"
                             class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">Home</a>
 
@@ -167,7 +167,7 @@
                 <div>
                     <p class="font-semibold text-gray-800 dark:text-white">More Information</p>
 
-                    <div class="flex flex-col items-start mt-5 space-y-2">
+                    <div class="flex flex-col items-center md:items-start lg:items-start mt-5 space-y-2">
                         <a href="#"
                             class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">Privacy
                             Policy</a>
@@ -185,7 +185,7 @@
                 <div>
                     <p class="font-semibold text-gray-800 dark:text-white">Agent Program</p>
 
-                    <div class="flex flex-col items-start mt-5 space-y-2">
+                    <div class="flex flex-col items-center md:items-start lg:items-start mt-5 space-y-2">
                         <a href="{{ route('agent.login') }}"
                             class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">Agent
                             Portal</a>
@@ -226,7 +226,7 @@
                         height="30" alt="db" />
                 </div>
             </div> --}}
-            <p class="p-8 font-sans text-white text-start md:text-center md:text-lg md:p-4">© {{ now()->year }}
+            <p class="p-8 font-sans text-white text-center md:text-start lg:text-start md:text-center md:text-lg md:p-4">© {{ now()->year }}
                 Ceylon
                 Travel. All rights
                 reserved. Developed By <a href="https://zenax.info/" target="_blank">ZENAX</a></p>
