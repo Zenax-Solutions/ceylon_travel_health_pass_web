@@ -37,8 +37,8 @@ class User extends Authenticatable implements FilamentUser
         'two_factor_confirmed_at' => 'datetime',
     ];
 
-    // public function isSuperAdmin(): bool
-    // {
-    //     return in_array($this->email, config('auth.super_admins'));
-    // }
+    public function isSuperAdmin(): bool
+    {
+        return in_array($this->email, config('auth.super_admins'));
+    }
 }
