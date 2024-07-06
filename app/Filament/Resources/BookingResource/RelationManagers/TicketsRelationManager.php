@@ -67,7 +67,7 @@ class TicketsRelationManager extends RelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('booking.date')->date()->since(),
-                Tables\Columns\TextColumn::make('ticket_id')->limit(50),
+                Tables\Columns\TextColumn::make('ticket_id')->searchable()->limit(50),
                 Tables\Columns\TextColumn::make('expiry_date')->date(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
@@ -108,9 +108,6 @@ class TicketsRelationManager extends RelationManager
                             );
                     }),
 
-                SelectFilter::make('booking_id')
-                    ->multiple()
-                    ->relationship('booking', 'date'),
             ])
             ->headerActions([Tables\Actions\CreateAction::make()])
             ->actions([
