@@ -22,6 +22,8 @@ use Filament\Forms\Components\RichEditor;
 use Filament\Tables\Filters\SelectFilter;
 use App\Filament\Filters\DateRangeFilter;
 use App\Filament\Resources\BookingResource\Pages;
+use Illuminate\Database\Eloquent\Builder;
+use App\Models\Destination;
 
 class BookingResource extends Resource
 {
@@ -90,8 +92,11 @@ class BookingResource extends Resource
                             'lg' => 4,
                         ]),
 
-                    KeyValue::make('destination_list')
+                    Select::make('destination_list')
                         ->required()
+                        ->multiple()
+                        ->getSearchResultsUsing(fn (string $search): array => Destination::where('destination', 'like', "%{$search}%")->where('status', 'publish')->limit(50)->pluck('destination', 'id')->toArray())
+                        ->getOptionLabelsUsing(fn (array $values): array => Destination::whereIn('id', $values)->pluck('destination', 'id')->toArray())
                         ->required()
                         ->columnSpan([
                             'default' => 12,
@@ -99,14 +104,7 @@ class BookingResource extends Resource
                             'lg' => 12,
                         ]),
 
-                    KeyValue::make('esim_list')
-                        ->required()
-                        ->required()
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 12,
-                        ]),
+                   
 
                     DatePicker::make('date')
                         ->rules(['date'])
@@ -144,15 +142,31 @@ class BookingResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('id')
+                   
+                    ->label('Booking No')
+                    ->formatStateUsing(function ($state) {
+                        return '#'.$state;
+                    })
+                    ->searchable()
+                    ->limit(50),
                 Tables\Columns\TextColumn::make('package.main_title')
                     ->toggleable()
                     ->searchable()
                     ->limit(50),
-                Tables\Columns\TextColumn::make('customer')
-                    ->formatStateUsing(function ($state) {
-                        return $state->first_name . ' ' . $state->last_name;
+                Tables\Columns\TextColumn::make('id')
+                    ->formatStateUsing(function (Booking $record, $state) {
+                        if($record->customer != null)
+                        {
+                           return $record->customer != null ? '#'.$state.'  -> '. $record->customer->first_name . ' ' . $record->customer->last_name : '';
+                        }
+                        else
+                        { 
+                            return $record->agent != null ?  '#'.$state.'  -> '. $record->agent->name .' ( Tourism Agent ✅ )' : '';
+                        }
                     })
-                    ->toggleable()
+                  
+                    ->label('Booking Info')
                     ->searchable()
                     ->limit(50),
                 Tables\Columns\TextColumn::make('adult_pass_count')
@@ -180,13 +194,21 @@ class BookingResource extends Resource
                 SelectFilter::make('package_id')
                     ->relationship('package', 'main_title')
                     ->indicator('Package')
-                    ->multiple()
                     ->label('Package'),
 
                 SelectFilter::make('customer_id')
                     ->relationship('customer', 'first_name')
                     ->indicator('Customer')
                     ->label('Customer'),
+
+                    SelectFilter::make('agent_id')
+                    ->relationship('agent', 'name', function (Builder $query) {
+                        $query->where(function ($query) {
+                            $query->where('type', 'tour_agent');
+                        });
+                    })
+                    ->indicator('Tourism Agent')
+                    ->label('Tourism Agent'),
             ])
             ->actions([
                 //ViewAction::make(),

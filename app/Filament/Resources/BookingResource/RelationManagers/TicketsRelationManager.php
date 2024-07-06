@@ -66,15 +66,15 @@ class TicketsRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('booking.date')->limit(50),
+                Tables\Columns\TextColumn::make('booking.date')->date()->since(),
                 Tables\Columns\TextColumn::make('ticket_id')->limit(50),
                 Tables\Columns\TextColumn::make('expiry_date')->date(),
-                Tables\Columns\TextColumn::make('status')->enum([
-                    'active' => 'Active',
-                    'used' => 'Used',
-                    'pending' => 'Pending',
-                    'expired' => 'Expired',
-                ]),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'expired' => 'warning',
+                        'active' => 'success',
+                    }),
             ])
             ->filters([
                 Tables\Filters\Filter::make('created_at')
