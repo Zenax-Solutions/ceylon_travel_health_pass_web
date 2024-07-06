@@ -230,7 +230,7 @@
                     {
                         regionality.textContent = 'SAARC Nations';
 
-                    }elseif(event.detail.data.regionality == 'non_south_asian')
+                    }else if(event.detail.data.regionality == 'non_south_asian')
                     {
                         regionality.textContent = 'Non-SAARC Nations';
                     }   
