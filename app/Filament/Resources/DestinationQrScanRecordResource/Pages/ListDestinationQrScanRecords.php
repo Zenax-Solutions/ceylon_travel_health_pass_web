@@ -4,10 +4,13 @@ namespace App\Filament\Resources\DestinationQrScanRecordResource\Pages;
 
 use App\Filament\Resources\DestinationQrScanRecordResource;
 use Filament\Actions;
+use App\Filament\Traits\HasDescendingOrder;
 use Filament\Resources\Pages\ListRecords;
 
 class ListDestinationQrScanRecords extends ListRecords
 {
+    use HasDescendingOrder;
+
     protected static string $resource = DestinationQrScanRecordResource::class;
 
     protected function getHeaderActions(): array
