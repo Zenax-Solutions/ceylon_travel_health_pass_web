@@ -66,7 +66,7 @@ class TicketsRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('booking.date')->date()->since(),
+                Tables\Columns\TextColumn::make('created_at')->date()->since(),
                 Tables\Columns\TextColumn::make('ticket_id')->searchable()->limit(50),
                 Tables\Columns\TextColumn::make('expiry_date')->date(),
                 Tables\Columns\TextColumn::make('status')
