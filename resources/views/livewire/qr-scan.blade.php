@@ -114,7 +114,13 @@
                                                 <span id="pass_type" class="text-xl font-bold text-blue-400"></span>
 
                                             </div>
-                                        @endif
+
+                                            <div class="pt-2">
+
+                                                 <span id="regionality" class="text-lg font-bold text-red-400"></span>
+
+                                            </div>
+                                                @endif
 
                                         <div class="pt-2">
                                             <p class="text-sm font-medium leading-none text-gray-800">
@@ -202,6 +208,7 @@
             let bookigId = document.getElementById('bookingId');
             let passType = document.getElementById('pass_type');
             let ticketNo = document.getElementById('ticketNo');
+            let regionality = document.getElementById('regionality');
 
             if (resultElement && modal) {
                 if (event.detail.status === 'valid') {
@@ -218,6 +225,15 @@
                     } else {
                         passType.textContent = 'Child Pass';
                     }
+
+                    if(event.detail.data.regionality == 'south_asian')
+                    {
+                        regionality.textContent = 'SAARC Nations';
+
+                    }elseif(event.detail.data.regionality == 'non_south_asian')
+                    {
+                        regionality.textContent = 'Non-SAARC Nations';
+                    }   
 
 
 

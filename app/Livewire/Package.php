@@ -53,6 +53,8 @@ class Package extends Component
     public $auth_customer;
     public $auth_agent;
 
+    public $regionality;
+
     public $coupon_code;
     public $coupon_data, $coupon_message = ['color' => '', 'message' => ''];
     public $discount = 0;
@@ -305,7 +307,9 @@ class Package extends Component
 
             $booking = Booking::create($PackageData);
 
-            $genrateQrCode->genarate($PackageData, $booking, $customer);
+            $this->regionality = $customer->region_type;
+
+            $genrateQrCode->genarate($PackageData, $booking, $customer, $this->regionality);
 
             if (isset($this->coupon_code)) {
                 $agent = Agent::where('coupon_code', $this->coupon_code);
@@ -329,6 +333,11 @@ class Package extends Component
         } elseif ($type == 'withOutEsim') {
 
             if ($this->auth_agent != null) {
+
+
+                $this->validate([
+                    'regionality' => 'required',
+                ]);
 
                 $PackageData = [
                     'package_id' => $this->packageId,
@@ -365,9 +374,12 @@ class Package extends Component
 
 
                 if ($this->auth_agent != null) {
-                    $genrateQrCode->genarate($PackageData, $booking, $this->auth_agent);
+                    $genrateQrCode->genarate($PackageData, $booking, $this->auth_agent, $this->regionality);
                 } else {
-                    $genrateQrCode->genarate($PackageData, $booking, $customer);
+
+                    $this->regionality = $customer->region_type;
+
+                    $genrateQrCode->genarate($PackageData, $booking, $customer, $this->regionality);
                 }
 
 

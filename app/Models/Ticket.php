@@ -11,7 +11,7 @@ class Ticket extends Model
     use HasFactory;
     use Searchable;
 
-    protected $fillable = ['booking_id', 'ticket_id', 'is_adult', 'expiry_date', 'status'];
+    protected $fillable = ['booking_id', 'ticket_id', 'is_adult', 'expiry_date','regionality', 'status'];
 
     protected $searchableFields = ['*'];
 

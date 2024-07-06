@@ -96,22 +96,18 @@ class TicketResource extends Resource
                     ->toggleable()
                     ->label('Bookig No')
                     ->formatStateUsing(function ($state) {
-                        return '#'.$state;
+                        return '#' . $state;
                     })
                     ->searchable()
                     ->limit(50),
                 Tables\Columns\TextColumn::make('booking')
                     ->formatStateUsing(function ($state) {
 
-                        if($state->customer_id != null)
-                        {
-                           return $state->customer != null ? $state->customer->first_name . ' ' . $state->customer->last_name : '';
+                        if ($state->customer_id != null) {
+                            return $state->customer != null ? $state->customer->first_name . ' ' . $state->customer->last_name : '';
+                        } else {
+                            return $state->agent->name != null ?  $state->agent->name . ' ( Tourism Agent ✅ )' : '';
                         }
-                        else
-                        { 
-                            return $state->agent->name != null ?  $state->agent->name .' ( Tourism Agent ✅ )' : '';
-                        }
-                        
                     })
                     ->label('Customer Name')
                     ->limit(50),
@@ -122,6 +118,24 @@ class TicketResource extends Resource
                 Tables\Columns\TextColumn::make('expiry_date')
                     ->toggleable()
                     ->date(),
+                Tables\Columns\TextColumn::make('regionality')
+                    ->formatStateUsing(function ($state){
+
+                        if($state == 'south_asian')
+                        {
+                           return 'SAARC Nations';
+                        }
+                        elseif($state == 'non_south_asian')
+                        {
+                            return 'Non-SAARC Nations';
+                        }
+                        else
+                        {
+                            return '';
+                        }
+
+                    })
+                    ->toggleable(),
 
                 Tables\Columns\TextColumn::make('status')
                     ->badge()

@@ -251,6 +251,14 @@ class DestinationResource extends Resource
                     ->badge()
                     ->color('danger')
                     ->toggleable(),
+                    Tables\Columns\TextColumn::make('id')
+                    ->label('Over selling count')
+                    ->formatStateUsing(fn (Destination $record): string => $record->destinationStock()->orderBy('id', 'desc')->firstOr(function () {
+                        return (object) ['over_selling' => 'stock not available'];
+                    })->over_selling)
+                    ->badge()
+                    ->color('danger')
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {

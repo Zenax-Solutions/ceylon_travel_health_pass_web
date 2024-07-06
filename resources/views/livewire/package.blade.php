@@ -555,6 +555,24 @@
 
                                         </div>
 
+                                    @else
+                                    
+                                    <div class="mb-4">
+                                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Please Select The Region Type</label>
+                                    <select wire:model="regionality" required
+                                    class="bg-gray-50 border font-bold border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option value="">Select One</option>
+                                        <option value="south_asian">SAARC Nations ( South Asian )</option>
+                                        <option value="non_south_asian">Non-SAARC Nations ( Non South Asian )</option>
+                                    </select>
+                                    <div class="pt-2">
+                                    @error('regionality')
+                                            <span  class="pt-2 font-bold text-red-400 error">{{ $message }}</span>
+                                    @enderror
+                                    </div>
+                                  
+                                    </div>
+
                                     @endif
 
                                     <hr>

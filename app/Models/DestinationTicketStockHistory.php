@@ -9,7 +9,7 @@ class DestinationTicketStockHistory extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['destination_id', 'ticket_stock_count', 'selling_ticket_count', 'date'];
+    protected $fillable = ['destination_id', 'ticket_stock_count', 'selling_ticket_count','over_selling', 'date'];
 
 
     public function destination()

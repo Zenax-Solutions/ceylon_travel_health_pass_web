@@ -21,7 +21,7 @@ class GenarateQrCodes
         // Initialization code...
     }
 
-    public function genarate($data, $bookig, $customer)
+    public function genarate($data, $bookig, $customer,$regionality=null)
     {
         try {
             // Get the current date
@@ -60,6 +60,7 @@ class GenarateQrCodes
                     'ticket_id' => $ticketNumber,
                     'is_adult' => false,
                     //'expiry_date' => $formattedExpirationDate,
+                    'regionality' => $regionality,
                     'status' => 'active'
                 ]);
                 $tickets[] = $ticket;

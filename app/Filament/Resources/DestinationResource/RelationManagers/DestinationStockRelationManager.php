@@ -44,6 +44,9 @@ class DestinationStockRelationManager extends RelationManager
                     ->description(fn (DestinationTicketStockHistory $record): string => 'remaining : ' . $record->ticket_stock_count - $record->selling_ticket_count)
                     ->badge()
                     ->color('warning'),
+                Tables\Columns\TextColumn::make('over_selling')
+                    ->badge()
+                    ->color('danger'),
                 Tables\Columns\TextColumn::make('date'),
 
             ])

@@ -26,6 +26,7 @@ class Package extends Model
         'discount_shop_list',
         'discount_service_list',
         'expire_days_count',
+        'show_tour_agent_only',
     ];
 
     protected $searchableFields = ['*'];
