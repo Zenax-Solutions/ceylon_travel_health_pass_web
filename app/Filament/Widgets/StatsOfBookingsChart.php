@@ -4,10 +4,13 @@ namespace App\Filament\Widgets;
 
 use Filament\Widgets\ChartWidget;
 use Illuminate\Support\Facades\DB;
+use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 use Carbon\Carbon;
 
 class StatsOfBookingsChart extends ChartWidget
 {
+    use HasWidgetShield;
+
     protected static ?string $heading = 'Chart';
     protected static ?int $sort = 2;
     protected int | string | array $columnSpan = 'full';
