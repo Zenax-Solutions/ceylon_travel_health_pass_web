@@ -40,6 +40,7 @@ class GenarateQrCodes
                     'booking_id' => $bookig->id,
                     'ticket_id' => $ticketNumber,
                     'is_adult' => true,
+                    'regionality' => $regionality,
                     //'expiry_date' => $formattedExpirationDate,
                     'status' => 'active'
                 ]);
