@@ -116,7 +116,7 @@
                                         <h1 class="text-lg font-black text-gray-800 md:text-2xl">Destinations</h1>
                                         <div class="items-center pt-4 pb-4" style="gap: 10px; display: grid;">
 
-                                            @forelse($destinations as $destination)
+                                            @forelse($destinations->shuffle()->take(5) as $destination)
                                                 <div class="flex" style="gap: 10px;align-items: center;">
                                                     <img style="object-fit: cover"
                                                         class="transform border border-gray-200 rounded-md w-14 h-14 hover:scale-125"
@@ -134,23 +134,10 @@
                             </div>
                         </div>
 
-
                         <div class="p-6 pt-0">
-                            <div>
-
-                                <div class="inline-block align-bottom">
-
-                                    <a href="{{ route('package', ['id' => $package->id]) }}"
-                                        class="middle none center mr-3 rounded-lg bg-green-500 py-3 px-6 font-sans text-xs font-bold  text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                                        data-ripple-light="true">
-                                        More Details
-                                    </a>
-
-
-                                </div>
-                            </div>
-
+                           @include('pages.home.components.package-info')
                         </div>
+
                     </div>
 
                 </div>

@@ -14,7 +14,7 @@ class HomeController extends Controller
     {
         $packages = Package::where('show_tour_agent_only', false)->get();
 
-        $destinations = Destination::all()->shuffle()->take(5);
+        $destinations = Destination::all();
 
         // Get published discount shops and shuffle them, then take 3
         $discountShops = DiscountShop::where('status', 'publish')->get()->shuffle()->take(3);
