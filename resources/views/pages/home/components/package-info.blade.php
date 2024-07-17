@@ -99,7 +99,7 @@
                                     @php
                                     $shop = \App\Models\DiscountShop::find($shopId);
                                     @endphp
-                                    <template x-if="searchshops === '' || {{ json_encode($destination->destination) }}.toLowerCase().includes(searchshops.toLowerCase())">
+                                    <template x-if="searchshops === '' || {{ json_encode($shop?->shope_name) }}.toLowerCase().includes(searchshops.toLowerCase())">
                                         <div class="bg-gray-50 hover:bg-gray-100 p-4 cursor-pointer rounded-md border border-gray-300 transition-colors duration-300">
                                             <h3 class="text-lg font-semibold text-black mb-2">{{ $shop?->shope_name }}</h3>
                                             <img style="object-fit: cover" class="transform border border-gray-200 rounded-md w-full h-20 object-cover" src="{{ Storage::url($shop?->image) }}" />
