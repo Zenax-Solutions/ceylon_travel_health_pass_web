@@ -13,7 +13,7 @@ class logo extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct($logo)
+    public function __construct($logo =  null)
     {
         $this->logo = $logo;
     }
