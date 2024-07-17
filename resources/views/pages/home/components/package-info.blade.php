@@ -21,7 +21,7 @@
 
 
                         <div class="p-4">
-                            <div class="mb-4 flex space-x-4 p-2 bg-white rounded-lg shadow-md font-bold">
+                            <div class="mb-4 flex space-x-4 text-sm p-2 bg-white rounded-lg shadow-md font-bold">
                                 <button x-on:click="openTab = 1" :class="{ 'bg-green-600 font-bold text-white': openTab === 1 }" class="flex-1 py-2 px-4 rounded-md focus:outline-none font-bold focus:shadow-outline-blue transition-all duration-300">Destinations</button>
                                 <button x-on:click="openTab = 2" :class="{ 'bg-green-600 font-bold text-white': openTab === 2 }" class="flex-1 py-2 px-4 rounded-md focus:outline-none font-bold focus:shadow-outline-blue transition-all duration-300">Services</button>
                                 <button x-on:click="openTab = 3" :class="{ 'bg-green-600 font-bold text-white': openTab === 3 }" class="flex-1 py-2 px-4 rounded-md focus:outline-none font-bold focus:shadow-outline-blue transition-all duration-300">Shops</button>
