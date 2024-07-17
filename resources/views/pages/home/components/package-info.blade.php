@@ -27,6 +27,7 @@
                                 <button x-on:click="openTab = 3" :class="{ 'bg-green-600 font-bold text-white': openTab === 3 }" class="flex-1 py-2 px-4 rounded-md focus:outline-none font-bold focus:shadow-outline-blue transition-all duration-300">Shops</button>
                             </div>
                         </div>
+                        <div class="mt-4 px-4 h-full overflow-auto">
                         <div x-show="openTab === 1" class="transition-all duration-300">
                             <!-- Search Input -->
                             <div class="mt-4 px-4">
@@ -114,7 +115,7 @@
                         </div>
 
 
-
+                        </div>
 
                         <!-- Sidebar Footer -->
                         <div class="mt-6 px-4">
