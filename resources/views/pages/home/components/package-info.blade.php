@@ -1,8 +1,8 @@
 <div>
-    <div x-data="{ open: false, searchdestination: '',searchservices: '',searchshops: '', openTab: 1  }">
+    <div x-data="{ open: false, searchdestination: '',searchservices: '',searchshops: '', openTab: 1  }" x-effect="document.body.style.overflow = open ? 'hidden' : 'auto'" >
 
         <!-- Sidebar Overlay -->
-        <div x-show="open" class="fixed inset-0 z-50 overflow-hidden">
+        <div x-show="open" class="fixed inset-0 z-50 overflow-hidden backdrop-blur">
             <div x-show="open" x-transition:enter="transition-opacity ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity ease-in duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
             <!-- Sidebar Content -->
             <section class="absolute inset-y-0 right-0 flex">
