@@ -99,20 +99,20 @@
                                     {{ env('CURRENCY', '$') . number_format($package->price) }}</span>
                                 </p>
                             </div>
-                            <div class="flex flex-wrap items-center justify-between mb-2">
+                            <div class="flex flex-wrap flex-col  justify-between mb-2">
                                 <div>
                                     <p class="text-base text-gray-500 md:text-lg">
                                         <h1 class="text-lg font-black text-gray-800 md:text-2xl">Travel</h1>
                                         {!! $package->travel_info !!}
                                     </p>
-                                    <p class="text-base text-gray-500 md:text-lg">
+                                    <p class="text-base text-gray-500 md:text-lg mt-4">
                                         <h1 class="text-lg font-black text-gray-800 md:text-2xl">Health</h1>
                                         {!! $package->health_info !!}
                                     </p>
                                 </div>
 
                                 <div>
-                                    <div class="">
+                                    <div class="mt-4">
                                         <h1 class="text-lg font-black text-gray-800 md:text-2xl">Destinations</h1>
                                         <div class="items-center pt-4 pb-4" style="gap: 10px; display: grid;">
 
