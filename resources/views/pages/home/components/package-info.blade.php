@@ -5,7 +5,7 @@
         <div x-show="open" class="fixed inset-0 z-50 overflow-hidden">
             <div x-show="open" x-transition:enter="transition-opacity ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity ease-in duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
             <!-- Sidebar Content -->
-            <section class="absolute inset-y-0 right-0 pl-10 max-w-full flex">
+            <section class="absolute inset-y-0 right-0 max-w-full flex">
                 <div x-show="open" x-transition:enter="transition-transform ease-out duration-300" x-transition:enter-start="transform translate-x-full" x-transition:enter-end="transform translate-x-0" x-transition:leave="transition-transform ease-in duration-300" x-transition:leave-start="transform translate-x-0" x-transition:leave-end="transform translate-x-full" class="w-screen max-w-md">
                     <div class="h-full flex flex-col py-6 bg-white shadow-xl">
                         <!-- Sidebar Header -->
