@@ -9,13 +9,13 @@ use Joaopaulolndev\FilamentGeneralSettings\Models\GeneralSetting;
 
 class logo extends Component
 {
-    public $logo;
+    public $main_logo;
     /**
      * Create a new component instance.
      */
-    public function __construct($logo =  null)
+    public function __construct()
     {
-        $this->logo = $logo;
+        $this->main_logo = GeneralSetting::first();
     }
 
     /**
@@ -23,8 +23,6 @@ class logo extends Component
      */
     public function render()
     {
-        $this->logo = GeneralSetting::first();
-
         return view('components.logo');
     }
 }
