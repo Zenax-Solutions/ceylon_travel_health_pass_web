@@ -16,7 +16,6 @@
 
     <!-- PWA  -->
     <meta name="theme-color" content="#22c55e" />
-    <link rel="apple-touch-icon" href="{{ asset('images/logo.png') }}">
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
 
 
