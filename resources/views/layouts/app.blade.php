@@ -6,8 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Ceylon Travel & health pass web</title>
+    <!-- Developed By ZENAX -->
+    {!! SEO::generate(true) !!}
 
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('images/favicon/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('images/favicon/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('images/favicon/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{asset('images/favicon/site.webmanifest')}}">
     <!-- Fonts -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,7 +57,7 @@
             <div style="background-color: #e3efc9; padding:10px" class="relative flex flex-wrap items-center justify-between w-full rounded-md group py-7 shrink-0">
                 <div>
                     <a href="/">
-                        <img style="width: 200px" src="{{ asset('images/logo.png') }}">
+                        <x-logo></x-logo>
                     </a>
                 </div>
                 <div class="items-center justify-between hidden text-black md:flex">
@@ -113,7 +118,7 @@
 
                     <div>
                         <a href="/">
-                            <img src="{{ asset('images/logo.png') }}">
+                            <x-logo></x-logo>
                         </a>
                     </div>
 

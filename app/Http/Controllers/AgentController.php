@@ -12,11 +12,42 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Artesaos\SEOTools\Facades\SEOMeta;
+use Joaopaulolndev\FilamentGeneralSettings\Models\GeneralSetting;
+use Artesaos\SEOTools\Facades\OpenGraph;
 
 class AgentController extends Controller
 {
+
+    private $genaralSettings;
+
+    public function __construct()
+    {
+        $this->genaralSettings = GeneralSetting::first();
+    }
+
+    //seo function
+    public function seo()
+    {
+
+        SEOMeta::setTitle($this->genaralSettings?->site_name);
+        SEOMeta::setDescription($this->genaralSettings?->site_description);
+        SEOMeta::addMeta('article:section', $this->genaralSettings?->seo_title, 'property');
+        SEOMeta::addKeyword([$this->genaralSettings?->seo_keywords]);
+        SEOMeta::addMeta('og:type', 'website');
+        SEOMeta::addMeta('og:site_name', $this->genaralSettings?->site_name);
+        SEOMeta::addMeta('og:image', env('APP_URL') . '/storage/' . $this->genaralSettings?->site_logo);
+        OpenGraph::setDescription($this->genaralSettings?->site_description);
+        OpenGraph::setTitle($this->genaralSettings?->seo_title);
+        OpenGraph::setUrl(env('APP_URL'));
+        OpenGraph::addProperty('type', 'website');
+        OpenGraph::addImage(env('APP_URL') . '/storage/' . $this->genaralSettings?->site_logo);
+    }
+
     public function dashboard()
     {
+        $this->seo();
+
         if (Session::has('auth_agent')) {
 
             $agent = Agent::where('email', Session::get('auth_agent'))->first();
@@ -31,11 +62,15 @@ class AgentController extends Controller
 
     public function loginView()
     {
+        $this->seo();
+
         return view('pages.agent.auth.login');
     }
 
     public function registerView()
     {
+        $this->seo();
+
         return view('pages.agent.auth.register');
     }
 
@@ -112,21 +147,28 @@ class AgentController extends Controller
 
     public function qrscan()
     {
+        $this->seo();
+
         return view('pages.agent.dashboard.pages.qrscan');
     }
 
     public function records()
     {
+        $this->seo();
+
         return view('pages.agent.dashboard.pages.records');
     }
 
     public function services()
     {
+        $this->seo();
+
         return view('pages.agent.dashboard.pages.services');
     }
 
     public function packages()
     {
+        $this->seo();
 
         $authAgentEmail = Session::get('auth_agent');
         $agent = Agent::where('email', $authAgentEmail)->firstOrFail();
@@ -142,6 +184,8 @@ class AgentController extends Controller
 
     public function booking(Request $request)
     {
+        $this->seo();
+
         $authAgentEmail = Session::get('auth_agent');
         $agent = Agent::where('email', $authAgentEmail)->firstOrFail();
 
@@ -160,6 +204,8 @@ class AgentController extends Controller
 
     public function myProfile()
     {
+        $this->seo();
+
         $authAgentEmail = Session::get('auth_agent');
         $agent = Agent::where('email', $authAgentEmail)->firstOrFail();
 

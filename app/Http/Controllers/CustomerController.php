@@ -11,11 +11,42 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Artesaos\SEOTools\Facades\SEOMeta;
+use Joaopaulolndev\FilamentGeneralSettings\Models\GeneralSetting;
+use Artesaos\SEOTools\Facades\OpenGraph;
 
 class CustomerController extends Controller
 {
+
+    private $genaralSettings;
+
+    public function __construct() {
+        $this->genaralSettings = GeneralSetting::first();
+    }
+
+    //seo function
+    public function seo()
+    {
+        
+        SEOMeta::setTitle($this->genaralSettings?->site_name);
+        SEOMeta::setDescription($this->genaralSettings?->site_description);
+        SEOMeta::addMeta('article:section', $this->genaralSettings?->seo_title , 'property');
+        SEOMeta::addKeyword([$this->genaralSettings?->seo_keywords]);
+        SEOMeta::addMeta('og:type','website');
+        SEOMeta::addMeta('og:site_name',$this->genaralSettings?->site_name);
+        SEOMeta::addMeta('og:image',env('APP_URL').'/storage/'.$this->genaralSettings?->site_logo);
+        OpenGraph::setDescription($this->genaralSettings?->site_description);
+        OpenGraph::setTitle($this->genaralSettings?->seo_title);
+        OpenGraph::setUrl(env('APP_URL'));
+        OpenGraph::addProperty('type', 'website');
+        OpenGraph::addImage(env('APP_URL').'/storage/'.$this->genaralSettings?->site_logo);
+      
+    }
+
     public function dashboard()
     {
+        $this->seo();
+
         if (Session::has('auth_customer')) {
 
             $customer = Customer::where('email', Session::get('auth_customer'))->first();
@@ -32,6 +63,8 @@ class CustomerController extends Controller
 
     public function myProfile()
     {
+        $this->seo();
+
         $authCustomerEmail = Session::get('auth_customer');
         $customer = Customer::where('email', $authCustomerEmail)->firstOrFail();
 
@@ -41,6 +74,8 @@ class CustomerController extends Controller
 
     public function myTickets(Request $request)
     {
+        $this->seo();
+
         if ($request->id == null) {
             return redirect()->back();
         }
@@ -78,11 +113,15 @@ class CustomerController extends Controller
 
     public function loginView()
     {
+        $this->seo();
+
         return view('pages.customer.auth.login');
     }
 
     public function registerView()
     {
+        $this->seo();
+
         return view('pages.customer.auth.register');
     }
 
