@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Destinaton Portal</title>
 
+    @laravelPWA
+
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
