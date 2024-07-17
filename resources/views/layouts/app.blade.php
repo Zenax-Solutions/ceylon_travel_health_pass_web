@@ -13,6 +13,13 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{asset('images/favicon/favicon-32x32.png')}}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('images/favicon/favicon-16x16.png')}}">
     <link rel="manifest" href="{{asset('images/favicon/site.webmanifest')}}">
+
+    <!-- PWA  -->
+    <meta name="theme-color" content="#22c55e" />
+    <link rel="apple-touch-icon" href="{{ asset('images/logo.png') }}">
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
+
+
     <!-- Fonts -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -228,6 +235,24 @@
                 mainContent.style.display = 'block';
             }, 1500); // You can adjust the delay as needed or use an actual event like 'load'
         });
+    </script>
+
+    <script src="{{ asset('/sw.js') }}"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            // Register a service worker hosted at the root of the
+            // site using the default scope.
+            navigator.serviceWorker.register("/sw.js").then(
+                (registration) => {
+                    console.log("Service worker registration succeeded:", registration);
+                },
+                (error) => {
+                    console.error(`Service worker registration failed: ${error}`);
+                },
+            );
+        } else {
+            console.error("Service workers are not supported.");
+        }
     </script>
 
 </body>
