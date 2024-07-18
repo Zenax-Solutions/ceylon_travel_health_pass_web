@@ -5,7 +5,7 @@ return [
     'manifest' => [
         'name' => 'Ceylon Travel & Health Pass',
         'short_name' => 'CTP',
-        'start_url' => '/',
+        'start_url' => 'https://healthpass.supunnethsara.dev/destination/login',
         'background_color' => '#ffffff',
         'theme_color' => '#22c55e',
         'display' => 'standalone',
