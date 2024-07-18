@@ -2,6 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
+@laravelPWA
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -9,13 +10,13 @@
     <!-- Developed By ZENAX -->
     {!! SEO::generate(true) !!}
 
-    
+
     <link rel="apple-touch-icon" sizes="180x180" href="{{asset('images/favicon/apple-touch-icon.png')}}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{asset('images/favicon/favicon-32x32.png')}}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('images/favicon/favicon-16x16.png')}}">
     <link rel="manifest" href="{{asset('images/favicon/site.webmanifest')}}">
 
-   
+
 
     <!-- Fonts -->
 
@@ -176,7 +177,9 @@
 
                             <a href="{{ route('destination.login') }}" class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">Destination
                                 Portal</a>
-
+                            <button id="pwa-download-btn" class="middle none center mr-3 rounded-lg bg-pink-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" data-ripple-light="true">
+                                Button
+                            </button>
 
                         </div>
                     </div>
@@ -234,7 +237,34 @@
         });
     </script>
 
-  z
+    <script>
+        let deferredPrompt;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('pwa-download-btn').style.display = 'block';
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const installButton = document.getElementById('pwa-download-btn');
+            if (installButton) {
+                installButton.addEventListener('click', () => {
+                    if (deferredPrompt) {
+                        deferredPrompt.prompt();
+                        deferredPrompt.userChoice.then((result) => {
+                            if (result.outcome === 'accepted') {
+                                console.log('User accepted the install prompt');
+                            } else {
+                                console.log('User dismissed the install prompt');
+                            }
+                            deferredPrompt = null;
+                        });
+                    }
+                });
+            }
+        });
+    </script>
 
 </body>
 
