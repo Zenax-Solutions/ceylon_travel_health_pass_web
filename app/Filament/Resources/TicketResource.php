@@ -115,25 +115,29 @@ class TicketResource extends Resource
                     ->toggleable()
                     ->label('Ticket No')
                     ->limit(50),
+                Tables\Columns\TextColumn::make('is_adult')
+                    ->toggleable()
+                    ->formatStateUsing(fn ($state) => $state ? 'Adult Pass' : 'Child Pass')
+                    ->label('Ticket Type')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        '1' => 'primary',
+                        '0' => 'warning',
+                    })
+                    ->limit(50),
                 Tables\Columns\TextColumn::make('expiry_date')
                     ->toggleable()
                     ->date(),
                 Tables\Columns\TextColumn::make('regionality')
-                    ->formatStateUsing(function ($state){
+                    ->formatStateUsing(function ($state) {
 
-                        if($state == 'south_asian')
-                        {
-                           return 'SAARC Nations';
-                        }
-                        elseif($state == 'non_south_asian')
-                        {
+                        if ($state == 'south_asian') {
+                            return 'SAARC Nations';
+                        } elseif ($state == 'non_south_asian') {
                             return 'Non-SAARC Nations';
-                        }
-                        else
-                        {
+                        } else {
                             return '';
                         }
-
                     })
                     ->toggleable(),
 

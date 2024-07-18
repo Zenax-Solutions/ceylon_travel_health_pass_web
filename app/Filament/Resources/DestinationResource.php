@@ -21,6 +21,7 @@ use Filament\Tables\Filters\SelectFilter;
 use App\Filament\Filters\DateRangeFilter;
 use App\Filament\Resources\DestinationResource\Pages;
 use App\Filament\Resources\DestinationResource\RelationManagers\DestinationStockRelationManager;
+use Filament\Forms\Components\Toggle;
 use Filament\Support\RawJs;
 
 class DestinationResource extends Resource
@@ -148,6 +149,21 @@ class DestinationResource extends Resource
                             'md' => 12,
                             'lg' => 4,
                         ]),
+                        TextInput::make('discount_info')
+                        ->placeholder('Discount Message')
+                        ->columnSpan([
+                            'default' => 12,
+                            'md' => 12,
+                            'lg' => 4,
+                        ]),
+                        Toggle::make('is_wildlife')
+                        ->label("Wildlife Destination")
+                        ->onColor('success')
+                        ->offColor('danger')->columnSpan([
+                            'default' => 12,
+                            'md' => 12,
+                            'lg' => 4,
+                        ]),
 
                     // TextInput::make('discount_price')
                     //     ->rules(['numeric'])
@@ -235,6 +251,7 @@ class DestinationResource extends Resource
                 Tables\Columns\TextColumn::make('child_non_south_asian_price')
                     ->money('USD')
                     ->toggleable(),
+                Tables\Columns\ToggleColumn::make('is_wildlife')->label("Wildlife Destination"),    
                 Tables\Columns\TextColumn::make('stock_count')
                     ->label('Ticket stock count')
                     ->formatStateUsing(fn (Destination $record): string => $record->destinationStock()->orderBy('id', 'desc')->firstOr(function () {

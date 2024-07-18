@@ -24,6 +24,8 @@ class Destination extends Model
         'discount_price',
         'stock_count',
         'current_stock_count',
+        'is_wildlife',
+        'discount_info',
         'status',
     ];
 

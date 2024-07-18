@@ -68,6 +68,15 @@ class TicketsRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('created_at')->date()->since(),
                 Tables\Columns\TextColumn::make('ticket_id')->searchable()->limit(50),
+                Tables\Columns\TextColumn::make('is_adult')
+                    ->toggleable()
+                    ->formatStateUsing(fn ($state) => $state ? 'Adult Pass' : 'Child Pass')
+                    ->label('Ticket Type')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        '1' => 'primary',
+                        '0' => 'warning',
+                    }),
                 Tables\Columns\TextColumn::make('expiry_date')->date(),
                 Tables\Columns\TextColumn::make('regionality')->formatStateUsing(function ($state){
 
