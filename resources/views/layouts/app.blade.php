@@ -46,6 +46,8 @@
         }
     </style>
 
+<link rel="manifest" href="{{asset('manifest.json')}}">
+<meta name="theme-color" content="#000000">
 
 </head>
 
@@ -234,7 +236,17 @@
         });
     </script>
 
-  
+<script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(function(registration) {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                })
+                .catch(function(error) {
+                    console.log('Service Worker registration failed:', error);
+                });
+        }
+    </script>
 
 </body>
 
