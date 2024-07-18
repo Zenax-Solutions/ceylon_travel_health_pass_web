@@ -6,19 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="manifest" href="{{asset('manifest.json')}}">
-    <meta name="theme-color" content="#000000">
-
     <!-- Developed By ZENAX -->
     {!! SEO::generate(true) !!}
 
-
+    
     <link rel="apple-touch-icon" sizes="180x180" href="{{asset('images/favicon/apple-touch-icon.png')}}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{asset('images/favicon/favicon-32x32.png')}}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('images/favicon/favicon-16x16.png')}}">
     <link rel="manifest" href="{{asset('images/favicon/site.webmanifest')}}">
 
-
+   
 
     <!-- Fonts -->
 
@@ -48,7 +45,6 @@
             list-style-type: disc !important;
         }
     </style>
-
 
 
 </head>
@@ -238,17 +234,7 @@
         });
     </script>
 
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js')
-                .then(function(registration) {
-                    console.log('Service Worker registered with scope:', registration.scope);
-                })
-                .catch(function(error) {
-                    console.log('Service Worker registration failed:', error);
-                });
-        }
-    </script>
+  z
 
 </body>
 
