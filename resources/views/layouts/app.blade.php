@@ -122,7 +122,7 @@
             <div class="container px-6 py-12 mx-auto">
                 <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4 text-center md:text-left lg:text-left">
 
-                    <div>
+                    <div class="flex justify-center md:justify-start lg:justify-start">
                         <a href="/">
                             <x-logo></x-logo>
                         </a>
