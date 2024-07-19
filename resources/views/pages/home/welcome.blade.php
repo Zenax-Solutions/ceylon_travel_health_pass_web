@@ -266,6 +266,45 @@
     </div>
 </div>
 
+<div class="py-16 overflow-hidden bg-gray-50">
+    <div class="container px-6 m-auto space-y-8 text-gray-500 md:px-12">
+        <div>
+            <h2 class="mt-4 text-2xl font-bold text-gray-900 md:text-4xl">Our Blogs</h2>
+        </div>
+        
+
+            <section class="mt-6 grid md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8">
+
+@forelse($blogs as $blog)
+
+<article class="bg-white group relative rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transform duration-200">
+    <div class="relative w-full h-80 md:h-64 lg:h-44">
+        <img src="{{Storage::url($blog->image)}}" alt="Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug." class="w-full h-full object-center object-cover">
+    </div>
+    <div class="px-3 py-4">
+        <h3 class="text-lg font-bold text-white pb-2">
+            <a class="text-green-400 rounded-lg" href="{{ route('blogs.page',['slug' => $blog->slug]) }}">
+               {{$blog->title}}
+            </a>
+        </h3>
+        <p class="text-sm font-bold text-black group-hover:text-black">
+           {{ Str::limit($blog->seo_description,100)}}
+        </p>
+    </div>
+</article>
+
+@empty
+@endforelse
+
+</section>
+
+
+           
+        
+    </div>
+</div>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 
 @endsection
