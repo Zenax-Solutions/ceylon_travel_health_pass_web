@@ -375,16 +375,18 @@ class Package extends Component
                 $booking = Booking::create($PackageData);
 
 
-                if ($this->auth_agent != null) {
-                    //$genrateQrCode->genarate($PackageData, $booking, $this->auth_agent, $this->regionality);
-                } else {
+                $paymentData = $payHerePayment->execute($booking);
 
-                    $this->regionality = $customer->region_type;
+                // if ($this->auth_agent != null) {
+                //     //$genrateQrCode->genarate($PackageData, $booking, $this->auth_agent, $this->regionality);
+                // } else {
 
-                    $paymentData = $payHerePayment->execute($booking);
+                //     $this->regionality = $customer->region_type;
 
-                    // $genrateQrCode->genarate($PackageData, $booking, $customer, $this->regionality);
-                }
+
+
+                //     // $genrateQrCode->genarate($PackageData, $booking, $customer, $this->regionality);
+                // }
 
                 if (isset($this->coupon_code)) {
                     $agent = Agent::where('coupon_code', $this->coupon_code);
@@ -402,15 +404,13 @@ class Package extends Component
                     }
                 }
 
-                toastr()->success('Booking Successfully');
+                toastr()->success('Booking Successfully, Wait for a Payment');
 
-                if ($this->auth_agent != null) {
-                    $this->redirectRoute('agent.dashboard');
+                if ($paymentData) {
+                    session()->flash('paymentData', $paymentData);
+                    $this->redirectRoute('payment.process');
                 } else {
-                    if ($paymentData) {
-                        session()->flash('paymentData', $paymentData);
-                        $this->redirectRoute('payment.process');
-                    }
+                    toastr()->error('System Error !');
                 }
             }
         }
