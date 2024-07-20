@@ -11,6 +11,7 @@ use App\Models\EsimService;
 use App\Models\Package as ModelsPackage;
 use App\Models\PointsHistory;
 use App\Services\GenarateQrCodes;
+use App\Services\PayHerePayment;
 use Illuminate\Http\Request;
 use Livewire\Component;
 use Livewire\Attributes\On;
@@ -276,6 +277,7 @@ class Package extends Component
 
         $customer = $this->auth_customer;
         $genrateQrCode = new GenarateQrCodes;
+        $payHerePayment = new PayHerePayment;
 
         if ($type == 'withEsim') {
 
@@ -379,7 +381,9 @@ class Package extends Component
 
                     $this->regionality = $customer->region_type;
 
-                    $genrateQrCode->genarate($PackageData, $booking, $customer, $this->regionality);
+                    $payHerePayment->execute($booking);
+
+                    // $genrateQrCode->genarate($PackageData, $booking, $customer, $this->regionality);
                 }
 
 
