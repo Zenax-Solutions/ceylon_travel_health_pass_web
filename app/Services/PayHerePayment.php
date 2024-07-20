@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Booking;
+use Illuminate\Support\Facades\Log;
 
 class PayHerePayment
 {
@@ -57,6 +58,8 @@ class PayHerePayment
 
     public function handleNotification($request)
     {
+        Log::info($request);
+
         $merchantId = $request->input('merchant_id');
         $orderId = $request->input('order_id');
         $payhereAmount = $request->input('payhere_amount');
