@@ -34,7 +34,7 @@ class PaymentController extends Controller
 
     public function handleReturn(Request $request)
     {
-        return redirect('payment.info');
+        return redirect()->route('payment.info');
     }
 
     public function handleCancel(Request $request)
