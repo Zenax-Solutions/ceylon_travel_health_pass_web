@@ -34,7 +34,7 @@ class PaymentController extends Controller
 
     public function handleReturn(Request $request)
     {
-        return $this->payHerePayment->handleNotification($request);
+        return redirect('payment.info');
     }
 
     public function handleCancel(Request $request)
