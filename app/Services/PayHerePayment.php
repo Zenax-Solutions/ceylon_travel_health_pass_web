@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Booking;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class PayHerePayment
@@ -56,7 +57,7 @@ class PayHerePayment
         return strtoupper(md5($hashString));
     }
 
-    public function handleNotification($request)
+    public function handleNotification(Request $request)
     {
         Log::info($request);
 
