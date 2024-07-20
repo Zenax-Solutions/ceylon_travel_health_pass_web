@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Models\Booking;
+
 class PayHerePayment
 {
     protected $merchantId;
@@ -14,9 +16,9 @@ class PayHerePayment
     {
         $this->merchantId = env('PAYHERE_MERCHANT_ID'); // Add your PayHere Merchant ID to the .env file
         $this->merchantSecret = env('PAYHERE_MERCHANT_SECRET'); // Add your PayHere Merchant Secret to the .env file
-        $this->returnUrl = route('payment.info');
-        $this->cancelUrl = route('payment.info');
-        $this->notifyUrl = route('payment.info');
+        $this->returnUrl = route('payment.return');
+        $this->cancelUrl = route('payment.cancel');
+        $this->notifyUrl = route('payment.notify');
     }
 
     public function execute($booking)
@@ -41,8 +43,10 @@ class PayHerePayment
 
         $data['hash'] = $this->generateHash($data);
 
-        // Create and submit the form
-        return $this->createAndSubmitForm($data);
+        return $data;
+
+        // Return a view or redirect with the form data to submit to PayHere
+        //return view('payment.payhere.checkout', compact('data'));
     }
 
     protected function generateHash($data)
@@ -51,15 +55,34 @@ class PayHerePayment
         return strtoupper(md5($hashString));
     }
 
-    protected function createAndSubmitForm($data)
+    public function handleNotification($request)
     {
-        $form = '<form id="payhere_form" method="post" action="https://sandbox.payhere.lk/pay/checkout">';
-        foreach ($data as $key => $value) {
-            $form .= '<input type="hidden" name="' . $key . '" value="' . $value . '">';
-        }
-        $form .= '</form>';
-        $form .= '<script type="text/javascript">document.getElementById("payhere_form").submit();</script>';
+        $merchantId = $request->input('merchant_id');
+        $orderId = $request->input('order_id');
+        $payhereAmount = $request->input('payhere_amount');
+        $payhereCurrency = $request->input('payhere_currency');
+        $statusCode = $request->input('status_code');
+        $md5sig = $request->input('md5sig');
 
-        return $form;
+        $localMd5sig = strtoupper(
+            md5(
+                $merchantId .
+                    $orderId .
+                    $payhereAmount .
+                    $payhereCurrency .
+                    $statusCode .
+                    strtoupper(md5($this->merchantSecret))
+            )
+        );
+
+        if ($localMd5sig === $md5sig && $statusCode == 2) {
+            // TODO: Update your database as payment success
+
+            Booking::find($orderId)->update(['status' => 'paid']);
+
+            return response('Payment verified', 200);
+        }
+
+        return response('Payment verification failed', 400);
     }
 }

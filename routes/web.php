@@ -12,6 +12,7 @@ use App\Http\Controllers\EsimServiceController;
 use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\DiscountShopController;
 use App\Http\Controllers\DiscountServiceController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Session;
 
 /*
@@ -31,10 +32,16 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/package/{id}', 'package')->name('package');
     Route::get('/shops', 'shops')->name('shops');
     Route::get('/services', 'services')->name('services');
-    Route::get('/blogs','blogs')->name('blogs');
-    Route::get('/blogs/{slug?}','singleBlog')->name('blogs.page');
+    Route::get('/blogs', 'blogs')->name('blogs');
+    Route::get('/blogs/{slug?}', 'singleBlog')->name('blogs.page');
     Route::get('/payment/info', 'thankYouPage')->name('payment.info');
 });
+
+Route::get('/payment/process', [PaymentController::class, 'process'])->name('payment.process');
+Route::get('/payment/return', [PaymentController::class, 'handleReturn'])->name('payment.return');
+Route::get('/payment/cancel', [PaymentController::class, 'handleCancel'])->name('payment.cancel');
+Route::post('/payment/notify', [PaymentController::class, 'handleNotify'])->name('payment.notify');
+
 
 
 //Customers

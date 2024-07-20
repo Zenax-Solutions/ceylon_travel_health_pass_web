@@ -376,17 +376,15 @@ class Package extends Component
 
 
                 if ($this->auth_agent != null) {
-                    $genrateQrCode->genarate($PackageData, $booking, $this->auth_agent, $this->regionality);
+                    //$genrateQrCode->genarate($PackageData, $booking, $this->auth_agent, $this->regionality);
                 } else {
 
                     $this->regionality = $customer->region_type;
 
-                    $payHerePayment->execute($booking);
+                    $paymentData = $payHerePayment->execute($booking);
 
                     // $genrateQrCode->genarate($PackageData, $booking, $customer, $this->regionality);
                 }
-
-
 
                 if (isset($this->coupon_code)) {
                     $agent = Agent::where('coupon_code', $this->coupon_code);
@@ -409,7 +407,10 @@ class Package extends Component
                 if ($this->auth_agent != null) {
                     $this->redirectRoute('agent.dashboard');
                 } else {
-                    $this->redirectRoute('payment.info');
+                    if ($paymentData) {
+                        session()->flash('paymentData', $paymentData);
+                        $this->redirectRoute('payment.process');
+                    }
                 }
             }
         }
