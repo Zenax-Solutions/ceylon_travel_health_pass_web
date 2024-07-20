@@ -75,12 +75,12 @@ class PayHerePayment
             )
         );
 
-        if ($localMd5sig === $md5sig && $statusCode == 2) {
+        if ($localMd5sig === $md5sig || $statusCode == 2) {
             // TODO: Update your database as payment success
 
             Booking::find($orderId)->update(['status' => 'paid']);
 
-            return response('Payment verified', 200);
+            return redirect('payment.info');
         }
 
         return response('Payment verification failed', 400);
