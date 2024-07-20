@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Booking;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class PayHerePayment
@@ -14,6 +13,8 @@ class PayHerePayment
     protected $cancelUrl;
     protected $notifyUrl;
 
+    protected $qrCodeGenarate;
+
     public function __construct()
     {
         $this->merchantId = env('PAYHERE_MERCHANT_ID'); // Add your PayHere Merchant ID to the .env file
@@ -21,6 +22,10 @@ class PayHerePayment
         $this->returnUrl = route('payment.return');
         $this->cancelUrl = route('payment.cancel');
         $this->notifyUrl = route('payment.notify');
+
+        $genarateQrCodes = new GenarateQrCodes;
+
+        $this->qrCodeGenarate = $genarateQrCodes;
     }
 
     public function execute($booking)
@@ -46,9 +51,6 @@ class PayHerePayment
         $data['hash'] = $this->generateHash($data);
 
         return $data;
-
-        // Return a view or redirect with the form data to submit to PayHere
-        //return view('payment.payhere.checkout', compact('data'));
     }
 
     protected function generateHash($data)
@@ -57,9 +59,8 @@ class PayHerePayment
         return strtoupper(md5($hashString));
     }
 
-    public function handleNotification(Request $request)
+    public function handleNotification($request)
     {
-        Log::info($request);
 
         $merchantId = $request->input('merchant_id');
         $orderId = $request->input('order_id');
@@ -82,9 +83,36 @@ class PayHerePayment
         if ($localMd5sig === $md5sig && $statusCode == 2) {
             // TODO: Update your database as payment success
 
-            Booking::find($orderId)->update(['status' => 'paid']);
+            $booking = Booking::find($orderId);
+
+            $booking->update(['payment_status' => 'paid']);
+
+            if ($booking->agent_id != null) {
+
+                $regionality = session('agent_booking_ticket_regionality');
+
+                $this->qrCodeGenarate->genarate($booking->package(), $booking, $booking->agent(), $regionality);
+            } else {
+                $this->qrCodeGenarate->genarate($booking->package(), $booking, $booking->customer(), $booking->customer->regionality);
+            }
+
 
             return response('Payment verified', 200);
+        } elseif ($localMd5sig === $md5sig && $statusCode == -1) {
+
+            Booking::find($orderId)->update(['payment_status' => 'canceled']);
+
+            return response('Payment canceled', 400);
+        } elseif ($localMd5sig === $md5sig && $statusCode == -2) {
+
+            Booking::find($orderId)->update(['payment_status' => 'declined']);
+
+            return response('Payment declined', 400);
+        } elseif ($localMd5sig === $md5sig && $statusCode == 0) {
+
+            Booking::find($orderId)->update(['payment_status' => 'pending']);
+
+            return response('Payment pending', 400);
         }
 
         return response('Payment verification failed', 400);

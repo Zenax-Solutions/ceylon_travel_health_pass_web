@@ -374,19 +374,13 @@ class Package extends Component
 
                 $booking = Booking::create($PackageData);
 
-
                 $paymentData = $payHerePayment->execute($booking);
 
-                // if ($this->auth_agent != null) {
-                //     //$genrateQrCode->genarate($PackageData, $booking, $this->auth_agent, $this->regionality);
-                // } else {
+                if ($this->auth_agent != null) {
 
-                //     $this->regionality = $customer->region_type;
+                    session()->flash('agent_booking_ticket_regionality', $this->regionality);
+                }
 
-
-
-                //     // $genrateQrCode->genarate($PackageData, $booking, $customer, $this->regionality);
-                // }
 
                 if (isset($this->coupon_code)) {
                     $agent = Agent::where('coupon_code', $this->coupon_code);

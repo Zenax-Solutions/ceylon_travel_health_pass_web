@@ -52,7 +52,7 @@
     <div style="padding: 20px; display: grid;
     gap: 30px;">
 
-        @forelse ($tickets as $ticket)
+        {{-- @forelse ($tickets as $ticket)
             <div class="ticket">
                 <div class="qr-code">
                     <img src="{{ asset('storage/tickets/' . $ticket->ticket_id . '.png') }}" alt="QR Code">
@@ -73,7 +73,7 @@
             </div>
             <br>
         @empty
-        @endforelse
+        @endforelse --}}
 
     </div>
 </body>
