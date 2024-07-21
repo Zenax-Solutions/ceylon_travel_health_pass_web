@@ -29,7 +29,7 @@
                 </div>
             </div>
             <!-- Login box -->
-            <div class="flex flex-col justify-center flex-1 max-w-md space-y-5">
+            <div class="flex flex-col justify-center flex-1 max-w-md space-y-5 mb-10">
                 <div class="flex flex-col space-y-2 text-center">
                     <h2 class="text-3xl font-bold md:text-4xl">Create New Account</h2>
 
