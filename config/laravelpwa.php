@@ -59,23 +59,23 @@ return [
         ],
         'shortcuts' => [
             [
-                'name' => 'Shortcut Link 1',
-                'description' => 'Shortcut Link 1 Description',
-                'url' => '/shortcutlink1',
+                'name' => 'Agent Login',
+                'description' => '',
+                'url' => 'https://healthpass.supunnethsara.dev/agent/login',
                 'icons' => [
                     "src" => "/images/icons/logo.png",
                     "purpose" => "any"
                 ]
             ],
             [
-                'name' => 'Shortcut Link 2',
-                'description' => 'Shortcut Link 2 Description',
-                'url' => '/shortcutlink2'
+                'name' => 'Destination Login',
+                'description' => '',
+                'url' => 'https://healthpass.supunnethsara.dev/destination/login',
+                'icons' => [
+                    "src" => "/images/icons/logo.png",
+                    "purpose" => "any"
+                ]
             ]
-        ],
-        'origin_urls' => [
-            'https://healthpass.supunnethsara.dev/agent/login',
-            'https://healthpass.supunnethsara.dev/destination/login',
         ],
         'custom' => []
     ]
