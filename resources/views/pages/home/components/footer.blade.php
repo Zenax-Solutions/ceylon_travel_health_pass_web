@@ -1,6 +1,6 @@
    <!-- component -->
    <footer class="font-sans" style="background-color: #e3efc9;">
-            <div class="container px-6 py-12 mx-auto">
+            <div class="container px-6 py-12 mx-auto" style="font-weight: 400;">
                 <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4 text-center md:text-left lg:text-left">
 
                     <div class="flex justify-center md:justify-start lg:justify-start">
