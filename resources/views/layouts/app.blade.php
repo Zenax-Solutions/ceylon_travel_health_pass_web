@@ -59,13 +59,13 @@
 
 
         <div x-data="{ open: false }"  class="container flex flex-col mx-auto bg-white rounded-md z-10" style="padding: 10px;">
-            <div style="background-color: #e3efc9; padding:10px" class="relative flex flex-wrap items-center justify-between w-full rounded-md group py-7 shrink-0">
+            <div style="background-color: #e3efc9; padding:10px" class="relative gap-4 flex flex-wrap items-center justify-between md:justify-center lg:justify-between w-full rounded-md group py-7 shrink-0">
                 <div>
                     <a href="/">
                         <x-logo></x-logo>
                     </a>
                 </div>
-                <div class="items-center justify-between hidden text-black md:flex">
+                <div class="items-center  justify-between hidden text-black md:flex">
                     <a class="px-4 py-2 mt-2 text-sm font-semibold {{ request()->is('/') ? 'bg-green-200' : 'bg-transparent' }}  rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-green-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="/">Home</a>
                     <a class="px-4 py-2 mt-2 text-sm font-semibold {{ request()->is('shops') ? 'bg-green-200' : 'bg-transparent' }}  rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-green-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="{{ route('shops') }}">Shops</a>
                     <a class="px-4 py-2 mt-2 text-sm font-semibold {{ request()->is('services') ? 'bg-green-200' : 'bg-transparent' }}  rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-green-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="{{ route('services') }}">Services</a>
