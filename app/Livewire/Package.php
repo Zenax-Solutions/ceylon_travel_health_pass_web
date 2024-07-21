@@ -311,7 +311,7 @@ class Package extends Component
 
             $this->regionality = $customer->region_type;
 
-            $genrateQrCode->genarate($PackageData, $booking, $customer, $this->regionality);
+           // $genrateQrCode->genarate($PackageData, $booking, $customer, $this->regionality);
 
             if (isset($this->coupon_code)) {
                 $agent = Agent::where('coupon_code', $this->coupon_code);
