@@ -10,7 +10,7 @@
                 x-transition:leave-end="opacity-0"
                 class="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
             <!-- Sidebar Content -->
-            <section class="absolute inset-y-0 right-0 flex">
+            <section class="absolute inset-y-0 right-0 flex" style="z-index: 100;">
                 <div x-show="open" x-transition:enter="transition-transform ease-out duration-300"
                     x-transition:enter-start="transform translate-x-full"
                     x-transition:enter-end="transform translate-x-0"

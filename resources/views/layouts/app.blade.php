@@ -58,7 +58,7 @@
 
 
 
-        <div x-data="{ open: false }" style="background-color: #e3efc9; position: fixed;width: 100%; z-index: 100; align-items: center;"  class="flex flex-col mx-auto justify-center">
+        <div x-data="{ open: false }" style="background-color: #e3efc9; position: fixed;width: 100%; z-index: 50; align-items: center;"  class="flex flex-col mx-auto justify-center">
             <div style="padding: 10px;"  class="container  relative gap-4 flex flex-wrap items-center justify-between md:justify-center lg:justify-between w-full rounded-md group py-7 shrink-0">
                 <div>
                     <a href="/">
