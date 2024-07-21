@@ -72,7 +72,7 @@
             <div class="swiper-button-prev"></div> -->
         </div>
 
-        <div class="container flex flex-col mx-auto" style="padding: 10px">
+        <div class="container flex flex-col mx-auto" style="padding: 10px; margin-top: 30px;">
             <div class="grid w-full grid-cols-1 my-auto mt-12 mb-8 md:grid-cols-2 ">
                 <div class="flex flex-col justify-center text-center md:text-left lg:text-left lg:text-start">
                     <h1 class="mb-4 text-5xl font-extrabold leading-tight lg:text-7xl text-white">Ceylon Travel & Health

@@ -58,8 +58,8 @@
 
 
 
-        <div x-data="{ open: false }"  class="container flex flex-col mx-auto bg-white rounded-md z-10" style="padding: 10px;">
-            <div style="background-color: #e3efc9; padding:10px" class="relative gap-4 flex flex-wrap items-center justify-between md:justify-center lg:justify-between w-full rounded-md group py-7 shrink-0">
+        <div x-data="{ open: false }" style="background-color: #e3efc9; position: fixed;width: 100%; z-index: 100; align-items: center;"  class="flex flex-col mx-auto justify-center">
+            <div style="padding: 10px;"  class="container  relative gap-4 flex flex-wrap items-center justify-between md:justify-center lg:justify-between w-full rounded-md group py-7 shrink-0">
                 <div>
                     <a href="/">
                         <x-logo></x-logo>
