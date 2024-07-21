@@ -5,10 +5,10 @@
 
 
 <!-- component -->
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4 mb-12 pt-12">
+<section class="container  mx-auto px-4 sm:px-6 lg:px-4 mb-12 pt-12">
     <article>
-        <h2 class="text-2xl font-extrabold text-gray-900">Our Blogs</h2>
-        <section class="mt-6 grid md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8">
+        <h2 class="mt-4 text-2xl font-bold text-gray-900 md:text-4xl">Our Blogs</h2>
+        <section class="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8">
 
             @forelse($blogs as $blog)
 
