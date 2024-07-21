@@ -110,7 +110,7 @@
             x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100"
             x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100"
             x-transition:leave-end="transform opacity-0 scale-95"
-            class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50">
+            class="right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50">
             <ul class="text-start text-sm text-gray-900">
                 <template x-for="(language, index) in languages" :key="index">
                     <li translate="no" class="border-b border-gray-300 last:border-0">
