@@ -133,6 +133,16 @@ class HomeController extends Controller
     }
 
 
+    public function review()
+    {
+        $this->seo();
+
+        OpenGraph::setTitle('Review');
+
+        return view('pages.home.pages.review');
+    }
+
+
     public function thankYouPage()
     {
         $this->seo();

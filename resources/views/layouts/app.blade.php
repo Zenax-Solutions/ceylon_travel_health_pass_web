@@ -153,7 +153,7 @@
 
                             <a href="{{ route('services') }}" class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">Services</a>
 
-                            <a href="{{ route('blogs') }}" class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">Blogs</a>
+                            <a href="{{ route('review') }}" class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">Review Us</a>
 
                         </div>
                     </div>

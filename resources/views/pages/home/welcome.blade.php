@@ -132,7 +132,7 @@
         </div>
     </div>
 </section>
-<div class="py-16 overflow-hidden bg-gray-50">
+<div class="py-16 overflow-hidden">
     <div class="container px-6 m-auto space-y-8 text-gray-500 md:px-12">
         <div>
             <span class="text-lg font-semibold text-gray-600">Discount Shops</span>
@@ -186,7 +186,7 @@
     </div>
 </div>
 
-<div class="py-16 overflow-hidden bg-gray-50">
+<div class="py-16 overflow-hidden ">
     <div class="container px-6 m-auto space-y-8 text-gray-500 md:px-12">
         <div>
             <span class="text-lg font-semibold text-gray-600">Discount Services</span>
@@ -243,7 +243,7 @@
 
 @if($blogs->count() > 0)
 
-<div class="py-16 overflow-hidden bg-gray-50">
+<div class="py-16 overflow-hidden ">
     <div class="container px-6 m-auto space-y-8 text-gray-500 md:px-12">
         <div>
             <h2 class="mt-4 text-2xl font-bold text-gray-900 md:text-4xl">Our Blogs</h2>
@@ -281,6 +281,12 @@
     </div>
 </div>
 @endif
+
+
+
+@include('pages.home.components.testimonials')
+
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 

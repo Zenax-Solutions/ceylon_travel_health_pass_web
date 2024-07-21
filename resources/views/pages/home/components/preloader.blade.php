@@ -23,7 +23,7 @@
     }
 </style>
 
-<div class="flex items-center justify-center min-h-screen p-5 bg-gray-100 min-w-screen"  id="preloader">
+<div class="flex items-center justify-center min-h-screen p-5  min-w-screen"  id="preloader">
 
     <div class="loader" ></div>
 
