@@ -9,7 +9,7 @@
                         <div class="h-auto overflow-hidden bg-white">
                             <div class="p-2 mb-2" style="display: flex; justify-content: center;">
 
-                                <img style="width: 200px" src="{{ asset('images/logo.png') }}">
+                                <x-logo/>
 
                             </div>
                             <div class="relative overflow-hidden"
