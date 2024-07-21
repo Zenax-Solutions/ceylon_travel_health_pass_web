@@ -37,12 +37,6 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/payment/info', 'thankYouPage')->name('payment.info');
 });
 
-Route::get('/payment/process', [PaymentController::class, 'process'])->name('payment.process');
-Route::get('/payment/return', [PaymentController::class, 'handleReturn'])->name('payment.return');
-Route::get('/payment/cancel', [PaymentController::class, 'handleCancel'])->name('payment.cancel');
-Route::post('/payment/notify', [PaymentController::class, 'handleNotify'])->name('payment.notify');
-
-
 
 //Customers
 
@@ -99,3 +93,17 @@ Route::controller(DestinationController::class)->group(function () {
     Route::post('/destination/login/validate', 'loginDestination')->name('destination.login.validate');
     Route::get('/destination/logout', 'logout')->name('destination.logout');
 });
+
+
+
+//PayHere Routes
+Route::get('/payment/process', [PaymentController::class, 'process'])->name('payment.process');
+Route::get('/payment/return', [PaymentController::class, 'handleReturn'])->name('payment.return');
+Route::get('/payment/cancel', [PaymentController::class, 'handleCancel'])->name('payment.cancel');
+Route::post('/payment/notify', [PaymentController::class, 'handleNotify'])->name('payment.notify');
+
+
+
+//Mobile App Home View
+
+Route::view('/app/mobile/home','mobile.home')->name('mobile.home');

@@ -6,7 +6,7 @@
 <div class="max-w-screen-xl mx-auto">
 
 
-  <main class="mt-10">
+  <main class="mt-16">
 
     <div class="mb-4 md:mb-0 w-full max-w-screen-md mx-auto relative" style="height: 24em;">
       <div class="absolute left-0 bottom-0 w-full h-full z-10" style="background-image: linear-gradient(180deg,transparent,rgba(0,0,0,.7));"></div>
