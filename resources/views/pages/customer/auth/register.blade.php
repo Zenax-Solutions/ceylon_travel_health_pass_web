@@ -18,8 +18,8 @@
         </div>
 
         <!-- Login -->
-        <div class="relative flex flex-col items-center justify-center flex-1 px-10">
-            <div class="flex items-center justify-between w-full py-4 lg:hidden">
+        <div class="relative flex flex-col items-center justify-center flex-1 ">
+            <div class="flex items-center justify-center w-full py-4 lg:hidden">
 
                 <div class="flex items-center space-x-2">
                     <span>Already have an account </span>
