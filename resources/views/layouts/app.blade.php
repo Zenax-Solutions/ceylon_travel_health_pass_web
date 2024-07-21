@@ -113,7 +113,7 @@
         </div>
         <main>
 
-        <div style="padding-top: 50px;">
+        <div class="pt-12 sm:pt-12 md:pt-24 lg:pt-12">
         @yield('content')
         </div>
 
