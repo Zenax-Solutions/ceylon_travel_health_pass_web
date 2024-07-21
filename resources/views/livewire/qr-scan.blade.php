@@ -6,7 +6,7 @@
                 class="w-full max-w-md p-8 transition-all duration-500 ease-in-out transform bg-white rounded-lg shadow-lg hover:scale-105 hover:shadow-2xl">
                 <div class="mb-2" style="display: flex; justify-content: center;">
 
-                    <img style="width: 200px" src="{{ asset('images/logo.png') }}">
+                    <x-logo/>
 
                 </div>
                 <h2 class="mb-4 text-3xl font-bold text-center text-gray-800">QR Ticket Scanner</h2>
