@@ -144,28 +144,36 @@
                     name: 'English'
                 },
                 {
-                    code: 'de',
-                    name: 'German'
-                },
-                {
-                    code: 'fr',
-                    name: 'French'
-                },
-                {
-                    code: 'ja',
-                    name: 'Japanese'
+                    code: 'ar',
+                    name: 'Arabic'
                 },
                 {
                     code: 'zh-TW',
                     name: 'Chinese'
                 },
                 {
-                    code: 'ko',
-                    name: 'Korean'
+                    code: 'fr',
+                    name: 'French'
                 },
                 {
-                    code: 'ar',
-                    name: 'Arabic'
+                    code: 'de',
+                    name: 'German'
+                },
+                {
+                    code: 'hi',
+                    name: 'Hindi'
+                },
+                {
+                    code: 'it',
+                    name: 'Italian'
+                },
+                {
+                    code: 'ja',
+                    name: 'Japanese'
+                },
+                {
+                    code: 'ko',
+                    name: 'Korean'
                 },
                 {
                     code: 'ru',
@@ -174,14 +182,6 @@
                 {
                     code: 'es',
                     name: 'Spanish'
-                },
-                {
-                    code: 'it',
-                    name: 'Italian'
-                },
-                {
-                    code: 'hi',
-                    name: 'Hindi'
                 }
             ],
             toggleDropdown() {
