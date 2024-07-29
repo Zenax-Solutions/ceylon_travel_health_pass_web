@@ -102,7 +102,7 @@
 </style>
 <div x-data="languageSwitcher()" class="relative inline-block text-left">
     <button @click="toggleDropdown"
-        class="px-4 py-2 bg-white text-white font-semibold rounded-md shadow hover:bg-green-300 focus:outline-none">
+        class="px-4 py-2 bg-black text-white font-semibold rounded-md shadow hover:bg-green-300 focus:outline-none">
         <img width="30" height="30" src="https://img.icons8.com/fluency/48/language.png" alt="language" />
     </button>
 
