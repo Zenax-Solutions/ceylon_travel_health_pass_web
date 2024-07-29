@@ -39,6 +39,13 @@ Route::controller(HomeController::class)->group(function () {
 });
 
 
+Route::view('/privacy-policy', 'pages.home.pages.privacy-policy')->name('privacy-policy');
+Route::view('/terms-and-conditions', 'pages.home.pages.terms-and-Conditions')->name('terms-and-conditions');
+Route::view('/refund-policy', 'pages.home.pages.refund-policy')->name('refund-policy');
+
+///////////////////////////////
+
+
 //Customers
 
 Route::middleware('customer_auth')->group(function () {
@@ -107,4 +114,4 @@ Route::post('/payment/notify', [PaymentController::class, 'handleNotify'])->name
 
 //Mobile App Home View
 
-Route::view('/app/mobile/home','mobile.home')->name('mobile.home');
+Route::view('/app/mobile/home', 'mobile.home')->name('mobile.home');

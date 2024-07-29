@@ -7,6 +7,7 @@ use App\Models\Destination;
 use App\Models\DiscountService;
 use App\Models\DiscountShop;
 use App\Models\Package;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Joaopaulolndev\FilamentGeneralSettings\Models\GeneralSetting;
@@ -58,7 +59,10 @@ class HomeController extends Controller
         // Get published blogs and shuffle them, then take 3
         $blogs = Blog::where('is_published', true)->get()->shuffle()->take(3);
 
-        return view('pages.home.welcome', compact('packages', 'destinations', 'discountShops', 'discountServices', 'blogs'));
+        // Get published reviews.
+        $reviews = Review::where('is_published', true)->get();
+
+        return view('pages.home.welcome', compact('packages', 'destinations', 'discountShops', 'discountServices', 'blogs', 'reviews'));
     }
 
     public function package(Request $request)
