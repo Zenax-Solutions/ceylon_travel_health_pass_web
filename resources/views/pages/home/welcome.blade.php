@@ -11,7 +11,7 @@
 
     <section class="text-gray-600 bg-gray-100 body-font py-16 ">
         <div class="container  m-auto space-y-8 text-gray-500 md:px-12">
-            <div>
+            <div class="px-6">
                 <span class="text-lg font-semibold text-gray-600">Exclusive Attractions</span>
                 <h2 class="mt-4 text-2xl font-bold text-gray-900 md:text-4xl">Choose Your Attractions</h2>
             </div>
