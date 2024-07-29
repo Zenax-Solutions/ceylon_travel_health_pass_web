@@ -1,7 +1,6 @@
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-
 <style>
     .swiper-slide {
         position: relative;
@@ -11,7 +10,6 @@
     .swiper-button-next,
     .swiper-button-prev {
         color: #fff;
-        /* Change to the color you prefer */
         width: 50px;
         height: 50px;
         background: rgba(0, 0, 0, 0.5);
@@ -29,17 +27,16 @@
 
     .swiper-pagination-bullet {
         background: #fff;
-        /* Change to the color you prefer */
     }
 </style>
 
 
 
 <div id="default-carousel" class="relative w-full">
-    <div class="relative  overflow-hidden ">
+    <div class="relative overflow-hidden">
         <!-- Swiper -->
         <div class="swiper-container">
-            <div class="swiper-wrapper" style="z-index: -1; ">
+            <div class="swiper-wrapper" style="z-index: -1;">
                 <!-- Slide 1 -->
                 <div class="swiper-slide">
                     <div class="overlay">
@@ -60,19 +57,22 @@
                 <div class="swiper-slide">
                     <div class="overlay">
                         <img src="https://images.unsplash.com/photo-1701544872167-7f5ee73cb435?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                            class="slide-images absolute block w-full  object-cover object-center h-lvh md:h-lvh lg:h-lvh"
+                            class="slide-images absolute block w-full object-cover object-center h-lvh md:h-lvh lg:h-lvh"
                             alt="...">
                     </div>
                 </div>
             </div>
-            <!-- Navigation Buttons -->
+            <!-- Pagination -->
             <div class="swiper-pagination"></div>
-            <!-- <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div> -->
+            <!-- Navigation Buttons -->
+            <!-- Uncomment these lines to add navigation buttons
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            -->
         </div>
 
         <div class="container flex flex-col mx-auto" style="padding: 10px;">
-            <div class="grid w-full grid-cols-1 my-auto mt-12 mb-8 md:grid-cols-2 ">
+            <div class="grid w-full grid-cols-1 my-auto mt-12 mb-8 md:grid-cols-2">
                 <div class="flex flex-col justify-center text-center md:text-left lg:text-left lg:text-start">
                     <h1 class="mb-4 text-5xl font-extrabold leading-tight lg:text-7xl text-white">Ceylon Travel Pass
                     </h1>
@@ -107,7 +107,7 @@
                         </div>
                     </div>
                     </p>
-                    <div class="flex  justify-center md:justify-start lg:justify-start pb-8">
+                    <div class="flex justify-center md:justify-start lg:justify-start pb-8">
                         <a href="#buynow"
                             class="flex w-40 select-none items-center gap-3 rounded-lg bg-green-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                             type="button" data-ripple-light="true">
@@ -130,22 +130,27 @@
 </div>
 
 <script>
-    var swiper = new Swiper('.swiper-container', {
-        loop: true,
-        autoplay: true,
-        speed: 2000,
-        spaceBetween: 30,
-        effect: "fade",
-        fadeEffect: {
-            crossFade: true
-        },
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
+    document.addEventListener("DOMContentLoaded", function() {
+        var swiper = new Swiper('.swiper-container', {
+            loop: true,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            speed: 2000,
+            spaceBetween: 30,
+            effect: "fade",
+            fadeEffect: {
+                crossFade: true
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
     });
 </script>
