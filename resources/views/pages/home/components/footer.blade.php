@@ -59,8 +59,6 @@
                        <a href="{{ route('refund-policy') }}"
                            class="text-gray-600 transition-colors duration-300 dark:text-black dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">Refund
                            Policy</a>
-
-                       @include('components.language-switcher')
                    </div>
                </div>
 
