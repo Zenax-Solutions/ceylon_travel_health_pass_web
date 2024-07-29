@@ -9,19 +9,23 @@
 
 
 
-    <section class="text-gray-600 bg-gray-100 body-font">
-        <div class="container mx-auto">
+    <section class="text-gray-600 bg-gray-100 body-font py-16 ">
+        <div class="container px-6 m-auto space-y-8 text-gray-500 md:px-12">
+            <div>
+                <span class="text-lg font-semibold text-gray-600">Exclusive Attractions</span>
+                <h2 class="mt-4 text-2xl font-bold text-gray-900 md:text-4xl">Choose Your Attractions</h2>
+            </div>
             <div class="flex flex-wrap" id="buynow">
                 <!--start here-->
                 @forelse($packages as $key => $package)
-                    <div class="p-4 md:w-1/2 lg:w-1/2">
+                    <div class="p-4 md:w-1/2 lg:w-1/3">
 
                         <div class="relative flex flex-col text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
 
                             <div class="p-6 ">
                                 <div class="flex items-center justify-between mb-2">
                                     <h3 class="text-xl font-black text-gray-800 md:text-xl">
-                                        <span class="font-normal">{{ $key + 1 }}.</span> Choose Your Attractions
+                                        <span class="font-normal">{{ $key + 1 }}.</span> Attractions
                                     </h3>
                                 </div>
                             </div>
