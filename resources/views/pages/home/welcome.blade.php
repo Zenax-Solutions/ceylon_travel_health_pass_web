@@ -101,7 +101,7 @@
                                     </p>
                                 </div>
                                 <div class="flex flex-wrap flex-col  justify-between mb-2">
-                                    <div>
+                                    <div class="package-info">
                                         <p class="text-base text-gray-500 md:text-lg">
                                         <h1 class="text-lg font-black text-gray-800 md:text-2xl">Travel</h1>
                                         {!! $package->travel_info !!}

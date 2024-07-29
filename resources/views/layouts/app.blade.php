@@ -47,6 +47,12 @@
         .edited-list ul {
             list-style-type: disc !important;
         }
+
+        .package-info ul {
+            list-style: disc;
+            margin: 20px;
+            padding: unset;
+        }
     </style>
 
 
