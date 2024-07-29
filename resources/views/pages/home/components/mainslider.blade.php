@@ -131,10 +131,8 @@
 
 <script>
     var swiper = new Swiper('.swiper-container', {
-        loop: false,
-        autoplay: {
-            delay: 5000,
-        },
+        loop: true,
+        autoplay: true,
         speed: 2000,
         spaceBetween: 30,
         effect: "fade",
