@@ -31,7 +31,6 @@
         background: #fff;
         /* Change to the color you prefer */
     }
-
 </style>
 
 
@@ -75,38 +74,38 @@
         <div class="container flex flex-col mx-auto" style="padding: 10px;">
             <div class="grid w-full grid-cols-1 my-auto mt-12 mb-8 md:grid-cols-2 ">
                 <div class="flex flex-col justify-center text-center md:text-left lg:text-left lg:text-start">
-                    <h1 class="mb-4 text-5xl font-extrabold leading-tight lg:text-7xl text-white">Ceylon Travel & Health
-                        Pass</h1>
+                    <h1 class="mb-4 text-5xl font-extrabold leading-tight lg:text-7xl text-white">Ceylon Travel Pass
+                    </h1>
                     <p class="text-base font-normal leading-7 lg:w-3/4 text-white">
-                        <div class="p-6 mb-8 md:pl-0 lg:pl-0 space-y-4">
-                            <div
-                                class="relative w-full grid justify-items-center md:justify-items-start md:flex md:items-center md:gap-7">
-                                <img width="48" height="48" src="https://img.icons8.com/pulsar-gradient/48/skip.png"
-                                    alt="skip" />
-                                <div>
-                                    <p class="max-w-screen-sm mt-2 text-sm font-bold text-white">Skip the Lines with One
-                                        Digital Pass – No Waiting at Ticket Counters. </p>
-                                </div>
-                            </div>
-                            <div
-                                class="relative w-full grid justify-items-center md:justify-items-start md:justify-items-start md:flex md:items-center md:gap-7">
-                                <img width="48" height="48" src="https://img.icons8.com/pulsar-gradient/48/roadmap.png"
-                                    alt="roadmap" />
-                                <div>
-                                    <p class="max-w-screen-sm mt-2 text-sm font-bold text-white">Plan your trip from our
-                                        huge selection of attractions.</p>
-                                </div>
-                            </div>
-                            <div
-                                class="relative w-full grid justify-items-center md:justify-items-start md:justify-items-start md:flex md:items-center md:gap-7">
-                                <img width="48" height="48" src="https://img.icons8.com/pulsar-gradient/48/pass.png"
-                                    alt="pass" />
-                                <div>
-                                    <p class="max-w-screen-sm mt-2 text-sm font-bold text-white">Download your digital
-                                        pass and start exploring. There are no additional entry fees to pay. </p>
-                                </div>
+                    <div class="p-6 mb-8 md:pl-0 lg:pl-0 space-y-4">
+                        <div
+                            class="relative w-full grid justify-items-center md:justify-items-start md:flex md:items-center md:gap-7">
+                            <img width="48" height="48" src="https://img.icons8.com/pulsar-gradient/48/skip.png"
+                                alt="skip" />
+                            <div>
+                                <p class="max-w-screen-sm mt-2 text-sm font-bold text-white">Skip the Lines with One
+                                    Digital Pass – No Waiting at Ticket Counters. </p>
                             </div>
                         </div>
+                        <div
+                            class="relative w-full grid justify-items-center md:justify-items-start md:justify-items-start md:flex md:items-center md:gap-7">
+                            <img width="48" height="48"
+                                src="https://img.icons8.com/pulsar-gradient/48/roadmap.png" alt="roadmap" />
+                            <div>
+                                <p class="max-w-screen-sm mt-2 text-sm font-bold text-white">Plan your trip from our
+                                    huge selection of attractions.</p>
+                            </div>
+                        </div>
+                        <div
+                            class="relative w-full grid justify-items-center md:justify-items-start md:justify-items-start md:flex md:items-center md:gap-7">
+                            <img width="48" height="48" src="https://img.icons8.com/pulsar-gradient/48/pass.png"
+                                alt="pass" />
+                            <div>
+                                <p class="max-w-screen-sm mt-2 text-sm font-bold text-white">Download your digital
+                                    pass and start exploring. There are no additional entry fees to pay. </p>
+                            </div>
+                        </div>
+                    </div>
                     </p>
                     <div class="flex  justify-center md:justify-start lg:justify-start pb-8">
                         <a href="#buynow"
@@ -123,8 +122,7 @@
                     </div>
                 </div>
                 <div class="items-center justify-end md:flex">
-                    <img class="rounded-md w-100 md:w-96" src="{{ asset('images/mobile.png') }}"
-                        alt="header image">
+                    <img class="rounded-md w-100 md:w-96" src="{{ asset('images/mobile.png') }}" alt="header image">
                 </div>
             </div>
         </div>
@@ -152,5 +150,4 @@
             prevEl: '.swiper-button-prev',
         },
     });
-
 </script>
