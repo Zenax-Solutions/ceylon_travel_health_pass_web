@@ -1,6 +1,6 @@
 <div>
-    <div class=" pt-16 pb-16">
-        <div class="max-w-md mx-auto mt-10 p-5 bg-white shadow-lg rounded-lg">
+    <div class="pb-16">
+        <div class="max-w-md mx-auto mt-4 p-5 bg-white shadow-lg rounded-lg">
             <div>
                 <h2 class="mt-4 text-2xl font-bold text-gray-900 md:text-4xl">Review Us</h2>
             </div>
