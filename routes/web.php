@@ -40,7 +40,7 @@ Route::controller(HomeController::class)->group(function () {
 
 
 Route::view('/privacy-policy', 'pages.home.pages.privacy-policy')->name('privacy-policy');
-Route::view('/terms-and-conditions', 'pages.home.pages.terms-and-Conditions')->name('terms-and-conditions');
+Route::view('/terms-and-conditions', 'pages.home.pages.terms-and-conditions')->name('terms-and-conditions');
 Route::view('/refund-policy', 'pages.home.pages.refund-policy')->name('refund-policy');
 
 ///////////////////////////////
