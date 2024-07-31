@@ -47,7 +47,7 @@
     <div class="relative overflow-hidden">
         <!-- Swiper -->
         <div class="swiper-container h-screen lg:h-lvh md:h-lvh" style="position: absolute;
-    width: 100%; background: #0000004f;">
+    width: 100%; background: linear-gradient(61deg, #20af0ecf, #ffffff00);">
             <div class="swiper-wrapper" style="z-index: -1;">
                 <!-- Slide 1 -->
                 <div class="swiper-slide">
