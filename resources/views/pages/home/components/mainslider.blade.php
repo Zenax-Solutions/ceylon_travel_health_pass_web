@@ -83,8 +83,7 @@
                             <img width="48" height="48" src="https://img.icons8.com/pulsar-gradient/48/skip.png"
                                 alt="skip" />
                             <div>
-                                <p class="max-w-screen-sm mt-2 text-sm font-bold text-white">Skip the Lines with One
-                                    Digital Pass – No Waiting at Ticket Counters. </p>
+                                <p class="max-w-screen-sm mt-2 text-sm font-bold text-white">Skip the Lines with Our Digital Pass – No More Waiting!</p>
                             </div>
                         </div>
                         <div
@@ -92,8 +91,7 @@
                             <img width="48" height="48"
                                 src="https://img.icons8.com/pulsar-gradient/48/roadmap.png" alt="roadmap" />
                             <div>
-                                <p class="max-w-screen-sm mt-2 text-sm font-bold text-white">Plan your trip from our
-                                    huge selection of attractions.</p>
+                                <p class="max-w-screen-sm mt-2 text-sm font-bold text-white">Explore a Huge Selection of Attractions with Ease.</p>
                             </div>
                         </div>
                         <div
@@ -101,8 +99,7 @@
                             <img width="48" height="48" src="https://img.icons8.com/pulsar-gradient/48/pass.png"
                                 alt="pass" />
                             <div>
-                                <p class="max-w-screen-sm mt-2 text-sm font-bold text-white">Download your digital
-                                    pass and start exploring. There are no additional entry fees to pay. </p>
+                                <p class="max-w-screen-sm mt-2 text-sm font-bold text-white">Pass and Start Your Adventure—No Extra Fees, Just Fun!</p>
                             </div>
                         </div>
                     </div>

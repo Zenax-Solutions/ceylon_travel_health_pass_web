@@ -13,7 +13,7 @@
         <div class="container  m-auto space-y-8 text-gray-500 md:px-12">
             <div class="px-6">
                 <span class="text-lg font-semibold text-gray-600">Exclusive Attractions</span>
-                <h2 class="mt-4 text-2xl font-bold text-gray-900 md:text-4xl">Choose Your Attractions</h2>
+                <h2 class="mt-4 text-2xl font-bold text-gray-900 md:text-4xl">Select Your Dream Destinations</h2>
             </div>
             <div class="flex flex-wrap" id="buynow">
                 <!--start here-->
@@ -22,18 +22,18 @@
 
                         <div class="relative flex flex-col text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
 
-                            <div class="p-6 ">
+                            <!-- <div class="p-6 ">
                                 <div class="flex items-center justify-between mb-2">
                                     <h3 class="text-xl font-black text-gray-800 md:text-xl">
-                                        <span class="font-normal">{{ $key + 1 }}.</span> Attractions
+                                    {{ $key + 1 }}
                                     </h3>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div>
-                                <div id="default-carousel" class="relative w-full" data-carousel="slide">
+                                <div id="default-carousel" class="relative w-full " data-carousel="slide">
                                     <!-- Carousel wrapper -->
-                                    <div class="relative h-56 overflow-hidden ">
+                                    <div class="relative h-56 overflow-hidden rounded-xl">
 
                                         @if (isset($package->gallery))
                                             @forelse($package->gallery as $image)
@@ -158,7 +158,7 @@
         <div class="container px-6 m-auto space-y-8 text-gray-500 md:px-12">
             <div>
                 <span class="text-lg font-semibold text-gray-600">Discount Shops</span>
-                <h2 class="mt-4 text-2xl font-bold text-gray-900 md:text-4xl">Best Discount Shop's</h2>
+                <h2 class="mt-4 text-2xl font-bold text-gray-900 md:text-4xl">Top Savings Spots to Explore</h2>
             </div>
             <div
                 class="grid mt-16 overflow-hidden border divide-x divide-y rounded-xl sm:grid-cols-2 lg:divide-y-0 lg:grid-cols-3 xl:grid-cols-4">
@@ -217,7 +217,7 @@
         <div class="container px-6 m-auto space-y-8 text-gray-500 md:px-12">
             <div>
                 <span class="text-lg font-semibold text-gray-600">Discount Services</span>
-                <h2 class="mt-4 text-2xl font-bold text-gray-900 md:text-4xl">Best Discount Services</h2>
+                <h2 class="mt-4 text-2xl font-bold text-gray-900 md:text-4xl">Top Savings Services</h2>
             </div>
             <div
                 class="grid mt-16 overflow-hidden border divide-x divide-y rounded-xl sm:grid-cols-2 lg:divide-y-0 lg:grid-cols-3 xl:grid-cols-4">
