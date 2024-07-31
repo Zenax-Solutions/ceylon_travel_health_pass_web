@@ -141,7 +141,7 @@
     </div>
 </section>
 <div class="py-16 overflow-hidden">
-    <div class="container px-6 m-auto space-y-8 text-gray-500 md:px-12">
+    <div class="container px-6 m-auto space-y-8 text-gray-500 ">
         <div>
             <span class="text-lg font-semibold text-gray-600">Discount Shops</span>
             <h2 class="mt-4 text-2xl font-bold text-gray-900 md:text-4xl">Top Savings Spots to Explore</h2>
@@ -195,7 +195,7 @@
 </div>
 
 <div class="py-16 overflow-hidden ">
-    <div class="container px-6 m-auto space-y-8 text-gray-500 md:px-12">
+    <div class="container px-6 m-auto space-y-8 text-gray-500">
         <div>
             <span class="text-lg font-semibold text-gray-600">Discount Services</span>
             <h2 class="mt-4 text-2xl font-bold text-gray-900 md:text-4xl">Top Savings Services</h2>
