@@ -89,7 +89,7 @@
                             </p>
                         </div>
                         <div class="flex flex-wrap flex-col  justify-between mb-2">
-                            <div class="package-info" style="max-height: 360px !important; min-height: 360px !important;">
+                            <div class="package-info" style="min-height: 360px !important;">
                                 @if(!empty($package->travel_info))
                                 <p class="text-base text-gray-500 md:text-lg">
                                 <h1 class="text-lg font-black text-gray-800 md:text-2xl">Travel</h1>
