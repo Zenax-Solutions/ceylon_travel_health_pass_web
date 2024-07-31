@@ -80,7 +80,7 @@
                     <div class="p-6 ">
                         <div class="flex items-center justify-between mb-2">
 
-                            <h3 class="text-xl font-black text-green-400 md:text-3xl">
+                            <h3 class="text-2xl font-black text-green-400 md:text-3xl">
                                 {{ $package->main_title }}
                             </h3>
 
