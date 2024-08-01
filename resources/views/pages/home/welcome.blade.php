@@ -162,7 +162,14 @@
                                 {{ $shop->shope_name }}
                             </h5>
                         </a>
-                        <p class="text-sm font-bold text-green-400">Discount: %{{ $shop->discount_amount }}</p>
+                        <p class="text-sm font-bold text-green-400">
+
+                            @if (is_numeric($shop->discount_amount))
+                            Discount: %{{ $shop->discount_amount }}
+                            @else
+                            Discount: {{ $shop->discount_amount }}
+                            @endif
+                        </p>
                         <p class="text-sm font-bold text-gray-600">Area: {{ $shop->area }}</p>
                     </div>
 
@@ -215,7 +222,15 @@
                                 {{ $service->service_name }}
                             </h5>
                         </a>
-                        <p class="text-sm font-bold text-green-400">Discount: %{{ $service->discount_amount }}</p>
+                        <p class="text-sm font-bold text-green-400">
+
+                            @if (is_numeric($service->discount_amount))
+                            Discount: %{{ $service->discount_amount }}
+                            @else
+                            Discount: {{ $service->discount_amount }}
+                            @endif
+
+                        </p>
                         <p class="text-sm font-bold text-gray-600">Area: {{ $service->area }}</p>
                     </div>
 
