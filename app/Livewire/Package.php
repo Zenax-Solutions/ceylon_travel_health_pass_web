@@ -45,6 +45,9 @@ class Package extends Component
     public $totalPrice = 0;
     public $grandTotal = 0;
     public $totalOfChildPrice = 0;
+
+    public $wildlifePrice = 0,$wildlifeChildPrice = 0, $wildlifeItemCount = 0, $wildlifeServiceCharge;
+
     #[Validate('required')]
     public $adult_count = 1;
     #[Validate('required')]
@@ -114,6 +117,9 @@ class Package extends Component
         $this->adult_count =  $this->adult_count == '' ? 1 : $this->adult_count;
 
         $this->esimCount = $this->esimCount == '' ? 0 : $this->esimCount;
+
+
+        $this->calculatePacksPrice($this->adult_count, $this->children_count);
 
         if (isset($this->esimServiceProvider)) {
 
@@ -186,13 +192,20 @@ class Package extends Component
     }
 
     #[On('updatePrice')]
-    public function updateTotalPrice($totalPrice, $totalOfChildPrice)
+    public function updateTotalPrice($totalPrice, $totalOfChildPrice, $wildlifePrice,$wildlifeChildPrice,$wildlifeItemCount)
     {
         //Get Total of Destination Child Price
 
-        $this->totalOfChildPrice = $totalOfChildPrice;
+        $this->totalOfChildPrice = $totalOfChildPrice + $wildlifeChildPrice;
 
-        $this->totalPrice = $totalPrice;
+        $this->totalPrice = $totalPrice + $wildlifePrice;
+
+        $this->wildlifePrice = $wildlifePrice;
+
+        $this->wildlifeChildPrice = $wildlifeChildPrice;
+
+        $this->wildlifeItemCount = $wildlifeItemCount;
+
         // Calculate grand total
         $this->grandTotal = $this->totalPrice + $this->package->price;
     }
@@ -419,6 +432,33 @@ class Package extends Component
 
         $total = $adultPriceTotal + $childPriceTotal + $esimPriceTotal - $this->discount;
 
-        return $total;
+        if ($this->wildlifeItemCount > 0) {
+           return  $total + $this->calculatePacksPrice($this->adult_count, $this->children_count);
+        }
+        else
+        {
+            return $total;
+        }
+
+        
+    }
+
+
+    public function calculatePacksPrice($value1, $value2)
+    {
+        $total = $value1 + $value2;
+
+        // Determine the number of packs (each pack is 10 units or less)
+        $packs = ceil($total / env('WILD_PACKS_COUNT', 0));
+        
+        // Add 5 for each pack (whether complete or partial)
+        $additionalValue = $packs * env('WILD_SERVICE_CHARGE', 0);
+
+        $this->wildlifeServiceCharge = $additionalValue;
+        
+        // Add the additional value to the total
+        $finalTotal = $additionalValue;
+        
+        return $finalTotal;
     }
 }

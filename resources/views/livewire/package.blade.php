@@ -372,14 +372,33 @@
                                                 <div class="inline-flex items-center">
                                                     <label class="relative flex items-center p-3 rounded-full cursor-pointer" for="checkbox-{{ $destination->id }}" data-ripple-dark="true">
                                                         <input type="checkbox" class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-pink-500 checked:bg-pink-500 checked:before:bg-pink-500 hover:before:opacity-10" id="checkbox-{{ $destination->id }}" onchange="calculateTotal()" @if ($auth_customer !=null) @if ($auth_customer->region_type == 'south_asian')
+
+                                                        @if($destination->is_wildlife)
+                                                        data-wildlife-price="{{ $destination->south_asian_price + $destination->south_asian_price * (env('WILD_VAT_RATE', 0) / 100) }}"
+                                                        data-wildlife-child-price="{{ $destination->child_south_asian_price + $destination->child_south_asian_price * (env('WILD_VAT_RATE', 0) / 100) }}"
+                                                        @else
                                                         data-price="{{ $destination->south_asian_price }}"
                                                         data-child-price="{{ $destination->child_south_asian_price }}"
+                                                        @endif
                                                         @elseif ($auth_customer->region_type == 'non_south_asian')
-                                                        data-price="{{ $destination->non_south_asian_price }}"
-                                                        data-child-price="{{ $destination->child_non_south_asian_price }}" @endif
-                                                        @elseif ($auth_agent != null)
+
+                                                        @if($destination->is_wildlife)
+                                                        data-wildlife-price="{{ $destination->non_south_asian_price + $destination->non_south_asian_price * (env('WILD_VAT_RATE', 0) / 100) }}"
+                                                        data-wildlife-child-price="{{ $destination->child_non_south_asian_price + $destination->child_non_south_asian_price * (env('WILD_VAT_RATE', 0) / 100)}}"
+                                                        @else
                                                         data-price="{{ $destination->non_south_asian_price }}"
                                                         data-child-price="{{ $destination->child_non_south_asian_price }}"
+                                                        @endif
+                                                        @endif
+                                                        @elseif ($auth_agent != null)
+
+                                                        @if($destination->is_wildlife)
+                                                        data-wildlife-price="{{ $destination->non_south_asian_price + $destination->non_south_asian_price * (env('WILD_VAT_RATE', 0) / 100)}}"
+                                                        data-wildlife-child-price="{{ $destination->child_non_south_asian_price + $destination->child_non_south_asian_price * (env('WILD_VAT_RATE', 0) / 100)}}"
+                                                        @else
+                                                        data-price="{{ $destination->non_south_asian_price }}"
+                                                        data-child-price="{{ $destination->child_non_south_asian_price }}"
+                                                        @endif
                                                         @endif
                                                         />
 
@@ -404,33 +423,63 @@
                                                         {{ $destination->city->name }}</span>
                                                     <p class="text-[15px] text-light text-green-500">
 
-                                                        @if ($auth_customer != null)
-                                                        @if ($auth_customer->region_type == 'south_asian')
-                                                        Adult:
-                                                        {{ env('CURRENCY', '$') . $destination->south_asian_price }}
-                                                        <br>
-                                                        @if ($destination->child_south_asian_price > 0)
-                                                        Children:
-                                                        {{ env('CURRENCY', '$') . $destination->child_south_asian_price }}
-                                                        @endif
-                                                        @elseif ($auth_customer->region_type == 'non_south_asian')
-                                                        Adult:
-                                                        {{ env('CURRENCY', '$') . $destination->non_south_asian_price }}
-                                                        <br>
-                                                        @if ($destination->child_non_south_asian_price > 0)
-                                                        Children:
-                                                        {{ env('CURRENCY', '$') . $destination->child_non_south_asian_price }}
-                                                        @endif
-                                                        @endif
-                                                        @elseif ($auth_agent != null)
-                                                        Adult:
-                                                        {{ env('CURRENCY', '$') . $destination->non_south_asian_price }}
-                                                        <br>
-                                                        @if ($destination->child_non_south_asian_price > 0)
-                                                        Children:
-                                                        {{ env('CURRENCY', '$') . $destination->child_non_south_asian_price }}
-                                                        @endif
+                                                        @php
+                                                            $price = null;
+                                                            $childPrice = null;
 
+                                                            if ($auth_customer) {
+                                                                if ($auth_customer->region_type === 'south_asian') {
+
+                                                                    if($destination->is_wildlife)
+                                                                    {
+                                                                        $price = $destination->south_asian_price + $destination->south_asian_price * (env('WILD_VAT_RATE', 0) / 100);
+                                                                        $childPrice = $destination->child_south_asian_price + $destination->child_south_asian_price * (env('WILD_VAT_RATE', 0) / 100);
+                                                                    }
+                                                                    else {
+                                                                        $price = $destination->south_asian_price;
+                                                                        $childPrice = $destination->child_south_asian_price;
+                                                                    }
+
+                                                                
+                                                                } elseif ($auth_customer->region_type === 'non_south_asian') {
+
+                                                                    if($destination->is_wildlife)
+                                                                    {
+                                                                        $price = $destination->non_south_asian_price + $destination->non_south_asian_price * (env('WILD_VAT_RATE', 0) / 100);
+                                                                        $childPrice = $destination->child_non_south_asian_price + $destination->child_non_south_asian_price * (env('WILD_VAT_RATE', 0) / 100);
+                                                                    }
+                                                                    else
+                                                                    { 
+                                                                        $price = $destination->non_south_asian_price;
+                                                                        $childPrice = $destination->child_non_south_asian_price;
+
+                                                                    }
+                                                                    
+                                                                }
+                                                            } elseif ($auth_agent)
+                                                            {
+                                                                if($destination->is_wildlife)
+                                                                    {
+                                                                        $price = $destination->non_south_asian_price + $destination->non_south_asian_price * (env('WILD_VAT_RATE', 0) / 100);
+                                                                        $childPrice = $destination->child_non_south_asian_price + $destination->child_non_south_asian_price * (env('WILD_VAT_RATE', 0) / 100);
+                                                                    }
+                                                                    else
+                                                                    { 
+                                                                        $price = $destination->non_south_asian_price;
+                                                                        $childPrice = $destination->child_non_south_asian_price;
+
+                                                                    }
+                                                            }
+                                                        @endphp
+
+                                                       @if ($price !== null)
+                                                                Adult:
+                                                                {{ env('CURRENCY', '$') . $price }}
+                                                                <br>
+                                                            @if ($childPrice > 0)
+                                                                Children:
+                                                                {{ env('CURRENCY', '$') . $childPrice }}
+                                                            @endif
                                                         @endif
                                                     </p>
                                                     @if ($ticketCount?->selling_ticket_count == $ticketCount?->ticket_stock_count)
@@ -529,7 +578,7 @@
                                                 <label for="adult" class="block mb-3 text-base font-medium text-white">
                                                     Adult Count
                                                 </label>
-                                                <input type="number" min="1" wire:model.blur='adult_count' required class="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                                                <input type="number" min="1" wire:model.live.debounce.300ms='adult_count' required class="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                                                 @error('adult_count')
                                                 <span class="pt-2 font-bold text-red-400 error">{{ $message }}</span>
                                                 @enderror
@@ -538,7 +587,7 @@
                                                 <label for="children" class="block mt-3 mb-3 text-base font-medium text-white">
                                                     Children Count
                                                 </label>
-                                                <input type="number" min="0" wire:model.blur='children_count' class="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                                                <input type="number" min="0" wire:model.live.debounce.300ms='children_count' class="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                                                 @error('children_count')
                                                 <span class="pt-2 font-bold text-red-400 error">{{ $message }}</span>
                                                 @enderror
@@ -705,23 +754,25 @@
                                             </div>
                                             @endif
 
+                                            @if($wildlifeItemCount > 0)
+                                            <div class="flex items-center w-full mt-2">
+                                                <div class="flex-grow">
+                                                    <span class="font-semibold text-white">Wildlife Service Charge</span>
+                                                </div>
+
+                                                <div class="pl-3">
+                                                    <span class="text-lg font-semibold text-red-400">{{ env('CURRENCY', '$') . $wildlifeServiceCharge }}</span>
+                                                </div>
+                                            </div>
+                                            @endif
+
                                             <div class="flex items-center w-full">
                                                 <div class="flex-grow">
                                                     <span class="font-semibold text-white">Total</span>
                                                 </div>
 
                                                 <div class="pl-3">
-
-                                                    @php
-
-                                                    $sub_total = $children_count * $totalOfChildPrice;
-
-                                                    $total =
-                                                    $sub_total +
-                                                    $grandTotal * $adult_count +
-                                                    $esimCount * $esimProviderPrice;
-                                                    @endphp
-                                                    <span class="text-xl font-semibold text-red-400">{{ env('CURRENCY', '$') . $total - $discount }}</span>
+                                                    <span class="text-xl font-semibold text-red-400">{{ env('CURRENCY', '$') . $this->calculateTotalPrice() }}</span>
                                                 </div>
                                             </div>
 
@@ -798,11 +849,11 @@
                     </button>
 
                     <button @click="step++" x-show="step == 2" class="px-5 py-2 font-medium text-center text-white bg-black border border-transparent rounded-lg shadow-sm focus:outline-none hover:bg-white hover:text-green-500">🛒
-                        Chekout ( {{ env('CURRENCY', '$') . $total - $discount }} )</button>
+                        Chekout ( {{ env('CURRENCY', '$') . $this->calculateTotalPrice() }} )</button>
 
                     <div x-show="$wire.destinationsCount >= 1" wire:loading.remove>
                         <button wire:click.prevent='submitBooking()' x-show="step === 3" wire:confirm="Are you sure to process the payment? 😊" class="px-5 py-2 font-medium text-center text-white bg-green-800 border border-transparent rounded-lg shadow-sm focus:outline-none hover:text-dark">
-                            Pay-Online( {{ env('CURRENCY', '$') . $total - $discount }} )</button>
+                            Pay-Online( {{ env('CURRENCY', '$') . $this->calculateTotalPrice() }} )</button>
                     </div>
 
                     <div wire:loading wire:target="submitBooking()">
@@ -894,30 +945,47 @@
         var selectedDestinationIds = [];
         var totalPrice = 0;
         var totalOfChildPrice = 0;
+        var wildlifePrice = 0;
+        var wildlifeChildPrice = 0;
+        var wildlifeItemCount = 0; // Counter for wildlife items
 
         checkboxes.forEach(function(checkbox) {
-            totalPrice += parseFloat(checkbox.getAttribute('data-price'));
-            totalOfChildPrice += parseFloat(checkbox.getAttribute('data-child-price'));
-        });
+            if (checkbox.hasAttribute('data-price')) {
+                totalPrice += parseFloat(checkbox.getAttribute('data-price'));
+                totalOfChildPrice += parseFloat(checkbox.getAttribute('data-child-price'));
+            }
 
-        document.getElementById('totalPrice').innerText = totalPrice;
+            if (checkbox.hasAttribute('data-wildlife-price')) {
+                wildlifePrice += parseFloat(checkbox.getAttribute('data-wildlife-price'));
+                wildlifeChildPrice += parseFloat(checkbox.getAttribute('data-wildlife-child-price'));
+                wildlifeItemCount++; // Increment counter for wildlife items
+            }
 
-        var packagePrice = parseFloat('{{ $package?->price }}');
-        var grandTotal = packagePrice + totalPrice;
-        document.getElementById('grandTotal').innerText = grandTotal;
-
-        checkboxes.forEach(function(checkbox) {
             selectedDestinationIds.push(checkbox.id.replace('checkbox-', ''));
         });
+
+        var packagePrice = parseFloat('{{ $package?->price }}') || 0;
+        var grandTotal = packagePrice + totalPrice + wildlifePrice;
+
+        document.getElementById('totalPrice').innerText = totalPrice + wildlifePrice;
+        document.getElementById('grandTotal').innerText = grandTotal;
+
+
+        console.log('Wildlife Price: ', wildlifePrice);
+        console.log('Total Price: ', totalPrice);
+        console.log('Wildlife Item Count: ', wildlifeItemCount);
 
         Livewire.dispatch('updatePrice', {
             totalPrice: totalPrice,
             totalOfChildPrice: totalOfChildPrice,
-        })
+            wildlifePrice: wildlifePrice,
+            wildlifeChildPrice: wildlifeChildPrice,
+            wildlifeItemCount: wildlifeItemCount
+        });
 
         Livewire.dispatch('selectedDestinationIds', {
             selectedDestinationIds: selectedDestinationIds
-        })
+        });
     }
 </script>
 
