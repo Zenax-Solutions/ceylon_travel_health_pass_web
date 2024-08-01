@@ -438,6 +438,11 @@
                                                         <div class="mt-px">not available</div>
                                                     </div>
                                                     @endif
+                                                    @if ($destination->is_wildlife)
+                                                    <div class="center mt-2 relative inline-block select-none whitespace-nowrap rounded-lg bg-green-500 py-2 px-3.5 align-baseline font-sans text-xs font-bold  leading-none text-white">
+                                                        <div class="mt-px">wildlife 🐘🌲</div>
+                                                    </div>
+                                                    @endif
                                                 </div>
                                         </div>
                                         @empty
