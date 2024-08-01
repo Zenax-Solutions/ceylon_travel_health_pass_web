@@ -46,7 +46,7 @@ class BlogResource extends Resource
                     ->image(),
                 Forms\Components\TextInput::make('seo_title')
                     ->maxLength(255),
-                Forms\Components\Textarea::make('seo_description')->columnSpanFull(),
+                Forms\Components\Textarea::make('seo_description')->maxLength(255)->columnSpanFull(),
                 Forms\Components\Textarea::make('seo_keywords')
                     ->placeholder('test,test,test')
                     ->maxLength(65535)
