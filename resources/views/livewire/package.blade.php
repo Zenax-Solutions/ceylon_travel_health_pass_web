@@ -1,4 +1,4 @@
-<div>
+<div class="pt-0 md:pt-12 lg:pt-0">
     <!-- component -->
     <!-- This is an example component -->
     <div>
