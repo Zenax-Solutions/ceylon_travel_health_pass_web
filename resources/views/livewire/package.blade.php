@@ -853,7 +853,7 @@
 
                     <div x-show="$wire.destinationsCount >= 1" wire:loading.remove>
                         <button wire:click.prevent='submitBooking()' x-show="step === 3" wire:confirm="Are you sure to process the payment? 😊" class="px-5 py-2 font-medium text-center text-white bg-green-800 border border-transparent rounded-lg shadow-sm focus:outline-none hover:text-dark">
-                            Pay-Online( {{ env('CURRENCY', '$') . number_format($this->calculateTotalPrice(), 2) }} )</button>
+                            Pay-Online</button>
                     </div>
 
                     <div wire:loading wire:target="submitBooking()">
