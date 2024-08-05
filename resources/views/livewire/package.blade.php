@@ -424,62 +424,62 @@
                                                     <p class="text-[15px] text-light text-green-500">
 
                                                         @php
-                                                            $price = null;
-                                                            $childPrice = null;
+                                                        $price = null;
+                                                        $childPrice = null;
 
-                                                            if ($auth_customer) {
-                                                                if ($auth_customer->region_type === 'south_asian') {
+                                                        if ($auth_customer) {
+                                                        if ($auth_customer->region_type === 'south_asian') {
 
-                                                                    if($destination->is_wildlife)
-                                                                    {
-                                                                        $price = $destination->south_asian_price + $destination->south_asian_price * (env('WILD_VAT_RATE', 0) / 100);
-                                                                        $childPrice = $destination->child_south_asian_price + $destination->child_south_asian_price * (env('WILD_VAT_RATE', 0) / 100);
-                                                                    }
-                                                                    else {
-                                                                        $price = $destination->south_asian_price;
-                                                                        $childPrice = $destination->child_south_asian_price;
-                                                                    }
+                                                        if($destination->is_wildlife)
+                                                        {
+                                                        $price = $destination->south_asian_price + $destination->south_asian_price * (env('WILD_VAT_RATE', 0) / 100);
+                                                        $childPrice = $destination->child_south_asian_price + $destination->child_south_asian_price * (env('WILD_VAT_RATE', 0) / 100);
+                                                        }
+                                                        else {
+                                                        $price = $destination->south_asian_price;
+                                                        $childPrice = $destination->child_south_asian_price;
+                                                        }
 
-                                                                
-                                                                } elseif ($auth_customer->region_type === 'non_south_asian') {
 
-                                                                    if($destination->is_wildlife)
-                                                                    {
-                                                                        $price = $destination->non_south_asian_price + $destination->non_south_asian_price * (env('WILD_VAT_RATE', 0) / 100);
-                                                                        $childPrice = $destination->child_non_south_asian_price + $destination->child_non_south_asian_price * (env('WILD_VAT_RATE', 0) / 100);
-                                                                    }
-                                                                    else
-                                                                    { 
-                                                                        $price = $destination->non_south_asian_price;
-                                                                        $childPrice = $destination->child_non_south_asian_price;
+                                                        } elseif ($auth_customer->region_type === 'non_south_asian') {
 
-                                                                    }
-                                                                    
-                                                                }
-                                                            } elseif ($auth_agent)
-                                                            {
-                                                                if($destination->is_wildlife)
-                                                                    {
-                                                                        $price = $destination->non_south_asian_price + $destination->non_south_asian_price * (env('WILD_VAT_RATE', 0) / 100);
-                                                                        $childPrice = $destination->child_non_south_asian_price + $destination->child_non_south_asian_price * (env('WILD_VAT_RATE', 0) / 100);
-                                                                    }
-                                                                    else
-                                                                    { 
-                                                                        $price = $destination->non_south_asian_price;
-                                                                        $childPrice = $destination->child_non_south_asian_price;
+                                                        if($destination->is_wildlife)
+                                                        {
+                                                        $price = $destination->non_south_asian_price + $destination->non_south_asian_price * (env('WILD_VAT_RATE', 0) / 100);
+                                                        $childPrice = $destination->child_non_south_asian_price + $destination->child_non_south_asian_price * (env('WILD_VAT_RATE', 0) / 100);
+                                                        }
+                                                        else
+                                                        {
+                                                        $price = $destination->non_south_asian_price;
+                                                        $childPrice = $destination->child_non_south_asian_price;
 
-                                                                    }
-                                                            }
+                                                        }
+
+                                                        }
+                                                        } elseif ($auth_agent)
+                                                        {
+                                                        if($destination->is_wildlife)
+                                                        {
+                                                        $price = $destination->non_south_asian_price + $destination->non_south_asian_price * (env('WILD_VAT_RATE', 0) / 100);
+                                                        $childPrice = $destination->child_non_south_asian_price + $destination->child_non_south_asian_price * (env('WILD_VAT_RATE', 0) / 100);
+                                                        }
+                                                        else
+                                                        {
+                                                        $price = $destination->non_south_asian_price;
+                                                        $childPrice = $destination->child_non_south_asian_price;
+
+                                                        }
+                                                        }
                                                         @endphp
 
-                                                       @if ($price !== null)
-                                                                Adult:
-                                                                {{ env('CURRENCY', '$') . $price }}
-                                                                <br>
-                                                            @if ($childPrice > 0)
-                                                                Children:
-                                                                {{ env('CURRENCY', '$') . $childPrice }}
-                                                            @endif
+                                                        @if ($price !== null)
+                                                        Adult:
+                                                        {{ env('CURRENCY', '$') . $price }}
+                                                        <br>
+                                                        @if ($childPrice > 0)
+                                                        Children:
+                                                        {{ env('CURRENCY', '$') . $childPrice }}
+                                                        @endif
                                                         @endif
                                                     </p>
                                                     @if ($ticketCount?->selling_ticket_count == $ticketCount?->ticket_stock_count)
@@ -574,11 +574,11 @@
                                         <div class="w-full mx-auto">
 
 
-                                            <div class="mb-5">
+                                            <div class="mb-5" x-data="{ adultCount: $wire.entangle('adult_count').live, childrenCount: $wire.entangle('children_count').live }">
                                                 <label for="adult" class="block mb-3 text-base font-medium text-white">
                                                     Adult Count
                                                 </label>
-                                                <input type="number" min="1" wire:model.lazy='adult_count' required class="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                                                <input type="number" min="1" x-model="adultCount" required class="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                                                 @error('adult_count')
                                                 <span class="pt-2 font-bold text-red-400 error">{{ $message }}</span>
                                                 @enderror
@@ -587,7 +587,7 @@
                                                 <label for="children" class="block mt-3 mb-3 text-base font-medium text-white">
                                                     Children Count
                                                 </label>
-                                                <input type="number" min="0" wire:model.lazy='children_count' class="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                                                <input type="number" min="0" x-model="childrenCount" class="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                                                 @error('children_count')
                                                 <span class="pt-2 font-bold text-red-400 error">{{ $message }}</span>
                                                 @enderror
@@ -849,7 +849,7 @@
                     </button>
 
                     <button @click="step++" x-show="step == 2" class="px-5 py-2 font-medium text-center text-white bg-black border border-transparent rounded-lg shadow-sm focus:outline-none hover:bg-white hover:text-green-500">🛒
-                       ( {{ env('CURRENCY', '$') . number_format($this->calculateTotalPrice(), 2) }} )</button>
+                        ( {{ env('CURRENCY', '$') . number_format($this->calculateTotalPrice(), 2) }} )</button>
 
                     <div x-show="$wire.destinationsCount >= 1" wire:loading.remove>
                         <button wire:click.prevent='submitBooking()' x-show="step === 3" wire:confirm="Are you sure to process the payment? 😊" class="px-5 py-2 font-medium text-center text-white bg-green-800 border border-transparent rounded-lg shadow-sm focus:outline-none hover:text-dark">
@@ -971,9 +971,9 @@
         document.getElementById('grandTotal').innerText = grandTotal;
 
 
-        console.log('Wildlife Price: ', wildlifePrice);
-        console.log('Total Price: ', totalPrice);
-        console.log('Wildlife Item Count: ', wildlifeItemCount);
+        //console.log('Wildlife Price: ', wildlifePrice);
+        //console.log('Total Price: ', totalPrice);
+        //console.log('Wildlife Item Count: ', wildlifeItemCount);
 
         Livewire.dispatch('updatePrice', {
             totalPrice: totalPrice,
