@@ -19,7 +19,7 @@
         "joaopaulolndev/filament-general-settings": "^1.0",
         "laravel/framework": "^10.10",
         "laravel/octane": "^2.5",
-        "laravel/pulse": "^1.2",
+        "laravel/pulse": "*",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.4",
