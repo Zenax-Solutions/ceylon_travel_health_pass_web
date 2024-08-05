@@ -25,4 +25,5 @@ class EditAgent extends EditRecord
 
         return $data;
     }
+    
 }

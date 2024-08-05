@@ -12,6 +12,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 
 
 class PointsHistoryResource extends Resource
@@ -37,9 +38,11 @@ class PointsHistoryResource extends Resource
                     ->default(0),
                 Forms\Components\DatePicker::make('date')
                     ->required(),
-                Forms\Components\TextInput::make('paid_status')
-                    ->required()
-                    ->maxLength(255)
+                Forms\Components\Select::make('paid_status')
+                    ->options([
+                        'pending' => 'Pending',
+                        'paid' => 'Paid',
+                    ])
                     ->default('pending'),
             ]);
     }
@@ -51,8 +54,7 @@ class PointsHistoryResource extends Resource
                 Tables\Columns\TextColumn::make('agent.name')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('points')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('points')->money('USD')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('date')
                     ->date()
@@ -62,6 +64,9 @@ class PointsHistoryResource extends Resource
                     ->color(fn (string $state): string => match ($state) {
                         'pending' => 'danger',
                         'paid' => 'success',
+                    })->icon(fn (string $state): string => match ($state) {
+                        'pending' => 'heroicon-o-arrow-path',
+                        'paid' => 'heroicon-o-check-badge',
                     }),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -72,6 +77,8 @@ class PointsHistoryResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+
+
             ->filters([
                 DateRangeFilter::make('created_at'),
 
@@ -82,10 +89,10 @@ class PointsHistoryResource extends Resource
                         });
                     })
                     ->indicator('Agent')
-                    ->label('Tourism Agent List'),
+                    ->label('Tourism Agent List')->searchable(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                //Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

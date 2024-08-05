@@ -25,6 +25,7 @@ use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Get;
 use Illuminate\Support\Facades\Hash;
 use Filament\Support\RawJs;
+use Illuminate\Database\Eloquent\Builder;
 
 class AgentResource extends Resource
 {
@@ -164,6 +165,7 @@ class AgentResource extends Resource
                                     ]),
 
                                 TextInput::make('agent_discount_margin')
+                                    ->helperText('Default Agent Margin is '.env('AGENT_DISCONUNT_MARGIN', 0))
                                     ->rules(['numeric'])
                                     ->numeric()
                                     ->mask(RawJs::make('$money($input)'))
@@ -354,8 +356,11 @@ class AgentResource extends Resource
             // AgentResource\RelationManagers\DiscountShopsRelationManager::class,
             // AgentResource\RelationManagers\DiscountServicesRelationManager::class,
             // AgentResource\RelationManagers\EsimServicesRelationManager::class,
+            AgentResource\RelationManagers\PointHistoryRelationManager::class,
         ];
     }
+
+
 
     public static function getPages(): array
     {

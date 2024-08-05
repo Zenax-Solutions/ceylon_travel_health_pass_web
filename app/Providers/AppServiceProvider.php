@@ -2,9 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\PointsHistory;
 use App\View\Components\logo;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\DB;
+
 
 class AppServiceProvider extends ServiceProvider
 {

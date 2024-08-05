@@ -46,7 +46,7 @@ class Package extends Component
     public $grandTotal = 0;
     public $totalOfChildPrice = 0;
 
-    public $wildlifePrice = 0,$wildlifeChildPrice = 0, $wildlifeItemCount = 0, $wildlifeServiceCharge;
+    public $wildlifePrice = 0, $wildlifeChildPrice = 0, $wildlifeItemCount = 0, $wildlifeServiceCharge;
 
     #[Validate('required')]
     public $adult_count = 1;
@@ -192,7 +192,7 @@ class Package extends Component
     }
 
     #[On('updatePrice')]
-    public function updateTotalPrice($totalPrice, $totalOfChildPrice, $wildlifePrice,$wildlifeChildPrice,$wildlifeItemCount)
+    public function updateTotalPrice($totalPrice, $totalOfChildPrice, $wildlifePrice, $wildlifeChildPrice, $wildlifeItemCount)
     {
         //Get Total of Destination Child Price
 
@@ -324,7 +324,7 @@ class Package extends Component
 
             $this->regionality = $customer->region_type;
 
-           // $genrateQrCode->genarate($PackageData, $booking, $customer, $this->regionality);
+            // $genrateQrCode->genarate($PackageData, $booking, $customer, $this->regionality);
 
             if (isset($this->coupon_code)) {
                 $agent = Agent::where('coupon_code', $this->coupon_code);
@@ -400,14 +400,15 @@ class Package extends Component
 
                     if ($agent->exists()) {
 
-
                         $getAgent = $agent->where('coupon_code', $this->coupon_code)->first();
 
-                        PointsHistory::create([
-                            'agent_id' => $getAgent->id,
-                            'points' => env('AGENT_DISCONUNT_MARGIN', 5),
-                            'date' => Carbon::now(),
-                        ]);
+                        if (env('AGENT_DISCONUNT_MARGIN', 5) > 0 || $getAgent->agent_discount_margin > env('AGENT_DISCONUNT_MARGIN', 5)) {
+                            PointsHistory::create([
+                                'agent_id' => $getAgent->id,
+                                'points' => $getAgent->agent_discount_margin > 0 ? $getAgent->agent_discount_margin : env('AGENT_DISCONUNT_MARGIN', 5),
+                                'date' => Carbon::now(),
+                            ]);
+                        }
                     }
                 }
 
@@ -433,14 +434,10 @@ class Package extends Component
         $total = $adultPriceTotal + $childPriceTotal + $esimPriceTotal - $this->discount;
 
         if ($this->wildlifeItemCount > 0) {
-           return  $total + $this->calculatePacksPrice($this->adult_count, $this->children_count);
-        }
-        else
-        {
+            return  $total + $this->calculatePacksPrice($this->adult_count, $this->children_count);
+        } else {
             return $total;
         }
-
-        
     }
 
 
@@ -450,15 +447,15 @@ class Package extends Component
 
         // Determine the number of packs (each pack is 10 units or less)
         $packs = ceil($total / env('WILD_PACKS_COUNT', 0));
-        
+
         // Add 5 for each pack (whether complete or partial)
         $additionalValue = $packs * env('WILD_SERVICE_CHARGE', 0);
 
         $this->wildlifeServiceCharge = $additionalValue;
-        
+
         // Add the additional value to the total
         $finalTotal = $additionalValue;
-        
+
         return $finalTotal;
     }
 }

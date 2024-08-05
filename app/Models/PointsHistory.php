@@ -16,4 +16,6 @@ class PointsHistory extends Model
     {
         return $this->belongsTo(Agent::class, 'agent_id', 'id');
     }
+
+   
 }

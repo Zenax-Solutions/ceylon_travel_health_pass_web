@@ -12,6 +12,8 @@ class ViewBooking extends ViewRecord
 
     public function getHeaderActions(): array
     {
-        return [EditAction::make()];
+        return [
+           // EditAction::make()
+        ];
     }
 }
