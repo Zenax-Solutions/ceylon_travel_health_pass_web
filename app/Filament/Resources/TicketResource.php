@@ -21,6 +21,7 @@ use Filament\Tables\Filters\SelectFilter;
 use App\Filament\Filters\DateRangeFilter;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\TicketResource\Pages;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class TicketResource extends Resource
 {
@@ -164,6 +165,7 @@ class TicketResource extends Resource
             ])
             ->headerActions([
                 //CreateAction::make()
+                ExportBulkAction::make(),
             ]);
     }
 
