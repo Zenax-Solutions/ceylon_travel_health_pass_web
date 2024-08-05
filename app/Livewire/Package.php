@@ -112,9 +112,9 @@ class Package extends Component
             'passportImages.*' => 'required|image',
         ]);
 
-        $this->children_count =  $this->children_count == '' ? 0 : $this->children_count;
+        //$this->children_count =  $this->children_count == '' ? 0 : $this->children_count;
 
-        $this->adult_count =  $this->adult_count == '' ? 1 : $this->adult_count;
+        //$this->adult_count =  $this->adult_count == '' ? 1 : $this->adult_count;
 
         $this->esimCount = $this->esimCount == '' ? 0 : $this->esimCount;
 
@@ -427,8 +427,8 @@ class Package extends Component
 
     public function calculateTotalPrice()
     {
-        $adultPriceTotal = $this->adult_count * $this->grandTotal;
-        $childPriceTotal = $this->children_count * $this->totalOfChildPrice;
+        $adultPriceTotal = (float)$this->adult_count * $this->grandTotal;
+        $childPriceTotal = (float)$this->children_count * $this->totalOfChildPrice;
         $esimPriceTotal = $this->esimCount * $this->esimProviderPrice;
 
         $total = $adultPriceTotal + $childPriceTotal + $esimPriceTotal - $this->discount;
@@ -443,7 +443,7 @@ class Package extends Component
 
     public function calculatePacksPrice($value1, $value2)
     {
-        $total = $value1 + $value2;
+        $total = (int)$value1 + (int)$value2;
 
         // Determine the number of packs (each pack is 10 units or less)
         $packs = ceil($total / env('WILD_PACKS_COUNT', 0));
