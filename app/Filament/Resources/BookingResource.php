@@ -24,6 +24,7 @@ use App\Filament\Filters\DateRangeFilter;
 use App\Filament\Resources\BookingResource\Pages;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\Destination;
+use Filament\Tables\Columns\Summarizers\Sum;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class BookingResource extends Resource
@@ -177,6 +178,7 @@ class BookingResource extends Resource
                     ->toggleable()
                     ->limit(50),
                 Tables\Columns\TextColumn::make('total')
+                    ->summarize(Sum::make()->money('USD')->label('Total'))->money('USD')
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('date')
                     ->toggleable()
