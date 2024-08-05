@@ -692,7 +692,7 @@
                                                     <span class="font-semibold text-white">
                                                         {{ $adult_count }}
                                                         <span>x</span>
-                                                        {{ env('CURRENCY', '$') . $grandTotal }}</span>
+                                                        {{ env('CURRENCY', '$') . number_format($grandTotal,2) }}</span>
                                                 </div>
                                             </div>
                                             @if ($package?->child_price == 1)
@@ -704,7 +704,7 @@
                                                     <span class="font-semibold text-white">
                                                         {{ $children_count }}
                                                         <span>x</span>
-                                                        {{ env('CURRENCY', '$') . $totalOfChildPrice }}</span>
+                                                        {{ env('CURRENCY', '$') . number_format($totalOfChildPrice,2) }}</span>
                                                 </div>
                                             </div>
                                             @endif
@@ -718,7 +718,7 @@
                                                     <span class="font-semibold text-white">
                                                         {{ $esimCount }}
                                                         <span>x</span>
-                                                        {{ env('CURRENCY', '$') . $esimProviderPrice }}</span>
+                                                        {{ env('CURRENCY', '$') . number_format($esimProviderPrice,2) }}</span>
                                                 </div>
                                             </div>
 
@@ -733,7 +733,7 @@
                                                     <span class="font-semibold text-white">
 
                                                         -
-                                                        <span>{{ env('CURRENCY', '$') . $discount }}</span>
+                                                        <span>{{ env('CURRENCY', '$') . number_format($discount,2) }}</span>
 
                                                 </div>
                                             </div>
@@ -748,7 +748,7 @@
                                                     <span class="font-semibold text-white">
 
                                                         -
-                                                        <span>{{ env('CURRENCY', '$') . $discount }}</span>
+                                                        <span>{{ env('CURRENCY', '$') . number_format($discount, 2) }}</span>
 
                                                 </div>
                                             </div>
@@ -772,7 +772,7 @@
                                                 </div>
 
                                                 <div class="pl-3">
-                                                    <span class="text-xl font-semibold text-red-400">{{ env('CURRENCY', '$') . $this->calculateTotalPrice() }}</span>
+                                                    <span class="text-xl font-semibold text-red-400">{{ env('CURRENCY', '$') . number_format($this->calculateTotalPrice(),2) }}</span>
                                                 </div>
                                             </div>
 
