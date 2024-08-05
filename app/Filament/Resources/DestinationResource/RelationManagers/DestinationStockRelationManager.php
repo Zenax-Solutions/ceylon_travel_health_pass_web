@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Filters\DateRangeFilter;
 use App\Models\DestinationTicketStockHistory;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class DestinationStockRelationManager extends RelationManager
 {
@@ -55,6 +56,9 @@ class DestinationStockRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()->label('Add New Stock'),
+                
+                ExportBulkAction::make(),
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

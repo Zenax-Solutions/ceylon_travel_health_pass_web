@@ -14,6 +14,7 @@ use Filament\Tables\Columns\Summarizers\Sum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class PointHistoryRelationManager extends RelationManager
 {
@@ -57,6 +58,7 @@ class PointHistoryRelationManager extends RelationManager
             ])
             ->headerActions([
                 //Tables\Actions\CreateAction::make(),
+                ExportBulkAction::make(),
             ])
             ->actions([
                 //Tables\Actions\EditAction::make(),

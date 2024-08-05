@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Filters\DateRangeFilter;
 use Filament\Tables\Filters\SelectFilter;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class ShopeQrScanRecordResource extends Resource
 {
@@ -85,6 +86,8 @@ class ShopeQrScanRecordResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     // Tables\Actions\DeleteBulkAction::make(),
                 ]),
+            ])->headerActions([
+                ExportBulkAction::make(),
             ]);
     }
 

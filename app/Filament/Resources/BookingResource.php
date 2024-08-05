@@ -24,6 +24,7 @@ use App\Filament\Filters\DateRangeFilter;
 use App\Filament\Resources\BookingResource\Pages;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\Destination;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class BookingResource extends Resource
 {
@@ -217,6 +218,7 @@ class BookingResource extends Resource
             ])
             ->headerActions([
                 // CreateAction::make()
+                ExportBulkAction::make(),
             ]);
     }
 

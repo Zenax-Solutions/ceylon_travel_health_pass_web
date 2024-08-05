@@ -23,6 +23,7 @@ use App\Filament\Resources\DestinationResource\Pages;
 use App\Filament\Resources\DestinationResource\RelationManagers\DestinationStockRelationManager;
 use Filament\Forms\Components\Toggle;
 use Filament\Support\RawJs;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class DestinationResource extends Resource
 {
@@ -297,7 +298,10 @@ class DestinationResource extends Resource
                 EditAction::make(),
                 DeleteAction::make(),
             ])
-            ->headerActions([CreateAction::make()]);
+            ->headerActions([
+                CreateAction::make(),
+                ExportBulkAction::make(),
+            ]);
     }
 
     public static function getRelations(): array

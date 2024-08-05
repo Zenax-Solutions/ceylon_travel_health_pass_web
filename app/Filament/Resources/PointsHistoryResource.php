@@ -13,7 +13,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
-
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class PointsHistoryResource extends Resource
 {
@@ -97,7 +97,9 @@ class PointsHistoryResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     // Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                ])
+            ])->headerActions([
+                ExportBulkAction::make(),
             ]);
     }
 
