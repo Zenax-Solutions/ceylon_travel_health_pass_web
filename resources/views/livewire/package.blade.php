@@ -325,12 +325,12 @@
                                     <div class="flex w-full space-x-3 md:w-1/2">
                                         <div class="w-1/2">
                                             <h2 class="text-gray-500">Total Price:</h2>
-                                            <p wire:transition><span id="totalPrice" class="text-xl text-green-400 text-normal">{{ env('CURRENCY', '$') . $totalPrice }}</span>
+                                            <p wire:transition><span id="totalPrice" class="text-xl text-green-400 text-normal">{{ env('CURRENCY', '$') . number_format($totalPrice, 2) }}</span>
                                             </p>
                                         </div>
                                         <div class="w-1/2">
                                             <h2 class="text-gray-500">Grand Total:</h2>
-                                            <p wire:transition><span id="grandTotal" class="text-xl text-red-400 text-normal">{{ env('CURRENCY', '$') . $grandTotal }}</span>
+                                            <p wire:transition><span id="grandTotal" class="text-xl text-red-400 text-normal">{{ env('CURRENCY', '$') . number_format($grandTotal, 2) }}</span>
                                             </p>
                                         </div>
                                     </div>
