@@ -38,6 +38,7 @@ class DestinationStockRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('destination_id')
             ->columns([
+                Tables\Columns\TextColumn::make('destination.destination'),
                 Tables\Columns\TextColumn::make('ticket_stock_count')
                     ->badge()
                     ->color('success'),

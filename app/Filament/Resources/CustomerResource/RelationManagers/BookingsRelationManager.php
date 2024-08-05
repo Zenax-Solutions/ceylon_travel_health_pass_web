@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\CustomerResource\RelationManagers;
 
+use App\Models\Booking;
 use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
@@ -16,6 +17,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Components\BelongsToSelect;
 use Filament\Resources\RelationManagers\RelationManager;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class BookingsRelationManager extends RelationManager
 {
@@ -116,22 +118,51 @@ class BookingsRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('package.main_title')->limit(
-                    50
-                ),
-                Tables\Columns\TextColumn::make('customer.first_name')->limit(
-                    50
-                ),
-                Tables\Columns\TextColumn::make('adult_pass_count')->limit(50),
-                Tables\Columns\TextColumn::make('child_pass_count')->limit(50),
-                Tables\Columns\TextColumn::make('total'),
-                Tables\Columns\TextColumn::make('date')->date(),
-                Tables\Columns\TextColumn::make('payment_status')->enum([
-                    'pending' => 'Pending',
-                    'declined' => 'Declined',
-                    'canceled' => 'Canceled',
-                    'paid' => 'Paid',
-                ]),
+                Tables\Columns\TextColumn::make('id')
+                   
+                ->label('Booking No')
+                ->formatStateUsing(function ($state) {
+                    return '#'.$state;
+                })
+                ->searchable()
+                ->limit(50),
+            Tables\Columns\TextColumn::make('package.main_title')
+                ->toggleable()
+                ->searchable()
+                ->limit(50),
+            Tables\Columns\TextColumn::make('id')
+                ->formatStateUsing(function (Booking $record, $state) {
+                    if($record->customer != null)
+                    {
+                       return $record->customer != null ? '#'.$state.'  -> '. $record->customer->first_name . ' ' . $record->customer->last_name : '';
+                    }
+                    else
+                    { 
+                        return $record->agent != null ?  '#'.$state.'  -> '. $record->agent->name .' ( Tourism Agent ✅ )' : '';
+                    }
+                })
+              
+                ->label('Booking Info')
+                ->searchable()
+                ->limit(50),
+            Tables\Columns\TextColumn::make('adult_pass_count')
+                ->toggleable()
+                ->limit(50),
+            Tables\Columns\TextColumn::make('child_pass_count')
+                ->toggleable()
+                ->limit(50),
+            Tables\Columns\TextColumn::make('total')
+                ->toggleable(),
+            Tables\Columns\TextColumn::make('date')
+                ->toggleable()
+                ->date(),
+            Tables\Columns\TextColumn::make('payment_status')
+                ->badge()
+                ->color(fn (string $state): string => match ($state) {
+                    'pending' => 'danger',
+                    'paid' => 'success',
+                }),
+
             ])
             ->filters([
                 Tables\Filters\Filter::make('created_at')
@@ -173,11 +204,16 @@ class BookingsRelationManager extends RelationManager
                     ->multiple()
                     ->relationship('customer', 'first_name'),
             ])
-            ->headerActions([Tables\Actions\CreateAction::make()])
+            ->headerActions([
+                //Tables\Actions\CreateAction::make(),
+                ExportBulkAction::make()
+                ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                //Tables\Actions\EditAction::make(),
+                //Tables\Actions\DeleteAction::make(),
             ])
-            ->bulkActions([Tables\Actions\DeleteBulkAction::make()]);
+            ->bulkActions([
+                //Tables\Actions\DeleteBulkAction::make()
+                ]);
     }
 }

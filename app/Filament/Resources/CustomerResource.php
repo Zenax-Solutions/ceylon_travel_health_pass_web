@@ -23,6 +23,7 @@ use App\Filament\Filters\DateRangeFilter;
 use Filament\Forms\Components\ToggleButtons;
 use Illuminate\Support\Facades\Hash;
 use App\Filament\Resources\CustomerResource\Pages;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class CustomerResource extends Resource
 {
@@ -218,13 +219,14 @@ class CustomerResource extends Resource
             ->headerActions([
 
                 //CreateAction::make()
+                ExportBulkAction::make(),
             ]);
     }
 
     public static function getRelations(): array
     {
         return [
-            // CustomerResource\RelationManagers\BookingsRelationManager::class,
+            CustomerResource\RelationManagers\BookingsRelationManager::class,
         ];
     }
 

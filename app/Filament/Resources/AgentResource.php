@@ -26,6 +26,7 @@ use Filament\Forms\Get;
 use Illuminate\Support\Facades\Hash;
 use Filament\Support\RawJs;
 use Illuminate\Database\Eloquent\Builder;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class AgentResource extends Resource
 {
@@ -347,7 +348,10 @@ class AgentResource extends Resource
                 EditAction::make(),
                 DeleteAction::make(),
             ])
-            ->headerActions([CreateAction::make()]);
+            ->headerActions([
+                CreateAction::make(),
+                ExportBulkAction::make(),
+            ]);
     }
 
     public static function getRelations(): array
