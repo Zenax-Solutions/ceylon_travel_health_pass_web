@@ -578,7 +578,7 @@
                                                 <label for="adult" class="block mb-3 text-base font-medium text-white">
                                                     Adult Count
                                                 </label>
-                                                <input type="number" min="1" wire:model.change='adult_count' required class="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                                                <input type="number" min="1" wire:model.lazy='adult_count' required class="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                                                 @error('adult_count')
                                                 <span class="pt-2 font-bold text-red-400 error">{{ $message }}</span>
                                                 @enderror
@@ -587,7 +587,7 @@
                                                 <label for="children" class="block mt-3 mb-3 text-base font-medium text-white">
                                                     Children Count
                                                 </label>
-                                                <input type="number" min="0" wire:model.change='children_count' class="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                                                <input type="number" min="0" wire:model.lazy='children_count' class="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                                                 @error('children_count')
                                                 <span class="pt-2 font-bold text-red-400 error">{{ $message }}</span>
                                                 @enderror
