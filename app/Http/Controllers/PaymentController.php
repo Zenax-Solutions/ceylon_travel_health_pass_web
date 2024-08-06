@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\PayHerePayment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class PaymentController extends Controller
 {
@@ -29,6 +30,8 @@ class PaymentController extends Controller
 
     public function handleNotify(Request $request)
     {
+        Log::info($request);
+
         return $this->payHerePayment->handleNotification($request);
     }
 
