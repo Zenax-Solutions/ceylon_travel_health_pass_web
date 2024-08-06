@@ -20,6 +20,7 @@ use App\Http\Controllers\Api\CustomerBookingsController;
 use App\Http\Controllers\Api\AgentEsimServicesController;
 use App\Http\Controllers\Api\AgentDiscountShopsController;
 use App\Http\Controllers\Api\AgentDiscountServicesController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,11 @@ use App\Http\Controllers\Api\AgentDiscountServicesController;
 */
 
 Route::post('/login', [AuthController::class, 'login'])->name('api.login');
+
+Route::get('/payment/process', [PaymentController::class, 'process'])->name('payment.process');
+Route::get('/payment/return', [PaymentController::class, 'handleReturn'])->name('payment.return');
+Route::get('/payment/cancel', [PaymentController::class, 'handleCancel'])->name('payment.cancel');
+Route::post('/payment/notify', [PaymentController::class, 'handleNotify'])->name('payment.notify');
 
 Route::middleware('auth:sanctum')
     ->get('/user', function (Request $request) {
