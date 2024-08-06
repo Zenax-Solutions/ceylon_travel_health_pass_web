@@ -186,8 +186,15 @@ class BookingResource extends Resource
                 Tables\Columns\TextColumn::make('payment_status')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
-                        'pending' => 'danger',
+                        'pending' => 'warning',
+                        'declined' => 'danger',
+                        'canceled' => 'danger',
                         'paid' => 'success',
+                    })->icon(fn (string $state): string => match ($state) {
+                        'pending' => 'heroicon-o-arrow-path',
+                        'declined' => 'heroicon-o-x-mark',
+                        'canceled' => 'heroicon-o-x-mark',
+                        'paid' => 'heroicon-o-check-badge',
                     }),
 
             ])
