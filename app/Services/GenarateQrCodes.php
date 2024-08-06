@@ -24,6 +24,8 @@ class GenarateQrCodes
 
     public function genarate($data, $bookig, $customer,$regionality=null)
     {
+        Log::info('Booking: ' . $data);
+
         try {
             // Get the current date
             $currentDate = Carbon::now();

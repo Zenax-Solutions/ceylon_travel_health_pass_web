@@ -85,8 +85,6 @@ class PayHerePayment
 
             $booking = Booking::find($orderId);
 
-            Log::info('Booking ID: ' . $booking->package);
-
             $booking->update(['payment_status' => 'paid']);
 
             if ($booking->agent_id != null) {
