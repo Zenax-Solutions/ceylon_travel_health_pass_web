@@ -62,10 +62,8 @@ class PayHerePayment
     public function handleNotification($request)
     {
 
-        Log::info($request->all());
-
         $merchantId = $request->input('merchant_id');
-        $orderId = $request->order_id;
+        $orderId = $request->input('order_id');
         $payhereAmount = $request->input('payhere_amount');
         $payhereCurrency = $request->input('payhere_currency');
         $statusCode = $request->input('status_code');
@@ -86,6 +84,8 @@ class PayHerePayment
             // TODO: Update your database as payment success
 
             $booking = Booking::find($orderId);
+
+            Log::info('Booking ID: ' . $booking->id);
 
             $booking->update(['payment_status' => 'paid']);
 
