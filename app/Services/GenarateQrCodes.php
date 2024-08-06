@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
+
 class GenarateQrCodes
 {
     protected  $tickets = [];
@@ -32,6 +33,10 @@ class GenarateQrCodes
 
             // Format the expiration date if needed
             $formattedExpirationDate = $expirationDate->toDateString();
+
+       
+            Log::info($data['adult_pass_count'],$data['child_pass_count']);
+
 
             // Generate adult tickets
             for ($i = 0; $i < $data['adult_pass_count']; $i++) {
