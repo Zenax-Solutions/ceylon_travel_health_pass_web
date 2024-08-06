@@ -30,8 +30,6 @@ class PaymentController extends Controller
 
     public function handleNotify(Request $request)
     {
-        Log::info($request);
-
         return $this->payHerePayment->handleNotification($request);
     }
 

@@ -62,8 +62,10 @@ class PayHerePayment
     public function handleNotification($request)
     {
 
+        Log::info($request->all());
+
         $merchantId = $request->input('merchant_id');
-        $orderId = $request->input('order_id');
+        $orderId = $request->order_id;
         $payhereAmount = $request->input('payhere_amount');
         $payhereCurrency = $request->input('payhere_currency');
         $statusCode = $request->input('status_code');
@@ -90,8 +92,6 @@ class PayHerePayment
             if ($booking->agent_id != null) {
 
                 $regionality = session('agent_booking_ticket_regionality');
-
-                Log::info($booking);
 
                 $this->qrCodeGenarate->genarate($booking->package, $booking, $booking->agent, $regionality);
             } else {

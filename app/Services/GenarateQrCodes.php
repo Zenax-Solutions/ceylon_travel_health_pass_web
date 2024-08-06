@@ -34,10 +34,6 @@ class GenarateQrCodes
             // Format the expiration date if needed
             $formattedExpirationDate = $expirationDate->toDateString();
 
-       
-            Log::info($data->adult_pass_count);
-
-
             // Generate adult tickets
             for ($i = 0; $i < $data->adult_pass_count; $i++) {
                 $ticketNumber = Str::uuid()->toString();
