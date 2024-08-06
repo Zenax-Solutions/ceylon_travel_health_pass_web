@@ -104,6 +104,9 @@ Route::controller(DestinationController::class)->group(function () {
 
 
 
+//PayHere Routes
+Route::get('/payment/process', [PaymentController::class, 'process'])->name('payment.process');
+
 //Mobile App Home View
 
 Route::view('/app/mobile/home', 'mobile.home')->name('mobile.home');

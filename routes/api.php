@@ -36,7 +36,6 @@ use App\Http\Controllers\PaymentController;
 Route::post('/login', [AuthController::class, 'login'])->name('api.login');
 
 //PayHere Routes
-Route::get('/payment/process', [PaymentController::class, 'process'])->name('payment.process');
 Route::get('/payment/return', [PaymentController::class, 'handleReturn'])->name('payment.return');
 Route::get('/payment/cancel', [PaymentController::class, 'handleCancel'])->name('payment.cancel');
 Route::post('/payment/notify', [PaymentController::class, 'handleNotify'])->name('payment.notify');
