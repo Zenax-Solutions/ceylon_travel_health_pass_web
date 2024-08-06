@@ -19,9 +19,9 @@ class PayHerePayment
     {
         $this->merchantId = env('PAYHERE_MERCHANT_ID'); // Add your PayHere Merchant ID to the .env file
         $this->merchantSecret = env('PAYHERE_MERCHANT_SECRET'); // Add your PayHere Merchant Secret to the .env file
-        $this->returnUrl = route('payment.return');
-        $this->cancelUrl = route('payment.cancel');
-        $this->notifyUrl = route('payment.notify');
+        $this->returnUrl = env('APP_URL') . '/api/payment/return';
+        $this->cancelUrl = env('APP_URL') . '/api/payment/cancel';
+        $this->notifyUrl = env('APP_URL') . '/api/payment/notify';
 
         $genarateQrCodes = new GenarateQrCodes;
 

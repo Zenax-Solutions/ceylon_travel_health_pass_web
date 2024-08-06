@@ -104,14 +104,6 @@ Route::controller(DestinationController::class)->group(function () {
 
 
 
-//PayHere Routes
-Route::get('/payment/process', [PaymentController::class, 'process'])->name('payment.process');
-Route::get('/payment/return', [PaymentController::class, 'handleReturn'])->name('payment.return');
-Route::get('/payment/cancel', [PaymentController::class, 'handleCancel'])->name('payment.cancel');
-Route::post('/payment/notify', [PaymentController::class, 'handleNotify'])->name('payment.notify');
-
-
-
 //Mobile App Home View
 
 Route::view('/app/mobile/home', 'mobile.home')->name('mobile.home');
