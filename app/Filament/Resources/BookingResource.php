@@ -179,7 +179,7 @@ class BookingResource extends Resource
                     ->toggleable()
                     ->limit(50),
                 Tables\Columns\TextColumn::make('total')
-                    ->summarize(Sum::make()->query(fn (QueryBuilder $query) => $query->where('payment_status', 'paid'))->money('USD')->label('Total'))->money('USD')
+                    ->summarize(Sum::make()->query(fn (QueryBuilder $query) => $query->where('payment_status', 'paid'))->money('USD')->label('Total of Paid Bookings'))->money('USD')
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('date')
                     ->toggleable()
