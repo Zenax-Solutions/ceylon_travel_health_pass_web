@@ -107,7 +107,7 @@ class BookingResource extends Resource
                             'lg' => 12,
                         ]),
 
-                   
+
 
                     DatePicker::make('date')
                         ->rules(['date'])
@@ -146,10 +146,10 @@ class BookingResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')
-                   
+
                     ->label('Booking No')
                     ->formatStateUsing(function ($state) {
-                        return '#'.$state;
+                        return '#' . $state;
                     })
                     ->searchable()
                     ->limit(50),
@@ -159,16 +159,13 @@ class BookingResource extends Resource
                     ->limit(50),
                 Tables\Columns\TextColumn::make('id')
                     ->formatStateUsing(function (Booking $record, $state) {
-                        if($record->customer != null)
-                        {
-                           return $record->customer != null ? '#'.$state.'  -> '. $record->customer->first_name . ' ' . $record->customer->last_name : '';
-                        }
-                        else
-                        { 
-                            return $record->agent != null ?  '#'.$state.'  -> '. $record->agent->name .' ( Tourism Agent ✅ )' : '';
+                        if ($record->customer != null) {
+                            return $record->customer != null ? '#' . $state . '  -> ' . $record->customer->first_name . ' ' . $record->customer->last_name : '';
+                        } else {
+                            return $record->agent != null ?  '#' . $state . '  -> ' . $record->agent->name . ' ( Tourism Agent ✅ )' : '';
                         }
                     })
-                  
+
                     ->label('Booking Info')
                     ->searchable()
                     ->limit(50),
@@ -212,7 +209,7 @@ class BookingResource extends Resource
                     ->indicator('Customer')
                     ->label('Customer'),
 
-                    SelectFilter::make('agent_id')
+                SelectFilter::make('agent_id')
                     ->relationship('agent', 'name', function (Builder $query) {
                         $query->where(function ($query) {
                             $query->where('type', 'tour_agent');
@@ -220,6 +217,13 @@ class BookingResource extends Resource
                     })
                     ->indicator('Tourism Agent')
                     ->label('Tourism Agent'),
+                SelectFilter::make('payment_status')
+                    ->options([
+                        'pending' => 'Pending',
+                        'declined' => 'Declined',
+                        'canceled' => 'Canceled',
+                        'paid' => 'Paid',
+                    ])->indicator('Payment Status'),
             ])
             ->actions([
                 //ViewAction::make(),
