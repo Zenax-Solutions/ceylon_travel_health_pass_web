@@ -39,7 +39,7 @@ class GenarateQrCodes
 
 
             // Generate adult tickets
-            for ($i = 0; $i < $data['adult_pass_count']; $i++) {
+            for ($i = 0; $i < $data->adult_pass_count; $i++) {
                 $ticketNumber = Str::uuid()->toString();
                 $ticket = Ticket::create([
                     'booking_id' => $bookig->id,
@@ -58,7 +58,7 @@ class GenarateQrCodes
             }
 
             // Generate child tickets
-            for ($i = 0; $i < $data['child_pass_count']; $i++) {
+            for ($i = 0; $i < $data->child_pass_count; $i++) {
 
                 $ticketNumber = Str::uuid()->toString();
                 $ticket = Ticket::create([

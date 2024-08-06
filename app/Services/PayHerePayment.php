@@ -91,6 +91,8 @@ class PayHerePayment
 
                 $regionality = session('agent_booking_ticket_regionality');
 
+                Log::info($booking);
+
                 $this->qrCodeGenarate->genarate($booking->package, $booking, $booking->agent, $regionality);
             } else {
                 $this->qrCodeGenarate->genarate($booking->package, $booking, $booking->customer, $booking->customer->regionality);
