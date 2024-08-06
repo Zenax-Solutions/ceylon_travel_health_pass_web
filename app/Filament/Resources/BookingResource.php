@@ -26,6 +26,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Models\Destination;
 use Filament\Tables\Columns\Summarizers\Sum;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use Illuminate\Database\Query\Builder as QueryBuilder;
 
 class BookingResource extends Resource
 {
@@ -178,7 +179,7 @@ class BookingResource extends Resource
                     ->toggleable()
                     ->limit(50),
                 Tables\Columns\TextColumn::make('total')
-                    ->summarize(Sum::make()->money('USD')->label('Total'))->money('USD')
+                    ->summarize(Sum::make()->query(fn (QueryBuilder $query) => $query->where('payment_status', 'paid'))->money('USD')->label('Total'))->money('USD')
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('date')
                     ->toggleable()
