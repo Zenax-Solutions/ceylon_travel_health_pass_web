@@ -184,6 +184,9 @@
 
             </div>
         </div>
+        @if(env('DEMO_MODE', true))
+                   @include('pages.home.components.demowidget')
+        @endif
     </nav>
     <!-- End Nav -->
     <!-- Start Main -->

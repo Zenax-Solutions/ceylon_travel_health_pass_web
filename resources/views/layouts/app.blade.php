@@ -64,8 +64,6 @@
 
     <div id="main-content" style="display:none;">
 
-
-
         <div x-data="{ open: false }"
             style="background-color: #e3efc9; position: fixed;width: 100%; z-index: 50; align-items: center;"
             class="flex flex-col mx-auto justify-center">
@@ -145,6 +143,11 @@
         <main>
 
             <div class="pt-12 sm:pt-12 md:pt-12 lg:pt-12">
+
+                @if(env('DEMO_MODE', true))
+                   @include('pages.home.components.demowidget')
+                @endif
+           
                 @yield('content')
             </div>
 

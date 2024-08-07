@@ -51,6 +51,7 @@
 
 
 <body class="container flex flex-col mx-auto bg-white bg-gray-100 rounded-md" style="padding: 10px">
+    
 
     <nav style="background-color: #e3efc9; padding:10px" class="relative flex flex-wrap items-center justify-between w-full rounded-md group py-7 shrink-0">
         <div class="hidden lg:flex lg:justify-between lg:items-center">
@@ -127,11 +128,17 @@
                 </ul>
 
             </div>
+            
         </div>
+        @if(env('DEMO_MODE', true))
+                   @include('pages.home.components.demowidget')
+             @endif
     </nav>
+               
     <!-- End Nav -->
     <!-- Start Main -->
     <main class="container py-4 mx-auto mx-w-6xl">
+   
         @yield('content')
     </main>
 

@@ -28,6 +28,7 @@
 <body class="bg-white">
 
     <div x-data="{ open: false }"  class="container flex flex-col mx-auto bg-white rounded-md" style="padding: 10px">
+        
         <div style="background-color: #e3efc9; padding:10px" class="relative flex flex-wrap items-center justify-between w-full rounded-md group py-7 shrink-0">
             <div>
                 <a href="/">
@@ -62,9 +63,11 @@
 
     </div>
 
+    @if(env('DEMO_MODE', true))
+                   @include('pages.home.components.demowidget')
+                @endif
     <!-- Example -->
     <div class="flex ">
-
 
         @yield('content')
 

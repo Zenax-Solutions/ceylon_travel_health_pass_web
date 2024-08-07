@@ -130,10 +130,14 @@
 
             </div>
         </div>
+        @if(env('DEMO_MODE', true))
+                   @include('pages.home.components.demowidget')
+                @endif
     </nav>
     <!-- End Nav -->
     <!-- Start Main -->
     <main class="container py-4 mx-auto mx-w-6xl">
+ 
         @yield('content')
     </main>
     
