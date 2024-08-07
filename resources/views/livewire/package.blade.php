@@ -181,11 +181,11 @@
 
                                     @if ($auth_agent != null)
                                     <p style="font-size: 30px" class="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900">
-                                        {{ env('CURRENCY', '$') . $package?->price - $discount }}
+                                        {{ config('app.currency') . $package?->price - $discount }}
                                     </p>
                                     @else
                                     <p style="font-size: 30px" class="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900">
-                                        {{ env('CURRENCY', '$') . $package?->price }}
+                                        {{ config('app.currency') . $package?->price }}
                                     </p>
                                     @endif
 
@@ -308,14 +308,14 @@
                                         <div class="w-1/2">
                                             <h2 class="text-gray-500">Package Price:</h2>
                                             <p wire:transition class="text-xl text-green-400 text-normal">
-                                                {{ env('CURRENCY', '$') . $package->price - $discount }}
+                                                {{ config('app.currency') . $package->price - $discount }}
                                             </p>
                                         </div>
                                         @else
                                         <div class="w-1/2">
                                             <h2 class="text-gray-500">Package Price:</h2>
                                             <p wire:transition class="text-xl text-green-400 text-normal">
-                                                {{ env('CURRENCY', '$') . $package->price }}
+                                                {{ config('app.currency') . $package->price }}
                                             </p>
                                         </div>
                                         @endif
@@ -325,12 +325,12 @@
                                     <div class="flex w-full space-x-3 md:w-1/2">
                                         <div class="w-1/2">
                                             <h2 class="text-gray-500">Total Price:</h2>
-                                            <p wire:transition><span id="totalPrice" class="text-xl text-green-400 text-normal">{{ env('CURRENCY', '$') . number_format($totalPrice, 2) }}</span>
+                                            <p wire:transition><span id="totalPrice" class="text-xl text-green-400 text-normal">{{ config('app.currency') . number_format($totalPrice, 2) }}</span>
                                             </p>
                                         </div>
                                         <div class="w-1/2">
                                             <h2 class="text-gray-500">Grand Total:</h2>
-                                            <p wire:transition><span id="grandTotal" class="text-xl text-red-400 text-normal">{{ env('CURRENCY', '$') . number_format($grandTotal, 2) }}</span>
+                                            <p wire:transition><span id="grandTotal" class="text-xl text-red-400 text-normal">{{ config('app.currency') . number_format($grandTotal, 2) }}</span>
                                             </p>
                                         </div>
                                     </div>
@@ -374,8 +374,8 @@
                                                         <input type="checkbox" class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-pink-500 checked:bg-pink-500 checked:before:bg-pink-500 hover:before:opacity-10" id="checkbox-{{ $destination->id }}" onchange="calculateTotal()" @if ($auth_customer !=null) @if ($auth_customer->region_type == 'south_asian')
 
                                                         @if($destination->is_wildlife)
-                                                        data-wildlife-price="{{ $destination->south_asian_price + $destination->south_asian_price * (env('WILD_VAT_RATE', 0) / 100) }}"
-                                                        data-wildlife-child-price="{{ $destination->child_south_asian_price + $destination->child_south_asian_price * (env('WILD_VAT_RATE', 0) / 100) }}"
+                                                        data-wildlife-price="{{ $destination->south_asian_price + $destination->south_asian_price * (config('app.wild_vat_rate') / 100) }}"
+                                                        data-wildlife-child-price="{{ $destination->child_south_asian_price + $destination->child_south_asian_price * (config('app.wild_vat_rate') / 100) }}"
                                                         @else
                                                         data-price="{{ $destination->south_asian_price }}"
                                                         data-child-price="{{ $destination->child_south_asian_price }}"
@@ -383,8 +383,8 @@
                                                         @elseif ($auth_customer->region_type == 'non_south_asian')
 
                                                         @if($destination->is_wildlife)
-                                                        data-wildlife-price="{{ $destination->non_south_asian_price + $destination->non_south_asian_price * (env('WILD_VAT_RATE', 0) / 100) }}"
-                                                        data-wildlife-child-price="{{ $destination->child_non_south_asian_price + $destination->child_non_south_asian_price * (env('WILD_VAT_RATE', 0) / 100)}}"
+                                                        data-wildlife-price="{{ $destination->non_south_asian_price + $destination->non_south_asian_price * (config('app.wild_vat_rate') / 100) }}"
+                                                        data-wildlife-child-price="{{ $destination->child_non_south_asian_price + $destination->child_non_south_asian_price * (config('app.wild_vat_rate') / 100)}}"
                                                         @else
                                                         data-price="{{ $destination->non_south_asian_price }}"
                                                         data-child-price="{{ $destination->child_non_south_asian_price }}"
@@ -393,8 +393,8 @@
                                                         @elseif ($auth_agent != null)
 
                                                         @if($destination->is_wildlife)
-                                                        data-wildlife-price="{{ $destination->non_south_asian_price + $destination->non_south_asian_price * (env('WILD_VAT_RATE', 0) / 100)}}"
-                                                        data-wildlife-child-price="{{ $destination->child_non_south_asian_price + $destination->child_non_south_asian_price * (env('WILD_VAT_RATE', 0) / 100)}}"
+                                                        data-wildlife-price="{{ $destination->non_south_asian_price + $destination->non_south_asian_price * (config('app.wild_vat_rate') / 100)}}"
+                                                        data-wildlife-child-price="{{ $destination->child_non_south_asian_price + $destination->child_non_south_asian_price * ( config('app.wild_vat_rate')/ 100)}}"
                                                         @else
                                                         data-price="{{ $destination->non_south_asian_price }}"
                                                         data-child-price="{{ $destination->child_non_south_asian_price }}"
@@ -432,8 +432,8 @@
 
                                                         if($destination->is_wildlife)
                                                         {
-                                                        $price = $destination->south_asian_price + $destination->south_asian_price * (env('WILD_VAT_RATE', 0) / 100);
-                                                        $childPrice = $destination->child_south_asian_price + $destination->child_south_asian_price * (env('WILD_VAT_RATE', 0) / 100);
+                                                        $price = $destination->south_asian_price + $destination->south_asian_price * (config('app.wild_vat_rate') / 100);
+                                                        $childPrice = $destination->child_south_asian_price + $destination->child_south_asian_price * (config('app.wild_vat_rate') / 100);
                                                         }
                                                         else {
                                                         $price = $destination->south_asian_price;
@@ -445,8 +445,8 @@
 
                                                         if($destination->is_wildlife)
                                                         {
-                                                        $price = $destination->non_south_asian_price + $destination->non_south_asian_price * (env('WILD_VAT_RATE', 0) / 100);
-                                                        $childPrice = $destination->child_non_south_asian_price + $destination->child_non_south_asian_price * (env('WILD_VAT_RATE', 0) / 100);
+                                                        $price = $destination->non_south_asian_price + $destination->non_south_asian_price * (config('app.wild_vat_rate') / 100);
+                                                        $childPrice = $destination->child_non_south_asian_price + $destination->child_non_south_asian_price * (config('app.wild_vat_rate') / 100);
                                                         }
                                                         else
                                                         {
@@ -460,8 +460,8 @@
                                                         {
                                                         if($destination->is_wildlife)
                                                         {
-                                                        $price = $destination->non_south_asian_price + $destination->non_south_asian_price * (env('WILD_VAT_RATE', 0) / 100);
-                                                        $childPrice = $destination->child_non_south_asian_price + $destination->child_non_south_asian_price * (env('WILD_VAT_RATE', 0) / 100);
+                                                        $price = $destination->non_south_asian_price + $destination->non_south_asian_price * (config('app.wild_vat_rate') / 100);
+                                                        $childPrice = $destination->child_non_south_asian_price + $destination->child_non_south_asian_price * (config('app.wild_vat_rate') / 100);
                                                         }
                                                         else
                                                         {
@@ -474,11 +474,11 @@
 
                                                         @if ($price !== null)
                                                         Adult:
-                                                        {{ env('CURRENCY', '$') . $price }}
+                                                        {{ config('app.currency') . $price }}
                                                         <br>
                                                         @if ($childPrice > 0)
                                                         Children:
-                                                        {{ env('CURRENCY', '$') . $childPrice }}
+                                                        {{ config('app.currency') . $childPrice }}
                                                         @endif
                                                         @endif
                                                     </p>
@@ -692,7 +692,7 @@
                                                     <span class="font-semibold text-white">
                                                         {{ $adult_count }}
                                                         <span>x</span>
-                                                        {{ env('CURRENCY', '$') . number_format($grandTotal,2) }}</span>
+                                                        {{ config('app.currency') . number_format($grandTotal,2) }}</span>
                                                 </div>
                                             </div>
                                             @if ($package?->child_price == 1)
@@ -704,7 +704,7 @@
                                                     <span class="font-semibold text-white">
                                                         {{ $children_count }}
                                                         <span>x</span>
-                                                        {{ env('CURRENCY', '$') . number_format($totalOfChildPrice,2) }}</span>
+                                                        {{ config('app.currency') . number_format($totalOfChildPrice,2) }}</span>
                                                 </div>
                                             </div>
                                             @endif
@@ -718,7 +718,7 @@
                                                     <span class="font-semibold text-white">
                                                         {{ $esimCount }}
                                                         <span>x</span>
-                                                        {{ env('CURRENCY', '$') . number_format($esimProviderPrice,2) }}</span>
+                                                        {{ config('app.currency') . number_format($esimProviderPrice,2) }}</span>
                                                 </div>
                                             </div>
 
@@ -733,7 +733,7 @@
                                                     <span class="font-semibold text-white">
 
                                                         -
-                                                        <span>{{ env('CURRENCY', '$') . number_format($discount,2) }}</span>
+                                                        <span>{{ config('app.currency') . number_format($discount,2) }}</span>
 
                                                 </div>
                                             </div>
@@ -748,7 +748,7 @@
                                                     <span class="font-semibold text-white">
 
                                                         -
-                                                        <span>{{ env('CURRENCY', '$') . number_format($discount, 2) }}</span>
+                                                        <span>{{ config('app.currency') . number_format($discount, 2) }}</span>
 
                                                 </div>
                                             </div>
@@ -761,7 +761,7 @@
                                                 </div>
 
                                                 <div class="pl-3">
-                                                    <span class="text-lg font-semibold text-red-400">{{ env('CURRENCY', '$') . $wildlifeServiceCharge }}</span>
+                                                    <span class="text-lg font-semibold text-red-400">{{ config('app.currency') . $wildlifeServiceCharge }}</span>
                                                 </div>
                                             </div>
                                             @endif
@@ -772,7 +772,7 @@
                                                 </div>
 
                                                 <div class="pl-3">
-                                                    <span class="text-xl font-semibold text-red-400">{{ env('CURRENCY', '$') . number_format($this->calculateTotalPrice(),2) }}</span>
+                                                    <span class="text-xl font-semibold text-red-400">{{ config('app.currency') . number_format($this->calculateTotalPrice(),2) }}</span>
                                                 </div>
                                             </div>
 
@@ -849,7 +849,7 @@
                     </button>
 
                     <button @click="step++" x-show="step == 2" class="px-5 py-2 font-medium text-center text-white bg-black border border-transparent rounded-lg shadow-sm focus:outline-none hover:bg-white hover:text-green-500">🛒
-                        ( {{ env('CURRENCY', '$') . number_format($this->calculateTotalPrice(), 2) }} )</button>
+                        ( {{ config('app.currency') . number_format($this->calculateTotalPrice(), 2) }} )</button>
 
                     <div x-show="$wire.destinationsCount >= 1" wire:loading.remove>
                         <button wire:click.prevent='submitBooking()' x-show="step === 3" wire:confirm="Are you sure to process the payment? 😊" class="px-5 py-2 font-medium text-center text-white bg-green-800 border border-transparent rounded-lg shadow-sm focus:outline-none hover:text-dark">

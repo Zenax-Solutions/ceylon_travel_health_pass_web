@@ -26,13 +26,13 @@
                                             if ($agentDiscountMargin > 0) {
                                                 $discount = $agentDiscountMargin;
                                             } else {
-                                                $discount = env('AGENT_DISCONUNT_MARGIN', 0);
+                                                $discount = config('app.agent_discount_margin');
                                             }
 
                                         @endphp
 
 
-                                        {{ env('CURRENCY', '$') . number_format($package->price - $discount) }}</span>
+                                        {{ config('app.currency') . number_format($package->price - $discount) }}</span>
 
                                 </p>
 

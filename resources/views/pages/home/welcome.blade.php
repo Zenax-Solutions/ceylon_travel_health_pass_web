@@ -90,7 +90,7 @@
                         <div class="flex items-center justify-between mb-4">
 
                             <p <span class="text-3xl font-bold text-red-400 leading-none align-baseline">
-                                {{ env('CURRENCY', '$') . number_format($package->price, 2) }}</span>
+                                {{ config('app.currency') . number_format($package->price, 2) }}</span>
                             </p>
                         </div>
                         <div class="flex flex-wrap flex-col  justify-between mb-2">

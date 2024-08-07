@@ -110,7 +110,7 @@
                                                 </td>
                                                 <td
                                                     class="px-4 py-4 text-sm font-bold text-black dark:text-gray-300 whitespace-nowrap">
-                                                    {{ env('CURRENCY', '$') . $booking->total }}
+                                                    {{ config('app.currency') . $booking->total }}
                                                 </td>
 
                                                 <td

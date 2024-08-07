@@ -23,6 +23,13 @@ return
     'currency' => env('CURRENCY', '$'),
     'coupon_length' => env('COUPON_LENGTH', 5),
     'coupon_characters' => env('COUPON_CHARACTERS', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'),
+
+
+    'payhere_merchant_id' => env('PAYHERE_MERCHANT_ID', '1227710'),
+    'payhere_merchant_secret' => env('PAYHERE_MERCHANT_SECRET', 'MjgwODczMTA1ODM3MDM4MzUzMjE1NjI2NzE4MjgzMDIyMTI0NDA4'),
+    'payhere_api' => env('PAYHERE_API', 'https://sandbox.payhere.lk'),
+    'payhere_app_id' => env('PAYHERE_APP_ID', '4OVxfv4uKRs4JEVOCn8feE3TX'),
+    'payhere_app_secret' => env('PAYHERE_APP_SECRET', '4ZDuNQrXDoP8bP3L0qGcPA4vQwOs3cS6E4pDTzFstawG'),
     
 
 

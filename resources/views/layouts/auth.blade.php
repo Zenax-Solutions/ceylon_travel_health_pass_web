@@ -63,7 +63,7 @@
 
     </div>
 
-    @if(env('DEMO_MODE', true))
+    @if(config('app.demo_mode))
                    @include('pages.home.components.demowidget')
                 @endif
     <!-- Example -->

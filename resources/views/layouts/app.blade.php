@@ -144,7 +144,7 @@
 
             <div class="pt-12 sm:pt-12 md:pt-12 lg:pt-12">
 
-                @if(env('DEMO_MODE', true))
+                @if(config('app.demo_mode'))
                    @include('pages.home.components.demowidget')
                 @endif
            

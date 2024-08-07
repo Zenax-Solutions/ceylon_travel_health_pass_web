@@ -166,14 +166,14 @@ class AgentResource extends Resource
                                     ]),
 
                                 TextInput::make('agent_discount_margin')
-                                    ->helperText('Default Agent Margin is '.env('AGENT_DISCONUNT_MARGIN', 0))
+                                    ->helperText('Default Agent Margin is '.config('app.agent_discount_margin'))
                                     ->rules(['numeric'])
                                     ->numeric()
                                     ->mask(RawJs::make('$money($input)'))
                                     ->stripCharacters(',')
                                     ->prefix('$')
                                     ->placeholder('Default 5 USD')
-                                    ->minValue(env('AGENT_DISCONUNT_MARGIN', 0))
+                                    ->minValue(config('app.agent_discount_margin'))
                                     ->columnSpan([
                                         'default' => 12,
                                         'md' => 12,

@@ -36,12 +36,12 @@ class AgentController extends Controller
         SEOMeta::addKeyword([$this->genaralSettings?->seo_keywords]);
         SEOMeta::addMeta('og:type', 'website');
         SEOMeta::addMeta('og:site_name', $this->genaralSettings?->site_name);
-        SEOMeta::addMeta('og:image', env('APP_URL') . '/storage/' . $this->genaralSettings?->site_logo);
+        SEOMeta::addMeta('og:image', config('app.url') . '/storage/' . $this->genaralSettings?->site_logo);
         OpenGraph::setDescription($this->genaralSettings?->site_description);
         OpenGraph::setTitle($this->genaralSettings?->seo_title);
-        OpenGraph::setUrl(env('APP_URL'));
+        OpenGraph::setUrl(config('app.url'));
         OpenGraph::addProperty('type', 'website');
-        OpenGraph::addImage(env('APP_URL') . '/storage/' . $this->genaralSettings?->site_logo);
+        OpenGraph::addImage(config('app.url') . '/storage/' . $this->genaralSettings?->site_logo);
     }
 
     public function dashboard()
@@ -295,8 +295,8 @@ class AgentController extends Controller
 
     public function generateUniqueCouponCode()
     {
-        $characters = env('COUPON_CHARACTERS', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');
-        $length = env('COUPON_LENGTH', 5);
+        $characters = config('app.coupon_characters');
+        $length = config('app.coupon_length');
         $code = '';
 
         do {

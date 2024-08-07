@@ -95,7 +95,7 @@ class Package extends Component
                     if ($agent->agent_discount_margin > 5) {
                         $this->discount = $agent->agent_discount_margin;
                     } else {
-                        $this->discount = env('AGENT_DISCONUNT_MARGIN', 0);
+                        $this->discount = config('app.agent_discount_margin');
                     }
                 } else {
                     $this->redirectRoute('agent.packages');
@@ -146,7 +146,7 @@ class Package extends Component
                     'message' => 'Valid Coupon code'
                 ];
                 $this->coupon_data = $validate->get();
-                $this->discount =  env('CUSTOMER_DISCONUNT_MARGIN', 5);
+                $this->discount =  config('app.customer_discount_margin');
             } else {
                 $this->coupon_message = [
                     'color' => 'text-red-400',
@@ -333,11 +333,9 @@ class Package extends Component
 
                     $getAgent = $agent->where('coupon_code', $this->coupon_code)->first();
 
-                    //$getAgent->increment('points', env('AGENT_DISCONUNT_MARGIN', 5));
-
                     PointsHistory::create([
                         'agent_id' => $getAgent->id,
-                        'points' => env('AGENT_DISCONUNT_MARGIN', 5),
+                        'points' => config('app.agent_discount_margin'),
                         'date' => Carbon::now(),
                     ]);
                 }
@@ -402,10 +400,10 @@ class Package extends Component
 
                         $getAgent = $agent->where('coupon_code', $this->coupon_code)->first();
 
-                        if (env('AGENT_DISCONUNT_MARGIN', 5) > 0 || $getAgent->agent_discount_margin > env('AGENT_DISCONUNT_MARGIN', 5)) {
+                        if (config('app.agent_discount_margin') > 0 || $getAgent->agent_discount_margin > config('app.agent_discount_margin')) {
                             PointsHistory::create([
                                 'agent_id' => $getAgent->id,
-                                'points' => $getAgent->agent_discount_margin > 0 ? $getAgent->agent_discount_margin : env('AGENT_DISCONUNT_MARGIN', 5),
+                                'points' => $getAgent->agent_discount_margin > 0 ? $getAgent->agent_discount_margin : config('app.agent_discount_margin'),
                                 'date' => Carbon::now(),
                             ]);
                         }
@@ -446,10 +444,10 @@ class Package extends Component
         $total = (int)$value1 + (int)$value2;
 
         // Determine the number of packs (each pack is 10 units or less)
-        $packs = ceil($total / env('WILD_PACKS_COUNT', 0));
+        $packs = ceil($total / config('app.wild_packs_count'));
 
         // Add 5 for each pack (whether complete or partial)
-        $additionalValue = $packs * env('WILD_SERVICE_CHARGE', 0);
+        $additionalValue = $packs * config('app.wild_service_charge');
 
         $this->wildlifeServiceCharge = $additionalValue;
 

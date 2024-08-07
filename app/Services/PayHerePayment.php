@@ -17,11 +17,12 @@ class PayHerePayment
 
     public function __construct()
     {
-        $this->merchantId = env('PAYHERE_MERCHANT_ID'); // Add your PayHere Merchant ID to the .env file
-        $this->merchantSecret = env('PAYHERE_MERCHANT_SECRET'); // Add your PayHere Merchant Secret to the .env file
-        $this->returnUrl = env('APP_URL') . '/api/payment/return';
-        $this->cancelUrl = env('APP_URL') . '/api/payment/cancel';
-        $this->notifyUrl = env('APP_URL') . '/api/payment/notify';
+
+        $this->merchantId = config('app.payhere_merchant_id'); // Use config() instead of env()
+        $this->merchantSecret = config('app.payhere_merchant_secret'); // Use config() instead of env()
+        $this->returnUrl = config('app.url') . '/api/payment/return'; // Use config() instead of env()
+        $this->cancelUrl = config('app.url') . '/api/payment/cancel'; // Use config() instead of env()
+        $this->notifyUrl = config('app.url') . '/api/payment/notify'; // Use config() instead of env()
 
         $genarateQrCodes = new GenarateQrCodes;
 
