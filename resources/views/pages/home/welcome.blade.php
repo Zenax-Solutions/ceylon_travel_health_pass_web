@@ -281,8 +281,8 @@
 
             @forelse($blogs as $blog)
             <article class="bg-white group relative rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transform duration-200">
-                <div class="relative w-full h-80 md:h-64 lg:h-44">
-                    <img src="{{ Storage::url($blog->image) }}" alt="Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug." class="w-full h-full object-center object-cover">
+                <div class="relative w-full h-80 md:h-64 lg:h-44" style="padding: 10px;">
+                    <img src="{{ Storage::url($blog->image) }}" style="border-radius: 10px" alt="Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug." class="w-full h-full object-center object-cover">
                 </div>
                 <div class="px-3 py-4">
                     <h3 class="text-lg font-bold text-white pb-2">
