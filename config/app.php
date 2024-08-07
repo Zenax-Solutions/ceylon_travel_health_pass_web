@@ -3,7 +3,28 @@
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
-return [
+return 
+[
+
+     /*
+    |--------------------------------------------------------------------------
+    | Application System Settings
+    |--------------------------------------------------------------------------
+    |
+    */
+
+
+    'demo_mode' => env('DEMO_MODE', false),
+    'agent_discount_margin' => env('AGENT_DISCOUNT_MARGIN', 0),
+    'wild_vat_rate' => env('WILD_VAT_RATE', 18),
+    'wild_packs_count' => env('WILD_PACKS_COUNT', 10),
+    'wild_service_charge' => env('WILD_SERVICE_CHARGE', 10),
+    'customer_discount_margin' => env('CUSTOMER_DISCOUNT_MARGIN', 5),
+    'currency' => env('CURRENCY', '$'),
+    'coupon_length' => env('COUPON_LENGTH', 5),
+    'coupon_characters' => env('COUPON_CHARACTERS', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'),
+    
+
 
     /*
     |--------------------------------------------------------------------------
