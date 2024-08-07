@@ -30,7 +30,16 @@
                                 </div>
                             </div> -->
 
-                    <div>
+                            <div class="p-6 ">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h3 class="text-4xl font-black text-green-400 md:text-3xl">
+                                            {{ $package->main_title }}
+                                    </h3>
+                                </div>
+                            </div>
+                           
+
+                    <div style="padding-left: 20px; padding-right: 20px">
                         <div id="default-carousel" class="relative w-full " data-carousel="slide">
                             <!-- Carousel wrapper -->
                             <div class="relative h-56 overflow-hidden rounded-xl">
@@ -78,14 +87,10 @@
 
                     </div>
                     <div class="p-6 ">
-                        <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center justify-between mb-4">
 
-                            <h3 class="text-3xl font-black text-green-400 md:text-3xl">
-                                {{ $package->main_title }}
-                            </h3>
-
-                            <p <span class="text-5xl font-bold leading-none align-baseline">
-                                {{ env('CURRENCY', '$') . number_format($package->price) }}</span>
+                            <p <span class="text-3xl font-bold  leading-none align-baseline">
+                                {{ env('CURRENCY', '$') . number_format($package->price, 2) }}</span>
                             </p>
                         </div>
                         <div class="flex flex-wrap flex-col  justify-between mb-2">
