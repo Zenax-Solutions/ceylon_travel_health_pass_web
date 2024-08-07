@@ -47,7 +47,10 @@
             "Services\\Agents\\": "services/agents/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "exclude-from-classmap": [
+            "app/Filament/Pages/FulseDashboard.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
