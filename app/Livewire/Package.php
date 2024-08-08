@@ -411,7 +411,7 @@ class Package extends Component
 
                 toastr()->success('Booking Successfully, Wait for a Payment');
 
-                $recipient = auth()->user();
+                $recipient = User::where('email', 'admin@admin.com')->first();
 
                 Notification::make()
                     ->title('New Booking Alert ✔')
