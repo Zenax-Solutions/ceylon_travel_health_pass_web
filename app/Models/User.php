@@ -12,6 +12,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use Filament\Notifications\Notification;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 
 class User extends Authenticatable implements FilamentUser
 {
@@ -46,5 +48,21 @@ class User extends Authenticatable implements FilamentUser
     public function canAccessPanel(Panel $panel): bool
     {
         return true;
+    }
+
+
+    public function toDatabase(User $notifiable): array
+    {
+        return Notification::make()
+            ->title('New Booking Alert ✔')
+            ->getDatabaseMessage();
+    }
+
+
+    public function toBroadcast(User $notifiable): BroadcastMessage
+    {
+        return Notification::make()
+            ->title('New Booking Alert ✔')
+            ->getBroadcastMessage();
     }
 }

@@ -60,12 +60,16 @@
 
             </div>
         </div>
+            
+        @if(config('app.demo_mode'))
+                   @include('pages.home.components.demowidget')
+             @endif
+    
 
     </div>
 
-    @if(config('app.demo_mode))
-                   @include('pages.home.components.demowidget')
-                @endif
+
+
     <!-- Example -->
     <div class="flex ">
 

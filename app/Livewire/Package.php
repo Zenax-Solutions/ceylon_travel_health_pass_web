@@ -10,8 +10,10 @@ use App\Models\Destination;
 use App\Models\EsimService;
 use App\Models\Package as ModelsPackage;
 use App\Models\PointsHistory;
+use App\Models\User;
 use App\Services\GenarateQrCodes;
 use App\Services\PayHerePayment;
+use Filament\Notifications\Notification;
 use Illuminate\Http\Request;
 use Livewire\Component;
 use Livewire\Attributes\On;
@@ -408,6 +410,15 @@ class Package extends Component
                 }
 
                 toastr()->success('Booking Successfully, Wait for a Payment');
+
+                $recipient = auth()->user();
+
+                Notification::make()
+                    ->title('New Booking Alert ✔')
+                    ->success()
+                    ->duration(5000)
+                    ->send()
+                    ->sendToDatabase($recipient)->toBroadcast($recipient);
 
                 if ($paymentData) {
                     session()->flash('paymentData', $paymentData);
