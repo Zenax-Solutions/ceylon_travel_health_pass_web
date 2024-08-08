@@ -55,6 +55,9 @@ class User extends Authenticatable implements FilamentUser
     {
         return Notification::make()
             ->title('New Booking Alert ✔')
+            ->duration(5000)
+            ->icon('heroicon-o-document-text')
+            ->iconColor('success')
             ->getDatabaseMessage();
     }
 
