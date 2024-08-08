@@ -22,6 +22,7 @@ use Livewire\WithFileUploads;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Session;
+use Filament\Notifications\Actions\Action;
 
 class Package extends Component
 {
@@ -417,6 +418,11 @@ class Package extends Component
                     ->title('New Booking Alert ✔')
                     ->success()
                     ->duration(5000)
+                    ->actions([
+                        Action::make('view')
+                            ->button()
+                            ->url('admin/bookings/'.$booking->id, shouldOpenInNewTab: true),
+                    ])
                     ->send()
                     ->sendToDatabase($recipient)->toBroadcast($recipient);
 
