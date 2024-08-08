@@ -291,14 +291,14 @@
 
                         <div x-show.transition.in="step === 2">
 
-                            <div class="w-full px-2 py-4 bg-white border border-gray-200 shadow-md rounded-xl shadow-gray-100">
+                            <div wire:ignore class="w-full px-2 py-4 bg-white border border-gray-200 shadow-md rounded-xl shadow-gray-100">
                                 <div class="font-bold text-gray-800 md:flex">
                                     <div class="flex w-full space-x-3 md:w-1/2">
                                         <div class="w-1/2">
                                             <h2 class="text-gray-500">Destinations Count:</h2>
                                             <div wire:transition>
                                                 <p class="text-xl text-green-400 text-normal">
-                                                    {{ $this->getSelectedDestinationCount() }}
+                                                    <span id="selectedDestinationsCount"></span>
                                                 </p>
                                             </div>
                                         </div>
@@ -325,12 +325,12 @@
                                     <div class="flex w-full space-x-3 md:w-1/2">
                                         <div class="w-1/2">
                                             <h2 class="text-gray-500">Total Price:</h2>
-                                            <p wire:transition><span id="totalPrice" class="text-xl text-green-400 text-normal">{{ config('app.currency') . number_format($totalPrice, 2) }}</span>
+                                            <p wire:transition><span id="totalPrice" class="text-xl text-green-400 text-normal"></span>
                                             </p>
                                         </div>
                                         <div class="w-1/2">
                                             <h2 class="text-gray-500">Grand Total:</h2>
-                                            <p wire:transition><span id="grandTotal" class="text-xl text-red-400 text-normal">{{ config('app.currency') . number_format($grandTotal, 2) }}</span>
+                                            <p wire:transition><span id="grandTotal" class="text-xl text-red-400 text-normal"></span>
                                             </p>
                                         </div>
                                     </div>
@@ -578,7 +578,7 @@
                                                 <label for="adult" class="block mb-3 text-base font-medium text-white">
                                                     Adult Count
                                                 </label>
-                                                <input type="number" min="1" x-model="adultCount" required class="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                                                <input type="number" min="1" x-model="adultCount" id="adultCountInput" required class="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                                                 @error('adult_count')
                                                 <span class="pt-2 font-bold text-red-400 error">{{ $message }}</span>
                                                 @enderror
@@ -587,7 +587,7 @@
                                                 <label for="children" class="block mt-3 mb-3 text-base font-medium text-white">
                                                     Children Count
                                                 </label>
-                                                <input type="number" min="0" x-model="childrenCount" class="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                                                <input type="number" min="0" x-model="childrenCount" id="childrenCountInput"  class="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                                                 @error('children_count')
                                                 <span class="pt-2 font-bold text-red-400 error">{{ $message }}</span>
                                                 @enderror
@@ -690,9 +690,9 @@
                                                 </div>
                                                 <div class="pl-3">
                                                     <span class="font-semibold text-white">
-                                                        {{ $adult_count }}
+                                                        <span wire:ignore id="adult_count"></span>
                                                         <span>x</span>
-                                                        {{ config('app.currency') . number_format($grandTotal,2) }}</span>
+                                                        {{ config('app.currency') . number_format($totalOfAdultPrice,2) }}</span>
                                                 </div>
                                             </div>
                                             @if ($package?->child_price == 1)
@@ -702,7 +702,7 @@
                                                 </div>
                                                 <div class="pl-3">
                                                     <span class="font-semibold text-white">
-                                                        {{ $children_count }}
+                                                        <span wire:ignore id="children_count"></span>
                                                         <span>x</span>
                                                         {{ config('app.currency') . number_format($totalOfChildPrice,2) }}</span>
                                                 </div>
@@ -754,17 +754,17 @@
                                             </div>
                                             @endif
 
-                                            @if($wildlifeItemCount > 0)
-                                            <div class="flex items-center w-full mt-2">
+                                           
+                                            <div wire:ignore class="flex items-center w-full mt-2">
                                                 <div class="flex-grow">
                                                     <span class="font-semibold text-white">Wildlife Service Charge</span>
                                                 </div>
 
                                                 <div class="pl-3">
-                                                    <span class="text-lg font-semibold text-red-400">{{ config('app.currency') . $wildlifeServiceCharge }}</span>
+                                                    <span class="text-lg font-semibold text-red-400" id="wildLifeServiceCharge"></span>
                                                 </div>
                                             </div>
-                                            @endif
+                                           
 
                                             <div class="flex items-center w-full">
                                                 <div class="flex-grow">
@@ -772,7 +772,7 @@
                                                 </div>
 
                                                 <div class="pl-3">
-                                                    <span class="text-xl font-semibold text-red-400">{{ config('app.currency') . number_format($this->calculateTotalPrice(),2) }}</span>
+                                                    <span class="text-xl font-semibold text-red-400">{{ config('app.currency') . number_format($grandTotal,2) }}</span>
                                                 </div>
                                             </div>
 
@@ -836,7 +836,7 @@
     </div>
 
     <!-- Bottom Navigation -->
-    <div class="fixed bottom-0 left-0 right-0 py-5 bg-green-500 shadow-md" x-show="step != 'complete'">
+    <div wire:ignore class="fixed bottom-0 left-0 right-0 py-5 bg-green-500 shadow-md" x-show="step != 'complete'">
         <div class="max-w-3xl px-4 mx-auto">
             <div class="flex justify-between">
                 <div class="w-1/2">
@@ -848,8 +848,7 @@
                         Select Attractions
                     </button>
 
-                    <button @click="step++" x-show="step == 2" class="px-5 py-2 font-medium text-center text-white bg-black border border-transparent rounded-lg shadow-sm focus:outline-none hover:bg-white hover:text-green-500">🛒
-                        ( {{ config('app.currency') . number_format($this->calculateTotalPrice(), 2) }} )</button>
+                    <button @click="step++" x-show="step == 2" id="checkOutBtn" wire:ignore.self  class="px-5 py-2 font-medium text-center text-white bg-black border border-transparent rounded-lg shadow-sm focus:outline-none hover:bg-white hover:text-green-500"></button>
 
                     <div x-show="$wire.destinationsCount >= 1" wire:loading.remove>
                         <button wire:click.prevent='submitBooking()' x-show="step === 3" wire:confirm="Are you sure to process the payment? 😊" class="px-5 py-2 font-medium text-center text-white bg-green-800 border border-transparent rounded-lg shadow-sm focus:outline-none hover:text-dark">
@@ -940,7 +939,39 @@
         }
     }
 
-    function calculateTotal() {
+    var selectedDestinationsCount = document.getElementById('selectedDestinationsCount');
+    document.getElementById('checkOutBtn').innerText = '🛒 ( $' + 0 + ' ) ';
+    selectedDestinationsCount.innerText = 0;
+
+        var adultCount = parseFloat('{{ $adult_count }}') || 0;
+        var childrenCount = parseFloat('{{ $children_count }}') || 0;
+        var esimCount = parseFloat('{{ $esimCount }}') || 0;
+        var esimProviderPrice = parseFloat('{{ $esimProviderPrice }}') || 0;
+        var discount = parseFloat('{{ $discount }}') || 0;
+
+
+         // Set the values to the number inputs
+        document.getElementById('adultCountInput').value = adultCount;
+        document.getElementById('childrenCountInput').value = childrenCount;
+
+        document.getElementById('adult_count').innerText = adultCount;
+        document.getElementById('children_count').innerText = childrenCount;
+
+        // Optional: Add event listeners if you want to handle changes
+        document.getElementById('adultCountInput').addEventListener('input', function() {
+            adultCount = parseFloat(this.value);
+            document.getElementById('adult_count').innerText = adultCount;
+            calculateTotal();
+        });
+
+        document.getElementById('childrenCountInput').addEventListener('input', function() {
+            childrenCount = parseFloat(this.value);
+            document.getElementById('children_count').innerText = childrenCount;
+            calculateTotal();
+        });
+
+     // Function to calculate total prices
+     function calculateTotal() {
         var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
         var selectedDestinationIds = [];
         var totalPrice = 0;
@@ -949,6 +980,7 @@
         var wildlifeChildPrice = 0;
         var wildlifeItemCount = 0; // Counter for wildlife items
 
+        // Iterate over each checked checkbox and sum up the prices
         checkboxes.forEach(function(checkbox) {
             if (checkbox.hasAttribute('data-price')) {
                 totalPrice += parseFloat(checkbox.getAttribute('data-price'));
@@ -964,29 +996,67 @@
             selectedDestinationIds.push(checkbox.id.replace('checkbox-', ''));
         });
 
-        var packagePrice = parseFloat('{{ $package?->price }}') || 0;
+        selectedDestinationsCount.innerText = selectedDestinationIds.length;
+
+
+
+        var packagePrice = parseFloat('{{ $package?->price }}');
         var grandTotal = packagePrice + totalPrice + wildlifePrice;
 
-        document.getElementById('totalPrice').innerText = totalPrice + wildlifePrice;
+        // Display total prices
+        document.getElementById('totalPrice').innerText = '$'+ (totalPrice + wildlifePrice).toFixed(2);
         document.getElementById('grandTotal').innerText = grandTotal;
 
-
-        //console.log('Wildlife Price: ', wildlifePrice);
-        //console.log('Total Price: ', totalPrice);
-        //console.log('Wildlife Item Count: ', wildlifeItemCount);
-
+        // Dispatch events to Livewire
         Livewire.dispatch('updatePrice', {
-            totalPrice: totalPrice,
-            totalOfChildPrice: totalOfChildPrice,
-            wildlifePrice: wildlifePrice,
-            wildlifeChildPrice: wildlifeChildPrice,
+            totalOfAdultPrice:totalPrice + wildlifePrice,
+            totalOfChildPrice: totalOfChildPrice +  wildlifeChildPrice,
             wildlifeItemCount: wildlifeItemCount
         });
 
         Livewire.dispatch('selectedDestinationIds', {
-            selectedDestinationIds: selectedDestinationIds
+           selectedDestinationIds: selectedDestinationIds
         });
+
+        // Perform client-side calculation for final total price
+        calculateFinalPrice(totalPrice, totalOfChildPrice, wildlifePrice, wildlifeChildPrice, wildlifeItemCount);
     }
+
+    // Function to calculate final price including packs and service charge
+    function calculateFinalPrice(totalPrice, totalOfChildPrice, wildlifePrice, wildlifeChildPrice, wildlifeItemCount) {
+   
+
+        var packagePrice = parseFloat('{{ $package?->price }}');
+
+        var adultPriceTotal = adultCount * (totalPrice + wildlifePrice);
+        var childPriceTotal = childrenCount * (totalOfChildPrice + wildlifeChildPrice);
+        var esimPriceTotal = esimCount * esimProviderPrice;
+
+        var total = adultPriceTotal + childPriceTotal + esimPriceTotal - discount;
+
+        if (wildlifeItemCount > 0) {
+            total += calculatePacksPrice(adultCount, childrenCount);
+
+            document.getElementById('wildLifeServiceCharge').innerText = '$' + calculatePacksPrice(adultCount, childrenCount).toFixed(2);
+
+        }
+
+        // Update the final total
+        document.getElementById('grandTotal').innerText = '$' + (total + packagePrice).toFixed(2);
+        document.getElementById('checkOutBtn').innerText = '🛒 ( $' + (total + packagePrice).toFixed(2) + ' ) ';
+
+    }
+
+    // Function to calculate packs price
+    function calculatePacksPrice(adultCount, childrenCount) {
+
+        var total = parseInt(adultCount) + parseInt(childrenCount);
+        var packs = Math.ceil(total / parseInt('{{ config("app.wild_packs_count") }}'));
+        var additionalValue = packs * parseInt('{{ config("app.wild_service_charge") }}');
+
+        return additionalValue;
+    }
+
 </script>
 
 @if ($showModal)

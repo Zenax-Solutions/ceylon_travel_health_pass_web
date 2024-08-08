@@ -42,7 +42,7 @@ class Package extends Component
     public $destinationsCount = 0;
 
     public $esimProviderPrice = 0;
-    public $totalPrice = 0;
+    public $totalOfAdultPrice = 0;
     public $grandTotal = 0;
     public $totalOfChildPrice = 0;
 
@@ -121,6 +121,8 @@ class Package extends Component
 
         $this->calculatePacksPrice($this->adult_count, $this->children_count);
 
+        $this->calculateTotalPrice();
+
         if (isset($this->esimServiceProvider)) {
 
             if ($this->esimServiceProvider == 'null') {
@@ -179,6 +181,7 @@ class Package extends Component
         }
 
 
+        $this->calculateTotalPrice();
 
         return view('livewire.package');
     }
@@ -187,27 +190,21 @@ class Package extends Component
     #[On('selectedDestinationIds')]
     public function submit($selectedDestinationIds)
     {
-
         $this->selectedDestinationIds = $selectedDestinationIds;
+
+        $this->getSelectedDestinationCount();
     }
 
     #[On('updatePrice')]
-    public function updateTotalPrice($totalPrice, $totalOfChildPrice, $wildlifePrice, $wildlifeChildPrice, $wildlifeItemCount)
+    public function updateTotalPrice($totalOfAdultPrice, $totalOfChildPrice, $wildlifeItemCount)
     {
-        //Get Total of Destination Child Price
+    
+        $this->totalOfAdultPrice  = $totalOfAdultPrice;
 
-        $this->totalOfChildPrice = $totalOfChildPrice + $wildlifeChildPrice;
-
-        $this->totalPrice = $totalPrice + $wildlifePrice;
-
-        $this->wildlifePrice = $wildlifePrice;
-
-        $this->wildlifeChildPrice = $wildlifeChildPrice;
+        $this->totalOfChildPrice = $totalOfChildPrice;
 
         $this->wildlifeItemCount = $wildlifeItemCount;
 
-        // Calculate grand total
-        $this->grandTotal = $this->totalPrice + $this->package->price;
     }
 
     public function getSelectedDestinationCount()
@@ -315,7 +312,7 @@ class Package extends Component
                 'child_pass_count' => $this->children_count,
                 'destination_list' => $this->selectedDestinationIds,
                 'esim_list' => $esimData,
-                'total' => $this->calculateTotalPrice(),
+                'total' => $this->grandTotal,
                 'date' => Carbon::now(),
                 'payment_status' => 'pending',
             ];
@@ -359,7 +356,7 @@ class Package extends Component
                     'child_pass_count' => $this->children_count,
                     'destination_list' => $this->selectedDestinationIds,
                     'esim_list' => $esimData,
-                    'total' => $this->calculateTotalPrice(),
+                    'total' => $this->grandTotal,
                     'date' => Carbon::now(),
                     'payment_status' => 'pending',
                 ];
@@ -371,7 +368,7 @@ class Package extends Component
                     'child_pass_count' => $this->children_count,
                     'destination_list' => $this->selectedDestinationIds,
                     'esim_list' => $esimData,
-                    'total' => $this->calculateTotalPrice(),
+                    'total' => $this->grandTotal,
                     'date' => Carbon::now(),
                     'payment_status' => 'pending',
                 ];
@@ -425,16 +422,19 @@ class Package extends Component
 
     public function calculateTotalPrice()
     {
-        $adultPriceTotal = (float)$this->adult_count * $this->grandTotal;
-        $childPriceTotal = (float)$this->children_count * $this->totalOfChildPrice;
-        $esimPriceTotal = $this->esimCount * $this->esimProviderPrice;
+        $adultPriceTotal = $this->adult_count * (float)$this->totalOfAdultPrice;
+        $childPriceTotal = $this->children_count * (float)$this->totalOfChildPrice;
+        $esimPriceTotal = $this->esimCount * (float)$this->esimProviderPrice;
 
         $total = $adultPriceTotal + $childPriceTotal + $esimPriceTotal - $this->discount;
 
         if ($this->wildlifeItemCount > 0) {
-            return  $total + $this->calculatePacksPrice($this->adult_count, $this->children_count);
+            
+            $this->grandTotal = $total + $this->calculatePacksPrice($this->adult_count, $this->children_count) + $this->package->price;
+
         } else {
-            return $total;
+
+            $this->grandTotal = $total + $this->package->price;
         }
     }
 
