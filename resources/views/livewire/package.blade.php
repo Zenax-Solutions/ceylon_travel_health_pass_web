@@ -1040,6 +1040,10 @@
             document.getElementById('wildLifeServiceCharge').innerText = '$' + calculatePacksPrice(adultCount, childrenCount).toFixed(2);
 
         }
+        else
+        {
+            document.getElementById('wildLifeServiceCharge').innerText = '$0.00';
+        }
 
         // Update the final total
         document.getElementById('grandTotal').innerText = '$' + (total + packagePrice).toFixed(2);

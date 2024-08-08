@@ -422,9 +422,9 @@ class Package extends Component
 
     public function calculateTotalPrice()
     {
-        $adultPriceTotal = $this->adult_count * (float)$this->totalOfAdultPrice;
-        $childPriceTotal = $this->children_count * (float)$this->totalOfChildPrice;
-        $esimPriceTotal = $this->esimCount * (float)$this->esimProviderPrice;
+        $adultPriceTotal = (float)$this->adult_count * (float)$this->totalOfAdultPrice;
+        $childPriceTotal = (float)$this->children_count * (float)$this->totalOfChildPrice;
+        $esimPriceTotal = (float)$this->esimCount * (float)$this->esimProviderPrice;
 
         $total = $adultPriceTotal + $childPriceTotal + $esimPriceTotal - $this->discount;
 
