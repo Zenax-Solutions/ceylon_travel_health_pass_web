@@ -412,7 +412,7 @@ class Package extends Component
 
                 toastr()->success('Booking Successfully, Wait for a Payment');
 
-                $recipient = User::where('email', 'admin@'.config('url'))->first();
+                $recipient = User::where('email', 'admin@ceylontp.com')->first();
 
                 if($recipient == null){
                     $recipient = User::where('email', 'admin@admin.com')->first();
