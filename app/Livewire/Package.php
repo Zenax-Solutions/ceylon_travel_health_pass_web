@@ -412,7 +412,11 @@ class Package extends Component
 
                 toastr()->success('Booking Successfully, Wait for a Payment');
 
-                $recipient = User::where('email', 'admin@admin.com')->first();
+                $recipient = User::where('email', 'admin@'.config('url'))->first();
+
+                if($recipient == null){
+                    $recipient = User::where('email', 'admin@admin.com')->first();
+                }
 
                 Notification::make()
                     ->title('New Booking Alert ✔')
